@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLEARBUILD — 정비사업 의사결정 도구</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f7f8fb;
+      --white:    #ffffff;
+      --blue:     #1a3f7a;
+      --blue-mid: #2255a4;
+      --blue-lt:  #e8eef8;
+      --blue-glow:#3b72d4;
+      --dark:     #111827;
+      --text:     #374151;
+      --muted:    #6b7280;
+      --border:   #e5e7eb;
+      --radius:   12px;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247,248,251,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--blue);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      background: var(--blue-lt);
+      border: 1px solid #c5d4ef;
+      border-radius: 999px;
+      padding: 7px 16px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: #d6e2f5; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 24px 88px;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--blue-lt);
+      border: 1px solid #c5d4ef;
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue-mid);
+      letter-spacing: 0.06em;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue-glow);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.35; }
+    }
+    .hero h1 {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: clamp(2rem, 6.5vw, 3.4rem);
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      word-break: keep-all;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--blue-mid);
+    }
+    .hero-sub {
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 36px;
+      word-break: keep-all;
+      line-height: 1.75;
+    }
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-actions .btn { min-width: 280px; text-align: center; }
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-blue {
+      background: var(--blue-glow);
+      color: #fff;
+      font-size: 16px;
+      padding: 16px 32px;
+      box-shadow: 0 6px 22px rgba(59,114,212,0.45);
+    }
+    .btn-blue:hover { background: #2a5fc2; box-shadow: 0 8px 28px rgba(59,114,212,0.55); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--blue);
+      border: 1.5px solid #c5d4ef;
+    }
+    .btn-ghost:hover { background: var(--blue-lt); }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 24px;
+    }
+    .stats-inner {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    /* ── SECTION ── */
+    .section { padding: 72px 24px; max-width: 760px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--blue-glow);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.35rem, 4vw, 1.75rem);
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+    .section-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 40px;
+      word-break: keep-all;
+    }
+
+    /* ── SERVICE CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue) 0%, var(--blue-glow) 100%);
+      opacity: 0;
+      transition: opacity 0.18s;
+    }
+    .card:hover { box-shadow: 0 6px 24px rgba(26,63,122,0.1); transform: translateY(-3px); border-color: #c5d4ef; }
+    .card:hover::before { opacity: 1; }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--blue-lt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+    .card-tag {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue-glow);
+      background: var(--blue-lt);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-title { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 4px; word-break: keep-all; }
+    .step-desc { font-size: 13px; color: var(--muted); word-break: keep-all; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background: var(--blue);
+      padding: 72px 24px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-size: clamp(1.4rem, 5vw, 2rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      word-break: keep-all;
+    }
+    .cta-band p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      max-width: 420px;
+      margin: 0 auto 32px;
+      word-break: keep-all;
+    }
+    .btn-white {
+      background: #fff;
+      color: var(--blue);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      font-size: 16px;
+      padding: 16px 36px;
+    }
+    .btn-white:hover { background: #f0f4ff; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(0,0,0,0.25); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 12px;
+    }
+    footer span { color: rgba(255,255,255,0.6); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 720px) {
+      .card-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 580px) {
+      .stats-inner { gap: 28px; }
+      .hero { padding: 56px 20px 64px; }
+      .section { padding: 52px 20px; }
+      .hero-actions .btn { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">CLEARBUILD</a>
+  <a href="mailto:clearbuild@example.com" class="nav-cta">사전신청</a>
+</nav>
+
+<!-- ① HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">정비사업 의사결정 도구</div>
+  <h1>투표 도구는 있다.<br><em>판단 근거가 없다.</em></h1>
+  <p class="hero-sub">
+    정비사업 문서를 AI가 읽고, 조합원 개인의 분담금 의사결정 근거를 만듭니다.
+  </p>
+  <div class="hero-actions">
+    <a href="mailto:clearbuild@example.com" class="btn btn-blue">분담금 시뮬레이션 사전신청</a>
+    <a href="#services" class="btn btn-ghost">기능 살펴보기</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">4가지</div>
+      <div class="stat-label">핵심 분석 기능</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">AI</div>
+      <div class="stat-label">PDF·HWP 자동 파싱</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">즉시</div>
+      <div class="stat-label">예상 분담금 계산</div>
+    </div>
+  </div>
+</div>
+
+<!-- ② 서비스 카드 -->
+<section class="section" id="services">
+  <div class="section-label">FEATURES</div>
+  <div class="section-title">분담금을 근거 있게 계산합니다</div>
+  <div class="section-sub">사업 변수가 달라질 때 내 부담이 어떻게 변하는지 숫자로 확인합니다.</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🧮</div>
+      <div class="card-title">분담금 시뮬레이터</div>
+      <div class="card-desc">내 물건 정보와 사업 변수를 입력하면 예상 분담금을 바로 산출합니다. 권리가액·비례율 계산까지 자동으로 처리합니다.</div>
+      <span class="card-tag">즉시 계산</span>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <div class="card-title">총투입비 분석</div>
+      <div class="card-desc">분담금에 더해 대출이자, 이주비, 보유세까지 합산한 실제 부담 총액을 산출합니다.</div>
+      <span class="card-tag">실부담 산출</span>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🔀</div>
+      <div class="card-title">시나리오 비교</div>
+      <div class="card-desc">공사비·분양가·용적률이 달라지면 내 분담금이 얼마나 달라지는지 시나리오별로 비교합니다.</div>
+      <span class="card-tag">변수 시뮬레이션</span>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">AI 문서 파싱</div>
+      <div class="card-desc">정비계획·관리처분·총회자료(PDF·HWP)를 AI가 읽어 계산에 필요한 수치를 자동으로 추출합니다.</div>
+      <span class="card-tag">AI 자동화</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div style="background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <section class="section" style="padding-top:60px;padding-bottom:60px;">
+    <div class="section-label">HOW IT WORKS</div>
+    <div class="section-title">3단계로 판단 근거를 만듭니다</div>
+    <div class="section-sub" style="margin-bottom:28px;">복잡한 정비사업 서류 없이도 내 상황에 맞는 숫자를 뽑아냅니다</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">내 물건 정보 입력</div>
+          <div class="step-desc">종전자산 평가액, 평형, 조합원 분양가 등 기본 정보를 입력합니다. PDF를 올리면 AI가 자동으로 채워줍니다.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">사업 변수 설정</div>
+          <div class="step-desc">공사비, 분양가, 용적률, 비례율 등 사업 조건을 설정합니다. 시나리오를 다양하게 바꿔볼 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">판단 근거 확인</div>
+          <div class="step-desc">예상 분담금과 총투입비, 시나리오별 비교 결과를 확인합니다. 동의·매수·보유 중 어떤 선택이 유리한지 숫자로 판단합니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ③ CTA -->
+<div class="cta-band" id="contact">
+  <h2>분담금 시뮬레이션,<br>먼저 경험해 보세요</h2>
+  <p>사전신청하시면 정식 출시 전 우선 이용 안내를 드립니다.<br>이메일 주소만 남겨 주시면 됩니다.</p>
+  <a href="mailto:clearbuild@example.com" class="btn btn-white">분담금 시뮬레이션 사전신청 →</a>
+  <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.4);">clearbuild@example.com</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><span>CLEARBUILD</span> &nbsp;·&nbsp; 정비사업 의사결정 도구 &nbsp;·&nbsp; © 2025</p>
+</footer>
+
+<!-- 부드러운 앵커 스크롤 -->
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
