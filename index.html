@@ -430,6 +430,13 @@
     .field.invalid .err { display: block; }
 
     .signup-form .btn-blue { width: 100%; margin-top: 4px; }
+    .signup-form .btn-blue:disabled {
+      opacity: 0.6;
+      cursor: progress;
+      transform: none;
+      box-shadow: 0 4px 14px rgba(59,114,212,0.25);
+    }
+    .signup-form .btn-blue:disabled:hover { background: var(--blue-glow); }
 
     /* ── SIGNUP LIST ── */
     .list-head {
@@ -790,8 +797,22 @@
     document.getElementById(fieldId).classList.toggle('invalid', invalid);
   }
 
+  var submitBtn = form.querySelector('button[type="submit"]');
+  var submitLabel = submitBtn.textContent;
+  var contactErrEl = document.querySelector('#f-contact .err');
+  var CONTACT_MSG_EMPTY  = '이메일 또는 휴대폰 번호를 입력해 주세요.';
+  var CONTACT_MSG_FORMAT = '올바른 연락처를 입력해 주세요.';
+
+  function isValidContact(v) {
+    var email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    var phone = /^\d{9,11}$/.test(v.replace(/[\s-]/g, ''));
+    return email || phone;
+  }
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+    if (submitBtn.disabled) return; // 처리 중 재제출 차단
+
     var complex  = form.complex.value.trim();
     var owner    = form.owner.value;
     var contact  = form.contact.value.trim();
@@ -800,18 +821,37 @@
     var ok = true;
     setInvalid('f-complex', !complex);   if (!complex) ok = false;
     setInvalid('f-owner', !owner);       if (!owner) ok = false;
-    setInvalid('f-contact', !contact);   if (!contact) ok = false;
     setInvalid('f-interest', !interest); if (!interest) ok = false;
+
+    // 연락처: 빈 칸 검증 → 형식 검증 (메시지 분기)
+    if (!contact) {
+      contactErrEl.textContent = CONTACT_MSG_EMPTY;
+      setInvalid('f-contact', true); ok = false;
+    } else if (!isValidContact(contact)) {
+      contactErrEl.textContent = CONTACT_MSG_FORMAT;
+      setInvalid('f-contact', true); ok = false;
+    } else {
+      setInvalid('f-contact', false);
+    }
+
     if (!ok) return;
 
-    signups.unshift({ id: ++seq, complex: complex, owner: owner, contact: contact, interest: interest });
-    render();
-    form.reset();
+    // 연타 방지: 처리 중 비활성화 → 등록 후 복구
+    submitBtn.disabled = true;
+    submitBtn.textContent = '처리 중…';
+    window.setTimeout(function() {
+      signups.unshift({ id: ++seq, complex: complex, owner: owner, contact: contact, interest: interest });
+      render();
+      form.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitLabel;
+    }, 500);
   });
 
   listEl.addEventListener('click', function(e) {
     var btn = e.target.closest('.del-btn');
     if (!btn) return;
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
     var id = parseInt(btn.getAttribute('data-id'), 10);
     signups = signups.filter(function(s) { return s.id !== id; });
     render();
