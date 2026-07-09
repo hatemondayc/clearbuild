@@ -441,11 +441,13 @@
     /* ── SIGNUP LIST ── */
     .list-head {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
+      gap: 12px;
       margin: 44px 0 16px;
     }
     .list-head h3 { font-size: 16px; font-weight: 700; color: var(--dark); }
+    .list-head-right { display: flex; align-items: center; gap: 10px; }
     .list-count {
       font-size: 12px;
       font-weight: 700;
@@ -454,6 +456,21 @@
       border-radius: 999px;
       padding: 3px 11px;
     }
+    .reset-btn {
+      appearance: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+    .reset-btn:hover { color: #d14343; border-color: #f0c4c4; background: #fdf2f2; }
+    .reset-btn[hidden] { display: none; }
     .signup-list { display: flex; flex-direction: column; gap: 12px; }
 
     .signup-card {
@@ -706,7 +723,10 @@
 
     <div class="list-head">
       <h3>사전신청 목록</h3>
-      <span class="list-count" id="list-count">0건</span>
+      <div class="list-head-right">
+        <span class="list-count" id="list-count">0건</span>
+        <button type="button" class="reset-btn" id="reset-btn" hidden>전체 초기화</button>
+      </div>
     </div>
     <div class="signup-list" id="signup-list"></div>
   </div>
@@ -754,12 +774,36 @@
     });
   });
 
-  // ── 사전신청 (임시 메모리 저장) ──
-  var signups = [];
-  var seq = 0;
+  // ── 사전신청 (localStorage 저장) ──
+  var STORAGE_KEY = 'registrations';
+
+  function loadSignups() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [];
+      var data = JSON.parse(raw);
+      return Array.isArray(data) ? data : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveSignups() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(signups));
+    } catch (e) {}
+  }
+
+  var signups = loadSignups();
+  // 저장된 항목 중 가장 큰 id에서 이어서 부여 (id 충돌 방지)
+  var seq = signups.reduce(function(max, s) {
+    return (s && s.id > max) ? s.id : max;
+  }, 0);
+
   var form = document.getElementById('signup-form');
   var listEl = document.getElementById('signup-list');
   var countEl = document.getElementById('list-count');
+  var resetBtn = document.getElementById('reset-btn');
 
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function(c) {
@@ -769,6 +813,7 @@
 
   function render() {
     countEl.textContent = signups.length + '건';
+    resetBtn.hidden = signups.length === 0;
     if (signups.length === 0) {
       listEl.innerHTML =
         '<div class="empty-card">' +
@@ -841,6 +886,7 @@
     submitBtn.textContent = '처리 중…';
     window.setTimeout(function() {
       signups.unshift({ id: ++seq, complex: complex, owner: owner, contact: contact, interest: interest });
+      saveSignups();
       render();
       form.reset();
       submitBtn.disabled = false;
@@ -854,6 +900,16 @@
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
     var id = parseInt(btn.getAttribute('data-id'), 10);
     signups = signups.filter(function(s) { return s.id !== id; });
+    saveSignups();
+    render();
+  });
+
+  // ── 전체 초기화 ──
+  resetBtn.addEventListener('click', function() {
+    if (signups.length === 0) return;
+    if (!window.confirm('모든 사전신청을 삭제하시겠습니까?')) return;
+    signups = [];
+    saveSignups();
     render();
   });
 
