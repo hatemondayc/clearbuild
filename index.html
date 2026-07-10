@@ -54,18 +54,6 @@
       letter-spacing: 0.04em;
       text-decoration: none;
     }
-    .nav-cta {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--blue);
-      background: var(--blue-lt);
-      border: 1px solid #c5d4ef;
-      border-radius: 999px;
-      padding: 7px 16px;
-      text-decoration: none;
-      transition: background 0.15s;
-    }
-    .nav-cta:hover { background: #d6e2f5; }
 
     /* ── HERO ── */
     .hero {
@@ -530,6 +518,62 @@
       word-break: keep-all;
     }
     .empty-card .empty-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .empty-card .empty-text { margin-bottom: 14px; }
+    .sample-btn {
+      appearance: none;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      background: none;
+      border: none;
+      padding: 4px 6px;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.15s;
+    }
+    .sample-btn:hover { color: var(--blue-mid); }
+    /* 실습용 예시 데이터 표시 뱃지 */
+    .sample-tag {
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      background: #eef1f6;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 7px;
+      margin-left: 6px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    /* ── FOOTER 연락·공유 ── */
+    .footer-contact {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px 18px;
+      margin-bottom: 14px;
+    }
+    .footer-link {
+      appearance: none;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.15s;
+    }
+    .footer-link:hover { color: rgba(255,255,255,0.9); }
+    /* 라벨이 바뀌어도 폭이 흔들리지 않게 고정 (리플로우 방지) */
+    .footer-share { min-width: 92px; text-align: center; }
 
     /* ── MOBILE ── */
     @media (max-width: 720px) {
@@ -545,6 +589,24 @@
       .tab-btn { padding: 14px 14px; font-size: 13px; }
       .signup-card { padding: 16px; }
     }
+    /* 375px 이하: 좁은 화면에서 먼저 읽히도록 밀도 조정 */
+    @media (max-width: 400px) {
+      nav { padding: 0 16px; }
+      .hero { padding: 48px 18px 56px; }
+      .hero-eyebrow { font-size: 11px; margin-bottom: 22px; }
+      .stats-inner { gap: 18px; }
+      .stat-num { font-size: 1.4rem; }
+      .stat-label { font-size: 11px; }
+      .cta-band { padding: 60px 18px; }
+      /* 사전신청 영역도 함께 조정 */
+      .signup-wrap { padding: 36px 16px 56px; }
+      .signup-head { margin-bottom: 28px; }
+      .signup-form { padding: 20px 16px; gap: 15px; }
+      .list-head { margin: 36px 0 14px; }
+      .signup-card { padding: 14px; gap: 10px; }
+      .signup-card-title { font-size: 14px; }
+      .del-btn { padding: 6px 10px; }
+    }
   </style>
 </head>
 <body>
@@ -552,7 +614,6 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo" data-tab="landing">CLEARBUILD</a>
-  <button type="button" class="nav-cta" data-tab="signup">사전신청</button>
 </nav>
 
 <!-- TAB BAR -->
@@ -670,7 +731,6 @@
   <h2>분담금 시뮬레이션,<br>먼저 경험해 보세요</h2>
   <p>사전신청하시면 정식 출시 전 우선 이용 안내를 드립니다.<br>이메일 주소만 남겨 주시면 됩니다.</p>
   <button type="button" class="btn btn-white" data-tab="signup">분담금 시뮬레이션 사전신청 →</button>
-  <p style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.4);">ellemercury88@gmail.com</p>
 </div>
 
 </div><!-- /tab-landing -->
@@ -734,6 +794,10 @@
 
 <!-- FOOTER -->
 <footer>
+  <div class="footer-contact">
+    <a href="mailto:ellemercury88@gmail.com" class="footer-link">✉️ ellemercury88@gmail.com</a>
+    <button type="button" class="footer-link footer-share" id="share-btn">🔗 링크 복사</button>
+  </div>
   <p><span>CLEARBUILD</span> &nbsp;·&nbsp; 정비사업 의사결정 도구 &nbsp;·&nbsp; © 2026</p>
 </footer>
 
@@ -800,6 +864,21 @@
     return (s && s.id > max) ? s.id : max;
   }, 0);
 
+  // 실습용 가짜 데이터 (실제 신청자 아님 — 데모/테스트 전용)
+  var SAMPLE_DATA = [
+    { complex: '산본 설악주공8단지', owner: '조합원',      contact: 'owner01@example.com', interest: '예상 분담금' },
+    { complex: '상계 주공5단지',     owner: '조합원',      contact: '010-1234-5678',       interest: '공사비 변동 영향' },
+    { complex: '반포 미도아파트',    owner: '매수 대기자', contact: 'buyer02@example.com', interest: '총투입비' }
+  ];
+
+  function fillSample() {
+    SAMPLE_DATA.forEach(function(s) {
+      signups.push({ id: ++seq, complex: s.complex, owner: s.owner, contact: s.contact, interest: s.interest, sample: true });
+    });
+    saveSignups();
+    render();
+  }
+
   var form = document.getElementById('signup-form');
   var listEl = document.getElementById('signup-list');
   var countEl = document.getElementById('list-count');
@@ -818,7 +897,8 @@
       listEl.innerHTML =
         '<div class="empty-card">' +
           '<div class="empty-icon">📋</div>' +
-          '아직 신청이 없습니다. 첫 사전신청을 등록해 보세요.' +
+          '<div class="empty-text">아직 신청이 없습니다. 첫 사전신청을 등록해 보세요.</div>' +
+          '<button type="button" class="sample-btn" id="sample-btn">실습용 예시 데이터 채우기</button>' +
         '</div>';
       return;
     }
@@ -826,7 +906,9 @@
       return '' +
         '<div class="signup-card">' +
           '<div class="signup-card-body">' +
-            '<div class="signup-card-title">' + esc(s.complex) + '</div>' +
+            '<div class="signup-card-title">' + esc(s.complex) +
+              (s.sample ? ' <span class="sample-tag">예시</span>' : '') +
+            '</div>' +
             '<div class="signup-meta">' +
               '<span class="meta-chip">' + esc(s.owner) + '</span>' +
               '<span class="meta-chip">' + esc(s.interest) + '</span>' +
@@ -895,6 +977,10 @@
   });
 
   listEl.addEventListener('click', function(e) {
+    if (e.target.closest('.sample-btn')) {
+      fillSample();
+      return;
+    }
     var btn = e.target.closest('.del-btn');
     if (!btn) return;
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
@@ -912,6 +998,26 @@
     saveSignups();
     render();
   });
+
+  // ── 링크 복사 (공유) ──
+  var shareBtn = document.getElementById('share-btn');
+  if (shareBtn) {
+    var shareLabel = shareBtn.textContent;
+    shareBtn.addEventListener('click', function() {
+      var url = window.location.href;
+      function done() {
+        shareBtn.textContent = '✅ 복사됨';
+        window.setTimeout(function() { shareBtn.textContent = shareLabel; }, 1800);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done, function() {
+          window.prompt('아래 주소를 복사하세요', url);
+        });
+      } else {
+        window.prompt('아래 주소를 복사하세요', url);
+      }
+    });
+  }
 
   render();
 </script>
