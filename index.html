@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <title>재건축·리모델링 분담금 계산기 | 조합원 총투입비·손익분기 시뮬레이션 — CLEARBUILD</title>
   <meta name="description" content="공사비가 오르면 내 분담금은 얼마나 늘어날까? 재개발·재건축·리모델링 조합원과 매수 대기자를 위한 분담금·총투입비 시뮬레이션 도구입니다. 단지 정보만 넣으면 시나리오별 예상 분담금은 물론 이주비·대출이자까지 더한 총투입비와 손익분기 시세를 한 번에 확인할 수 있습니다." />
   <meta name="keywords" content="재건축 분담금 계산, 리모델링 분담금, 정비사업 총투입비, 조합원 분담금 시뮬레이션, 손익분기 시세" />
@@ -630,6 +633,32 @@
     .faq-q { font-weight: 700; color: var(--dark); font-size: 1.04rem; margin-bottom: 8px; }
     .faq-q::before { content: "Q. "; color: var(--blue-glow); font-weight: 800; }
     .faq-a { color: var(--text); line-height: 1.8; }
+
+    /* Day6: 분담금 시뮬레이터 */
+    .sim-card { max-width: 720px; margin: 0 auto; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 26px; text-align: left; box-shadow: 0 6px 24px rgba(17,24,39,.05); }
+    .sim-controls { display: grid; grid-template-columns: 1.4fr 1fr; gap: 22px; }
+    .sim-field label { display: block; font-size: .9rem; color: var(--muted); margin-bottom: 10px; }
+    .sim-field label b { color: var(--blue); font-size: 1rem; }
+    .sim-field .opt { color: var(--muted); font-weight: 400; }
+    #sim-cost { width: 100%; accent-color: var(--blue-mid); margin: 2px 0; }
+    .sim-scale { display: flex; justify-content: space-between; font-size: .72rem; color: var(--muted); margin-top: 4px; }
+    .sim-inline { display: flex; align-items: center; gap: 8px; }
+    .sim-inline input { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: inherit; }
+    .sim-inline span { color: var(--muted); font-size: .9rem; white-space: nowrap; }
+    .sim-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0 4px; }
+    .sim-res { background: var(--bg); border-radius: 10px; padding: 16px 14px; }
+    .sim-res.primary { background: var(--blue-lt); }
+    .sim-res-label { font-size: .82rem; color: var(--muted); margin-bottom: 8px; }
+    .sim-res-num { font-size: 1.35rem; font-weight: 800; color: var(--dark); letter-spacing: -.02em; }
+    .sim-res.primary .sim-res-num { color: var(--blue); }
+    .sim-res-sub { font-size: .74rem; color: var(--muted); margin-top: 6px; }
+    .tag.est { display: inline-block; font-size: .66rem; font-weight: 700; color: var(--blue-mid); background: #fff; border: 1px solid var(--blue-lt); border-radius: 6px; padding: 1px 6px; margin-left: 4px; vertical-align: middle; }
+    .sim-note { font-size: .78rem; color: var(--muted); line-height: 1.65; margin-top: 16px; }
+    .sim-cta { margin-top: 18px; text-align: center; }
+    @media (max-width: 580px) {
+      .sim-controls { grid-template-columns: 1fr; gap: 16px; }
+      .sim-results { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -658,6 +687,55 @@
   <div class="hero-actions">
     <button type="button" class="btn btn-blue" data-tab="signup">분담금 시뮬레이션 사전신청</button>
     <a href="#services" class="btn btn-ghost">기능 살펴보기</a>
+  </div>
+</section>
+
+<!-- SIMULATOR -->
+<section class="section sim" id="sim">
+  <div class="section-label">SIMULATOR</div>
+  <div class="section-title">공사비가 오르면 내 분담금은?</div>
+  <div class="section-sub">분당 느티마을 3단지 · 전용 84㎡ · 리모델링 (총회 확정 기준)</div>
+
+  <div class="sim-card">
+    <div class="sim-controls">
+      <div class="sim-field">
+        <label for="sim-cost">공사비 (평당) <b id="sim-cost-val">750만원</b></label>
+        <input type="range" id="sim-cost" min="600" max="800" step="10" value="750" />
+        <div class="sim-scale"><span>600만원</span><span>700만원</span><span>800만원</span></div>
+      </div>
+      <div class="sim-field">
+        <label for="sim-buy">현재 매수가 <span class="opt">(선택)</span></label>
+        <div class="sim-inline">
+          <input type="number" id="sim-buy" min="0" step="0.1" placeholder="예: 9.5" />
+          <span>억원</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-results">
+      <div class="sim-res primary">
+        <div class="sim-res-label">예상 분담금 <span class="tag est">참고 추정</span></div>
+        <div class="sim-res-num" id="r-bundam">—</div>
+        <div class="sim-res-sub">전용 84㎡ 기준</div>
+      </div>
+      <div class="sim-res">
+        <div class="sim-res-label">총투입비</div>
+        <div class="sim-res-num" id="r-total">—</div>
+        <div class="sim-res-sub">매수가 + 분담금</div>
+      </div>
+      <div class="sim-res">
+        <div class="sim-res-label">손익분기 시세</div>
+        <div class="sim-res-num" id="r-bep">—</div>
+        <div class="sim-res-sub">준공 후 이 시세면 본전</div>
+      </div>
+    </div>
+
+    <p class="sim-note">
+      기준값: 느티마을 3단지 전용 84㎡ 리모델링 <b>총회 확정 최대 분담금 3.8억</b>(2023, 헤럴드경제). 공사비 민감도는 산본 우륵 리모델링 실사례(공사비 +100만원/평 → 분담금 약 +18%, 헤럴드경제)를 적용한 <b>참고 추정값</b>으로, 조합·평형·시점에 따라 실제와 다릅니다. 투자 판단의 근거로 사용할 수 없습니다.
+    </p>
+    <div class="sim-cta">
+      <button type="button" class="btn btn-blue" data-tab="signup">내 단지로 정확히 계산받기 (사전신청)</button>
+    </div>
   </div>
 </section>
 
@@ -1089,6 +1167,46 @@
   }
 
   render();
+
+  // ── Day6: 분담금 시뮬레이터 (느티마을 3단지 전용 84㎡) ──
+  (function() {
+    var cost = document.getElementById('sim-cost');
+    if (!cost) return;
+    var costVal = document.getElementById('sim-cost-val');
+    var buy = document.getElementById('sim-buy');
+    var rB = document.getElementById('r-bundam');
+    var rT = document.getElementById('r-total');
+    var rE = document.getElementById('r-bep');
+
+    // 앵커: 공사비 750만원/평 → 84㎡ 분담금 3.8억(총회 확정 최대)
+    // 민감도: 산본 우륵 실사례 +100만원/평 → +18% (= 0.18%/만원)
+    var BASE_COST = 750, BASE_BUNDAM = 38000, SENS = 0.0018;
+
+    function won(manwon) {
+      var v = Math.round(manwon / 100) * 100; // 100만원 단위 반올림
+      var eok = Math.floor(v / 10000), man = v % 10000;
+      if (eok <= 0) return v.toLocaleString() + '만원';
+      return eok + '억' + (man ? ' ' + man.toLocaleString() + '만원' : '');
+    }
+    function calc() {
+      var c = parseInt(cost.value, 10);
+      costVal.textContent = c.toLocaleString() + '만원';
+      var bundam = BASE_BUNDAM * (1 + SENS * (c - BASE_COST));
+      rB.textContent = won(bundam);
+      var buyEok = parseFloat(buy.value);
+      if (buyEok > 0) {
+        var total = buyEok * 10000 + bundam;
+        rT.textContent = won(total);
+        rE.textContent = won(total);
+      } else {
+        rT.textContent = '매수가 입력 시';
+        rE.textContent = '매수가 입력 시';
+      }
+    }
+    cost.addEventListener('input', calc);
+    buy.addEventListener('input', calc);
+    calc();
+  })();
 </script>
 
 </body>
