@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clearbuild-site-theta.vercel.app/sitemap.xml

@@ -3,7 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CLEARBUILD — 정비사업 의사결정 도구</title>
+  <title>재건축·리모델링 분담금 계산기 | 조합원 총투입비·손익분기 시뮬레이션 — CLEARBUILD</title>
+  <meta name="description" content="공사비가 오르면 내 분담금은 얼마나 늘어날까? 재개발·재건축·리모델링 조합원과 매수 대기자를 위한 분담금·총투입비 시뮬레이션 도구입니다. 단지 정보만 넣으면 시나리오별 예상 분담금은 물론 이주비·대출이자까지 더한 총투입비와 손익분기 시세를 한 번에 확인할 수 있습니다." />
+  <meta name="keywords" content="재건축 분담금 계산, 리모델링 분담금, 정비사업 총투입비, 조합원 분담금 시뮬레이션, 손익분기 시세" />
+  <link rel="canonical" href="https://clearbuild-site-theta.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://clearbuild-site-theta.vercel.app/" />
+  <meta property="og:title" content="재건축·리모델링 분담금 계산기 | 조합원 총투입비 시뮬레이션" />
+  <meta property="og:description" content="공사비가 오르면 내 분담금은 얼마나 늘어날까? 단지 정보만 넣으면 예상 분담금·총투입비·손익분기 시세를 확인하는 정비사업 의사결정 도구." />
+  <meta property="og:image" content="https://clearbuild-site-theta.vercel.app/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:site_name" content="CLEARBUILD" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="재건축·리모델링 분담금 계산기 | 조합원 총투입비 시뮬레이션" />
+  <meta name="twitter:description" content="단지 정보만 넣으면 예상 분담금·총투입비·손익분기 시세를 확인하는 정비사업 의사결정 도구." />
+  <meta name="twitter:image" content="https://clearbuild-site-theta.vercel.app/og-image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -607,6 +623,13 @@
       .signup-card-title { font-size: 14px; }
       .del-btn { padding: 6px 10px; }
     }
+    /* Day6: GEO about + FAQ */
+    .geo-about .section-sub { max-width: 780px; margin: 0 auto; line-height: 1.9; text-align: left; }
+    .faq { max-width: 780px; margin: 0 auto; text-align: left; }
+    .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 12px; }
+    .faq-q { font-weight: 700; color: var(--dark); font-size: 1.04rem; margin-bottom: 8px; }
+    .faq-q::before { content: "Q. "; color: var(--blue-glow); font-weight: 800; }
+    .faq-a { color: var(--text); line-height: 1.8; }
   </style>
 </head>
 <body>
@@ -630,7 +653,7 @@
   <div class="hero-eyebrow">정비사업 의사결정 도구</div>
   <h1>투표 도구는 있다.<br><em>판단 근거가 없다.</em></h1>
   <p class="hero-sub">
-    정비사업 문서를 AI가 읽고, 조합원 개인의 분담금 의사결정 근거를 만듭니다.
+    재건축·리모델링 분담금 계산과 정비사업 총투입비 시뮬레이션. 정비사업 문서를 AI가 읽어 조합원 개인의 분담금 판단 근거를 만듭니다.
   </p>
   <div class="hero-actions">
     <button type="button" class="btn btn-blue" data-tab="signup">분담금 시뮬레이션 사전신청</button>
@@ -660,20 +683,20 @@
 <section class="section" id="services">
   <div class="section-label">FEATURES</div>
   <div class="section-title">분담금을 근거 있게 계산합니다</div>
-  <div class="section-sub">사업 변수가 달라질 때 내 부담이 어떻게 변하는지 숫자로 확인합니다.</div>
+  <div class="section-sub">재건축 분담금 계산부터 리모델링 분담금까지, 사업 변수가 달라질 때 내 부담이 어떻게 변하는지 숫자로 확인합니다.</div>
 
   <div class="card-grid">
     <div class="card">
       <div class="card-icon">🧮</div>
       <div class="card-title">분담금 시뮬레이터</div>
-      <div class="card-desc">내 물건 정보와 사업 변수를 입력하면 예상 분담금을 바로 산출합니다. 권리가액·비례율 계산까지 자동으로 처리합니다.</div>
+      <div class="card-desc">단지명과 평형만 넣으면 예상 분담금을 바로 산출하는 조합원 분담금 시뮬레이션입니다. 권리가액·비례율 계산까지 자동으로 처리합니다.</div>
       <span class="card-tag">즉시 계산</span>
     </div>
 
     <div class="card">
       <div class="card-icon">📊</div>
       <div class="card-title">총투입비 분석</div>
-      <div class="card-desc">분담금에 더해 대출이자, 이주비, 보유세까지 합산한 실제 부담 총액을 산출합니다.</div>
+      <div class="card-desc">분담금에 더해 대출이자·이주비·보유세까지 합산한 정비사업 총투입비를 산출합니다. 준공 후 손익분기 시세까지 함께 확인합니다.</div>
       <span class="card-tag">실부담 산출</span>
     </div>
 
@@ -726,12 +749,58 @@
   </section>
 </div>
 
+<!-- ABOUT / GEO -->
+<section class="section geo-about">
+  <div class="section-label">ABOUT</div>
+  <div class="section-title">왜 분담금 판단 근거가 필요한가</div>
+  <div class="section-sub">
+    2026년 국내 도시정비시장은 약 77조원 규모이며, 공사비는 평당 1,370만원으로 역대 최고 수준까지 올랐습니다. CLEARBUILD는 수도권 리모델링 118개 단지의 커뮤니티 발화 154,558건을 분석해 설계한 분담금·총투입비 의사결정 도구입니다. 전자투표나 총회 운영에 집중하는 기존 서비스와 달리, 조합원 개인의 분담금 판단 근거를 제공합니다.
+  </div>
+</section>
+
 <!-- ③ CTA -->
 <div class="cta-band" id="contact">
   <h2>분담금 시뮬레이션,<br>먼저 경험해 보세요</h2>
   <p>사전신청하시면 정식 출시 전 우선 이용 안내를 드립니다.<br>이메일 주소만 남겨 주시면 됩니다.</p>
   <button type="button" class="btn btn-white" data-tab="signup">분담금 시뮬레이션 사전신청 →</button>
 </div>
+
+<!-- FAQ -->
+<section class="section faq-section">
+  <div class="section-label">FAQ</div>
+  <div class="section-title">자주 묻는 질문</div>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q">분담금이 왜 계속 바뀌나요?</div>
+      <div class="faq-a">분담금은 확정된 고정값이 아니라 사업이 진행되며 계속 변동됩니다. 총공사비와 일반분양가가 사업 단계마다 달라지고, 그에 맞춰 비례율과 조합원 부담이 다시 산정되기 때문입니다. 특히 공사비가 오르면 분담금은 늘어나는 구조입니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">재건축과 리모델링 중 뭐가 유리한가요?</div>
+      <div class="faq-a">정답이 정해져 있지 않고 단지 조건에 따라 달라집니다. 용적률 여유, 준공 연한, 대지 지분 같은 조건에 따라 재건축이 유리한 단지도, 리모델링이 현실적인 단지도 있습니다. 그래서 두 방식의 예상 비용과 사업성을 비교해 판단하는 과정이 필요합니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">분담금 외에 어떤 비용이 더 드나요?</div>
+      <div class="faq-a">실제 부담은 분담금 하나로 끝나지 않습니다. 이주비와 중도금 대출이자, 보유세 등이 더해져 총투입비를 이룹니다. CLEARBUILD는 이런 숨은 비용까지 합산해 실제로 필요한 현금과 손익분기 시세를 함께 보여드립니다.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">사전신청하면 뭘 받을 수 있나요?</div>
+      <div class="faq-a">정식 출시 전에 우선 이용 안내를 보내드립니다. 관심 단지와 궁금한 항목을 남겨 주시면, 서비스가 열릴 때 먼저 알려드립니다.</div>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"분담금이 왜 계속 바뀌나요?","acceptedAnswer":{"@type":"Answer","text":"분담금은 확정된 고정값이 아니라 사업이 진행되며 계속 변동됩니다. 총공사비와 일반분양가가 사업 단계마다 달라지고, 그에 맞춰 비례율과 조합원 부담이 다시 산정되기 때문입니다. 특히 공사비가 오르면 분담금은 늘어나는 구조입니다."}},
+    {"@type":"Question","name":"재건축과 리모델링 중 뭐가 유리한가요?","acceptedAnswer":{"@type":"Answer","text":"정답이 정해져 있지 않고 단지 조건에 따라 달라집니다. 용적률 여유, 준공 연한, 대지 지분 같은 조건에 따라 재건축이 유리한 단지도, 리모델링이 현실적인 단지도 있습니다. 그래서 두 방식의 예상 비용과 사업성을 비교해 판단하는 과정이 필요합니다."}},
+    {"@type":"Question","name":"분담금 외에 어떤 비용이 더 드나요?","acceptedAnswer":{"@type":"Answer","text":"실제 부담은 분담금 하나로 끝나지 않습니다. 이주비와 중도금 대출이자, 보유세 등이 더해져 총투입비를 이룹니다. CLEARBUILD는 이런 숨은 비용까지 합산해 실제로 필요한 현금과 손익분기 시세를 함께 보여드립니다."}},
+    {"@type":"Question","name":"사전신청하면 뭘 받을 수 있나요?","acceptedAnswer":{"@type":"Answer","text":"정식 출시 전에 우선 이용 안내를 보내드립니다. 관심 단지와 궁금한 항목을 남겨 주시면, 서비스가 열릴 때 먼저 알려드립니다."}}
+  ]
+}
+</script>
 
 </div><!-- /tab-landing -->
 
