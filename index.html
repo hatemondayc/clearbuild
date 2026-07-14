@@ -670,6 +670,20 @@
     /* Day6: GEO about + FAQ */
     .geo-about .section-sub { max-width: 780px; margin: 0 auto; line-height: 1.9; text-align: left; }
     .geo-src { max-width: 780px; margin: 12px auto 0; font-size: .76rem; color: var(--muted); text-align: left; }
+    /* Day7 증분2: 검증 데이터 표 */
+    .data-table-wrap { max-width: 840px; margin: 0 auto; overflow-x: auto; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: .88rem; text-align: left; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .data-table th, .data-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .data-table thead th { background: var(--blue); color: #fff; font-weight: 700; font-size: .82rem; white-space: nowrap; }
+    .data-table tbody tr:nth-child(even) { background: var(--blue-lt); }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table td:first-child { font-weight: 700; color: var(--dark); white-space: nowrap; }
+    .data-table a { color: var(--blue); text-decoration: underline; white-space: nowrap; }
+    .dt-note { display: block; font-size: .72rem; color: var(--muted); margin-top: 3px; font-weight: 400; }
+    .dt-grade { display: inline-block; font-size: .68rem; font-weight: 800; color: #fff; border-radius: 5px; padding: 1px 7px; }
+    .dt-grade.a { background: var(--blue); }
+    .dt-grade.b { background: #0f766e; }
+    @media (max-width: 580px) { .data-table { font-size: .8rem; } .data-table th, .data-table td { padding: 9px 10px; } }
     .faq { max-width: 780px; margin: 0 auto; text-align: left; }
     .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 12px; }
     .faq-q { font-weight: 700; color: var(--dark); font-size: 1.04rem; margin-bottom: 8px; }
@@ -701,9 +715,34 @@
     .sim-note-row em { color: var(--muted); font-style: normal; }
     .sim-note-disc { font-size: .76rem; color: var(--muted); line-height: 1.6; margin-top: 10px; }
     .sim-cta { margin-top: 18px; text-align: center; }
+    /* Day7: 계산 깊이 + 근거 노출 */
+    .sim-badge { display: inline-block; font-size: .64rem; font-weight: 800; color: #fff; background: #0f766e; border-radius: 5px; padding: 1px 6px; margin-left: 4px; vertical-align: middle; }
+    .sim-details { margin-top: 14px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .sim-details > summary { cursor: pointer; list-style: none; padding: 12px 16px; font-size: .86rem; font-weight: 700; color: var(--blue); background: var(--bg); }
+    .sim-details > summary::-webkit-details-marker { display: none; }
+    .sim-details > summary::after { content: " ▾"; color: var(--muted); float: right; }
+    .sim-details[open] > summary::after { content: " ▴"; }
+    .sim-details-body { padding: 14px 16px; }
+    .brk-row { display: flex; justify-content: space-between; align-items: center; font-size: .85rem; padding: 7px 0; border-bottom: 1px dashed var(--border); }
+    .brk-row:last-of-type { border-bottom: none; }
+    .brk-row.total { font-weight: 800; color: var(--dark); border-top: 2px solid var(--border); border-bottom: none; margin-top: 4px; padding-top: 10px; }
+    .brk-k { color: var(--text); }
+    .brk-v { font-weight: 700; color: var(--dark); font-variant-numeric: tabular-nums; }
+    .brk-tag { font-size: .62rem; font-weight: 700; color: var(--muted); border: 1px solid var(--border); border-radius: 5px; padding: 0 5px; margin-left: 6px; vertical-align: middle; }
+    .assump { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .assump label { font-size: .76rem; color: var(--muted); display: block; margin-bottom: 4px; }
+    .assump input { width: 100%; padding: 7px 9px; border: 1px solid var(--border); border-radius: 7px; font-size: .9rem; font-family: inherit; }
+    .assump-kor { display: block; font-size: .72rem; color: var(--muted); margin-top: 4px; }
+    .assump-note { grid-column: 1 / -1; font-size: .73rem; color: var(--muted); line-height: 1.55; margin: 2px 0 0; }
+    .src-row { font-size: .8rem; line-height: 1.65; padding: 9px 0; border-bottom: 1px dashed var(--border); color: var(--text); }
+    .src-row:last-child { border-bottom: none; }
+    .src-row .src-k { font-weight: 700; color: var(--blue-mid); }
+    .src-row a { color: var(--blue); text-decoration: underline; }
+    .src-grade { font-size: .62rem; font-weight: 800; color: #fff; background: #0f766e; border-radius: 5px; padding: 1px 6px; }
     @media (max-width: 580px) {
       .sim-controls { grid-template-columns: 1fr; gap: 16px; }
       .sim-results { grid-template-columns: 1fr; }
+      .assump { grid-template-columns: 1fr; }
     }
 
     /* Day6: 실제 이미지(SVG) 보강 */
@@ -790,14 +829,14 @@
 
     <div class="sim-results">
       <div class="sim-res primary">
-        <div class="sim-res-label">예상 분담금 <span class="tag est">참고 추정</span></div>
+        <div class="sim-res-label">예상 분담금 <span class="tag est">참고 추정</span><span class="sim-badge b">B</span></div>
         <div class="sim-res-num" id="r-bundam">—</div>
-        <div class="sim-res-sub">전용 84㎡ 기준</div>
+        <div class="sim-res-sub">전용 84㎡ · 확정 범위 1.85–3.83억</div>
       </div>
       <div class="sim-res">
         <div class="sim-res-label">총투입비</div>
         <div class="sim-res-num" id="r-total">—</div>
-        <div class="sim-res-sub">매수가 + 분담금</div>
+        <div class="sim-res-sub">매수가 + 분담금 + 부대비용</div>
       </div>
       <div class="sim-res">
         <div class="sim-res-label">손익분기 시세</div>
@@ -806,11 +845,41 @@
       </div>
     </div>
 
+    <details class="sim-details sim-breakdown">
+      <summary>총투입비 내역 · 가정 수정</summary>
+      <div class="sim-details-body">
+        <div class="brk-row" id="brk-buy-row"><span class="brk-k">현재 매수가</span><span class="brk-v" id="b-buy">—</span></div>
+        <div class="brk-row"><span class="brk-k">예상 분담금 <span class="brk-tag">확정 기반</span></span><span class="brk-v" id="b-bundam">—</span></div>
+        <div class="brk-row"><span class="brk-k">이주비 대출이자 <span class="brk-tag">가정</span></span><span class="brk-v" id="b-interest">—</span></div>
+        <div class="brk-row"><span class="brk-k">취득·부대비용 <span class="brk-tag">가정</span></span><span class="brk-v" id="b-fee">—</span></div>
+        <div class="brk-row total"><span class="brk-k">총투입비</span><span class="brk-v" id="b-total">—</span></div>
+
+        <div class="assump">
+          <div><label for="a-move">이주비 (원)</label><input type="text" inputmode="numeric" id="a-move" value="200,000,000" /><span class="assump-kor" id="a-move-kor"></span></div>
+          <div><label for="a-rate">이주비 대출 이자율 (%)</label><input type="number" id="a-rate" min="0" step="0.1" value="4.5" /></div>
+          <div><label for="a-months">이주 기간 (개월)</label><input type="number" id="a-months" min="0" step="1" value="30" /></div>
+          <div><label for="a-fee">취득·부대비용 (원)</label><input type="text" inputmode="numeric" id="a-fee" value="30,000,000" /><span class="assump-kor" id="a-fee-kor"></span></div>
+          <p class="assump-note">※ 이주비·이자율·부대비용은 <b>예시 가정값</b>입니다 — 조합·개인 대출조건에 따라 다르니 본인 값으로 바꿔 계산하세요. 분담금만 총회 확정 기반 추정입니다.</p>
+        </div>
+      </div>
+    </details>
+
     <div class="sim-note">
-      <div class="sim-note-row"><span class="sim-note-k">기준값</span><span>느티마을 3단지 · 전용 84㎡ · 총회 확정 분담금 3.8억 <em>(2023, 헤럴드경제)</em></span></div>
-      <div class="sim-note-row"><span class="sim-note-k">민감도</span><span>산본 우륵 실사례 공사비 +100만원/평 → 분담금 약 +18% <em>(헤럴드경제)</em></span></div>
+      <div class="sim-note-row"><span class="sim-note-k">기준값</span><span>느티마을 3단지 · 전용 84㎡ · 총회 확정 분담금 최대 3.8억 <em>(범위 1.85–3.83억 · 신뢰도 B · 2023 헤럴드경제)</em></span></div>
+      <div class="sim-note-row"><span class="sim-note-k">민감도</span><span>산본 우륵(전용59㎡) 실사례 공사비 +100만원/평 → 분담금 약 +18% 참고 적용 <em>(추정 · 헤럴드경제)</em></span></div>
       <p class="sim-note-disc">※ 참고 추정값입니다. 조합·평형·시점에 따라 실제와 다르며, 투자 판단의 근거로 쓸 수 없습니다.</p>
     </div>
+
+    <details class="sim-details sim-source">
+      <summary>이 숫자, 어떻게 나왔나?</summary>
+      <div class="sim-details-body">
+        <div class="src-row"><span class="src-k">분담금 기준</span> <span class="src-grade">B</span> — 느티마을 3단지(더샵분당티에르원), 전용 84㎡ 총회 확정 최대 <b>3억 8,000만원</b>(향·동호수별 1.85–3.83억), 2023 이주 확정. <a href="https://v.daum.net/v/20230328171658696" target="_blank" rel="noopener">헤럴드경제 기사</a></div>
+        <div class="src-row"><span class="src-k">공사비 민감도</span> <span class="src-grade">B</span> — 산본 우륵아파트(전용 59㎡), 공사비 3.3㎡당 650→750만원 시 분담금 <b>3억 → 3억 5,400만원(+18%)</b>. 타 단지 실사례를 참고 적용한 <b>추정</b>. <a href="https://biz.heraldcorp.com/article/10528387" target="_blank" rel="noopener">헤럴드경제 기사</a></div>
+        <div class="src-row"><span class="src-k">부대비용</span> — 이주비 대출이자·취득비용은 위 <b>가정값</b> 기반(사용자 수정 가능). 확정 수치 아님.</div>
+        <div class="src-row"><span class="src-k">검증 기준</span> — 리모델링 단지만, 기사·복수 출처로 교차검증한 신뢰도 A·B 사례만 사용. 커뮤니티 단일 추정치는 제외.</div>
+      </div>
+    </details>
+
     <div class="sim-cta">
       <button type="button" class="btn btn-blue" data-tab="signup">내 단지로 정확히 계산받기 (사전신청)</button>
     </div>
@@ -913,6 +982,61 @@
     2026년 국내 도시정비시장은 약 77조원 규모이며, 공사비는 평당 1,370만원으로 역대 최고 수준까지 올랐습니다. CLEARBUILD는 수도권 리모델링 118개 단지의 커뮤니티 발화 154,558건을 분석해 설계한 분담금·총투입비 의사결정 도구입니다. 전자투표나 총회 운영에 집중하는 기존 서비스와 달리, 조합원 개인의 분담금 판단 근거를 제공합니다.
   </div>
   <p class="geo-src">※ 시장 규모·공사비 수치는 업계·언론 보도, 단지·발화 데이터는 CLEARBUILD 자체 VOC 분석 기준입니다.</p>
+</section>
+
+<!-- 검증 데이터 (Day7 증분2) -->
+<section class="section data-proof">
+  <div class="section-label">검증 데이터</div>
+  <h2 class="section-title">지어낸 숫자가 아니라, 교차검증한 실데이터로 계산합니다</h2>
+  <div class="section-sub" style="margin-bottom:26px;">
+    수도권 리모델링 118개 단지의 커뮤니티 발화 154,558건에서 의사결정 VOC 약 7만 건을 분석하고, 분담금 사례는 <b>기사·복수 출처로 교차검증한 신뢰도 A·B 사례만</b> 계산 기준으로 씁니다. 단일 블로그·커뮤니티 추정치는 제외합니다.
+  </div>
+
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>단지</th><th>분담금 (검증)</th><th>기준</th><th>신뢰도</th><th>출처</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>수지 초입마을</td>
+          <td>3.5억 <span class="dt-note">총회 확정·균일</span></td>
+          <td>전용 59→77㎡</td>
+          <td><span class="dt-grade a">A</span></td>
+          <td><a href="https://biz.chosun.com/real_estate/real_estate_general/2025/08/15/DF2TN2BYHNCL3L7QYXVZCYOG24/" target="_blank" rel="noopener">조선비즈</a></td>
+        </tr>
+        <tr>
+          <td>느티마을 3단지</td>
+          <td>1.85–3.83억 <span class="dt-note">전용84㎡ 확정 최대 3.8억</span></td>
+          <td>전용 84㎡</td>
+          <td><span class="dt-grade b">B</span></td>
+          <td><a href="https://v.daum.net/v/20230328171658696" target="_blank" rel="noopener">헤럴드경제</a></td>
+        </tr>
+        <tr>
+          <td>한솔마을 5단지</td>
+          <td>비례율 88% <span class="dt-note">총회 확정(금액 비공개)</span></td>
+          <td>—</td>
+          <td><span class="dt-grade b">B</span></td>
+          <td><a href="https://www.yna.co.kr/view/AKR20220826092400061" target="_blank" rel="noopener">연합뉴스</a></td>
+        </tr>
+        <tr>
+          <td>산본 우륵</td>
+          <td>3.0→3.54억 <span class="dt-note">공사비 650→750, 시나리오</span></td>
+          <td>전용 59㎡</td>
+          <td><span class="dt-grade b">B</span></td>
+          <td><a href="https://biz.heraldcorp.com/article/10528387" target="_blank" rel="noopener">헤럴드경제</a></td>
+        </tr>
+        <tr>
+          <td>수지 현대</td>
+          <td>1.6→3.22억 <span class="dt-note">분담금 급등 리스크 사례</span></td>
+          <td>100㎡</td>
+          <td><span class="dt-grade b">B</span></td>
+          <td><a href="https://www.kgnews.co.kr/news/article.html?no=786288" target="_blank" rel="noopener">경기일보</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="geo-src">※ 신뢰도 A = 조합·총회 공식자료, B = 언론·복수 출처 교차확인. 산본 우륵·수지 현대는 확정값이 아니라 <b>공사비 상승 시나리오·리스크 참고 사례</b>입니다.</p>
 </section>
 
 <!-- ③ CTA -->
@@ -1256,34 +1380,117 @@
     var rB = document.getElementById('r-bundam');
     var rT = document.getElementById('r-total');
     var rE = document.getElementById('r-bep');
+    var aMove = document.getElementById('a-move');
+    var aRate = document.getElementById('a-rate');
+    var aMonths = document.getElementById('a-months');
+    var aFee = document.getElementById('a-fee');
+    var aMoveKor = document.getElementById('a-move-kor');
+    var aFeeKor = document.getElementById('a-fee-kor');
+    var bBuyRow = document.getElementById('brk-buy-row');
+    var bBuy = document.getElementById('b-buy');
+    var bBundam = document.getElementById('b-bundam');
+    var bInterest = document.getElementById('b-interest');
+    var bFee = document.getElementById('b-fee');
+    var bTotal = document.getElementById('b-total');
 
-    // 앵커: 공사비 750만원/평 → 84㎡ 분담금 3.8억(총회 확정 최대)
-    // 민감도: 산본 우륵 실사례 +100만원/평 → +18% (= 0.18%/만원)
+    // 앵커: 공사비 750만원/평 → 전용84㎡ 분담금 3.8억(느티마을 3단지 총회 확정 최대, 신뢰도 B)
+    // 민감도: 산본 우륵(59㎡) 실사례 +100만원/평 → +18% 참고 적용 (= 0.18%/만원)
     var BASE_COST = 750, BASE_BUNDAM = 38000, SENS = 0.0018;
 
     function won(manwon) {
       var v = Math.round(manwon / 100) * 100; // 100만원 단위 반올림
-      var eok = Math.floor(v / 10000), man = v % 10000;
-      if (eok <= 0) return v.toLocaleString() + '만원';
-      return eok + '억' + (man ? ' ' + man.toLocaleString() + '만원' : '');
+      var wonVal = v * 10000;                 // 만원 → 원
+      if (wonVal <= 0) return '0원';
+      return wonVal.toLocaleString() + '원';
+    }
+    function num(el, def) {
+      var v = parseFloat(String(el.value).replace(/,/g, ''));
+      return (isNaN(v) || v < 0) ? def : v;
+    }
+    // 천 단위 콤마 실시간 포맷 (커서 위치 보존)
+    function formatMoney(el) {
+      if (!el) return;
+      var digits = el.value.replace(/[^\d]/g, '');
+      if (digits === '') { el.value = ''; return; }
+      var caret = (el.selectionStart == null) ? el.value.length : el.selectionStart;
+      var before = el.value.slice(0, caret).replace(/[^\d]/g, '').length;
+      var formatted = parseInt(digits, 10).toLocaleString();
+      el.value = formatted;
+      var count = 0, pos = 0;
+      for (; pos < formatted.length && count < before; pos++) {
+        var ch = formatted.charCodeAt(pos);
+        if (ch >= 48 && ch <= 57) count++;
+      }
+      try { el.setSelectionRange(pos, pos); } catch (e) {}
+    }
+    // 원 → 한글 금액 (예: 200000000 → '이억원')
+    function toKorean(n) {
+      n = Math.floor(n);
+      if (n <= 0) return '영원';
+      var d = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+      var small = ['', '십', '백', '천'];
+      var big = ['', '만', '억', '조', '경'];
+      var out = '', gi = 0;
+      while (n > 0) {
+        var group = n % 10000;
+        if (group > 0) {
+          var gs = '', g = group, pos = 0;
+          while (g > 0) {
+            var digit = g % 10;
+            if (digit > 0) {
+              gs = ((digit === 1 && pos > 0) ? '' : d[digit]) + small[pos] + gs;
+            }
+            g = Math.floor(g / 10);
+            pos++;
+          }
+          out = gs + big[gi] + out;
+        }
+        n = Math.floor(n / 10000);
+        gi++;
+      }
+      return out + '원';
     }
     function calc() {
       var c = parseInt(cost.value, 10);
       costVal.textContent = c.toLocaleString() + '만원';
-      var bundam = BASE_BUNDAM * (1 + SENS * (c - BASE_COST));
+      var bundam = BASE_BUNDAM * (1 + SENS * (c - BASE_COST));   // 만원
+
+      var moveWon = num(aMove, 200000000), rate = num(aRate, 4.5), months = num(aMonths, 30), feeWon = num(aFee, 30000000);
+      var interest = (moveWon * (rate / 100) * (months / 12)) / 10000; // 만원
+      var feeMan = feeWon / 10000;                                     // 만원
+      var extra = bundam + interest + feeMan;                          // 분담금 + 부대 (매수가 제외)
+
+      if (aMoveKor) aMoveKor.textContent = toKorean(moveWon);
+      if (aFeeKor) aFeeKor.textContent = toKorean(feeWon);
+
       rB.textContent = won(bundam);
+      bBundam.textContent = won(bundam);
+      bInterest.textContent = won(interest);
+      bFee.textContent = won(feeMan);
+
       var buyEok = parseFloat(buy.value);
       if (buyEok > 0) {
-        var total = buyEok * 10000 + bundam;
+        var buyMan = buyEok * 10000;
+        var total = buyMan + extra;
         rT.textContent = won(total);
         rE.textContent = won(total);
+        bBuyRow.style.display = '';
+        bBuy.textContent = won(buyMan);
+        bTotal.textContent = won(total);
       } else {
         rT.textContent = '매수가 입력 시';
         rE.textContent = '매수가 입력 시';
+        bBuyRow.style.display = 'none';
+        bTotal.textContent = won(extra) + ' (매수가 제외)';
       }
     }
-    cost.addEventListener('input', calc);
-    buy.addEventListener('input', calc);
+    [cost, buy, aRate, aMonths].forEach(function(el) {
+      el.addEventListener('input', calc);
+    });
+    [aMove, aFee].forEach(function(el) {
+      el.addEventListener('input', function() { formatMoney(el); calc(); });
+    });
+    formatMoney(aMove); formatMoney(aFee);
     calc();
   })();
 </script>
