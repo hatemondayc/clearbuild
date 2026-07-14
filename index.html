@@ -831,7 +831,7 @@
       <div class="sim-res primary">
         <div class="sim-res-label">예상 분담금 <span class="tag est">참고 추정</span><span class="sim-badge b">B</span></div>
         <div class="sim-res-num" id="r-bundam">—</div>
-        <div class="sim-res-sub">전용 84㎡ · 확정 범위 1.85–3.83억</div>
+        <div class="sim-res-sub">전용 84㎡ · 공사비 가정 반영 추정</div>
       </div>
       <div class="sim-res">
         <div class="sim-res-label">총투입비</div>
@@ -841,7 +841,7 @@
       <div class="sim-res">
         <div class="sim-res-label">손익분기 시세</div>
         <div class="sim-res-num" id="r-bep">—</div>
-        <div class="sim-res-sub">준공 후 이 시세면 본전</div>
+        <div class="sim-res-sub">준공 후 실거래가가 이만큼이면 본전 (= 총투입비)</div>
       </div>
     </div>
 
@@ -849,10 +849,10 @@
       <summary>총투입비 내역 · 가정 수정</summary>
       <div class="sim-details-body">
         <div class="brk-row" id="brk-buy-row"><span class="brk-k">현재 매수가</span><span class="brk-v" id="b-buy">—</span></div>
-        <div class="brk-row"><span class="brk-k">예상 분담금 <span class="brk-tag">확정 기반</span></span><span class="brk-v" id="b-bundam">—</span></div>
+        <div class="brk-row"><span class="brk-k">예상 분담금 <span class="brk-tag">추정</span></span><span class="brk-v" id="b-bundam">—</span></div>
         <div class="brk-row"><span class="brk-k">이주비 대출이자 <span class="brk-tag">가정</span></span><span class="brk-v" id="b-interest">—</span></div>
         <div class="brk-row"><span class="brk-k">취득·부대비용 <span class="brk-tag">가정</span></span><span class="brk-v" id="b-fee">—</span></div>
-        <div class="brk-row total"><span class="brk-k">총투입비</span><span class="brk-v" id="b-total">—</span></div>
+        <div class="brk-row total"><span class="brk-k" id="b-total-k">총투입비</span><span class="brk-v" id="b-total">—</span></div>
 
         <div class="assump">
           <div><label for="a-move">이주비 (원)</label><input type="text" inputmode="numeric" id="a-move" value="200,000,000" /><span class="assump-kor" id="a-move-kor"></span></div>
@@ -1392,6 +1392,7 @@
     var bInterest = document.getElementById('b-interest');
     var bFee = document.getElementById('b-fee');
     var bTotal = document.getElementById('b-total');
+    var bTotalK = document.getElementById('b-total-k');
 
     // 앵커: 공사비 750만원/평 → 전용84㎡ 분담금 3.8억(느티마을 3단지 총회 확정 최대, 신뢰도 B)
     // 민감도: 산본 우륵(59㎡) 실사례 +100만원/평 → +18% 참고 적용 (= 0.18%/만원)
@@ -1403,9 +1404,10 @@
       if (wonVal <= 0) return '0원';
       return wonVal.toLocaleString() + '원';
     }
-    function num(el, def) {
+    function round100(manwon) { return Math.round(manwon / 100) * 100; } // 100만원 단위 반올림
+    function num(el) { // 빈칸·음수·오입력은 0 (숨은 기본값으로 되살리지 않음)
       var v = parseFloat(String(el.value).replace(/,/g, ''));
-      return (isNaN(v) || v < 0) ? def : v;
+      return (isNaN(v) || v < 0) ? 0 : v;
     }
     // 천 단위 콤마 실시간 포맷 (커서 위치 보존)
     function formatMoney(el) {
@@ -1453,12 +1455,12 @@
     function calc() {
       var c = parseInt(cost.value, 10);
       costVal.textContent = c.toLocaleString() + '만원';
-      var bundam = BASE_BUNDAM * (1 + SENS * (c - BASE_COST));   // 만원
-
-      var moveWon = num(aMove, 200000000), rate = num(aRate, 4.5), months = num(aMonths, 30), feeWon = num(aFee, 30000000);
-      var interest = (moveWon * (rate / 100) * (months / 12)) / 10000; // 만원
-      var feeMan = feeWon / 10000;                                     // 만원
-      var extra = bundam + interest + feeMan;                          // 분담금 + 부대 (매수가 제외)
+      // 각 항목을 100만원 단위로 먼저 반올림 → 내역 합이 총투입비와 정확히 일치
+      var bundam = round100(BASE_BUNDAM * (1 + SENS * (c - BASE_COST)));  // 만원
+      var moveWon = num(aMove), rate = num(aRate), months = num(aMonths), feeWon = num(aFee);
+      var interest = round100((moveWon * (rate / 100) * (months / 12)) / 10000); // 만원
+      var feeMan = round100(feeWon / 10000);                                     // 만원
+      var extra = bundam + interest + feeMan;                                    // 분담금 + 부대 (매수가 제외)
 
       if (aMoveKor) aMoveKor.textContent = toKorean(moveWon);
       if (aFeeKor) aFeeKor.textContent = toKorean(feeWon);
@@ -1470,18 +1472,20 @@
 
       var buyEok = parseFloat(buy.value);
       if (buyEok > 0) {
-        var buyMan = buyEok * 10000;
+        var buyMan = round100(buyEok * 10000);
         var total = buyMan + extra;
         rT.textContent = won(total);
-        rE.textContent = won(total);
+        rE.textContent = won(total);   // 손익분기 시세 = 총투입비 (준공 후 이 시세면 본전)
         bBuyRow.style.display = '';
         bBuy.textContent = won(buyMan);
+        bTotalK.textContent = '총투입비';
         bTotal.textContent = won(total);
       } else {
         rT.textContent = '매수가 입력 시';
         rE.textContent = '매수가 입력 시';
         bBuyRow.style.display = 'none';
-        bTotal.textContent = won(extra) + ' (매수가 제외)';
+        bTotalK.textContent = '필요자금 (매수가 제외)';
+        bTotal.textContent = won(extra);
       }
     }
     [cost, buy, aRate, aMonths].forEach(function(el) {
