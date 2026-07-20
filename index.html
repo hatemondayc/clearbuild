@@ -487,6 +487,16 @@
     }
     .signup-form .btn-blue:disabled:hover { background: var(--blue-glow); }
 
+    /* 폼 제출 결과 메시지 (Day11) */
+    .form-msg {
+      margin: 10px 0 0;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .form-msg.ok  { color: #1f9d55; }
+    .form-msg.err { color: #d14343; }
+
     /* ── SIGNUP LIST ── */
     .list-head {
       display: flex;
@@ -1130,6 +1140,7 @@
       </div>
 
       <button type="submit" class="btn btn-blue">사전신청</button>
+      <p class="form-msg" id="form-msg" role="status" aria-live="polite" hidden></p>
     </form>
 
     <div class="list-head">
@@ -1152,7 +1163,14 @@
   <p><span>CLEARBUILD</span> &nbsp;·&nbsp; 정비사업 의사결정 도구 &nbsp;·&nbsp; © 2026</p>
 </footer>
 
+<!-- Supabase JS (Day11: 리드 서버 저장) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  // ── Supabase 클라이언트 (익명 INSERT 전용 · 안전장치=RLS) ──
+  var SUPABASE_URL = 'https://lynmnuftfybbegdxjfbz.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bm1udWZ0ZnliYmVnZHhqZmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0Njk3OTUsImV4cCI6MjA5OTA0NTc5NX0.66hZ9W29yoscoC8ibbUeHQluG8ecEo-nI5a8F19beGE';
+  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
   // ── 탭 전환 ──
   var panels = {
     landing: document.getElementById('tab-landing'),
@@ -1275,6 +1293,15 @@
     document.getElementById(fieldId).classList.toggle('invalid', invalid);
   }
 
+  var formMsgEl = document.getElementById('form-msg');
+  function setFormMsg(text, ok) {
+    if (!text) { formMsgEl.hidden = true; formMsgEl.textContent = ''; return; }
+    formMsgEl.hidden = false;
+    formMsgEl.textContent = text;
+    formMsgEl.classList.toggle('ok', ok === true);
+    formMsgEl.classList.toggle('err', ok === false);
+  }
+
   var submitBtn = form.querySelector('button[type="submit"]');
   var submitLabel = submitBtn.textContent;
   var contactErrEl = document.querySelector('#f-contact .err');
@@ -1314,17 +1341,33 @@
 
     if (!ok) return;
 
-    // 연타 방지: 처리 중 비활성화 → 등록 후 복구
+    // 연타 방지: 처리 중 비활성화
     submitBtn.disabled = true;
     submitBtn.textContent = '처리 중…';
-    window.setTimeout(function() {
+    setFormMsg('', null);
+
+    // Supabase reservations 테이블에 서버 저장 (익명 INSERT)
+    sb.from('reservations').insert({
+      complex:    complex,
+      owner_type: owner,
+      interest:   interest,
+      contact:    contact
+    }).then(function(res) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitLabel;
+
+      if (res.error) {
+        setFormMsg('저장에 실패했어요. 잠시 후 다시 시도해 주세요.', false);
+        return;
+      }
+
+      // 성공: 이 기기 미리보기 목록에도 반영 (서버는 읽기 차단이라 로컬 미러 유지)
       signups.unshift({ id: ++seq, complex: complex, owner: owner, contact: contact, interest: interest });
       saveSignups();
       render();
       form.reset();
-      submitBtn.disabled = false;
-      submitBtn.textContent = submitLabel;
-    }, 500);
+      setFormMsg('사전신청이 접수됐습니다. 감사합니다!', true);
+    });
   });
 
   listEl.addEventListener('click', function(e) {
