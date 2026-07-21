@@ -450,6 +450,7 @@
       color: var(--dark);
     }
     .field label .req { color: var(--blue-glow); }
+    .field label .opt { color: var(--muted); font-weight: 400; }
     .field input,
     .field select {
       font-family: inherit;
@@ -1121,10 +1122,16 @@
         <span class="err">소유 유형을 선택해 주세요.</span>
       </div>
 
-      <div class="field" id="f-contact">
-        <label for="in-contact">연락처 <span class="req">*</span></label>
-        <input type="text" id="in-contact" name="contact" placeholder="이메일 또는 휴대폰 번호" autocomplete="off" />
-        <span class="err">이메일 또는 휴대폰 번호를 입력해 주세요.</span>
+      <div class="field" id="f-email">
+        <label for="in-email">이메일 <span class="req">*</span></label>
+        <input type="email" id="in-email" name="email" placeholder="예: hong@example.com" autocomplete="off" />
+        <span class="err">이메일을 입력해 주세요.</span>
+      </div>
+
+      <div class="field" id="f-phone">
+        <label for="in-phone">휴대폰 번호 <span class="opt">(선택)</span></label>
+        <input type="text" id="in-phone" name="phone" placeholder="예: 010-1234-5678" autocomplete="off" />
+        <span class="err">올바른 휴대폰 번호를 입력해 주세요.</span>
       </div>
 
       <div class="field" id="f-interest">
@@ -1235,14 +1242,14 @@
 
   // 실습용 가짜 데이터 (실제 신청자 아님 — 데모/테스트 전용)
   var SAMPLE_DATA = [
-    { complex: '산본 설악주공8단지', owner: '조합원',      contact: 'owner01@example.com', interest: '예상 분담금' },
-    { complex: '상계 주공5단지',     owner: '조합원',      contact: '010-1234-5678',       interest: '공사비 변동 영향' },
-    { complex: '반포 미도아파트',    owner: '매수 대기자', contact: 'buyer02@example.com', interest: '총투입비' }
+    { complex: '산본 설악주공8단지', owner: '조합원',      email: 'owner01@example.com', phone: '',              interest: '예상 분담금' },
+    { complex: '상계 주공5단지',     owner: '조합원',      email: 'owner05@example.com', phone: '010-1234-5678', interest: '공사비 변동 영향' },
+    { complex: '반포 미도아파트',    owner: '매수 대기자', email: 'buyer02@example.com', phone: '',              interest: '총투입비' }
   ];
 
   function fillSample() {
     SAMPLE_DATA.forEach(function(s) {
-      signups.push({ id: ++seq, complex: s.complex, owner: s.owner, contact: s.contact, interest: s.interest, sample: true });
+      signups.push({ id: ++seq, complex: s.complex, owner: s.owner, email: s.email, phone: s.phone, interest: s.interest, sample: true });
     });
     saveSignups();
     render();
@@ -1282,7 +1289,9 @@
               '<span class="meta-chip">' + esc(s.owner) + '</span>' +
               '<span class="meta-chip">' + esc(s.interest) + '</span>' +
             '</div>' +
-            '<div class="signup-contact">' + esc(s.contact) + '</div>' +
+            '<div class="signup-contact">' + esc(s.email || s.contact || '') +
+              (s.phone ? ' · ' + esc(s.phone) : '') +
+            '</div>' +
           '</div>' +
           '<button type="button" class="del-btn" data-id="' + s.id + '">삭제</button>' +
         '</div>';
@@ -1304,14 +1313,15 @@
 
   var submitBtn = form.querySelector('button[type="submit"]');
   var submitLabel = submitBtn.textContent;
-  var contactErrEl = document.querySelector('#f-contact .err');
-  var CONTACT_MSG_EMPTY  = '이메일 또는 휴대폰 번호를 입력해 주세요.';
-  var CONTACT_MSG_FORMAT = '올바른 연락처를 입력해 주세요.';
+  var emailErrEl = document.querySelector('#f-email .err');
+  var EMAIL_MSG_EMPTY  = '이메일을 입력해 주세요.';
+  var EMAIL_MSG_FORMAT = '올바른 이메일을 입력해 주세요.';
 
-  function isValidContact(v) {
-    var email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    var phone = /^\d{9,11}$/.test(v.replace(/[\s-]/g, ''));
-    return email || phone;
+  function isValidEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+  function isValidPhone(v) {
+    return /^\d{9,11}$/.test(v.replace(/[\s-]/g, ''));
   }
 
   form.addEventListener('submit', function(e) {
@@ -1320,7 +1330,8 @@
 
     var complex  = form.complex.value.trim();
     var owner    = form.owner.value;
-    var contact  = form.contact.value.trim();
+    var email    = form.email.value.trim();
+    var phone    = form.phone.value.trim();
     var interest = form.interest.value;
 
     var ok = true;
@@ -1328,15 +1339,22 @@
     setInvalid('f-owner', !owner);       if (!owner) ok = false;
     setInvalid('f-interest', !interest); if (!interest) ok = false;
 
-    // 연락처: 빈 칸 검증 → 형식 검증 (메시지 분기)
-    if (!contact) {
-      contactErrEl.textContent = CONTACT_MSG_EMPTY;
-      setInvalid('f-contact', true); ok = false;
-    } else if (!isValidContact(contact)) {
-      contactErrEl.textContent = CONTACT_MSG_FORMAT;
-      setInvalid('f-contact', true); ok = false;
+    // 이메일(필수): 빈 칸 검증 → 형식 검증 (메시지 분기)
+    if (!email) {
+      emailErrEl.textContent = EMAIL_MSG_EMPTY;
+      setInvalid('f-email', true); ok = false;
+    } else if (!isValidEmail(email)) {
+      emailErrEl.textContent = EMAIL_MSG_FORMAT;
+      setInvalid('f-email', true); ok = false;
     } else {
-      setInvalid('f-contact', false);
+      setInvalid('f-email', false);
+    }
+
+    // 휴대폰(선택): 입력했을 때만 형식 검증
+    if (phone && !isValidPhone(phone)) {
+      setInvalid('f-phone', true); ok = false;
+    } else {
+      setInvalid('f-phone', false);
     }
 
     if (!ok) return;
@@ -1351,7 +1369,8 @@
       complex:    complex,
       owner_type: owner,
       interest:   interest,
-      contact:    contact
+      email:      email,
+      phone:      phone || null
     }).then(function(res) {
       submitBtn.disabled = false;
       submitBtn.textContent = submitLabel;
@@ -1362,7 +1381,7 @@
       }
 
       // 성공: 이 기기 미리보기 목록에도 반영 (서버는 읽기 차단이라 로컬 미러 유지)
-      signups.unshift({ id: ++seq, complex: complex, owner: owner, contact: contact, interest: interest });
+      signups.unshift({ id: ++seq, complex: complex, owner: owner, email: email, phone: phone, interest: interest });
       saveSignups();
       render();
       form.reset();

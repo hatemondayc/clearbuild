@@ -1,3 +1,6 @@
 _workspace/
 .DS_Store
 .vercel
+
+# 준-RAG 자료 폴더 (로컬 전용, 배포 제외)
+knowledge/
