@@ -532,6 +532,9 @@
     .reset-btn:hover { color: #d14343; border-color: #f0c4c4; background: #fdf2f2; }
     .reset-btn[hidden] { display: none; }
     .signup-list { display: flex; flex-direction: column; gap: 12px; }
+    .signup-ticker { margin-top: 6px; background: var(--blue-lt,#eaf1fb); border: 1px solid #d3e2f7; border-radius: 999px; padding: 11px 16px; font-size: 13.5px; color: var(--dark,#1a1a1a); display: flex; align-items: center; gap: 8px; opacity: 0; transition: opacity .3s; }
+    .signup-ticker.show { opacity: 1; }
+    .signup-ticker .tick-dot { width: 7px; height: 7px; border-radius: 50%; background: #34c759; flex: none; }
 
     .signup-card {
       background: var(--white);
@@ -899,7 +902,7 @@
 
     <div class="sim-cta">
       <button type="button" class="btn btn-blue" data-tab="signup">내 단지로 정확히 계산받기 (사전신청)</button>
-      <p style="font-size:.78rem;color:var(--muted);margin-top:10px;">단지·평형·향·동호수까지 반영한 정밀 맞춤 리포트(유료)는 사전신청 후 안내드립니다.</p>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:10px;">내 단지·평형 기준으로 더 정확히 계산해 드립니다. (사전신청 시 우선 안내)</p>
     </div>
   </div>
 </section>
@@ -1152,7 +1155,6 @@
         <label for="in-interest">가장 궁금한 것 <span class="req">*</span></label>
         <select id="in-interest" name="interest">
           <option value="">선택해 주세요</option>
-          <option value="매물 맞춤 리포트(3만원)">매물 맞춤 리포트 (3만원) ⭐</option>
           <option value="예상 분담금">예상 분담금</option>
           <option value="총투입비">총투입비</option>
           <option value="공사비 변동 영향">공사비 변동 영향</option>
@@ -1165,14 +1167,7 @@
       <p class="form-msg" id="form-msg" role="status" aria-live="polite" hidden></p>
     </form>
 
-    <div class="list-head">
-      <h3>사전신청 목록</h3>
-      <div class="list-head-right">
-        <span class="list-count" id="list-count">0건</span>
-        <button type="button" class="reset-btn" id="reset-btn" hidden>전체 초기화</button>
-      </div>
-    </div>
-    <div class="signup-list" id="signup-list"></div>
+    <div class="signup-ticker" id="signup-ticker" aria-live="polite"></div>
   </div>
 </div>
 
@@ -1339,6 +1334,7 @@
   }
 
   function render() {
+    if (!listEl) return;   // 공개 목록 제거됨 — 로컬 미러 비활성(폼 저장은 서버로 정상)
     countEl.textContent = signups.length + '건';
     resetBtn.hidden = signups.length === 0;
     if (signups.length === 0) {
@@ -1461,7 +1457,7 @@
     });
   });
 
-  listEl.addEventListener('click', function(e) {
+  if (listEl) listEl.addEventListener('click', function(e) {
     if (e.target.closest('.sample-btn')) {
       fillSample();
       return;
@@ -1476,7 +1472,7 @@
   });
 
   // ── 전체 초기화 ──
-  resetBtn.addEventListener('click', function() {
+  if (resetBtn) resetBtn.addEventListener('click', function() {
     if (signups.length === 0) return;
     if (!window.confirm('모든 사전신청을 삭제하시겠습니까?')) return;
     signups = [];
@@ -1503,6 +1499,21 @@
       }
     });
   }
+
+  // ── 실시간 신청 티커 (실제 reservations 데이터 · 개인정보 미조회) ──
+  (function(){
+    var el = document.getElementById('signup-ticker');
+    if (!el || typeof sb === 'undefined') return;
+    function ownerLabel(o){ return o === '조합원' ? '조합원' : '매수희망자'; }
+    sb.from('reservations').select('complex,owner_type,created_at').order('created_at',{ascending:false}).limit(15).then(function(res){
+      if (res.error || !res.data || !res.data.length) return;
+      var msgs = res.data.map(function(r){ return '<b>'+esc(r.complex)+'</b> ' + ownerLabel(r.owner_type) + '님이 사전신청했습니다'; });
+      var i = 0;
+      function show(){ el.innerHTML = '<span class="tick-dot"></span><span>'+msgs[i % msgs.length]+'</span>'; el.classList.add('show'); i++; }
+      show();
+      setInterval(function(){ el.classList.remove('show'); setTimeout(show, 320); }, 3200);
+    });
+  })();
 
   render();
 
