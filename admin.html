@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>CLEARBUILD 관리</title>
+  <style>
+    :root{
+      --bg:#f4f7fa; --white:#fff; --text:#1a1a1a; --muted:#6b7280;
+      --border:#e5e9f0; --blue:#3b72d4; --navy:#142a45;
+      --green:#1e7a46; --amber:#b7791f; --red:#d14343;
+    }
+    *{box-sizing:border-box; margin:0; padding:0;}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",sans-serif;
+      background:var(--bg); color:var(--text); font-size:14px; line-height:1.4;}
+
+    /* 접근 거부 */
+    #gate{min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:24px; text-align:center;}
+    #gate .lock{font-size:40px;}
+    #gate h1{font-size:18px; color:var(--navy);}
+    #gate p{font-size:13px; color:var(--muted);}
+
+    /* 관리 화면 */
+    header{background:var(--navy); color:var(--white); padding:16px 20px; display:flex; align-items:baseline; gap:12px;}
+    header h1{font-size:17px; font-weight:700;}
+    header .sub{font-size:12px; color:#9db4d4;}
+    .wrap{max-width:1200px; margin:0 auto; padding:16px 20px;}
+
+    .controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:14px;}
+    .search{flex:1; min-width:220px; padding:9px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; background:var(--white);}
+    .search:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,114,212,.12);}
+    .filters{display:flex; gap:4px; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:3px;}
+    .filter-btn{border:0; background:none; padding:6px 12px; border-radius:6px; font-size:13px; color:var(--muted); cursor:pointer; font-family:inherit;}
+    .filter-btn.active{background:var(--blue); color:var(--white); font-weight:600;}
+    .refresh{border:1px solid var(--border); background:var(--white); padding:8px 12px; border-radius:8px; cursor:pointer; font-size:13px; color:var(--text); font-family:inherit;}
+    .count{font-size:13px; color:var(--muted); margin-left:auto;}
+
+    .table-wrap{background:var(--white); border:1px solid var(--border); border-radius:10px; overflow:auto;}
+    table{width:100%; border-collapse:collapse; min-width:760px;}
+    th,td{text-align:left; padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle;}
+    th{font-size:12px; color:var(--muted); font-weight:600; background:#fafbfd; position:sticky; top:0; white-space:nowrap;}
+    tr:last-child td{border-bottom:0;}
+    td.col-date{white-space:nowrap; color:var(--muted); font-size:12.5px;}
+    td .muted{color:var(--muted); font-size:12px;}
+    tbody tr{border-left:3px solid transparent;}
+    tbody tr.st-in_progress{border-left-color:var(--amber);}
+    tbody tr.st-done{border-left-color:var(--green); background:#fafdfb;}
+    tbody tr.st-done td{color:var(--muted);}
+    .empty{text-align:center; color:var(--muted); padding:32px 12px;}
+
+    .status-sel{padding:5px 8px; border:1px solid var(--border); border-radius:7px; font-size:13px; font-family:inherit; background:var(--white); cursor:pointer;}
+    .note-in{width:100%; min-width:130px; padding:6px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px; font-family:inherit; background:var(--white);}
+    .note-in:focus,.status-sel:focus{outline:none; border-color:var(--blue);}
+
+    #toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--navy); color:var(--white); padding:10px 18px; border-radius:8px; font-size:13px; opacity:0; pointer-events:none; transition:.2s;}
+    #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  </style>
+</head>
+<body>
+  <!-- 접근 거부 화면 -->
+  <div id="gate" hidden>
+    <div class="lock">🔒</div>
+    <h1>접근 권한이 없습니다</h1>
+    <p>올바른 접근 키가 필요합니다.</p>
+  </div>
+
+  <!-- 관리 화면 -->
+  <div id="app" hidden>
+    <header>
+      <h1>CLEARBUILD 관리</h1>
+      <span class="sub">사전신청·문의 관리 화면</span>
+    </header>
+    <div class="wrap">
+      <div class="controls">
+        <input id="search" class="search" type="text" placeholder="검색 — 단지·이메일·휴대폰·관심·메모" autocomplete="off" />
+        <div class="filters">
+          <button class="filter-btn active" data-status="all">전체</button>
+          <button class="filter-btn" data-status="new">신규</button>
+          <button class="filter-btn" data-status="in_progress">처리중</button>
+          <button class="filter-btn" data-status="done">완료</button>
+        </div>
+        <button id="refresh" class="refresh">↻ 새로고침</button>
+        <span id="count" class="count">0건</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>접수 시각</th><th>단지</th><th>소유</th><th>관심</th>
+              <th>연락처</th><th>상태</th><th>메모</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"><tr><td colspan="7" class="empty">불러오는 중…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ── 설정 ─────────────────────────────────────────────
+    var SUPABASE_URL = 'https://lynmnuftfybbegdxjfbz.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bm1udWZ0ZnliYmVnZHhqZmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0Njk3OTUsImV4cCI6MjA5OTA0NTc5NX0.66hZ9W29yoscoC8ibbUeHQluG8ecEo-nI5a8F19beGE';
+    var ADMIN_KEY = 'cb-owen-2026';   // ← 본인만 아는 접근 키. 바꾸려면 이 값만 수정.
+
+    // ── 접근 보호 (?key=) ────────────────────────────────
+    var params = new URLSearchParams(location.search);
+    if (params.get('key') !== ADMIN_KEY) {
+      document.getElementById('gate').hidden = false;
+    } else {
+      document.getElementById('app').hidden = false;
+      boot();
+    }
+
+    function boot() {
+      var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      var STATUS = [{v:'new',l:'신규'},{v:'in_progress',l:'처리중'},{v:'done',l:'완료'}];
+      function label(v){ for(var i=0;i<STATUS.length;i++){ if(STATUS[i].v===v) return STATUS[i].l; } return '신규'; }
+
+      var rows = [], q = '', filter = 'all';
+      var tbody = document.getElementById('tbody');
+      var countEl = document.getElementById('count');
+      var toastEl = document.getElementById('toast');
+
+      function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+      function fmtDate(iso){ if(!iso) return '';
+        try{ return new Date(iso).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',year:'2-digit',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }
+        catch(e){ return iso; } }
+      function toast(m){ toastEl.textContent=m; toastEl.classList.add('show'); setTimeout(function(){toastEl.classList.remove('show');},1500); }
+
+      function filtered(){
+        var query = q.trim().toLowerCase();
+        return rows.filter(function(r){
+          if (filter!=='all' && (r.status||'new')!==filter) return false;
+          if (!query) return true;
+          return [r.complex,r.email,r.phone,r.interest,r.owner_type,r.note].some(function(f){
+            return String(f||'').toLowerCase().indexOf(query)>-1; });
+        });
+      }
+
+      function render(){
+        var list = filtered();
+        countEl.textContent = list.length + ' / ' + rows.length + '건';
+        if (!list.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">문의가 없습니다.</td></tr>'; return; }
+        tbody.innerHTML = list.map(function(r){
+          var st = r.status||'new';
+          var opts = STATUS.map(function(s){
+            return '<option value="'+s.v+'"'+(s.v===st?' selected':'')+'>'+s.l+'</option>'; }).join('');
+          return '<tr class="st-'+esc(st)+'">'+
+            '<td class="col-date">'+esc(fmtDate(r.created_at))+'</td>'+
+            '<td><strong>'+esc(r.complex)+'</strong></td>'+
+            '<td>'+esc(r.owner_type)+'</td>'+
+            '<td>'+esc(r.interest)+'</td>'+
+            '<td class="col-contact">'+esc(r.email)+(r.phone?'<br><span class="muted">'+esc(r.phone)+'</span>':'')+'</td>'+
+            '<td><select class="status-sel" data-id="'+r.id+'">'+opts+'</select></td>'+
+            '<td><input class="note-in" data-id="'+r.id+'" value="'+esc(r.note)+'" placeholder="메모" /></td>'+
+          '</tr>';
+        }).join('');
+      }
+
+      async function load(){
+        tbody.innerHTML = '<tr><td colspan="7" class="empty">불러오는 중…</td></tr>';
+        var res = await sb.from('reservations').select('*').order('created_at',{ascending:false});
+        if (res.error){ tbody.innerHTML='<tr><td colspan="7" class="empty">불러오기 실패: '+esc(res.error.message)+'</td></tr>'; return; }
+        rows = res.data || []; render();
+      }
+
+      // 검색·필터·새로고침
+      document.getElementById('search').addEventListener('input', function(e){ q=e.target.value; render(); });
+      var fbtns = document.querySelectorAll('.filter-btn');
+      for (var i=0;i<fbtns.length;i++){
+        fbtns[i].addEventListener('click', function(){
+          for (var j=0;j<fbtns.length;j++) fbtns[j].classList.remove('active');
+          this.classList.add('active'); filter=this.getAttribute('data-status'); render();
+        });
+      }
+      document.getElementById('refresh').addEventListener('click', load);
+
+      // 상태 변경 · 메모 저장 (위임)
+      tbody.addEventListener('change', async function(e){
+        var sel = e.target.closest ? e.target.closest('.status-sel') : null;
+        var inp = e.target.closest ? e.target.closest('.note-in') : null;
+        if (sel){
+          var id = parseInt(sel.getAttribute('data-id'),10), val = sel.value;
+          var r1 = await sb.from('reservations').update({status:val}).eq('id',id);
+          if (r1.error){ toast('상태 저장 실패'); return; }
+          var row1 = rows.find(function(x){return x.id===id;}); if(row1) row1.status=val;
+          var tr = sel.closest('tr'); if(tr) tr.className='st-'+val;
+          toast('상태 → '+label(val));
+        } else if (inp){
+          var id2 = parseInt(inp.getAttribute('data-id'),10), val2 = inp.value;
+          var r2 = await sb.from('reservations').update({note:val2}).eq('id',id2);
+          if (r2.error){ toast('메모 저장 실패'); return; }
+          var row2 = rows.find(function(x){return x.id===id2;}); if(row2) row2.note=val2;
+          toast('메모 저장됨');
+        }
+      });
+
+      load();
+    }
+  </script>
+</body>
+</html>
