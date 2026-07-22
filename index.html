@@ -898,8 +898,8 @@
     </details>
 
     <div class="sim-cta">
-      <button type="button" class="btn btn-blue" data-tab="signup">이 매물 맞춤 리포트 받기 — 3만원</button>
-      <p style="font-size:.8rem;color:var(--muted);margin-top:10px;line-height:1.5;">단지·평형·향·동호수까지 반영한 정밀 총투입비 리포트를 보내드립니다. 출처·근거 포함 · 판단은 본인 몫입니다. <span style="color:var(--blue);">먼저 사전신청하면 우선 안내드립니다.</span></p>
+      <button type="button" class="btn btn-blue" data-tab="signup">내 단지로 정확히 계산받기 (사전신청)</button>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:10px;">단지·평형·향·동호수까지 반영한 정밀 맞춤 리포트(유료)는 사전신청 후 안내드립니다.</p>
     </div>
   </div>
 </section>
@@ -1475,6 +1475,11 @@
       if (wonVal <= 0) return '0원';
       return wonVal.toLocaleString() + '원';
     }
+    function eok(manwon) {  // 억 단위 축약 (결과 타일용 — 원단위는 너무 길어 줄바꿈됨)
+      var v = Math.round(manwon / 100) * 100;
+      if (v <= 0) return '—';
+      return (Math.round(v / 1000) / 10).toLocaleString() + '억';
+    }
     function round100(manwon) { return Math.round(manwon / 100) * 100; } // 100만원 단위 반올림
     function num(el) { // 빈칸·음수·오입력은 0 (숨은 기본값으로 되살리지 않음)
       var v = parseFloat(String(el.value).replace(/,/g, ''));
@@ -1536,25 +1541,25 @@
       if (aMoveKor) aMoveKor.textContent = toKorean(moveWon);
       if (aFeeKor) aFeeKor.textContent = toKorean(feeWon);
 
-      rB.textContent = won(bundam);
+      rB.textContent = eok(bundam);
       bBundam.textContent = won(bundam);
       bInterest.textContent = won(interest);
       bFee.textContent = won(feeMan);
-      if (rC) rC.textContent = won(extra);
+      if (rC) rC.textContent = eok(extra);
 
       var buyEok = parseFloat(buy.value);
       if (buyEok > 0) {
         var buyMan = round100(buyEok * 10000);
         var total = buyMan + extra;
-        rT.textContent = won(total);
-        rE.textContent = won(total);   // 손익분기 시세 = 총투입비 (준공 후 이 시세면 본전)
+        rT.textContent = eok(total);
+        rE.textContent = eok(total);   // 손익분기 시세 = 총투입비 (준공 후 이 시세면 본전)
         bBuyRow.style.display = '';
         bBuy.textContent = won(buyMan);
         bTotalK.textContent = '총투입비';
         bTotal.textContent = won(total);
       } else {
-        rT.textContent = '매수가 입력 시';
-        rE.textContent = '매수가 입력 시';
+        rT.textContent = '호가 입력 시';
+        rE.textContent = '호가 입력 시';
         bBuyRow.style.display = 'none';
         bTotalK.textContent = '필요자금 (매수가 제외)';
         bTotal.textContent = won(extra);
