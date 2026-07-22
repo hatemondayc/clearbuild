@@ -775,7 +775,6 @@
 <div class="tabbar" role="tablist">
   <button type="button" class="tab-btn active" data-tab="landing" role="tab">서비스 소개</button>
   <button type="button" class="tab-btn" data-tab="signup" role="tab">사전신청</button>
-  <button type="button" class="tab-btn" data-tab="demo" role="tab">동작 데모</button>
 </div>
 
 <!-- ===== 탭1: 서비스 소개 ===== -->
@@ -1177,38 +1176,6 @@
   </div>
 </div>
 
-<!-- ===== 탭3: 동작 데모 ===== -->
-<div class="tab-panel" id="tab-demo">
-  <section class="section">
-    <div class="section-label">LIVE DEMO</div>
-    <h2 class="section-title">우리가 만든 시스템, 실제로 돌아갑니다</h2>
-    <div class="section-sub">사전신청 한 건이 들어오면 — 서버 저장 → 자동 알림 → 운영 관리까지 자동으로 흐릅니다.</div>
-
-    <div style="text-align:center;margin:10px 0 28px;">
-      <span style="font-size:13px;color:var(--muted,#6b7280);">현재 서버에 쌓인 사전신청</span>
-      <div id="demo-count" style="font-size:36px;font-weight:800;color:var(--blue,#3b72d4);letter-spacing:-.02em;line-height:1.2;">—</div>
-      <span style="font-size:12px;color:var(--muted,#6b7280);">Supabase reservations · 실시간 조회</span>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
-      <div class="card"><span class="card-tag" style="background:var(--green,#1e7a46);color:#fff;">① 입력</span><h3 class="card-title">사전신청 폼</h3><div class="card-desc">손님이 단지·소유유형·이메일을 남기면 접수. 검증·중복 방지 포함.</div></div>
-      <div class="card"><span class="card-tag" style="background:var(--green,#1e7a46);color:#fff;">② 저장</span><h3 class="card-title">Supabase 서버 저장</h3><div class="card-desc">익명 INSERT + RLS로 서버 DB에 한 건씩 안전 적재. 위 실시간 건수가 증거.</div></div>
-      <div class="card"><span class="card-tag" style="background:var(--green,#1e7a46);color:#fff;">③ 알림</span><h3 class="card-title">자동 알림 (Zapier→Gmail)</h3><div class="card-desc">새 행이 생기면 고객 확인 메일 + 운영자 알림 메일이 자동 발송.</div></div>
-      <div class="card"><span class="card-tag" style="background:var(--green,#1e7a46);color:#fff;">④ 관리</span><h3 class="card-title">운영 관리 화면</h3><div class="card-desc">쌓인 문의를 검색·필터·상태관리. 유입 채널까지 추적.</div></div>
-    </div>
-
-    <div style="margin-top:26px;">
-      <h3 style="font-size:15px;font-weight:700;color:var(--dark,#1a1a1a);margin-bottom:12px;">최근 접수 <span style="font-size:12px;color:var(--muted,#6b7280);font-weight:400;">(개인정보 마스킹)</span></h3>
-      <div id="demo-recent" style="display:flex;flex-direction:column;gap:8px;"></div>
-    </div>
-
-    <div style="text-align:center;margin-top:28px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-      <button type="button" class="btn btn-blue" data-tab="signup">직접 사전신청 해보기</button>
-      <a href="/admin.html?key=cb-owen-2026" target="_blank" class="btn btn-ghost">운영 관리 화면 보기</a>
-    </div>
-  </section>
-</div>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-contact">
@@ -1285,8 +1252,7 @@
   // ── 탭 전환 ──
   var panels = {
     landing: document.getElementById('tab-landing'),
-    signup:  document.getElementById('tab-signup'),
-    demo:    document.getElementById('tab-demo')
+    signup:  document.getElementById('tab-signup')
   };
   var tabButtons = document.querySelectorAll('.tab-btn');
 
@@ -1308,29 +1274,6 @@
       switchTab(this.getAttribute('data-tab'));
     });
   });
-
-  // ── 동작 데모 탭: 라이브 지표(저장 건수 + 최근 접수, 개인정보 마스킹) ──
-  (function(){
-    var countEl = document.getElementById('demo-count');
-    var recentEl = document.getElementById('demo-recent');
-    if (!countEl || typeof sb === 'undefined') return;
-    function esc(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
-    function loadDemo(){
-      sb.from('reservations').select('*', { count:'exact' }).order('created_at',{ascending:false}).limit(5).then(function(res){
-        if (res.error) return;
-        if (res.count != null) countEl.textContent = res.count + '건';
-        var rows = res.data || [];
-        recentEl.innerHTML = rows.map(function(r){
-          var t=''; try{ t=new Date(r.created_at).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){}
-          return '<div style="background:var(--white,#fff);border:1px solid var(--border,#e5e9f0);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;gap:10px;font-size:13.5px;">'+
-            '<span><b>'+esc(r.complex)+'</b> · '+esc(r.owner_type)+' · '+esc(r.interest)+'</span>'+
-            '<span style="color:var(--muted,#6b7280);white-space:nowrap;">'+esc(t)+'</span></div>';
-        }).join('') || '<div style="color:var(--muted,#6b7280);font-size:13px;">아직 접수가 없습니다.</div>';
-      });
-    }
-    document.querySelectorAll('[data-tab="demo"]').forEach(function(b){ b.addEventListener('click', loadDemo); });
-    loadDemo();
-  })();
 
   // ── 부드러운 앵커 스크롤 (탭1 내부 링크) ──
   document.querySelectorAll('a[href^="#"]').forEach(function(a) {
