@@ -535,6 +535,9 @@
     .signup-ticker { margin-top: 6px; background: var(--blue-lt,#eaf1fb); border: 1px solid #d3e2f7; border-radius: 999px; padding: 11px 16px; font-size: 13.5px; color: var(--dark,#1a1a1a); display: flex; align-items: center; gap: 8px; opacity: 0; transition: opacity .3s; }
     .signup-ticker.show { opacity: 1; }
     .signup-ticker .tick-dot { width: 7px; height: 7px; border-radius: 50%; background: #34c759; flex: none; }
+    #float-signup { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%) translateY(24px); background: var(--navy,#142a45); color: #fff; border: 0; border-radius: 999px; padding: 14px 26px; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; box-shadow: 0 8px 24px rgba(20,42,69,.28); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 40; white-space: nowrap; }
+    #float-signup.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    @media (max-width:560px){ #float-signup { left: 16px; right: 16px; transform: translateY(24px); border-radius: 12px; } #float-signup.show { transform: translateY(0); } }
 
     .signup-card {
       background: var(--white);
@@ -1177,6 +1180,8 @@
   </div>
 </div>
 
+<button type="button" id="float-signup">🔔 분담금 사전신청 받기</button>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-contact">
@@ -1329,6 +1334,20 @@
       switchTab(this.getAttribute('data-tab'));
     });
   });
+
+  // ── 플로팅 사전신청 CTA (서비스 소개 탭에서 스크롤 시 노출) ──
+  (function(){
+    var fab = document.getElementById('float-signup');
+    if (!fab) return;
+    fab.addEventListener('click', function(){ switchTab('signup'); });
+    function upd(){
+      var onLanding = panels.landing && panels.landing.classList.contains('active');
+      fab.classList.toggle('show', !!onLanding && window.scrollY > 320);
+    }
+    window.addEventListener('scroll', upd, { passive:true });
+    document.querySelectorAll('[data-tab]').forEach(function(b){ b.addEventListener('click', function(){ setTimeout(upd, 60); }); });
+    upd();
+  })();
 
   // ── 부드러운 앵커 스크롤 (탭1 내부 링크) ──
   document.querySelectorAll('a[href^="#"]').forEach(function(a) {
