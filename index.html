@@ -1208,6 +1208,14 @@
     var complexField = document.getElementById('in-complex');
     var dl = document.getElementById('complex-list');
     if (dl) SEED.forEach(function(s){ var o=document.createElement('option'); o.value=s.name; dl.appendChild(o); });
+    // 118 단지 자동완성 + 지오코딩 주소 (complexes.json)
+    var LOOKUP = {};
+    fetch('complexes.json').then(function(r){ return r.json(); }).then(function(list){
+      list.forEach(function(c){
+        LOOKUP[c.name] = c;
+        if (dl){ var o=document.createElement('option'); o.value=c.name; dl.appendChild(o); }
+      });
+    }).catch(function(){});
 
     function pin(lat,lng,name){
       var p = new naver.maps.LatLng(lat,lng);
@@ -1215,18 +1223,25 @@
       if (hint) hint.textContent = (name||'') + ' 위치를 표시했습니다.';
       if (complexField && name) complexField.value = name;
     }
+    function geocode(query, name){
+      if (!(naver.maps.Service && naver.maps.Service.geocode)) { if(hint) hint.textContent='지도 인증 후 위치 표시가 가능합니다.'; return; }
+      naver.maps.Service.geocode({ query:query }, function(status, response){
+        if (status===naver.maps.Service.Status.OK && response.v2 && response.v2.addresses.length){
+          var a = response.v2.addresses[0];
+          pin(parseFloat(a.y), parseFloat(a.x), name||query);
+        } else if (hint){ hint.textContent='위치를 찾지 못했어요. 단지명을 더 정확히 입력해 보세요.'; }
+      });
+    }
     function search(q){
       q = (q||'').trim(); if(!q) return;
       var hit = SEED.filter(function(s){ return q.indexOf(s.name)>-1 || s.name.indexOf(q)>-1; })[0];
       if (hit){ pin(hit.lat,hit.lng,hit.name); return; }
-      if (naver.maps.Service && naver.maps.Service.geocode){
-        naver.maps.Service.geocode({ query:q }, function(status, response){
-          if (status===naver.maps.Service.Status.OK && response.v2 && response.v2.addresses.length){
-            var a = response.v2.addresses[0];
-            pin(parseFloat(a.y), parseFloat(a.x), q);
-          } else if (hint){ hint.textContent='위치를 찾지 못했어요. 단지명을 더 정확히 입력해 보세요.'; }
-        });
+      var c = LOOKUP[q];
+      if (c){
+        if (c.lat!=null && c.lng!=null){ pin(c.lat, c.lng, c.name); return; }
+        geocode(c.geocodeQuery || c.name, c.name); return;
       }
+      geocode(q, q);
     }
     if (input) input.addEventListener('change', function(){ search(this.value); });
     // 탭 숨김 중 초기화되면 0크기 → 탭 열릴 때 리사이즈
