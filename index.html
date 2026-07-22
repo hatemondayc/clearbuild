@@ -719,8 +719,8 @@
     .sim-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 22px 0 4px; }
     .sim-res { background: var(--bg); border-radius: 10px; padding: 16px 14px; }
     .sim-res.primary { background: var(--blue-lt); }
-    .sim-res-label { font-size: .82rem; color: var(--muted); margin-bottom: 8px; }
-    .sim-res-num { font-size: 1.35rem; font-weight: 800; color: var(--dark); letter-spacing: -.02em; }
+    .sim-res-label { font-size: .82rem; color: var(--muted); margin-bottom: 8px; min-height: 42px; }
+    .sim-res-num { font-size: 1.35rem; font-weight: 800; color: var(--dark); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
     .sim-res.primary .sim-res-num { color: var(--blue); }
     .sim-res-sub { font-size: .74rem; color: var(--muted); margin-top: 6px; }
     .tag.est { display: inline-block; font-size: .66rem; font-weight: 700; color: var(--blue-mid); background: #fff; border: 1px solid var(--blue-lt); border-radius: 6px; padding: 1px 6px; margin-left: 4px; vertical-align: middle; }
@@ -1215,7 +1215,8 @@
         if (c.region) SIDO[c._sido][c.region] = 1;
       });
       if (sidoSel){
-        Object.keys(SIDO).sort().forEach(function(s){ var o=document.createElement('option'); o.value=s; o.textContent=s; sidoSel.appendChild(o); });
+        var ORD = ['서울','경기','인천','부산','대구','광주','대전','울산','세종','강원','충북','충남','전북','전남','경북','경남','제주'];
+        Object.keys(SIDO).sort(function(a,b){ var ia=ORD.indexOf(a), ib=ORD.indexOf(b); if(ia<0)ia=99; if(ib<0)ib=99; return ia-ib || a.localeCompare(b,'ko'); }).forEach(function(s){ var o=document.createElement('option'); o.value=s; o.textContent=s; sidoSel.appendChild(o); });
       }
     }).catch(function(){});
 
