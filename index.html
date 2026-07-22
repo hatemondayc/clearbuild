@@ -1116,8 +1116,13 @@
 
     <div class="signup-map" style="margin-bottom:20px;">
       <label for="map-search" style="display:block;font-size:13px;font-weight:700;color:var(--dark,#1a1a1a);margin-bottom:6px;">단지 검색 <span style="color:var(--muted,#6b7280);font-weight:400;">— 지도에서 위치 확인</span></label>
-      <input type="text" id="map-search" list="complex-list" placeholder="예: 분당 느티마을 3단지" autocomplete="off" style="width:100%;padding:12px 14px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:15px;font-family:inherit;background:var(--bg,#f4f7fa);margin-bottom:10px;" />
-      <datalist id="complex-list"></datalist>
+      <div style="display:flex;gap:8px;margin-bottom:10px;">
+        <select id="region-filter" style="padding:12px 10px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg,#f4f7fa);max-width:44%;"><option value="">전체 지역</option></select>
+        <div style="position:relative;flex:1;">
+          <input type="text" id="map-search" placeholder="단지명 입력 (예: 느티마을)" autocomplete="off" style="width:100%;padding:12px 14px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:15px;font-family:inherit;background:var(--bg,#f4f7fa);" />
+          <div id="map-sugg" style="position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:6;background:#fff;border:1px solid var(--border,#e5e9f0);border-radius:10px;max-height:230px;overflow:auto;display:none;box-shadow:0 10px 28px rgba(20,42,69,.14);"></div>
+        </div>
+      </div>
       <div id="naver-map" style="width:100%;height:230px;border-radius:12px;border:1px solid var(--border,#e5e9f0);background:#eef3fb;"></div>
       <p id="map-hint" style="font-size:12px;color:var(--muted,#6b7280);margin-top:7px;">단지명을 입력하면 지도에 위치가 표시됩니다.</p>
     </div>
@@ -1193,14 +1198,17 @@
     var input = document.getElementById('map-search');
     var hint = document.getElementById('map-hint');
     var complexField = document.getElementById('in-complex');
-    var dl = document.getElementById('complex-list');
-    // 118 단지 자동완성 + 지오코딩 주소 (complexes.json)
-    var LOOKUP = {};
+    var regionSel = document.getElementById('region-filter');
+    var suggEl = document.getElementById('map-sugg');
+    // 118 단지 (complexes.json) — 지역 필터 + 추천 검색
+    var LOOKUP = {}, ALL = [];
     fetch('complexes.json').then(function(r){ return r.json(); }).then(function(list){
-      list.forEach(function(c){
-        LOOKUP[c.name] = c;
-        if (dl){ var o=document.createElement('option'); o.value=c.name; dl.appendChild(o); }
-      });
+      ALL = list;
+      var regions = {};
+      list.forEach(function(c){ LOOKUP[c.name] = c; if (c.region) regions[c.region] = 1; });
+      if (regionSel){
+        Object.keys(regions).sort().forEach(function(rg){ var o=document.createElement('option'); o.value=rg; o.textContent=rg; regionSel.appendChild(o); });
+      }
     }).catch(function(){});
 
     function pin(lat,lng,name){
@@ -1228,7 +1236,31 @@
       }
       geocode(q, q);
     }
-    if (input) input.addEventListener('change', function(){ search(this.value); });
+    function renderSugg(){
+      if (!suggEl || !input) return;
+      var q = (input.value||'').trim();
+      var rg = regionSel ? regionSel.value : '';
+      var matches = ALL.filter(function(c){
+        if (rg && c.region !== rg) return false;
+        if (!q) return !!rg;                 // 검색어 없으면 지역 선택 시에만 나열
+        return c.name.indexOf(q) > -1;
+      }).slice(0, 8);
+      if (!matches.length){ suggEl.style.display='none'; return; }
+      suggEl.innerHTML = matches.map(function(c){
+        return '<div class="sugg-item" data-name="'+String(c.name).replace(/"/g,'&quot;')+'" style="padding:10px 13px;cursor:pointer;font-size:14px;border-bottom:1px solid #f0f3f8;">'+
+          c.name+' <span style="color:var(--muted,#6b7280);font-size:12px;">'+(c.region||'')+'</span></div>';
+      }).join('');
+      suggEl.style.display='block';
+    }
+    function choose(name){ if (input) input.value = name; if (suggEl) suggEl.style.display='none'; search(name); }
+    if (input){
+      input.addEventListener('input', renderSugg);
+      input.addEventListener('focus', renderSugg);
+      input.addEventListener('change', function(){ if (suggEl) suggEl.style.display='none'; search(this.value); });
+    }
+    if (regionSel) regionSel.addEventListener('change', function(){ if (input) input.focus(); renderSugg(); });
+    if (suggEl) suggEl.addEventListener('mousedown', function(e){ var it=e.target.closest('.sugg-item'); if(it){ e.preventDefault(); choose(it.getAttribute('data-name')); } });
+    document.addEventListener('click', function(e){ if (suggEl && input && e.target!==input && !suggEl.contains(e.target)) suggEl.style.display='none'; });
     // 탭 숨김 중 초기화되면 0크기 → 탭 열릴 때 리사이즈
     window.__cbRefreshMap = function(){
       setTimeout(function(){ naver.maps.Event.trigger(map,'resize'); map.setCenter(map.getCenter()); }, 60);
