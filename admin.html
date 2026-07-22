@@ -41,6 +41,9 @@
     table{width:100%; border-collapse:collapse; min-width:760px;}
     th,td{text-align:left; padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle; white-space:nowrap;}
     th{font-size:12px; color:var(--muted); font-weight:600; background:#fafbfd; position:sticky; top:0; white-space:nowrap;}
+    th[data-key]{cursor:pointer; user-select:none;}
+    th[data-key]:hover{color:var(--text);}
+    th .arr{color:var(--blue); font-size:10px; margin-left:2px;}
     tr:last-child td{border-bottom:0;}
     td.col-date{white-space:nowrap; color:var(--muted); font-size:12.5px;}
     td .muted{color:var(--muted); font-size:12px;}
@@ -88,8 +91,13 @@
         <table>
           <thead>
             <tr>
-              <th>접수 시각</th><th>단지</th><th>소유</th><th>관심</th>
-              <th>연락처</th><th>상태</th><th>메모</th>
+              <th data-key="created_at">접수 시각<span class="arr"></span></th>
+              <th data-key="complex">단지<span class="arr"></span></th>
+              <th data-key="owner_type">소유<span class="arr"></span></th>
+              <th data-key="interest">관심<span class="arr"></span></th>
+              <th data-key="email">연락처<span class="arr"></span></th>
+              <th data-key="status">상태<span class="arr"></span></th>
+              <th>메모</th>
             </tr>
           </thead>
           <tbody id="tbody"><tr><td colspan="7" class="empty">불러오는 중…</td></tr></tbody>
@@ -121,7 +129,7 @@
       var STATUS = [{v:'new',l:'신규'},{v:'in_progress',l:'처리중'},{v:'done',l:'완료'}];
       function label(v){ for(var i=0;i<STATUS.length;i++){ if(STATUS[i].v===v) return STATUS[i].l; } return '신규'; }
 
-      var rows = [], q = '', filter = 'all';
+      var rows = [], q = '', filter = 'all', sortKey = 'created_at', sortDir = 'desc';
       var tbody = document.getElementById('tbody');
       var countEl = document.getElementById('count');
       var toastEl = document.getElementById('toast');
@@ -143,8 +151,17 @@
         });
       }
 
+      function statusOrder(v){ var o={'new':0,'in_progress':1,'done':2}; var k=v||'new'; return o[k]!=null?o[k]:0; }
+      function sortList(list){
+        var dir = sortDir==='desc' ? -1 : 1;
+        return list.sort(function(a,b){
+          if (sortKey==='status') return (statusOrder(a.status)-statusOrder(b.status))*dir;
+          if (sortKey==='created_at'){ var x=a.created_at||'', y=b.created_at||''; return (x<y?-1:x>y?1:0)*dir; }
+          return String(a[sortKey]||'').localeCompare(String(b[sortKey]||''),'ko')*dir;
+        });
+      }
       function render(){
-        var list = filtered();
+        var list = sortList(filtered());
         countEl.textContent = list.length + ' / ' + rows.length + '건';
         if (!list.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">문의가 없습니다.</td></tr>'; return; }
         tbody.innerHTML = list.map(function(r){
@@ -180,6 +197,25 @@
         });
       }
       document.getElementById('refresh').addEventListener('click', load);
+
+      // 컬럼 정렬 (헤더 클릭 → 오름/내림 토글)
+      function updateArrows(){
+        var ths = document.querySelectorAll('th[data-key]');
+        for (var k=0;k<ths.length;k++){
+          ths[k].querySelector('.arr').textContent =
+            (ths[k].getAttribute('data-key')===sortKey) ? (sortDir==='asc'?'▲':'▼') : '';
+        }
+      }
+      var sortThs = document.querySelectorAll('th[data-key]');
+      for (var s=0;s<sortThs.length;s++){
+        sortThs[s].addEventListener('click', function(){
+          var key=this.getAttribute('data-key');
+          if (key===sortKey){ sortDir = (sortDir==='asc'?'desc':'asc'); }
+          else { sortKey=key; sortDir = (key==='created_at'?'desc':'asc'); }
+          updateArrows(); render();
+        });
+      }
+      updateArrows();
 
       // 상태 변경 · 메모 저장 (위임)
       tbody.addEventListener('change', async function(e){
