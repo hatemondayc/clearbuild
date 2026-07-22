@@ -1111,6 +1111,14 @@
       <p>단지와 관심사를 남겨 주시면 정식 출시 전 우선 이용 안내를 드립니다.</p>
     </div>
 
+    <div class="signup-map" style="margin-bottom:20px;">
+      <label for="map-search" style="display:block;font-size:13px;font-weight:700;color:var(--dark,#1a1a1a);margin-bottom:6px;">단지 검색 <span style="color:var(--muted,#6b7280);font-weight:400;">— 지도에서 위치 확인</span></label>
+      <input type="text" id="map-search" list="complex-list" placeholder="예: 분당 느티마을 3단지" autocomplete="off" style="width:100%;padding:12px 14px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:15px;font-family:inherit;background:var(--bg,#f4f7fa);margin-bottom:10px;" />
+      <datalist id="complex-list"></datalist>
+      <div id="naver-map" style="width:100%;height:230px;border-radius:12px;border:1px solid var(--border,#e5e9f0);background:#eef3fb;"></div>
+      <p id="map-hint" style="font-size:12px;color:var(--muted,#6b7280);margin-top:7px;">단지명을 입력하면 지도에 위치가 표시됩니다.</p>
+    </div>
+
     <form class="signup-form" id="signup-form" novalidate>
       <div class="field" id="f-complex">
         <label for="in-complex">단지명 <span class="req">*</span></label>
@@ -1177,6 +1185,57 @@
   <p><span>CLEARBUILD</span> &nbsp;·&nbsp; 정비사업 의사결정 도구 &nbsp;·&nbsp; © 2026</p>
 </footer>
 
+<!-- NAVER 지도 (사전신청 단지 맵핑) -->
+<script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=qc17nzumx4&submodules=geocoder"></script>
+<script>
+  (function(){
+    if (!window.naver || !naver.maps) return;
+    // 데이터 보유 단지 시드(정확 좌표) — complexes.json 나오면 교체·확장
+    var SEED = [
+      {name:'분당 느티마을 3단지', lat:37.3626, lng:127.1084},
+      {name:'산본 우륵주공아파트', lat:37.3585, lng:126.9285},
+      {name:'상계 주공5단지', lat:37.6614, lng:127.0705},
+      {name:'반포 미도아파트', lat:37.5085, lng:127.0075},
+      {name:'목동 신시가지 7단지', lat:37.5335, lng:126.8745},
+      {name:'분당 시범 우성아파트', lat:37.3735, lng:127.1145}
+    ];
+    var mapEl = document.getElementById('naver-map');
+    if (!mapEl) return;
+    var map = new naver.maps.Map(mapEl, { center:new naver.maps.LatLng(37.4979,127.0276), zoom:10, scaleControl:false, mapDataControl:false });
+    var marker = new naver.maps.Marker({ map:map, position:map.getCenter() });
+    var input = document.getElementById('map-search');
+    var hint = document.getElementById('map-hint');
+    var complexField = document.getElementById('in-complex');
+    var dl = document.getElementById('complex-list');
+    if (dl) SEED.forEach(function(s){ var o=document.createElement('option'); o.value=s.name; dl.appendChild(o); });
+
+    function pin(lat,lng,name){
+      var p = new naver.maps.LatLng(lat,lng);
+      map.setCenter(p); map.setZoom(15); marker.setPosition(p);
+      if (hint) hint.textContent = (name||'') + ' 위치를 표시했습니다.';
+      if (complexField && name) complexField.value = name;
+    }
+    function search(q){
+      q = (q||'').trim(); if(!q) return;
+      var hit = SEED.filter(function(s){ return q.indexOf(s.name)>-1 || s.name.indexOf(q)>-1; })[0];
+      if (hit){ pin(hit.lat,hit.lng,hit.name); return; }
+      if (naver.maps.Service && naver.maps.Service.geocode){
+        naver.maps.Service.geocode({ query:q }, function(status, response){
+          if (status===naver.maps.Service.Status.OK && response.v2 && response.v2.addresses.length){
+            var a = response.v2.addresses[0];
+            pin(parseFloat(a.y), parseFloat(a.x), q);
+          } else if (hint){ hint.textContent='위치를 찾지 못했어요. 단지명을 더 정확히 입력해 보세요.'; }
+        });
+      }
+    }
+    if (input) input.addEventListener('change', function(){ search(this.value); });
+    // 탭 숨김 중 초기화되면 0크기 → 탭 열릴 때 리사이즈
+    window.__cbRefreshMap = function(){
+      setTimeout(function(){ naver.maps.Event.trigger(map,'resize'); map.setCenter(map.getCenter()); }, 60);
+    };
+  })();
+</script>
+
 <!-- Supabase JS (Day11: 리드 서버 저장) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -1200,6 +1259,7 @@
     tabButtons.forEach(function(b) {
       b.classList.toggle('active', b.getAttribute('data-tab') === name);
     });
+    if (name === 'signup' && window.__cbRefreshMap) window.__cbRefreshMap();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
