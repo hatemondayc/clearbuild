@@ -108,12 +108,13 @@
               <th data-key="complex">단지<span class="arr"></span></th>
               <th data-key="owner_type">소유<span class="arr"></span></th>
               <th data-key="interest">관심<span class="arr"></span></th>
+              <th data-key="ref">채널<span class="arr"></span></th>
               <th data-key="email">연락처<span class="arr"></span></th>
               <th data-key="status">상태<span class="arr"></span></th>
               <th>메모</th>
             </tr>
           </thead>
-          <tbody id="tbody"><tr><td colspan="7" class="empty">불러오는 중…</td></tr></tbody>
+          <tbody id="tbody"><tr><td colspan="9" class="empty">불러오는 중…</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -162,7 +163,7 @@
           if (filter!=='all' && (r.status||'new')!==filter) return false;
           if (seg!=='all' && r.owner_type!==seg) return false;
           if (!query) return true;
-          return [r.complex,r.email,r.phone,r.interest,r.owner_type,r.note].some(function(f){
+          return [r.complex,r.email,r.phone,r.interest,r.owner_type,r.ref,r.note].some(function(f){
             return String(f||'').toLowerCase().indexOf(query)>-1; });
         });
       }
@@ -199,6 +200,7 @@
             '<td><strong>'+esc(r.complex)+'</strong></td>'+
             '<td>'+esc(r.owner_type)+'</td>'+
             '<td>'+esc(r.interest)+'</td>'+
+            '<td>'+esc(r.ref)+'</td>'+
             '<td class="col-contact"><span class="copyable" data-copy="'+esc(r.email)+'">'+esc(r.email)+'</span>'+
               (r.phone?'<br><span class="copyable muted" data-copy="'+esc(r.phone)+'">'+esc(r.phone)+'</span>':'')+'</td>'+
             '<td><select class="status-sel" data-id="'+r.id+'">'+opts+'</select></td>'+
@@ -218,10 +220,10 @@
       function csvCell(v){ v=String(v==null?'':v); if(/[",\r\n]/.test(v)) v='"'+v.replace(/"/g,'""')+'"'; return v; }
       function toCSV(){
         var list = sortList(filtered());
-        var head = ['접수시각','단지','소유유형','관심','이메일','휴대폰','상태','메모'];
+        var head = ['접수시각','단지','소유유형','관심','채널','이메일','휴대폰','상태','메모'];
         var lines = [head.join(',')];
         list.forEach(function(r){
-          lines.push([fmtDate(r.created_at), r.complex, r.owner_type, r.interest, r.email, r.phone, label(r.status||'new'), r.note].map(csvCell).join(','));
+          lines.push([fmtDate(r.created_at), r.complex, r.owner_type, r.interest, r.ref, r.email, r.phone, label(r.status||'new'), r.note].map(csvCell).join(','));
         });
         return '﻿' + lines.join('\r\n');   // BOM = 엑셀 한글 깨짐 방지
       }

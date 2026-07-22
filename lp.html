@@ -245,11 +245,7 @@
       var cta = document.getElementById('float-cta');
       var hero = document.querySelector('.hero');
       function onScroll(){
-        var past = window.scrollY > (hero.offsetHeight - 80);
-        var atForm = false;
-        var f = document.getElementById('signup');
-        if (f){ var r = f.getBoundingClientRect(); atForm = r.top < window.innerHeight && r.bottom > 0; }
-        cta.classList.toggle('show', past && !atForm);   // 폼 보이면 숨김(중복 방지)
+        cta.classList.toggle('show', window.scrollY > 240);   // 조금만 내려도 항상 노출
       }
       cta.addEventListener('click', function(){ document.getElementById('signup').scrollIntoView({behavior:'smooth'}); });
       window.addEventListener('scroll', onScroll, {passive:true});
