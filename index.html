@@ -7,22 +7,22 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <title>재건축·리모델링 분담금 계산기 | 조합원 총투입비·손익분기 시뮬레이션 — CLEARBUILD</title>
-  <meta name="description" content="공사비가 오르면 내 분담금은 얼마나 늘어날까? 재개발·재건축·리모델링 조합원과 매수 대기자를 위한 분담금·총투입비 시뮬레이션 도구입니다. 단지 정보만 넣으면 시나리오별 예상 분담금은 물론 이주비·대출이자까지 더한 총투입비와 손익분기 시세를 한 번에 확인할 수 있습니다." />
+  <title>재건축·리모델링 분담금 계산기 | 매물 총투입비·손익분기 시뮬레이션 — CLEARBUILD</title>
+  <meta name="description" content="공사비가 오르면 내 분담금은 얼마나 늘어날까? 재개발·재건축·리모델링 매물의 매수·보유 판단자를 위한 분담금·총투입비 시뮬레이션 도구입니다. 단지 정보만 넣으면 시나리오별 예상 분담금은 물론 이주비·대출이자까지 더한 총투입비와 손익분기 시세를 한 번에 확인할 수 있습니다." />
   <meta name="keywords" content="재건축 분담금 계산, 리모델링 분담금, 정비사업 총투입비, 조합원 분담금 시뮬레이션, 손익분기 시세" />
   <link rel="canonical" href="https://clearbuild-site-theta.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://clearbuild-site-theta.vercel.app/" />
-  <meta property="og:title" content="재건축·리모델링 분담금 계산기 | 조합원 총투입비 시뮬레이션" />
+  <meta property="og:title" content="재건축·리모델링 분담금 계산기 | 매물 총투입비 시뮬레이션" />
   <meta property="og:description" content="공사비가 오르면 내 분담금은 얼마나 늘어날까? 단지 정보만 넣으면 예상 분담금·총투입비·손익분기 시세를 확인하는 정비사업 의사결정 도구." />
   <meta property="og:image" content="https://clearbuild-site-theta.vercel.app/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="CLEARBUILD 분담금 시뮬레이션 — 재건축·리모델링 조합원 총투입비·손익분기 계산" />
+  <meta property="og:image:alt" content="CLEARBUILD 분담금 시뮬레이션 — 재건축·리모델링 매물 총투입비·손익분기 계산" />
   <meta property="og:locale" content="ko_KR" />
   <meta property="og:site_name" content="CLEARBUILD" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="재건축·리모델링 분담금 계산기 | 조합원 총투입비 시뮬레이션" />
+  <meta name="twitter:title" content="재건축·리모델링 분담금 계산기 | 매물 총투입비 시뮬레이션" />
   <meta name="twitter:description" content="단지 정보만 넣으면 예상 분담금·총투입비·손익분기 시세를 확인하는 정비사업 의사결정 도구." />
   <meta name="twitter:image" content="https://clearbuild-site-theta.vercel.app/og-image.png" />
   <script type="application/ld+json">
@@ -36,7 +36,7 @@
         "alternateName": "클리어빌드",
         "url": "https://clearbuild-site-theta.vercel.app/",
         "logo": "https://clearbuild-site-theta.vercel.app/favicon.png",
-        "slogan": "투표 도구는 있다. 판단 근거가 없다.",
+        "slogan": "호가는 반쪽 가격표. 진짜 가격은 총투입비.",
         "description": "재개발·재건축·리모델링 참여자에게 분담금·총투입비 등 판단 근거를 제공하는 정비사업 의사결정 도구."
       },
       {
@@ -1498,7 +1498,8 @@
       owner_type: owner,
       interest:   interest,
       email:      email,
-      phone:      phone || null
+      phone:      phone || null,
+      ref:        (new URLSearchParams(location.search).get('ref') || 'home')
     }).then(function(res) {
       submitBtn.disabled = false;
       submitBtn.textContent = submitLabel;
