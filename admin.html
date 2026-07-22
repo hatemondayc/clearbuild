@@ -12,57 +12,63 @@
       --green:#1e7a46; --amber:#b7791f; --red:#d14343;
     }
     *{box-sizing:border-box; margin:0; padding:0;}
-    [hidden]{display:none !important;}   /* hidden 속성이 display 규칙을 항상 이기게 */
+    [hidden]{display:none !important;}
     body{font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",sans-serif;
       background:var(--bg); color:var(--text); font-size:14px; line-height:1.4;}
 
-    /* 접근 거부 */
     #gate{min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:24px; text-align:center;}
     #gate .lock{font-size:40px;}
     #gate h1{font-size:18px; color:var(--navy);}
     #gate p{font-size:13px; color:var(--muted);}
 
-    /* 관리 화면 */
     header{background:var(--navy); color:var(--white); padding:16px 20px; display:flex; align-items:baseline; gap:12px;}
     header h1{font-size:17px; font-weight:700;}
     header .sub{font-size:12px; color:#9db4d4;}
     .wrap{max-width:1200px; margin:0 auto; padding:16px 20px;}
 
+    .stats{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;}
+    .stat{background:var(--white); border:1px solid var(--border); border-radius:8px; padding:7px 13px; font-size:12.5px; color:var(--muted);}
+    .stat b{color:var(--navy); font-size:15px; margin-left:5px;}
+
     .controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:14px;}
-    .search{flex:1; min-width:220px; padding:9px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; background:var(--white);}
+    .search{flex:1; min-width:200px; padding:9px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; background:var(--white);}
     .search:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,114,212,.12);}
+    .seg{padding:9px 10px; border:1px solid var(--border); border-radius:8px; font-size:13px; font-family:inherit; background:var(--white); color:var(--text); cursor:pointer;}
     .filters{display:flex; gap:4px; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:3px;}
     .filter-btn{border:0; background:none; padding:6px 12px; border-radius:6px; font-size:13px; color:var(--muted); cursor:pointer; font-family:inherit;}
     .filter-btn.active{background:var(--blue); color:var(--white); font-weight:600;}
-    .refresh{border:1px solid var(--border); background:var(--white); padding:8px 12px; border-radius:8px; cursor:pointer; font-size:13px; color:var(--text); font-family:inherit;}
+    .btn{border:1px solid var(--border); background:var(--white); padding:8px 12px; border-radius:8px; cursor:pointer; font-size:13px; color:var(--text); font-family:inherit;}
+    .btn:hover{border-color:var(--blue); color:var(--blue);}
     .count{font-size:13px; color:var(--muted); margin-left:auto;}
 
     .table-wrap{background:var(--white); border:1px solid var(--border); border-radius:10px; overflow:auto;}
-    table{width:100%; border-collapse:collapse; min-width:760px;}
+    table{width:100%; border-collapse:collapse; min-width:800px;}
     th,td{text-align:left; padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle; white-space:nowrap;}
-    th{font-size:12px; color:var(--muted); font-weight:600; background:#fafbfd; position:sticky; top:0; white-space:nowrap;}
+    th{font-size:12px; color:var(--muted); font-weight:600; background:#fafbfd; position:sticky; top:0;}
     th[data-key]{cursor:pointer; user-select:none;}
     th[data-key]:hover{color:var(--text);}
     th .arr{color:var(--blue); font-size:10px; margin-left:2px;}
     tr:last-child td{border-bottom:0;}
-    td.col-date{white-space:nowrap; color:var(--muted); font-size:12.5px;}
+    td.col-date{color:var(--muted); font-size:12.5px;}
     td .muted{color:var(--muted); font-size:12px;}
     tbody tr{border-left:3px solid transparent;}
     tbody tr.st-in_progress{border-left-color:var(--amber);}
     tbody tr.st-done{border-left-color:var(--green); background:#fafdfb;}
     tbody tr.st-done td{color:var(--muted);}
     .empty{text-align:center; color:var(--muted); padding:32px 12px;}
+    .copyable{cursor:pointer;}
+    .copyable:hover{color:var(--blue); text-decoration:underline;}
 
     .status-sel{padding:5px 8px; border:1px solid var(--border); border-radius:7px; font-size:13px; font-family:inherit; background:var(--white); cursor:pointer;}
     .note-in{width:100%; min-width:130px; padding:6px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px; font-family:inherit; background:var(--white);}
     .note-in:focus,.status-sel:focus{outline:none; border-color:var(--blue);}
 
-    #toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--navy); color:var(--white); padding:10px 18px; border-radius:8px; font-size:13px; opacity:0; pointer-events:none; transition:.2s;}
+    #toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--navy); color:var(--white); padding:10px 18px; border-radius:8px; font-size:13px; opacity:0; pointer-events:none; transition:.2s; max-width:80vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
     #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
   </style>
 </head>
 <body>
-  <!-- 접근 거부 화면 -->
+  <!-- 접근 거부 -->
   <div id="gate" hidden>
     <div class="lock">🔒</div>
     <h1>접근 권한이 없습니다</h1>
@@ -76,15 +82,22 @@
       <span class="sub">사전신청·문의 관리 화면</span>
     </header>
     <div class="wrap">
+      <div class="stats" id="stats"></div>
       <div class="controls">
         <input id="search" class="search" type="text" placeholder="검색 — 단지·이메일·휴대폰·관심·메모" autocomplete="off" />
+        <select id="seg" class="seg">
+          <option value="all">소유 전체</option>
+          <option value="조합원">조합원</option>
+          <option value="매수 대기자">매수 대기자</option>
+        </select>
         <div class="filters">
           <button class="filter-btn active" data-status="all">전체</button>
           <button class="filter-btn" data-status="new">신규</button>
           <button class="filter-btn" data-status="in_progress">처리중</button>
           <button class="filter-btn" data-status="done">완료</button>
         </div>
-        <button id="refresh" class="refresh">↻ 새로고침</button>
+        <button id="csv" class="btn">⤓ CSV</button>
+        <button id="refresh" class="btn">↻ 새로고침</button>
         <span id="count" class="count">0건</span>
       </div>
       <div class="table-wrap">
@@ -129,9 +142,10 @@
       var STATUS = [{v:'new',l:'신규'},{v:'in_progress',l:'처리중'},{v:'done',l:'완료'}];
       function label(v){ for(var i=0;i<STATUS.length;i++){ if(STATUS[i].v===v) return STATUS[i].l; } return '신규'; }
 
-      var rows = [], q = '', filter = 'all', sortKey = 'created_at', sortDir = 'desc';
+      var rows = [], q = '', filter = 'all', seg = 'all', sortKey = 'created_at', sortDir = 'desc';
       var tbody = document.getElementById('tbody');
       var countEl = document.getElementById('count');
+      var statsEl = document.getElementById('stats');
       var toastEl = document.getElementById('toast');
 
       function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
@@ -140,18 +154,18 @@
         try{ return new Date(iso).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',year:'2-digit',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }
         catch(e){ return iso; } }
       function toast(m){ toastEl.textContent=m; toastEl.classList.add('show'); setTimeout(function(){toastEl.classList.remove('show');},1500); }
+      function statusOrder(v){ var o={'new':0,'in_progress':1,'done':2}; var k=v||'new'; return o[k]!=null?o[k]:0; }
 
       function filtered(){
         var query = q.trim().toLowerCase();
         return rows.filter(function(r){
           if (filter!=='all' && (r.status||'new')!==filter) return false;
+          if (seg!=='all' && r.owner_type!==seg) return false;
           if (!query) return true;
           return [r.complex,r.email,r.phone,r.interest,r.owner_type,r.note].some(function(f){
             return String(f||'').toLowerCase().indexOf(query)>-1; });
         });
       }
-
-      function statusOrder(v){ var o={'new':0,'in_progress':1,'done':2}; var k=v||'new'; return o[k]!=null?o[k]:0; }
       function sortList(list){
         var dir = sortDir==='desc' ? -1 : 1;
         return list.sort(function(a,b){
@@ -160,10 +174,22 @@
           return String(a[sortKey]||'').localeCompare(String(b[sortKey]||''),'ko')*dir;
         });
       }
+
+      function renderStats(){
+        var c={all:rows.length,'new':0,in_progress:0,done:0};
+        rows.forEach(function(r){ var s=r.status||'new'; if(c[s]!=null)c[s]++; });
+        statsEl.innerHTML =
+          '<span class="stat">전체<b>'+c.all+'</b></span>'+
+          '<span class="stat">신규<b>'+c['new']+'</b></span>'+
+          '<span class="stat">처리중<b>'+c.in_progress+'</b></span>'+
+          '<span class="stat">완료<b>'+c.done+'</b></span>';
+      }
+
       function render(){
+        renderStats();
         var list = sortList(filtered());
         countEl.textContent = list.length + ' / ' + rows.length + '건';
-        if (!list.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">문의가 없습니다.</td></tr>'; return; }
+        if (!list.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">해당하는 문의가 없습니다.</td></tr>'; return; }
         tbody.innerHTML = list.map(function(r){
           var st = r.status||'new';
           var opts = STATUS.map(function(s){
@@ -173,7 +199,8 @@
             '<td><strong>'+esc(r.complex)+'</strong></td>'+
             '<td>'+esc(r.owner_type)+'</td>'+
             '<td>'+esc(r.interest)+'</td>'+
-            '<td class="col-contact">'+esc(r.email)+(r.phone?'<br><span class="muted">'+esc(r.phone)+'</span>':'')+'</td>'+
+            '<td class="col-contact"><span class="copyable" data-copy="'+esc(r.email)+'">'+esc(r.email)+'</span>'+
+              (r.phone?'<br><span class="copyable muted" data-copy="'+esc(r.phone)+'">'+esc(r.phone)+'</span>':'')+'</td>'+
             '<td><select class="status-sel" data-id="'+r.id+'">'+opts+'</select></td>'+
             '<td><input class="note-in" data-id="'+r.id+'" value="'+esc(r.note)+'" placeholder="메모" /></td>'+
           '</tr>';
@@ -187,8 +214,35 @@
         rows = res.data || []; render();
       }
 
-      // 검색·필터·새로고침
+      // ── CSV 내보내기 (현재 필터·정렬 반영) ──
+      function csvCell(v){ v=String(v==null?'':v); if(/[",\r\n]/.test(v)) v='"'+v.replace(/"/g,'""')+'"'; return v; }
+      function toCSV(){
+        var list = sortList(filtered());
+        var head = ['접수시각','단지','소유유형','관심','이메일','휴대폰','상태','메모'];
+        var lines = [head.join(',')];
+        list.forEach(function(r){
+          lines.push([fmtDate(r.created_at), r.complex, r.owner_type, r.interest, r.email, r.phone, label(r.status||'new'), r.note].map(csvCell).join(','));
+        });
+        return '﻿' + lines.join('\r\n');   // BOM = 엑셀 한글 깨짐 방지
+      }
+      function downloadCSV(){
+        var blob = new Blob([toCSV()], {type:'text/csv;charset=utf-8;'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a'); a.href=url; a.download='reservations.csv';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url); toast('CSV 내보냄 ('+sortList(filtered()).length+'건)');
+      }
+
+      function copyText(t){
+        if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t); }
+        toast('복사됨: '+t);
+      }
+
+      // ── 이벤트 ──
       document.getElementById('search').addEventListener('input', function(e){ q=e.target.value; render(); });
+      document.getElementById('seg').addEventListener('change', function(e){ seg=e.target.value; render(); });
+      document.getElementById('csv').addEventListener('click', downloadCSV);
+      document.getElementById('refresh').addEventListener('click', load);
       var fbtns = document.querySelectorAll('.filter-btn');
       for (var i=0;i<fbtns.length;i++){
         fbtns[i].addEventListener('click', function(){
@@ -196,7 +250,6 @@
           this.classList.add('active'); filter=this.getAttribute('data-status'); render();
         });
       }
-      document.getElementById('refresh').addEventListener('click', load);
 
       // 컬럼 정렬 (헤더 클릭 → 오름/내림 토글)
       function updateArrows(){
@@ -227,6 +280,7 @@
           if (r1.error){ toast('상태 저장 실패'); return; }
           var row1 = rows.find(function(x){return x.id===id;}); if(row1) row1.status=val;
           var tr = sel.closest('tr'); if(tr) tr.className='st-'+val;
+          renderStats();
           toast('상태 → '+label(val));
         } else if (inp){
           var id2 = parseInt(inp.getAttribute('data-id'),10), val2 = inp.value;
@@ -235,6 +289,12 @@
           var row2 = rows.find(function(x){return x.id===id2;}); if(row2) row2.note=val2;
           toast('메모 저장됨');
         }
+      });
+
+      // 연락처 클릭 → 복사 (위임)
+      tbody.addEventListener('click', function(e){
+        var c = e.target.closest ? e.target.closest('.copyable') : null;
+        if (c){ copyText(c.getAttribute('data-copy')); }
       });
 
       load();
