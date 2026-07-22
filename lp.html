@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLEARBUILD — 재개발·재건축 매물, 진짜 가격 확인</title>
+  <meta name="description" content="호가에 분담금·금융비용을 더한 '진짜 총투입비'를 거래 순간에 계산합니다. 사전신청하면 내 단지 준비되는 대로 가장 먼저 안내드립니다." />
+  <style>
+    :root{
+      --bg:#f4f7fa; --white:#fff; --text:#1a1a1a; --dark:#142a45; --muted:#6b7280;
+      --border:#e5e9f0; --blue:#3b72d4; --blue-lt:#eaf1fb; --navy:#142a45;
+      --green:#1e7a46; --amber:#b7791f;
+    }
+    *{box-sizing:border-box; margin:0; padding:0;}
+    [hidden]{display:none !important;}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.5; font-size:15px; padding-bottom:80px;}
+    .wrap{max-width:680px; margin:0 auto; padding:0 20px;}
+    .btn{display:inline-block; border:0; border-radius:10px; padding:14px 22px; font-size:15px; font-weight:700; font-family:inherit; cursor:pointer; text-decoration:none; text-align:center;}
+    .btn-blue{background:var(--blue); color:#fff;}
+    .btn-blue:hover{background:#2f61ba;}
+    .btn-ghost{background:transparent; color:var(--blue); border:1px solid var(--border);}
+
+    /* HERO */
+    .hero{text-align:center; padding:56px 20px 40px;}
+    .hero .eyebrow{color:var(--blue); font-weight:700; font-size:13px; letter-spacing:.02em; margin-bottom:14px;}
+    .hero h1{font-size:30px; font-weight:800; letter-spacing:-.02em; line-height:1.28; color:var(--dark);}
+    .hero h1 em{color:var(--blue); font-style:normal;}
+    .hero .sub{color:var(--muted); font-size:15.5px; margin:16px auto 26px; max-width:520px;}
+    .hero .sub b{color:var(--text);}
+
+    section{padding:36px 0;}
+    .sec-title{font-size:20px; font-weight:800; color:var(--dark); text-align:center; margin-bottom:6px; letter-spacing:-.01em;}
+    .sec-sub{font-size:14px; color:var(--muted); text-align:center; margin-bottom:22px;}
+
+    /* 가치 미리보기 4카드 */
+    .preview{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px;}
+    .pv{background:var(--white); border:1px solid var(--border); border-radius:12px; padding:16px 14px;}
+    .pv.primary{background:var(--blue-lt); border-color:#d3e2f7;}
+    .pv-label{font-size:12.5px; color:var(--muted); margin-bottom:6px;}
+    .pv-num{font-size:22px; font-weight:800; color:var(--dark); letter-spacing:-.02em;}
+    .pv.primary .pv-num{color:var(--blue);}
+    .pv-sub{font-size:11.5px; color:var(--muted); margin-top:5px;}
+    .preview-note{text-align:center; font-size:12.5px; color:var(--muted); margin-top:14px;}
+    .preview-note a{color:var(--blue); font-weight:600;}
+
+    /* 신뢰 배지 */
+    .trust{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:6px;}
+    .badge{background:var(--white); border:1px solid var(--border); border-radius:999px; padding:8px 15px; font-size:13px; color:var(--text);}
+    .badge b{color:var(--blue);}
+
+    /* 폼 */
+    .signup{background:var(--white); border:1px solid var(--border); border-radius:16px; padding:26px 22px; margin-top:6px;}
+    .field{margin-bottom:14px;}
+    .field label{display:block; font-size:13px; font-weight:700; color:var(--dark); margin-bottom:6px;}
+    .field .req{color:var(--blue);}
+    .field input, .field select{width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:10px; font-size:15px; font-family:inherit; background:var(--bg);}
+    .field input:focus, .field select:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,114,212,.12); background:#fff;}
+    .field.invalid input, .field.invalid select{border-color:#d14343;}
+    .field .err{display:none; font-size:12px; color:#d14343; margin-top:5px;}
+    .field.invalid .err{display:block;}
+    .signup .btn-blue{width:100%; margin-top:4px;}
+    .form-msg{margin-top:12px; font-size:14px; text-align:center; font-weight:600;}
+    .form-msg.ok{color:var(--green);} .form-msg.err{color:#d14343;}
+    .signup-foot{font-size:12px; color:var(--muted); text-align:center; margin-top:12px;}
+
+    /* FAQ */
+    .faq details{background:var(--white); border:1px solid var(--border); border-radius:12px; padding:2px 16px; margin-bottom:8px;}
+    .faq summary{cursor:pointer; font-weight:700; font-size:14.5px; color:var(--dark); padding:13px 0; list-style:none;}
+    .faq summary::-webkit-details-marker{display:none;}
+    .faq summary::after{content:'+'; float:right; color:var(--blue); font-weight:700;}
+    .faq details[open] summary::after{content:'−';}
+    .faq p{font-size:14px; color:var(--muted); padding:0 0 14px; line-height:1.6;}
+
+    footer{text-align:center; padding:30px 20px; color:var(--muted); font-size:12.5px; border-top:1px solid var(--border); margin-top:20px;}
+
+    /* 플로팅 사전신청 CTA */
+    #float-cta{position:fixed; left:50%; bottom:18px; transform:translateX(-50%) translateY(24px);
+      background:var(--navy); color:#fff; border:0; border-radius:999px; padding:14px 26px; font-size:15px; font-weight:700;
+      font-family:inherit; cursor:pointer; box-shadow:0 8px 24px rgba(20,42,69,.28); opacity:0; pointer-events:none;
+      transition:opacity .25s, transform .25s; z-index:40; white-space:nowrap;}
+    #float-cta.show{opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);}
+
+    /* AI 상담사 (더미) */
+    #chat-btn{position:fixed; right:20px; bottom:18px; width:56px; height:56px; border-radius:50%; border:0;
+      background:var(--blue); color:#fff; font-size:24px; cursor:pointer; box-shadow:0 8px 22px rgba(59,114,212,.4); z-index:50;}
+    #chat-btn:hover{background:#2f61ba;}
+    #chat-panel{position:fixed; right:20px; bottom:86px; width:330px; max-width:calc(100vw - 40px); height:460px; max-height:calc(100vh - 120px);
+      background:var(--white); border:1px solid var(--border); border-radius:16px; box-shadow:0 16px 44px rgba(20,42,69,.22);
+      display:flex; flex-direction:column; overflow:hidden; z-index:50;}
+    .chat-head{background:var(--navy); color:#fff; padding:14px 16px; display:flex; align-items:center; gap:8px;}
+    .chat-head .dot{width:8px; height:8px; border-radius:50%; background:#4ade80;}
+    .chat-head b{font-size:14px;} .chat-head .beta{font-size:10.5px; color:#9db4d4; margin-left:2px;}
+    .chat-head .x{margin-left:auto; background:none; border:0; color:#9db4d4; font-size:20px; cursor:pointer;}
+    .chat-body{flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; background:var(--bg);}
+    .msg{max-width:82%; padding:10px 13px; border-radius:13px; font-size:13.5px; line-height:1.5;}
+    .msg.bot{background:var(--white); border:1px solid var(--border); align-self:flex-start; border-bottom-left-radius:4px;}
+    .msg.user{background:var(--blue); color:#fff; align-self:flex-end; border-bottom-right-radius:4px;}
+    .msg .cta{display:inline-block; margin-top:8px; color:var(--blue); font-weight:700; cursor:pointer; font-size:13px;}
+    .chat-chips{padding:10px 12px; border-top:1px solid var(--border); display:flex; flex-wrap:wrap; gap:6px; background:var(--white);}
+    .chip{border:1px solid var(--border); background:var(--white); color:var(--text); border-radius:999px; padding:7px 11px; font-size:12.5px; cursor:pointer; font-family:inherit;}
+    .chip:hover{border-color:var(--blue); color:var(--blue);}
+
+    @media (max-width:560px){
+      .hero h1{font-size:25px;}
+      #float-cta{left:16px; right:16px; transform:translateY(24px); border-radius:12px; text-align:center; bottom:16px;}
+      #float-cta.show{transform:translateY(0);}
+      #chat-btn{bottom:74px;}   /* 모바일에선 플로팅 CTA 위로 */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow">정비사업 의사결정 도구</div>
+    <h1>호가는 반쪽 가격표입니다.<br><em>진짜 가격은 분담금까지죠.</em></h1>
+    <p class="sub">재건축·리모델링 매물의 호가에 분담금·금융비용을 더한 <b>'진짜 총투입비'</b>를 계산합니다. 호가 6.5억 매물이 실제로는 <b>9억대</b>일 수 있습니다.</p>
+    <a href="#signup" class="btn btn-blue" id="hero-cta">내 매물 진짜 가격 알아보기</a>
+  </header>
+
+  <div class="wrap">
+    <!-- 가치 미리보기 -->
+    <section>
+      <div class="sec-title">당신 매물의 진짜 가격, 이렇게 나옵니다</div>
+      <div class="sec-sub">분당 느티마을 3단지 · 전용 84㎡ · 호가 6.5억 예시</div>
+      <div class="preview">
+        <div class="pv primary"><div class="pv-label">총투입비 (진짜 가격)</div><div class="pv-num">10.8억</div><div class="pv-sub">호가+분담금+부대</div></div>
+        <div class="pv"><div class="pv-label">예상 분담금</div><div class="pv-num">3.8억</div><div class="pv-sub">신뢰도 B · 출처</div></div>
+        <div class="pv"><div class="pv-label">필요 현금</div><div class="pv-num">4.3억</div><div class="pv-sub">호가 외 추가 현금</div></div>
+        <div class="pv"><div class="pv-label">손익분기 시세</div><div class="pv-num">10.8억</div><div class="pv-sub">준공 후 본전 시세</div></div>
+      </div>
+      <p class="preview-note">참고 추정값입니다. <a href="/#sim">직접 계산해보기 →</a></p>
+    </section>
+
+    <!-- 신뢰 -->
+    <section>
+      <div class="sec-title">감이 아니라 근거로</div>
+      <div class="sec-sub">모든 숫자에 신뢰도 등급과 출처를 붙입니다</div>
+      <div class="trust">
+        <span class="badge"><b>A·B</b> 교차검증 등급</span>
+        <span class="badge"><b>15.4만</b> VOC 분석</span>
+        <span class="badge"><b>48개</b> 단지 분담금 검증</span>
+      </div>
+    </section>
+
+    <!-- 사전신청 폼 -->
+    <section id="signup">
+      <div class="sec-title">사전신청</div>
+      <div class="sec-sub">내 단지 준비되는 대로 가장 먼저 안내드립니다</div>
+      <form class="signup" id="lp-form" novalidate>
+        <div class="field" id="f-complex">
+          <label for="in-complex">관심 단지 <span class="req">*</span></label>
+          <input type="text" id="in-complex" placeholder="예: 분당 느티마을 3단지" autocomplete="off" />
+          <span class="err">관심 단지를 입력해 주세요.</span>
+        </div>
+        <div class="field" id="f-owner">
+          <label for="in-owner">소유 유형 <span class="req">*</span></label>
+          <select id="in-owner">
+            <option value="">선택해 주세요</option>
+            <option value="매수 대기자">매수 대기자</option>
+            <option value="조합원">조합원</option>
+          </select>
+          <span class="err">소유 유형을 선택해 주세요.</span>
+        </div>
+        <div class="field" id="f-email">
+          <label for="in-email">이메일 <span class="req">*</span></label>
+          <input type="email" id="in-email" placeholder="예: hong@example.com" autocomplete="off" />
+          <span class="err">올바른 이메일을 입력해 주세요.</span>
+        </div>
+        <button type="submit" class="btn btn-blue">사전신청하고 우선 안내받기</button>
+        <p class="form-msg" id="form-msg" role="status" aria-live="polite" hidden></p>
+        <p class="signup-foot">남겨주신 정보는 사전신청 안내 용도로만 사용됩니다.</p>
+      </form>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <div class="sec-title">자주 묻는 질문</div>
+      <div style="height:8px"></div>
+      <details><summary>분담금이 정확히 뭔가요?</summary><p>재건축·리모델링에서 새 집을 받기 위해 조합원이 추가로 내는 돈입니다. 공사비가 오르면 함께 오릅니다. 호가에 이 분담금까지 더해야 '진짜 가격(총투입비)'이 됩니다.</p></details>
+      <details><summary>믿을 수 있는 숫자인가요?</summary><p>모든 숫자에 A/B/C 신뢰도 등급과 출처를 붙이고, 교차검증된 A·B 사례만 계산에 사용합니다. 근거를 항상 화면에 노출합니다. (투자 판단의 근거로는 쓸 수 없습니다.)</p></details>
+      <details><summary>제 단지도 되나요?</summary><p>현재 검증된 단지부터 순차 확대 중입니다. 사전신청을 남겨주시면 해당 단지가 준비되는 대로 가장 먼저 알려드립니다.</p></details>
+    </section>
+  </div>
+
+  <footer>CLEARBUILD · 정비사업 의사결정 도구 · © 2026</footer>
+
+  <!-- 플로팅 사전신청 CTA -->
+  <button type="button" id="float-cta">🔔 사전신청하고 우선 안내받기</button>
+
+  <!-- AI 상담사 (더미) -->
+  <button type="button" id="chat-btn" aria-label="상담 열기">💬</button>
+  <div id="chat-panel" hidden>
+    <div class="chat-head"><span class="dot"></span><b>CLEARBUILD 상담</b><span class="beta">베타</span><button type="button" class="x" id="chat-x" aria-label="닫기">×</button></div>
+    <div class="chat-body" id="chat-body"></div>
+    <div class="chat-chips" id="chat-chips"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ── Supabase ──
+    var SUPABASE_URL = 'https://lynmnuftfybbegdxjfbz.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bm1udWZ0ZnliYmVnZHhqZmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0Njk3OTUsImV4cCI6MjA5OTA0NTc5NX0.66hZ9W29yoscoC8ibbUeHQluG8ecEo-nI5a8F19beGE';
+    var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    var REF = new URLSearchParams(location.search).get('ref') || 'direct';   // 채널 태깅
+
+    // ── 사전신청 폼 ──
+    (function(){
+      var form = document.getElementById('lp-form');
+      var msg = document.getElementById('form-msg');
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn.textContent;
+      function setMsg(t, ok){ if(!t){msg.hidden=true;return;} msg.hidden=false; msg.textContent=t; msg.className='form-msg '+(ok?'ok':'err'); }
+      function inv(id, bad){ document.getElementById(id).classList.toggle('invalid', bad); }
+      function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        if (btn.disabled) return;
+        var complex = document.getElementById('in-complex').value.trim();
+        var owner = document.getElementById('in-owner').value;
+        var email = document.getElementById('in-email').value.trim();
+        var ok = true;
+        inv('f-complex', !complex); if(!complex) ok=false;
+        inv('f-owner', !owner); if(!owner) ok=false;
+        inv('f-email', !isEmail(email)); if(!isEmail(email)) ok=false;
+        if (!ok) return;
+
+        btn.disabled = true; btn.textContent = '처리 중…'; setMsg('', null);
+        sb.from('reservations').insert({
+          complex: complex, owner_type: owner, interest: 'LP 사전신청',
+          email: email, phone: null, ref: REF
+        }).then(function(res){
+          btn.disabled = false; btn.textContent = label;
+          if (res.error){ setMsg('저장에 실패했어요. 잠시 후 다시 시도해 주세요.', false); return; }
+          form.reset();
+          setMsg('사전신청이 접수됐습니다. 준비되는 대로 가장 먼저 안내드릴게요!', true);
+        });
+      });
+    })();
+
+    // ── 플로팅 CTA (히어로 지나면 등장) ──
+    (function(){
+      var cta = document.getElementById('float-cta');
+      var hero = document.querySelector('.hero');
+      function onScroll(){
+        var past = window.scrollY > (hero.offsetHeight - 80);
+        var atForm = false;
+        var f = document.getElementById('signup');
+        if (f){ var r = f.getBoundingClientRect(); atForm = r.top < window.innerHeight && r.bottom > 0; }
+        cta.classList.toggle('show', past && !atForm);   // 폼 보이면 숨김(중복 방지)
+      }
+      cta.addEventListener('click', function(){ document.getElementById('signup').scrollIntoView({behavior:'smooth'}); });
+      window.addEventListener('scroll', onScroll, {passive:true});
+      window.addEventListener('resize', onScroll); onScroll();
+    })();
+
+    // ── AI 상담사 (더미) ──
+    (function(){
+      var btn = document.getElementById('chat-btn');
+      var panel = document.getElementById('chat-panel');
+      var body = document.getElementById('chat-body');
+      var chips = document.getElementById('chat-chips');
+      var QA = [
+        { q:'분담금이 뭐예요?', a:'재건축·리모델링에서 새 집을 받으려고 조합원이 추가로 내는 돈이에요. 공사비가 오르면 같이 올라요. 호가에 이 분담금까지 더해야 "진짜 가격"이 됩니다.' },
+        { q:'3만원 리포트엔 뭐가 들어가요?', a:'관심 매물의 단지·평형·향·동호수를 반영한 정밀 총투입비(분담금·필요현금·손익분기)와 각 숫자의 출처·등급이 담겨요. 판단은 본인 몫이에요.' },
+        { q:'내 단지도 되나요?', a:'지금은 검증된 단지부터 순차 확대 중이에요. 사전신청 남겨주시면 해당 단지 준비되는 대로 가장 먼저 알려드려요.' },
+        { q:'믿을 수 있는 숫자예요?', a:'모든 숫자에 A/B/C 신뢰도 등급과 출처를 붙이고, 교차검증된 A·B 사례만 계산에 써요. 근거를 항상 화면에 보여드립니다.' }
+      ];
+      var greeted = false;
+      function esc(s){ return String(s).replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+      function add(type, html){ var d=document.createElement('div'); d.className='msg '+type; d.innerHTML=html; body.appendChild(d); body.scrollTop=body.scrollHeight; }
+      function renderChips(){
+        chips.innerHTML='';
+        QA.forEach(function(item){ var c=document.createElement('button'); c.className='chip'; c.type='button'; c.textContent=item.q;
+          c.addEventListener('click', function(){ ask(item); }); chips.appendChild(c); });
+      }
+      function ask(item){
+        add('user', esc(item.q));
+        setTimeout(function(){
+          add('bot', esc(item.a) + '<br><span class="cta" data-go="signup">사전신청하고 자세히 받기 →</span>');
+        }, 350);
+      }
+      function open(){
+        panel.hidden=false;
+        if(!greeted){ greeted=true; add('bot','안녕하세요! 분담금·총투입비, 궁금한 걸 눌러보세요 🙂'); renderChips(); }
+      }
+      btn.addEventListener('click', function(){ panel.hidden ? open() : (panel.hidden=true); });
+      document.getElementById('chat-x').addEventListener('click', function(){ panel.hidden=true; });
+      body.addEventListener('click', function(e){
+        var g = e.target.closest ? e.target.closest('[data-go]') : null;
+        if(g){ panel.hidden=true; document.getElementById('signup').scrollIntoView({behavior:'smooth'}); }
+      });
+    })();
+  </script>
+</body>
+</html>
