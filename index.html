@@ -1223,15 +1223,7 @@
 <script>
   (function(){
     if (!window.naver || !naver.maps) return;
-    // 데이터 보유 단지 시드(정확 좌표) — complexes.json 나오면 교체·확장
-    var SEED = [
-      {name:'분당 느티마을 3단지', lat:37.3626, lng:127.1084},
-      {name:'산본 우륵주공아파트', lat:37.3585, lng:126.9285},
-      {name:'상계 주공5단지', lat:37.6614, lng:127.0705},
-      {name:'반포 미도아파트', lat:37.5085, lng:127.0075},
-      {name:'목동 신시가지 7단지', lat:37.5335, lng:126.8745},
-      {name:'분당 시범 우성아파트', lat:37.3735, lng:127.1145}
-    ];
+    // 좌표는 하드코딩하지 않고 complexes.json의 도로명주소로 지오코딩(정확도↑)
     var mapEl = document.getElementById('naver-map');
     if (!mapEl) return;
     var map = new naver.maps.Map(mapEl, { center:new naver.maps.LatLng(37.4979,127.0276), zoom:10, scaleControl:false, mapDataControl:false });
@@ -1240,7 +1232,6 @@
     var hint = document.getElementById('map-hint');
     var complexField = document.getElementById('in-complex');
     var dl = document.getElementById('complex-list');
-    if (dl) SEED.forEach(function(s){ var o=document.createElement('option'); o.value=s.name; dl.appendChild(o); });
     // 118 단지 자동완성 + 지오코딩 주소 (complexes.json)
     var LOOKUP = {};
     fetch('complexes.json').then(function(r){ return r.json(); }).then(function(list){
@@ -1252,7 +1243,7 @@
 
     function pin(lat,lng,name){
       var p = new naver.maps.LatLng(lat,lng);
-      map.setCenter(p); map.setZoom(15); marker.setPosition(p);
+      map.setCenter(p); map.setZoom(16); marker.setPosition(p);
       if (hint) hint.textContent = (name||'') + ' 위치를 표시했습니다.';
       if (complexField && name) complexField.value = name;
     }
@@ -1267,12 +1258,11 @@
     }
     function search(q){
       q = (q||'').trim(); if(!q) return;
-      var hit = SEED.filter(function(s){ return q.indexOf(s.name)>-1 || s.name.indexOf(q)>-1; })[0];
-      if (hit){ pin(hit.lat,hit.lng,hit.name); return; }
       var c = LOOKUP[q];
+      if (!c){ for (var k in LOOKUP){ if (k.indexOf(q)>-1 || q.indexOf(k)>-1){ c = LOOKUP[k]; break; } } }
       if (c){
         if (c.lat!=null && c.lng!=null){ pin(c.lat, c.lng, c.name); return; }
-        geocode(c.geocodeQuery || c.name, c.name); return;
+        geocode(c.geocodeQuery || c.address || c.name, c.name); return;   // 도로명주소로 정확 지오코딩
       }
       geocode(q, q);
     }
