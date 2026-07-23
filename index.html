@@ -1735,5 +1735,23 @@
   })();
 </script>
 
+<!-- Day14: 시뮬레이터 실행 측정 (핵심 지표 #3) — 사용자가 시뮬 입력을 처음 만질 때 1회만 Umami 이벤트 기록 -->
+<script>
+  (function () {
+    var fired = false;
+    function trackSimRun() {
+      if (fired) return;
+      fired = true;
+      if (window.umami) window.umami.track('sim-run');
+    }
+    ['sim-buy', 'sim-cost'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('change', trackSimRun);
+      el.addEventListener('input', trackSimRun);
+    });
+  })();
+</script>
+
 </body>
 </html>
