@@ -1588,7 +1588,7 @@
     var el = document.getElementById('signup-ticker');
     if (!el || typeof sb === 'undefined') return;
     function ownerLabel(o){ return o === '조합원' ? '조합원' : '매수희망자'; }
-    sb.from('reservations').select('complex,owner_type,created_at').order('created_at',{ascending:false}).limit(15).then(function(res){
+    sb.from('reservations_public').select('complex,owner_type,created_at').order('created_at',{ascending:false}).limit(15).then(function(res){
       if (res.error || !res.data || !res.data.length) return;
       var msgs = res.data.map(function(r){ return '<b>'+esc(r.complex)+'</b> ' + ownerLabel(r.owner_type) + '님이 사전신청했습니다'; });
       var i = 0;
