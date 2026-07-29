@@ -875,9 +875,10 @@
         var m=new naver.maps.Marker({position:ll,map:map,icon:{content:pin,anchor:new naver.maps.Point(w/2,h)},zIndex:isDeep?100:1});
         naver.maps.Event.addListener(m,'click',function(){
           window.__pinName=z.name;
+          var url='/detail.html?complex='+encodeURIComponent(z.name);
           var body=isDeep
-            ? '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#176B43;font-weight:600;">계산 서비스 제공 중</span><br><a href="/danji.html" style="color:#2255A4;">계산 예시 보기 →</a>'
-            : '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#5D6B80;">데이터 준비 중</span><br><a href="#" onclick="cbAlertFor();return false;" style="color:#2255A4;">확정값 알림 받기 →</a>';
+            ? '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#176B43;font-weight:600;">분담금 데이터 제공</span><br><a href="'+url+'" style="color:#2255A4;font-weight:600;">단지 상세 보기 →</a>'
+            : '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#5D6B80;">데이터 준비 중</span><br><a href="'+url+'" style="color:#2255A4;font-weight:600;">단지 상세 보기 →</a>';
           iw.setContent('<div style="padding:10px 12px;font-size:13px;line-height:1.55;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#333D4E;">'+body+'</div>');
           iw.open(map,m);
         });
