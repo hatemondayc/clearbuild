@@ -121,7 +121,7 @@
   <div class="card">
     <form id="order-form" novalidate>
       <label for="f-name">이름 <span class="req">*</span></label>
-      <input type="text" id="f-name" placeholder="예) 오원기" autocomplete="name" maxlength="10">
+      <input type="text" id="f-name" placeholder="예) 오원기" autocomplete="name">
       <div class="err-msg" id="e-name"></div>
 
       <label for="f-phone">연락처 <span class="req">*</span></label>
@@ -279,6 +279,18 @@
   function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
   function isValidPhone(v){ return /^01[016789][-\s]?\d{3,4}[-\s]?\d{4}$/.test(v); }
 
+  // Day18: 접수 전(입력 즉시) 실시간 붉은 경고 — 이름 길이·이메일 형식 (딱 잘리지 않고 경고로 안내)
+  byId('f-name').addEventListener('input', function(){
+    var v = this.value.trim();
+    if(v.length > LIMITS.name){ setErr('e-name','이름은 ' + LIMITS.name + '자를 넘을 수 없습니다.'); setInvalid('f-name', true); }
+    else { setErr('e-name',''); setInvalid('f-name', false); }
+  });
+  byId('f-email').addEventListener('input', function(){
+    var v = this.value.trim();
+    if(v && !isValidEmail(v)){ setErr('e-email','올바른 이메일 양식이 아닙니다. (예: name@example.com)'); setInvalid('f-email', true); }
+    else { setErr('e-email',''); setInvalid('f-email', false); }
+  });
+
   // ── 외부 알림 연동 훅 (B-17-03) ──
   // ⚠️ Day17은 Owen 결정에 따라 "설계만" 상태입니다(Zapier 취소).
   //    아래 함수는 활성화 지점이며, 실제 발송은 클라이언트가 아니라 서버(Supabase)에서 처리합니다.
@@ -318,7 +330,7 @@
     else { setErr('e-phone',''); setInvalid('f-phone',false); }
 
     if(!email){ setErr('e-email','이메일을 입력해 주세요. 리포트를 이 주소로 보내드려요.'); setInvalid('f-email',true); ok=false; }
-    else if(!isValidEmail(email)){ setErr('e-email','이메일 형식이 올바르지 않아요. name@example.com 형태로 적어 주세요.'); setInvalid('f-email',true); ok=false; }
+    else if(!isValidEmail(email)){ setErr('e-email','올바른 이메일 양식이 아닙니다. (예: name@example.com)'); setInvalid('f-email',true); ok=false; }
     else { setErr('e-email',''); setInvalid('f-email',false); }
 
     setErr('e-consent', consent ? '' : '유료 안내 동의가 필요해요. 체크 후 다시 접수해 주세요.'); if(!consent) ok=false;
@@ -326,7 +338,7 @@
     if(!ok){ setFormMsg('입력을 확인해 주세요. 빨간 안내가 있는 칸을 채우면 접수됩니다.', false); return; }
 
     // ⓒ Day18 크기 초과 방어 (maxlength 보완 — 붙여넣기·값 조작 대비, 코드로도 한국어 안내)
-    if(name.length > LIMITS.name){ setErr('e-name','이름은 최대 ' + LIMITS.name + '자까지 입력할 수 있어요.'); setInvalid('f-name',true); setFormMsg('입력을 확인해 주세요.', false); return; }
+    if(name.length > LIMITS.name){ setErr('e-name','이름은 ' + LIMITS.name + '자를 넘을 수 없습니다.'); setInvalid('f-name',true); setFormMsg('입력을 확인해 주세요.', false); return; }
     if(address.length > LIMITS.address){ setFormMsg('관심 단지/주소는 최대 ' + LIMITS.address + '자까지 입력할 수 있어요.', false); return; }
     if(note.length > LIMITS.note){ setFormMsg('요청 메모는 최대 ' + LIMITS.note + '자까지 입력할 수 있어요.', false); return; }
 
