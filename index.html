@@ -328,6 +328,43 @@
       </div>
     </div>
 
+    <!-- ═══ 실사례 케이스 (T12 · 증거 한 장) ═══ -->
+    <section style="padding-top:0;">
+      <div class="cb-container cb-data">
+        <div class="cb-card" style="border-left:3px solid var(--cb-navy-700);">
+          <div class="cb-label" style="text-transform:none; letter-spacing:.04em; color:var(--cb-navy-700);">실사례 · 느티마을 3단지 (리모델링)</div>
+          <h2 style="font-size:22px; margin-top:6px; line-height:1.3;">호가 <span class="cb-num">6.5억</span>. 진짜 값은 <span class="cb-num" style="color:var(--cb-navy-700);">10.8억</span>.</h2>
+          <p style="font-size:14px; color:var(--cb-ink-500); margin-top:8px;">호가만 보면 <b>4.3억</b>을 안 보고 삽니다 — 조합 총회 확정 분담금·금융비용까지 더한 진짜 총투입비입니다.</p>
+
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px;">
+            <div>
+              <div class="cb-label" style="text-transform:none;">조합 총회 확정 분담금 <span class="cb-grade cb-grade-b">B</span></div>
+              <div class="cb-num cb-num-lg" style="margin-top:4px;">3.8억</div>
+              <div style="font-size:12px; color:var(--cb-ink-400); margin-top:2px;">향·동호수별 1.85–3.83억 · <a href="https://v.daum.net/v/20230328171658696" target="_blank" rel="noopener">헤럴드경제</a></div>
+            </div>
+            <div>
+              <div class="cb-label" style="text-transform:none;">+ 금융·부대비용</div>
+              <div class="cb-num cb-num-lg" style="margin-top:4px;">+0.5억</div>
+              <div style="font-size:12px; color:var(--cb-ink-400); margin-top:2px;">이주비 이자·취득·부대 (가정 C)</div>
+            </div>
+            <div>
+              <div class="cb-label" style="text-transform:none;">= 총투입비 / 손익분기</div>
+              <div class="cb-num cb-num-lg" style="margin-top:4px; color:var(--cb-navy-700);">10.8억</div>
+              <div style="font-size:12px; color:var(--cb-ink-400); margin-top:2px;">호가 6.5 + 분담금 3.8 + 부대 0.5</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; font-size:14px; color:var(--cb-ink-700);">손익분기 <span class="cb-num">10.8억</span> — 인근 신축 84㎡ 실거래와의 갭이 '지금 사도 되나'의 답입니다. <span style="color:var(--cb-ink-400);">(단지별 실거래 연동 예정)</span></div>
+
+          <div style="margin-top:12px; padding:12px 14px; background:var(--cb-accent-bg); border-radius:var(--radius-md); font-size:13px; color:var(--cb-ink-700);">
+            <b>분담금은 확정 전까지 변합니다.</b> 산본 우륵 실사례: 공사비 +100만원/평 → 분담금 <b>+18%</b> (헤럴드경제). 그래서 우리는 추정을 <b>박제</b>하고 총회 확정과 <b>대조</b>합니다 — 아래 예측공시.
+          </div>
+
+          <div style="margin-top:14px;"><button type="button" class="cb-btn cb-btn-secondary" style="height:36px;" id="caseToCalc">↓ 내 조건으로 직접 계산</button></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ 시점별 필요현금 타임라인 (T3에서 시각화) ═══ -->
     <section>
       <div class="cb-container cb-data">
@@ -733,6 +770,15 @@
   });
 
   /* init */
+  // 프리필: ?ask= & cost= & type= (발표 시연·중개사 링크)
+  (function(){
+    var q=new URLSearchParams(location.search);
+    var qa=q.get('ask'); if(qa && /^[0-9,]+$/.test(qa)) ask.value=Number(qa.replace(/,/g,'')).toLocaleString();
+    var qc=parseInt(q.get('cost'),10); if(!isNaN(qc) && qc>=+range.min && qc<=+range.max) range.value=qc;
+    var qt=q.get('type'); if(qt && typeById(qt)) activeType=qt;
+  })();
+  var _c2c=document.getElementById('caseToCalc');
+  if(_c2c) _c2c.addEventListener('click', function(){ ask.scrollIntoView({behavior:'smooth', block:'center'}); ask.focus(); });
   renderTypeSeg();
   syncRange();
   calc();
