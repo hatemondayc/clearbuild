@@ -450,6 +450,15 @@
           <div class="msg2" id="fundMsg"></div>
           <p class="disclaim" style="margin-top:8px;">※ 자금조달 <b>수요 확인용</b> 신청입니다. CLEARBUILD는 대출을 중개·모집하지 않으며, 연결의 법적 형태는 검토 중입니다. 연락처는 이 목적에만 사용됩니다.</p>
         </form>
+        <form class="cb-fund-form" id="alertForm" hidden>
+          <label for="alertContact" style="font-size:12.5px; font-weight:600; color:var(--cb-ink-500);">이메일 (총회 확정값 나오면 알림)</label>
+          <div class="row">
+            <input id="alertContact" type="email" inputmode="email" placeholder="you@example.com" autocomplete="off" />
+            <button type="submit" class="cb-btn cb-btn-primary" id="alertSubmit">구독</button>
+          </div>
+          <div class="msg2" id="alertMsg"></div>
+          <p class="disclaim" style="margin-top:8px;">※ 무가입·무료. 이 단지 총회 확정 공시가 나오면 1회 알림. 이메일은 이 목적에만 사용됩니다.</p>
+        </form>
       </div>
     </section>
 
@@ -482,8 +491,26 @@
 
     <footer class="cb-footer">
       <div class="cb-container">
-        CLEARBUILD — 정비사업 판단·데이터 인프라
-        <p class="disclaim">본 페이지는 매수·매도·보유 <b>판단에 필요한 숫자와 출처</b>를 제공할 뿐, 특정 행위를 권유하지 않습니다. 분담금은 총회 의결 전 확정되지 않으며, 표시 수치는 신뢰등급(A/B/C)과 출처를 전제로 한 추정입니다. 문의 clearbuild@example.com</p>
+        <div style="font-weight:700; color:var(--cb-navy-700); margin-bottom:var(--sp-4);">CLEARBUILD — 정비사업 판단·데이터 인프라</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:16px;">
+          <div>
+            <div class="cb-label" style="text-transform:none;">무엇을 하나</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">정비사업 매물의 시점별 필요현금·총투입비를 근거와 함께 계산하는 판단·데이터 인프라.</div>
+          </div>
+          <div>
+            <div class="cb-label" style="text-transform:none;">데이터 출처</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">조합 총회자료·정비계획·권리변동계획 원본, 공개 실거래·언론(헤럴드경제 등), 118개 단지 커뮤니티 VOC(15.4만 건).</div>
+          </div>
+          <div>
+            <div class="cb-label" style="text-transform:none;">검증 방법</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">단지별 수작업 검증 후 신뢰등급 A(공시확정)/B(시장추정)/C(모델추정) 부여. C등급은 계산에서 제외.</div>
+          </div>
+          <div>
+            <div class="cb-label" style="text-transform:none;">팀 · 연락처</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">CLEARBUILD (오원기 · 정휘준) · <a href="mailto:clearbuild@example.com">clearbuild@example.com</a></div>
+          </div>
+        </div>
+        <p class="disclaim">본 페이지는 매수·매도·보유 <b>판단에 필요한 숫자와 출처</b>를 제공할 뿐, 특정 행위를 권유하지 않습니다. CLEARBUILD는 대출·매물을 <b>중개·모집하지 않습니다.</b> 분담금은 총회 의결 전 확정되지 않으며, 표시 수치는 신뢰등급(A/B/C)과 출처를 전제로 한 추정입니다.</p>
       </div>
     </footer>
   </main>
@@ -764,9 +791,25 @@
       done('신청 접수됐습니다.', false);
     }
   });
+  var alertForm=document.getElementById('alertForm'), alertMsg=document.getElementById('alertMsg'), alertContact=document.getElementById('alertContact');
   document.getElementById('ctaAlert').addEventListener('click', function(){
-    if(window.umami) window.umami.track('danji-cta-alert', { ref:REF, type:activeType });
-    alert('확정값 알림 구독 — S3에서 무가입 구독(카톡/이메일)으로 연결됩니다.');
+    alertForm.hidden=!alertForm.hidden;
+    if(!alertForm.hidden){ if(fundForm) fundForm.hidden=true; alertContact.focus(); if(window.umami) window.umami.track('danji-cta-alert', { ref:REF, type:activeType }); }
+  });
+  alertForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v=(alertContact.value||'').trim();
+    if(v.indexOf('@')<1){ alertMsg.textContent='이메일을 확인해 주세요.'; alertMsg.style.color='var(--cb-danger)'; return; }
+    var btn=document.getElementById('alertSubmit'); btn.disabled=true; btn.textContent='구독 중…';
+    var payload={ complex:'느티마을 3단지', owner_type:'매수희망자', interest:'[확정알림] 유형='+activeType, email:v, phone:null, ref:REF };
+    function done(m,bad){ btn.disabled=false; btn.textContent='구독'; alertMsg.textContent=m; alertMsg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
+    if(sb){
+      sb.from('reservations').insert(payload).then(function(res){
+        if(res.error){ done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); return; }
+        if(window.umami) window.umami.track('danji-alert-request', { ref:REF, type:activeType });
+        alertContact.value=''; done('구독 완료 — 확정값 나오면 알려드릴게요.', false);
+      });
+    } else { if(window.umami) window.umami.track('danji-alert-request', { ref:REF, type:activeType, offline:1 }); done('구독 완료.', false); }
   });
 
   /* init */
