@@ -103,6 +103,17 @@
   .pmed b{color:var(--cb-navy-700); font-size:15.5px; font-weight:700;}
   .plast{color:var(--cb-ink-500); font-size:12.5px; text-align:right;}
   @media(max-width:560px){ .prow{grid-template-columns:1fr 1fr; row-gap:2px;} .plast{text-align:left;} }
+  .mdeal{margin-top:14px; padding-top:14px; border-top:1px solid var(--cb-line-100);}
+  .lastdeal{font-size:13.5px; color:var(--cb-ink-700); margin-bottom:14px;}
+  .mlbl{font-size:12px; color:var(--cb-ink-700); font-weight:600; margin-bottom:9px;}
+  .mlbl span{color:var(--cb-ink-400); font-weight:400; font-size:11px;}
+  .mbars{display:flex; align-items:flex-end; gap:4px; height:64px;}
+  .mbar{flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:3px;}
+  .mbar .mval{font-size:9.5px; color:var(--cb-ink-400); line-height:1;}
+  .mbar .bar{width:100%; max-width:18px; background:#C9D9F4; border-radius:3px 3px 0 0;}
+  .mbar .bar.on{background:var(--cb-navy-600);}
+  .mbar .mlab{font-size:9.5px; color:var(--cb-ink-400); line-height:1;}
+  [data-theme="dark"] .mbar .bar{background:#2A3B57;}
 
   /* info rows */
   .rows{display:flex; flex-direction:column;}
@@ -232,9 +243,23 @@
           +'<span class="pmed">중앙 <b class="cb-num">'+fmtEok(it.median)+'</b></span>'
           +'<span class="plast">최근 <span class="cb-num">'+fmtEok(it.last)+'</span></span></div>';
       }).join('');
+      var ld=pd.lastDeal, lastLine='';
+      if(ld){ lastLine='<div class="lastdeal">마지막 거래 <b class="cb-num">'+ld.ymd.slice(0,4)+'.'+ld.ymd.slice(4,6)+'.'+ld.ymd.slice(6,8)+'</b> · 전용 '+ld.m2+'㎡ · <b class="cb-num" style="color:var(--cb-navy-700);">'+fmtEok(ld.amount)+'</b></div>'; }
+      var monBars='';
+      if(pd.monthly && pd.monthly.length){
+        var mx=1; pd.monthly.forEach(function(m){ if(m.count>mx) mx=m.count; });
+        monBars=pd.monthly.map(function(m,i){
+          var h=Math.round(m.count/mx*42)+4;
+          var on=(i===pd.monthly.length-1)?' on':'';
+          return '<div class="mbar" title="'+m.ym.slice(0,4)+'.'+m.ym.slice(4,6)+' · '+m.count+'건"><span class="mval cb-num">'+m.count+'</span><div class="bar'+on+'" style="height:'+h+'px;"></div><span class="mlab">'+parseInt(m.ym.slice(4),10)+'</span></div>';
+        }).join('');
+      }
       priceCard='<div class="card"><h2>실거래가</h2>'
         +'<div class="csub">'+esc(meta.source||'국토부 실거래가')+' · '+esc(meta.type||'아파트 매매')+(meta.period?' · '+esc(meta.period):'')+(meta.downloaded?' ('+esc(meta.downloaded)+' 기준)':'')+'</div>'
         +'<div class="pricerows">'+prows+'</div>'
+        +'<div class="mdeal">'+lastLine
+          +(monBars?'<div class="mlbl">월별 거래량 <span>(막대=거래 건수 · 숫자=월)</span></div><div class="mbars">'+monBars+'</div>':'')
+        +'</div>'
         +'<div class="src-note">신고가 기준 <b>실거래</b>입니다(매물 호가와 다를 수 있음). 사서 들어갈 때의 <b>실제 부담</b>은 아래 총투입비로 계산합니다.</div>'
         +'</div>';
     } else {
