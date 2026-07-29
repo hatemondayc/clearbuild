@@ -121,7 +121,7 @@
   <div class="card">
     <form id="order-form" novalidate>
       <label for="f-name">이름 <span class="req">*</span></label>
-      <input type="text" id="f-name" placeholder="예) 오원기" autocomplete="name" maxlength="40">
+      <input type="text" id="f-name" placeholder="예) 오원기" autocomplete="name" maxlength="10">
       <div class="err-msg" id="e-name"></div>
 
       <label for="f-phone">연락처 <span class="req">*</span></label>
@@ -182,7 +182,7 @@
   ];
   var CART = {}; // { productId: qty }
   var MAX_QTY = 20; // Day18: 수량 상한 (비현실적 값 방지)
-  var LIMITS = { name:40, address:100, note:200 }; // Day18: 크기 초과 방어
+  var LIMITS = { name:10, address:100, note:200 }; // Day18: 크기 초과 방어 (이름은 10자 — 한국어 이름 현실 상한)
 
   var won = function(n){ return n.toLocaleString('ko-KR') + '원'; };
   var byId = function(id){ return document.getElementById(id); };
