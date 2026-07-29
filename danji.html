@@ -503,12 +503,17 @@
           <h2>서비스 중인 정비사업 구역</h2>
           <div class="sub">CLEARBUILD가 데이터를 제공하는 정비사업장입니다. 커버리지를 그대로 공개합니다.</div>
         </div>
-        <div class="cb-card" style="padding:0; overflow:hidden;">
+        <div class="cb-card" style="padding:0; overflow:hidden; position:relative;">
+          <div id="mapCtl" style="position:absolute; top:12px; left:12px; z-index:10; display:flex; gap:6px;">
+            <button id="ctlNear" type="button" style="padding:6px 12px;font-size:12px;font-weight:600;border:1px solid #1A3F7A;border-radius:999px;cursor:pointer;box-shadow:0 1px 3px rgba(15,34,68,.14);font-family:inherit;background:#1A3F7A;color:#fff;">내 주변</button>
+            <button id="ctlAll" type="button" style="padding:6px 12px;font-size:12px;font-weight:600;border:1px solid #DDE3EC;border-radius:999px;cursor:pointer;box-shadow:0 1px 3px rgba(15,34,68,.14);font-family:inherit;background:#fff;color:#333D4E;">전국 보기</button>
+          </div>
           <div id="coverageMap" style="width:100%; height:380px; background:var(--cb-surface-2);"></div>
           <div style="display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center; padding:14px var(--sp-5); border-top:1px solid var(--cb-line-100); font-size:12.5px; color:var(--cb-ink-500);">
             <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#1A3F7A;display:inline-block;"></span> 계산 제공 <b id="cov-deep" class="cb-num" style="color:var(--cb-ink-900);">3</b></span>
             <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:#8494AA;display:inline-block;"></span> 정비사업 구역 <b id="cov-all" class="cb-num" style="color:var(--cb-ink-900);">118</b></span>
             <span>· 분담금 데이터 <b class="cb-num" style="color:var(--cb-ink-700);">48</b> <span style="color:var(--cb-ink-400);">(VOC·문서)</span></span>
+            <span id="geoStatus" style="color:var(--cb-navy-700); font-weight:600;"></span>
             <span style="margin-left:auto; color:var(--cb-ink-400);">채움율 그대로 공개</span>
           </div>
         </div>
@@ -858,21 +863,34 @@
   document.addEventListener('click', function(e){ var tip=document.getElementById('tlTip'); if(tip && e.target && e.target.closest && !e.target.closest('.tl-bar')) tip.hidden=true; });
   /* ───────────── S4-3: 커버리지 증명 지도 ───────────── */
   function cbAlertFor(){ window.__alertComplex=window.__pinName||null; var f=document.getElementById('alertForm'); if(f){ f.hidden=false; var i=document.getElementById('alertContact'); if(i) i.focus(); f.scrollIntoView({behavior:'smooth',block:'center'}); } }
+  function houseSvg(color,w,h){
+    return '<svg width="'+w+'" height="'+h+'" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 1px 2px rgba(15,34,68,.35));">'
+      +'<path d="M13 0C5.8 0 0 5.8 0 13c0 8.7 13 21 13 21s13-12.3 13-21C26 5.8 20.2 0 13 0z" fill="'+color+'" stroke="#fff" stroke-width="1.6"/>'
+      +'<path d="M13 6.6 L18.8 11.8 L17.1 11.8 L17.1 16.8 L14.2 16.8 L14.2 13.4 L11.8 13.4 L11.8 16.8 L8.9 16.8 L8.9 11.8 L7.2 11.8 Z" fill="#fff"/>'
+      +'</svg>';
+  }
+  function kmBetween(a,b){
+    var R=6371, rad=function(d){return d*Math.PI/180;};
+    var dLat=rad(b.lat()-a.lat()), dLng=rad(b.lng()-a.lng());
+    var x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(rad(a.lat()))*Math.cos(rad(b.lat()))*Math.sin(dLng/2)*Math.sin(dLng/2);
+    return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x));
+  }
   function initCoverage(){
     if(!(window.naver && naver.maps && naver.maps.Map)) return setTimeout(initCoverage,300);
     fetch('complexes.json').then(function(r){return r.json();}).then(function(arr){
       if(!Array.isArray(arr)) arr=arr.complexes||arr.zones||[];
       var pts=arr.filter(function(z){return z.lat&&z.lng;});
       if(!pts.length) return;
-      var map=new naver.maps.Map('coverageMap',{zoom:9,center:new naver.maps.LatLng(37.4,127.0),scrollWheel:false});
-      var b=new naver.maps.LatLngBounds(), deep=0;
+      var SEOUL=new naver.maps.LatLng(37.5665,126.9780);
+      var map=new naver.maps.Map('coverageMap',{zoom:11,center:SEOUL,scrollWheel:false});
+      var b=new naver.maps.LatLngBounds(), deep=0, markers=[];
       var iw=new naver.maps.InfoWindow({maxWidth:230,borderColor:'#DDE3EC',borderWidth:1,disableAnchor:true,backgroundColor:'#fff'});
       pts.forEach(function(z){
         var isDeep=!!z.hasBundam; if(isDeep) deep++;
         var ll=new naver.maps.LatLng(z.lat,z.lng); b.extend(ll);
-        var color=isDeep?'#1A3F7A':'#8494AA', w=isDeep?28:22, h=isDeep?36:28, dot=isDeep?5:4;
-        var pin='<svg width="'+w+'" height="'+h+'" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 1px 2px rgba(15,34,68,.35));"><path d="M13 0C5.8 0 0 5.8 0 13c0 8.7 13 21 13 21s13-12.3 13-21C26 5.8 20.2 0 13 0z" fill="'+color+'" stroke="#fff" stroke-width="1.6"/><circle cx="13" cy="13" r="'+dot+'" fill="#fff"/></svg>';
-        var m=new naver.maps.Marker({position:ll,map:map,icon:{content:pin,anchor:new naver.maps.Point(w/2,h)},zIndex:isDeep?100:1});
+        var color=isDeep?'#1A3F7A':'#8494AA', w=isDeep?30:24, h=isDeep?38:30;
+        var m=new naver.maps.Marker({position:ll,map:map,icon:{content:houseSvg(color,w,h),anchor:new naver.maps.Point(w/2,h)},zIndex:isDeep?100:1});
+        markers.push({m:m,ll:ll});
         naver.maps.Event.addListener(m,'click',function(){
           window.__pinName=z.name;
           var url='/detail.html?complex='+encodeURIComponent(z.name);
@@ -883,9 +901,44 @@
           iw.open(map,m);
         });
       });
-      try{ map.fitBounds(b); }catch(e){}
       var cd=document.getElementById('cov-deep'); if(cd) cd.textContent=deep;
       var ca=document.getElementById('cov-all'); if(ca) ca.textContent=pts.length;
+
+      // ── GPS "내 주변 10km" ─────────────
+      var geoStatus=document.getElementById('geoStatus');
+      var btnNear=document.getElementById('ctlNear'), btnAll=document.getElementById('ctlAll');
+      var userMarker=null, userCircle=null, located=false;
+      var BTN='padding:6px 12px;font-size:12px;font-weight:600;border:1px solid;border-radius:999px;cursor:pointer;box-shadow:0 1px 3px rgba(15,34,68,.14);font-family:inherit;';
+      function setActive(which){
+        if(btnNear) btnNear.style.cssText=BTN+(which==='near'?'background:#1A3F7A;color:#fff;border-color:#1A3F7A;':'background:#fff;color:#333D4E;border-color:#DDE3EC;');
+        if(btnAll) btnAll.style.cssText=BTN+(which==='all'?'background:#1A3F7A;color:#fff;border-color:#1A3F7A;':'background:#fff;color:#333D4E;border-color:#DDE3EC;');
+      }
+      function showAll(){ try{map.fitBounds(b);}catch(e){} setActive('all'); if(geoStatus) geoStatus.textContent=''; }
+      function locate(){
+        if(!navigator.geolocation){ showAll(); return; }
+        if(geoStatus){ geoStatus.textContent='내 위치 확인 중…'; geoStatus.style.color='var(--cb-ink-400)'; }
+        navigator.geolocation.getCurrentPosition(function(pos){
+          var u=new naver.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
+          map.morph ? map.morph(u,12) : (map.setCenter(u),map.setZoom(12));
+          if(userMarker) userMarker.setMap(null);
+          userMarker=new naver.maps.Marker({position:u,map:map,zIndex:300,icon:{content:'<div style="width:16px;height:16px;border-radius:50%;background:#2255A4;border:3px solid #fff;box-shadow:0 0 0 5px rgba(34,85,164,.22);"></div>',anchor:new naver.maps.Point(11,11)}});
+          if(userCircle) userCircle.setMap(null);
+          userCircle=new naver.maps.Circle({map:map,center:u,radius:10000,strokeColor:'#1A3F7A',strokeOpacity:.4,strokeWeight:1,fillColor:'#1A3F7A',fillOpacity:.05});
+          var near=0; for(var i=0;i<markers.length;i++){ if(kmBetween(u,markers[i].ll)<=10) near++; }
+          if(geoStatus){ geoStatus.textContent='내 주변 10km · '+near+'곳'; geoStatus.style.color='var(--cb-navy-700)'; }
+          setActive('near');
+          if(window.umami) window.umami.track('coverage-locate',{ near:near });
+        }, function(){
+          showAll(); if(geoStatus){ geoStatus.textContent='위치 권한이 없어 전국을 표시합니다'; geoStatus.style.color='var(--cb-ink-400)'; }
+        }, { enableHighAccuracy:false, timeout:8000, maximumAge:600000 });
+      }
+      if(btnNear) btnNear.addEventListener('click', locate);
+      if(btnAll) btnAll.addEventListener('click', showAll);
+      // 지도가 화면에 들어올 때 위치 요청(1회). 미지원 시 즉시 시도.
+      if('IntersectionObserver' in window){
+        var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !located){ located=true; io.disconnect(); locate(); } }); },{threshold:.25});
+        io.observe(document.getElementById('coverageMap'));
+      } else { locate(); }
     }).catch(function(){});
   }
   window.addEventListener('load', function(){ if(window.umami) window.umami.track('danji-view', { ref:REF }); initCoverage(); });
