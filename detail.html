@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>단지 상세 — CLEARBUILD</title>
   <meta name="description" content="정비사업장 상세 — 사업유형·위치·실거래가(국토부 연동)·분담금/시점별 필요현금. 숫자엔 출처와 신뢰등급이 붙습니다." />
-  <meta name="robots" content="noindex" />
+  <!-- 색인 허용: 단지 상세 = 무료 진입점. 단지별 title은 render()에서 설정 -->
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -183,8 +183,8 @@
   var REF='detail';
 
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
-  function qp(k){ var m=new RegExp('[?&]'+k+'=([^&]*)').exec(location.search); return m?decodeURIComponent(m[1].replace(/\+/g,' ')):''; }
-  function fmtEok(manwon){ return (manwon/10000).toFixed(1)+'억'; }
+  function qp(k){ var m=new RegExp('[?&]'+k+'=([^&]*)').exec(location.search); if(!m) return ''; try{ return decodeURIComponent(m[1].replace(/\+/g,' ')); }catch(e){ return m[1].replace(/\+/g,' '); } }
+  function fmtEok(manwon){ var e=Number(manwon)/10000; return isFinite(e)?e.toFixed(1)+'억':'—'; }
 
   fetch('/complexes.json').then(function(r){return r.json();}).then(function(list){
     var want=qp('complex').trim();
@@ -224,7 +224,7 @@
       ? '<div class="lead">사서 들어가면, 실제로 얼마?</div>'
         +'<p>이 단지는 분담금 데이터를 확보했습니다. 매물 호가에 <b>분담금·이자·부대비용</b>을 더한 <b>총투입비</b>와, 지금부터 입주까지 <b>시점별 필요현금</b>까지 계산해 드립니다 — 시세만 보면 안 보이는 숫자입니다.</p>'
         +costbar
-        +'<a class="btn btn-primary" href="/danji.html">분담금·필요현금 계산 열기 →</a>'
+        +'<a class="btn btn-primary" href="/danji.html">분담금·필요현금 계산 예시 보기 (느티마을 3단지) →</a>'
       : '<div class="lead">이 구역, 분담금 데이터 확보 중입니다</div>'
         +'<p>위치·사업유형은 확인했고, 분담금·필요현금 계산은 준비 중입니다. 확정되면 가장 먼저 알려드릴게요.</p>'
         +'<button class="btn btn-accent" id="ctaAlert">확정값 알림 받기</button>'
@@ -308,13 +308,14 @@
       +'<p class="disclaim">CLEARBUILD는 정보·계산 서비스이며 부동산 중개·투자 권유·조합원 모집을 하지 않습니다. 관계자 공식자료 정정 요청은 clearbuild@example.com 으로 받습니다.</p>';
 
     document.getElementById('app').innerHTML=html;
+    document.title=z.name+' 실거래·분담금 — CLEARBUILD';
     if(window.umami) window.umami.track('detail-view',{ name:z.name, deep:deep });
 
     // mini map
     try{
       if(window.naver&&naver.maps){
         var ll=new naver.maps.LatLng(z.lat,z.lng);
-        var map=new naver.maps.Map('miniMap',{center:ll,zoom:precise?16:13,scrollWheel:false,draggable:true,
+        var map=new naver.maps.Map('miniMap',{center:ll,zoom:precise?16:13,scrollWheel:false,draggable:false,
           logoControl:false,mapDataControl:false,scaleControl:false,zoomControl:true,zoomControlOptions:{position:naver.maps.Position.TOP_RIGHT}});
         var color=deep?'#1A3F7A':'#8494AA', w=deep?34:28, h=deep?42:34, dot=deep?6:5;
         var pin='<svg width="'+w+'" height="'+h+'" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 1px 2px rgba(15,34,68,.35));"><path d="M13 0C5.8 0 0 5.8 0 13c0 8.7 13 21 13 21s13-12.3 13-21C26 5.8 20.2 0 13 0z" fill="'+color+'" stroke="#fff" stroke-width="1.6"/><circle cx="13" cy="13" r="'+dot+'" fill="#fff"/></svg>';
@@ -327,12 +328,14 @@
       var ctaA=document.getElementById('ctaAlert'), box=document.getElementById('alertBox');
       var em=document.getElementById('alertEmail'), sub=document.getElementById('alertSubmit'), msg=document.getElementById('alertMsg');
       ctaA.addEventListener('click', function(){ box.classList.toggle('on'); if(box.classList.contains('on')){ em.focus(); if(window.umami) window.umami.track('detail-cta-alert',{ name:z.name }); } });
+      var submitting=false;
       function submit(){
+        if(submitting) return;
         var v=(em.value||'').trim();
         if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ msg.textContent='이메일 형식을 확인해 주세요.'; msg.style.color='var(--cb-danger)'; return; }
-        sub.disabled=true; sub.textContent='구독 중…';
+        submitting=true; sub.disabled=true; sub.textContent='구독 중…';
         var payload={ complex:z.name, owner_type:'매수희망자', interest:'[확정알림] 상세페이지 유형='+(z.type||''), email:v, phone:null, ref:REF };
-        function done(m,bad){ sub.disabled=false; sub.textContent='구독'; msg.textContent=m; msg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
+        function done(m,bad){ submitting=false; sub.disabled=false; sub.textContent='구독'; msg.textContent=m; msg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
         if(!sb){ done('일시 오류 — 저장 서버에 연결하지 못했어요. 잠시 후 다시 시도해 주세요.', true); return; }
         var settled=false, to=setTimeout(function(){ if(settled) return; settled=true; done('응답이 지연됩니다 — 네트워크 확인 후 다시 시도해 주세요.', true); },8000);
         sb.from('reservations').insert(payload).then(function(res){
