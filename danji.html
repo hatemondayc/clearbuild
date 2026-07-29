@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>느티마을 3단지 분담금·시점별 필요현금 — CLEARBUILD</title>
+  <meta name="description" content="느티마을 3단지(리모델링) 매물의 예상 분담금과 '지금부터 입주까지 언제 얼마가 필요한지' 시점별 필요현금을 근거·출처와 함께 확인하세요. 숫자엔 항상 신뢰등급과 출처가 붙습니다." />
+  <meta name="robots" content="noindex" /><!-- S1 빌드 중: 배포·패키징(S3)에서 index 색인 정책 반영 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- 폰트: 디자인시스템 v0.1 (Pretendard 본문 + IBM Plex Mono 숫자) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+
+  <style>
+  /* ═══ 디자인시스템 v0.1 — :root 토큰 (하위 호환 알리아스 포함) ═══ */
+  :root {
+    --cb-bg:#F6F8FB; --cb-surface:#FFFFFF; --cb-surface-2:#F1F4F9;
+    --cb-ink-900:#131A26; --cb-ink-700:#333D4E; --cb-ink-500:#5D6B80; --cb-ink-400:#8494AA;
+    --cb-line-300:#C7D0DC; --cb-line-200:#DDE3EC; --cb-line-100:#EBEFF5;
+    --cb-navy-50:#F2F6FC; --cb-navy-100:#E8EEF8; --cb-navy-200:#C9D9F4; --cb-navy-300:#A3BEEC;
+    --cb-navy-400:#6E97E0; --cb-navy-500:#3B72D4; --cb-navy-600:#2255A4; --cb-navy-700:#1A3F7A;
+    --cb-navy-800:#142F5C; --cb-navy-900:#0F2244; --cb-navy-950:#0A1830;
+    --cb-success:#1E7F4F; --cb-success-bg:#E7F4EC;
+    --cb-warning:#8A5A00; --cb-warning-bg:#FBF2DF;
+    --cb-danger:#B93838; --cb-danger-bg:#FAECEC;
+    --cb-grade-a:#176B43; --cb-grade-a-bg:#E7F4EC; --cb-grade-a-line:#BFE3CE;
+    --cb-grade-b:#8A5A00; --cb-grade-b-bg:#FBF2DF; --cb-grade-b-line:#EBD9A9;
+    --cb-grade-c:#4A5568; --cb-grade-c-bg:#EDF0F5; --cb-grade-c-line:#D3DAE5;
+    --cb-accent:#B4540A; --cb-accent-text:#96450A; --cb-accent-bg:#F9EEE3;
+    --cb-chart-1:#2255A4; --cb-chart-est:#5C89DA; --cb-chart-marker:#B4540A;
+    --cb-chart-2:#1E7F4F; --cb-chart-3:#8455A8; --cb-chart-grid:#EBEFF5;
+    --font-sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+    --font-num:"IBM Plex Mono",ui-monospace,"SF Mono",monospace;
+    --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
+    --radius-sm:4px; --radius-md:8px; --radius-lg:12px;
+    --shadow-1:0 1px 2px rgba(15,34,68,.06);
+    --shadow-2:0 4px 16px rgba(15,34,68,.08),0 1px 2px rgba(15,34,68,.05);
+    --shadow-focus:0 0 0 3px rgba(59,114,212,.28);
+    --ease:cubic-bezier(.2,.7,.3,1); --dur-1:120ms; --dur-2:200ms; --dur-3:320ms;
+    /* 하위 호환 알리아스 */
+    --bg:var(--cb-bg); --white:var(--cb-surface); --blue:var(--cb-navy-700); --blue-mid:var(--cb-navy-600);
+    --blue-lt:var(--cb-navy-100); --blue-glow:var(--cb-navy-500); --dark:var(--cb-ink-900);
+    --text:var(--cb-ink-700); --muted:var(--cb-ink-500); --border:var(--cb-line-200); --radius:var(--radius-lg);
+  }
+  [data-theme="dark"] {
+    --cb-bg:#0B111E; --cb-surface:#121A2B; --cb-surface-2:#1A2436;
+    --cb-ink-900:#E9EDF5; --cb-ink-700:#A9B4C7; --cb-ink-500:#77839B; --cb-ink-400:#5D6B80;
+    --cb-line-300:#33415C; --cb-line-200:#26324A; --cb-line-100:#1F2A40;
+    --cb-navy-700:#7AA1E8; --cb-navy-800:#93B3EC; --cb-navy-600:#8FB0EE; --cb-navy-100:#1A2A47;
+    --cb-navy-50:#16223A; --cb-navy-500:#6E97E0;
+    --cb-success:#5CC896; --cb-success-bg:#16241C; --cb-warning:#E0A94E; --cb-warning-bg:#2A2214;
+    --cb-danger:#E06C5F; --cb-danger-bg:#2A1616;
+    --cb-grade-a:#5CC896; --cb-grade-a-bg:#16241C; --cb-grade-a-line:#24483A;
+    --cb-grade-b:#E0A94E; --cb-grade-b-bg:#2A2214; --cb-grade-b-line:#4A3A1A;
+    --cb-grade-c:#9FACC2; --cb-grade-c-bg:#1C2536; --cb-grade-c-line:#33415C;
+    --cb-accent:#E08B4C; --cb-accent-text:#E08B4C; --cb-accent-bg:#2A1E12;
+    --cb-chart-1:#5D8AD8; --cb-chart-est:#7FA5E5; --cb-chart-marker:#CE6A2E;
+    --cb-chart-2:#2E9E68; --cb-chart-3:#9B72C8; --cb-chart-grid:#1F2A40;
+    --shadow-1:0 1px 2px rgba(0,0,0,.35);
+    --shadow-2:0 4px 16px rgba(0,0,0,.45),0 1px 2px rgba(0,0,0,.3);
+  }
+
+  /* ═══ 베이스 ═══ */
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--cb-bg); color:var(--cb-ink-700); font-family:var(--font-sans); font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .cb-num{font-family:var(--font-num); font-variant-numeric:tabular-nums; letter-spacing:-.01em;}
+  .cb-num-xl{font-size:34px; line-height:1.1; font-weight:600; color:var(--cb-ink-900);}
+  .cb-num-lg{font-size:26px; line-height:1.15; font-weight:600; color:var(--cb-ink-900);}
+  .cb-label{font-size:11.5px; font-weight:600; letter-spacing:.08em; color:var(--cb-ink-500); text-transform:uppercase;}
+  .cb-container{max-width:1152px; margin:0 auto; padding:0 20px;}
+  .cb-data{max-width:960px;}
+  h1,h2,h3{color:var(--cb-ink-900); letter-spacing:-.01em;}
+  a{color:var(--cb-navy-600); text-decoration:none;} a:hover{text-decoration:underline;}
+  section{padding:var(--sp-8) 0;}
+  @media(min-width:900px){ section{padding:var(--sp-9) 0;} }
+  .sec-head{margin-bottom:var(--sp-5);}
+  .sec-head h2{font-size:22px; font-weight:600;}
+  .sec-head .sub{font-size:13px; color:var(--cb-ink-500); margin-top:4px;}
+
+  /* ═══ 헤더 (단지 컨텍스트 바) — §5.0 ═══ */
+  .cb-topbar{position:sticky; top:0; z-index:20; background:rgba(246,248,251,.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--cb-line-200);}
+  [data-theme="dark"] .cb-topbar{background:rgba(11,17,30,.92);}
+  .cb-topbar .row{display:flex; align-items:center; gap:var(--sp-4); height:64px;}
+  .cb-brand{font-weight:700; color:var(--cb-navy-700); font-size:15px; letter-spacing:-.02em; white-space:nowrap;}
+  .cb-brand span{color:var(--cb-ink-400); font-weight:500;}
+  .cb-topbar .spacer{flex:1;}
+  .cb-complex{display:flex; align-items:baseline; gap:var(--sp-2); min-width:0;}
+  .cb-complex .name{font-size:17px; font-weight:700; color:var(--cb-ink-900); white-space:nowrap;}
+  .cb-complex .meta{font-size:12.5px; color:var(--cb-ink-500); white-space:nowrap;}
+  @media(max-width:760px){ .cb-complex .meta{display:none;} .cb-brand span{display:none;}
+    .cb-topbar .row{flex-wrap:wrap; height:auto; padding:8px 0; gap:8px;}
+    .cb-seg{order:3;} }
+
+  /* 사업단계 뱃지 */
+  .cb-stage{display:inline-flex; align-items:center; height:22px; padding:0 8px; border-radius:var(--radius-sm);
+    background:var(--cb-navy-100); color:var(--cb-navy-700); font-size:11.5px; font-weight:600; white-space:nowrap;}
+
+  /* 신뢰도 등급 배지 — §5.3 */
+  .cb-grade{display:inline-flex; align-items:center; gap:4px; height:20px; padding:0 8px;
+    border-radius:var(--radius-sm); font:700 12px/1 var(--font-sans); border:1px solid;}
+  .cb-grade.lg{height:24px; font-size:13px;}
+  .cb-grade-a{color:var(--cb-grade-a); background:var(--cb-grade-a-bg); border-color:var(--cb-grade-a-line);}
+  .cb-grade-b{color:var(--cb-grade-b); background:var(--cb-grade-b-bg); border-color:var(--cb-grade-b-line);}
+  .cb-grade-c{color:var(--cb-grade-c); background:var(--cb-grade-c-bg); border-color:var(--cb-grade-c-line);}
+
+  /* ═══ 사업유형 셀렉터 (segmented) — §5.4 / §6.5 ═══ */
+  .cb-seg{display:inline-flex; padding:3px; gap:2px; background:var(--cb-surface-2);
+    border:1px solid var(--cb-line-200); border-radius:var(--radius-md); overflow-x:auto; max-width:100%;}
+  .cb-seg button{height:34px; padding:0 14px; border:1px solid transparent; border-radius:6px; background:transparent;
+    font:500 14px/1 var(--font-sans); color:var(--cb-ink-500); cursor:pointer; white-space:nowrap;
+    transition:all var(--dur-2) var(--ease);}
+  .cb-seg button:hover:not(:disabled){color:var(--cb-ink-700);}
+  .cb-seg button[aria-pressed="true"]{background:var(--cb-surface); color:var(--cb-navy-700); font-weight:600;
+    border-color:var(--cb-line-200); box-shadow:var(--shadow-1);}
+  .cb-seg button:disabled{color:var(--cb-ink-400); cursor:not-allowed;}
+  .cb-seg button:focus-visible{outline:none; box-shadow:var(--shadow-focus);}
+
+  /* ═══ 히어로 입력 — §5.7 ═══ */
+  .hero{padding-top:var(--sp-7);}
+  .hero h1{font-size:clamp(26px,4vw,38px); line-height:1.15; letter-spacing:-.02em; font-weight:700;}
+  .hero .lede{font-size:15px; color:var(--cb-ink-500); margin-top:var(--sp-3); max-width:620px;}
+  .cb-inputs{display:flex; flex-wrap:wrap; gap:var(--sp-5); margin-top:var(--sp-5); align-items:flex-end;}
+  .cb-field{display:flex; flex-direction:column; gap:6px;}
+  .cb-field > label{font-size:11.5px; font-weight:600; letter-spacing:.08em; color:var(--cb-ink-500); text-transform:uppercase;}
+  .cb-price{display:flex; align-items:center; height:48px; padding:0 14px; background:var(--cb-surface);
+    border:1px solid var(--cb-line-300); border-radius:var(--radius-md); width:220px;}
+  .cb-price:focus-within{border-color:var(--cb-navy-500); box-shadow:var(--shadow-focus);}
+  .cb-price input{border:0; outline:0; background:transparent; text-align:right; flex:1;
+    font-family:var(--font-num); font-variant-numeric:tabular-nums; font-size:17px; color:var(--cb-ink-900); min-width:0;}
+  .cb-price .suffix{font-size:14px; color:var(--cb-ink-500); margin-left:6px;}
+  .cb-slider{width:280px;}
+  .cb-slider .val{font-family:var(--font-num); font-variant-numeric:tabular-nums; font-size:14px; color:var(--cb-navy-700); font-weight:600;}
+  .cb-range{-webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:3px; margin-top:12px;
+    background:linear-gradient(to right,var(--cb-navy-600) var(--fill,50%),var(--cb-line-200) var(--fill,50%));}
+  .cb-range::-webkit-slider-thumb{-webkit-appearance:none; width:20px; height:20px; border-radius:50%;
+    background:var(--cb-surface); border:2px solid var(--cb-navy-600); box-shadow:var(--shadow-1); cursor:grab;
+    transition:transform var(--dur-1) var(--ease);}
+  .cb-range::-webkit-slider-thumb:hover{transform:scale(1.1);}
+  .cb-range::-moz-range-thumb{width:18px; height:18px; border-radius:50%; background:var(--cb-surface);
+    border:2px solid var(--cb-navy-600); box-shadow:var(--shadow-1); cursor:grab;}
+  .cb-range:focus-visible{outline:none; box-shadow:var(--shadow-focus); border-radius:3px;}
+  .cb-scale{display:flex; justify-content:space-between; font-family:var(--font-num); font-size:12px; color:var(--cb-ink-400); margin-top:6px;}
+
+  /* ═══ 카드 / 그리드 — §5.2 / §6.4 ═══ */
+  .cb-card{background:var(--cb-surface); border:1px solid var(--cb-line-200); border-radius:var(--radius-lg);
+    padding:var(--sp-5); box-shadow:var(--shadow-1);}
+  .cb-card-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-4);}
+  @media(max-width:1023px){ .cb-card-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:639px){ .cb-card-grid{grid-template-columns:1fr;} }
+  .cb-card .top{display:flex; align-items:flex-start; justify-content:space-between; gap:8px;}
+  .cb-card .top .cb-label{text-transform:none; letter-spacing:.02em; font-size:12.5px;}
+  .cb-card .val{margin-top:var(--sp-3);}
+  .cb-card .ghost{display:inline-block; height:26px; min-width:120px; border-radius:6px; background:var(--cb-surface-2);}
+  .cb-card .hint{margin-top:6px; font-size:12.5px; color:var(--cb-ink-400);}
+  .cb-card .src{margin-top:var(--sp-3); padding-top:var(--sp-3); border-top:1px solid var(--cb-line-100);
+    font-size:12.5px; color:var(--cb-ink-400);}
+
+  /* ═══ 예측공시 위젯 — §5.6 / §6.6 ═══ */
+  .cb-pledge{position:relative; background:var(--cb-surface); border:1px solid var(--cb-line-200);
+    border-left:3px solid var(--cb-accent); border-radius:var(--radius-lg); padding:var(--sp-5);}
+  .cb-pledge .head{display:flex; align-items:center; gap:8px; margin-bottom:var(--sp-3);}
+  .cb-pledge .head svg{width:16px; height:16px; stroke:var(--cb-accent); fill:none;}
+  .cb-pledge .head .t{font-weight:600; color:var(--cb-ink-900); font-size:15px;}
+  .cb-pledge .sub{font-size:13px; color:var(--cb-ink-500);}
+  .cb-pledge .stamp{font-family:var(--font-num); font-variant-numeric:tabular-nums; font-size:12.5px;
+    color:var(--cb-accent-text); margin-top:var(--sp-2);}
+  .cb-pledge .rule{margin-top:var(--sp-3); padding-top:var(--sp-3); border-top:1px solid var(--cb-line-100);
+    font-size:12.5px; color:var(--cb-ink-500);}
+  .cb-chip-wait{display:inline-flex; height:20px; padding:0 8px; align-items:center; border-radius:var(--radius-sm);
+    font:600 12px/1 var(--font-sans); color:var(--cb-warning); background:var(--cb-warning-bg);}
+
+  /* ═══ 버튼 / CTA — §5.1 / §6.3 ═══ */
+  .cb-btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; height:40px; padding:0 16px;
+    border-radius:var(--radius-md); font:600 15px/1 var(--font-sans); cursor:pointer; border:1px solid transparent;
+    transition:background var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease),box-shadow var(--dur-1) var(--ease);}
+  .cb-btn-lg{height:48px; padding:0 20px;}
+  .cb-btn-primary{background:var(--cb-navy-700); color:#fff;}
+  .cb-btn-primary:hover{background:var(--cb-navy-800); box-shadow:var(--shadow-2);}
+  .cb-btn-primary:active{background:var(--cb-navy-900);}
+  [data-theme="dark"] .cb-btn-primary{color:#0B111E;}
+  .cb-btn-secondary{background:transparent; color:var(--cb-navy-700); border-color:var(--cb-line-300);}
+  .cb-btn-secondary:hover{background:var(--cb-navy-50); border-color:var(--cb-navy-300);}
+  .cb-btn:focus-visible{outline:none; box-shadow:var(--shadow-focus);}
+  .cb-cta{display:flex; align-items:center; gap:var(--sp-5); flex-wrap:wrap; background:var(--cb-navy-50);
+    border-radius:var(--radius-lg); padding:var(--sp-5);}
+  .cb-cta .msg{flex:1; min-width:220px; font-size:15px; color:var(--cb-ink-700);}
+  .cb-cta .btns{display:flex; gap:8px; flex-wrap:wrap;}
+  @media(max-width:560px){ .cb-cta .btns{width:100%;} .cb-cta .btns .cb-btn{flex:1;} }
+
+  /* ═══ 근거·출처 테이블 — §5.8 ═══ */
+  .cb-src-list{border-top:1px solid var(--cb-line-100);}
+  .cb-src-row{display:grid; grid-template-columns:1.2fr 1.6fr auto auto; gap:var(--sp-4); align-items:center;
+    padding:var(--sp-3) var(--sp-2); border-bottom:1px solid var(--cb-line-100); font-size:14px;}
+  .cb-src-row:hover{background:var(--cb-navy-50);}
+  .cb-src-row .k{color:var(--cb-ink-700); font-weight:500;}
+  .cb-src-row .s{color:var(--cb-ink-500);}
+  .cb-src-row .d{font-family:var(--font-num); font-size:12.5px; color:var(--cb-ink-400); white-space:nowrap;}
+  @media(max-width:680px){ .cb-src-row{grid-template-columns:1fr auto;} .cb-src-row .s,.cb-src-row .d{display:none;} }
+
+  /* 유형 상태 안내 (분기 선반영) */
+  .cb-type-note{margin-top:var(--sp-4); padding:var(--sp-4) var(--sp-5); border:1px dashed var(--cb-line-300);
+    border-radius:var(--radius-md); background:var(--cb-surface-2); font-size:13.5px; color:var(--cb-ink-500); display:none;}
+  .cb-type-note.on{display:block;}
+  .cb-type-note b{color:var(--cb-ink-700);}
+  .cb-assume{margin-top:var(--sp-4); font-size:13px;}
+  .cb-assume summary{cursor:pointer; color:var(--cb-navy-600); font-weight:600; font-size:13px; list-style:none;}
+  .cb-assume summary::-webkit-details-marker{display:none;}
+  .cb-assume summary::before{content:"▸ "; color:var(--cb-ink-400);}
+  .cb-assume[open] summary::before{content:"▾ ";}
+  .cb-assume .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-3); margin-top:var(--sp-3);}
+  @media(max-width:560px){ .cb-assume .grid{grid-template-columns:1fr;} }
+  .cb-assume label{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--cb-ink-500);}
+  .cb-assume input{flex:1; min-width:0; height:34px; padding:0 10px; border:1px solid var(--cb-line-300);
+    border-radius:var(--radius-md); background:var(--cb-surface); font-family:var(--font-num); font-size:14px;
+    color:var(--cb-ink-900); text-align:right;}
+  .cb-assume input:focus{outline:none; border-color:var(--cb-navy-500); box-shadow:var(--shadow-focus);}
+  .cb-assume .note{margin-top:var(--sp-3); font-size:12px; color:var(--cb-ink-400);}
+  .muted-out{color:var(--cb-ink-400)!important; font-weight:500!important;}
+
+  /* 필요현금 타임라인 (SVG) — §5.5 */
+  .cb-timeline{position:relative; background:var(--cb-surface); border:1px solid var(--cb-line-200);
+    border-radius:var(--radius-lg); padding:var(--sp-5); min-height:220px;}
+  .tl-svg{width:100%; height:auto; display:block; overflow:visible;}
+  .tl-grid{stroke:var(--cb-chart-grid); stroke-width:1;}
+  .tl-bar{cursor:pointer; transition:filter var(--dur-1) var(--ease);}
+  .tl-bar:hover{filter:brightness(1.08);}
+  .tl-bar-c{fill:var(--cb-chart-1);}
+  .tl-bar-e{fill:var(--cb-chart-est); fill-opacity:.9; stroke:var(--cb-chart-est); stroke-width:1; stroke-dasharray:3 2;}
+  .tl-ghost{fill:var(--cb-surface-2);}
+  .tl-nowrule{stroke:var(--cb-chart-marker); stroke-width:1.5;}
+  .tl-nowchip{fill:var(--cb-chart-marker);}
+  .tl-legc{fill:var(--cb-chart-1);} .tl-lege{fill:var(--cb-chart-est);}
+  .tl-axis{font-family:var(--font-num); font-variant-numeric:tabular-nums; font-size:12px; fill:var(--cb-ink-400);}
+  .tl-val{font-family:var(--font-num); font-variant-numeric:tabular-nums; font-size:12.5px; font-weight:600; fill:var(--cb-ink-900);}
+  .tl-xk{font-size:12px; fill:var(--cb-ink-700);}
+  .tl-xw{font-family:var(--font-num); font-size:10.5px; fill:var(--cb-ink-400);}
+  .tl-now{font-size:10px; font-weight:700; fill:#fff;}
+  .tl-leg{font-size:11px; fill:var(--cb-ink-500);}
+  .tl-tip{position:absolute; z-index:5; pointer-events:none; background:var(--cb-surface);
+    border:1px solid var(--cb-line-200); box-shadow:var(--shadow-2); border-radius:var(--radius-md);
+    padding:8px 10px; font-size:12.5px; color:var(--cb-ink-700); max-width:230px; line-height:1.5;}
+  .tl-tip .s{color:var(--cb-ink-400); font-size:11.5px;}
+  .tl-tip[hidden]{display:none;}
+  .tl-empty{min-height:200px; display:flex; align-items:center; justify-content:center;
+    color:var(--cb-ink-400); font-size:13.5px; text-align:center; line-height:1.7;}
+
+  /* 예측공시 박제 + 자금조달 폼 (S2) */
+  .pledge-cmp{margin-top:6px; font-size:12.5px; color:var(--cb-ink-500);}
+  .pledge-cmp .cb-num{color:var(--cb-ink-700);}
+  .pledge-act{margin-top:var(--sp-4); display:flex; align-items:center; gap:var(--sp-4);}
+  .pledge-act a{font-size:12.5px;}
+  .cb-chip-done{color:var(--cb-success); background:var(--cb-success-bg);}
+  .cb-fund-form{margin-top:var(--sp-4); background:var(--cb-surface); border:1px solid var(--cb-line-200);
+    border-radius:var(--radius-lg); padding:var(--sp-4) var(--sp-5);}
+  .cb-fund-form .row{display:flex; gap:8px; margin-top:6px;}
+  .cb-fund-form input{flex:1; min-width:0; height:40px; padding:0 12px; border:1px solid var(--cb-line-300);
+    border-radius:var(--radius-md); background:var(--cb-surface); font-size:15px; color:var(--cb-ink-900);}
+  .cb-fund-form input:focus{outline:none; border-color:var(--cb-navy-500); box-shadow:var(--shadow-focus);}
+  .cb-fund-form .msg2{margin-top:8px; font-size:13px;}
+  .cb-fund-form[hidden]{display:none;}
+
+  .cb-footer{border-top:1px solid var(--cb-line-200); padding:var(--sp-6) 0; font-size:12.5px; color:var(--cb-ink-400);}
+  .disclaim{margin-top:var(--sp-4); font-size:12px; color:var(--cb-ink-400); line-height:1.6;}
+  .enter{opacity:0; transform:translateY(6px); animation:cb-enter var(--dur-3) var(--ease) forwards;}
+  @keyframes cb-enter{to{opacity:1; transform:none;}}
+  @media(prefers-reduced-motion:reduce){ .enter{animation:none; opacity:1; transform:none;} }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ 헤더: 단지 컨텍스트 바 ═══ -->
+  <header class="cb-topbar">
+    <div class="cb-container row">
+      <a class="cb-brand" href="/">CLEARBUILD<span> · 단지</span></a>
+      <div class="cb-complex">
+        <span class="name" id="complexName">느티마을 3단지</span>
+        <span class="meta" id="complexMeta">분당 · 전용 84㎡ · 더샵분당 티에르원</span>
+      </div>
+      <span class="cb-stage" id="stageBadge">이주 완료</span>
+      <div class="spacer"></div>
+      <!-- 사업유형 셀렉터 (분기 선반영) -->
+      <div class="cb-seg" role="group" aria-label="사업유형 선택" id="typeSeg"></div>
+      <span class="cb-grade cb-grade-b lg" title="이 단지 데이터 신뢰등급 (B: 시장추정 혼합)">B 시장추정</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══ 히어로 + 입력 ═══ -->
+    <div class="cb-container">
+      <div class="hero enter">
+        <h1 id="heroTitle">이 매물, 지금 사면 <em>언제 얼마</em>가 필요할까?</h1>
+        <p class="lede">호가만 보면 반쪽 가격표입니다. 분담금·금융비용까지 더한 <b>총투입비</b>와, 계약부터 입주까지 <b>시점별 필요현금</b>을 근거·출처와 함께 계산합니다.</p>
+
+        <div class="cb-inputs">
+          <div class="cb-field">
+            <label for="askInput">매물 호가</label>
+            <div class="cb-price">
+              <input id="askInput" inputmode="numeric" value="65,000" aria-label="매물 호가 (만원)" />
+              <span class="suffix">만원</span>
+            </div>
+          </div>
+          <div class="cb-field cb-slider">
+            <label for="costRange">공사비 <span class="val" id="costVal">750만원/평</span></label>
+            <input type="range" class="cb-range" id="costRange" min="600" max="800" step="10" value="750" aria-label="평당 공사비" />
+            <div class="cb-scale"><span>600</span><span>시장 평균 750</span><span>800</span></div>
+          </div>
+        </div>
+
+        <!-- 유형 분기 안내 (리모델링 외 유형 선택 시 노출) -->
+        <div class="cb-type-note" id="typeNote"></div>
+
+        <!-- 가정값 (T2 계산 입력 · C등급) -->
+        <details class="cb-assume">
+          <summary>가정값 수정 (이주비·이자·부대비용)</summary>
+          <div class="grid">
+            <label>이주비 <input id="aMove" inputmode="numeric" value="20,000" /><span>만원</span></label>
+            <label>대출 이자율 <input id="aRate" type="number" step="0.1" value="4.5" /><span>%</span></label>
+            <label>대출 기간 <input id="aMonths" type="number" value="24" /><span>개월</span></label>
+            <label>취득·부대비용 <input id="aFee" inputmode="numeric" value="3,000" /><span>만원</span></label>
+          </div>
+          <p class="note">※ 이주비·이자율·부대비용은 <b>예시 가정값(C등급)</b> — 조합·개인 대출조건에 따라 다릅니다. 분담금만 총회 확정 기반 추정(B).</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- ═══ 실사례 케이스 (T12 · 증거 한 장) ═══ -->
+    <section style="padding-top:0;">
+      <div class="cb-container cb-data">
+        <div class="cb-card" style="border-left:3px solid var(--cb-navy-700);">
+          <div class="cb-label" style="text-transform:none; letter-spacing:.04em; color:var(--cb-navy-700);">실사례 · 느티마을 3단지 (리모델링)</div>
+          <h2 style="font-size:22px; margin-top:6px; line-height:1.3;">호가 <span class="cb-num">6.5억</span>. 진짜 값은 <span class="cb-num" style="color:var(--cb-navy-700);">10.8억</span>.</h2>
+          <p style="font-size:14px; color:var(--cb-ink-500); margin-top:8px;">호가만 보면 <b>4.3억</b>을 안 보고 삽니다 — 조합 총회 확정 분담금·금융비용까지 더한 진짜 총투입비입니다.</p>
+
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px;">
+            <div>
+              <div class="cb-label" style="text-transform:none;">조합 총회 확정 분담금 <span class="cb-grade cb-grade-b">B</span></div>
+              <div class="cb-num cb-num-lg" style="margin-top:4px;">3.8억</div>
+              <div style="font-size:12px; color:var(--cb-ink-400); margin-top:2px;">향·동호수별 1.85–3.83억 · <a href="https://v.daum.net/v/20230328171658696" target="_blank" rel="noopener">헤럴드경제</a></div>
+            </div>
+            <div>
+              <div class="cb-label" style="text-transform:none;">+ 금융·부대비용</div>
+              <div class="cb-num cb-num-lg" style="margin-top:4px;">+0.5억</div>
+              <div style="font-size:12px; color:var(--cb-ink-400); margin-top:2px;">이주비 이자·취득·부대 (가정 C)</div>
+            </div>
+            <div>
+              <div class="cb-label" style="text-transform:none;">= 총투입비 / 손익분기</div>
+              <div class="cb-num cb-num-lg" style="margin-top:4px; color:var(--cb-navy-700);">10.8억</div>
+              <div style="font-size:12px; color:var(--cb-ink-400); margin-top:2px;">호가 6.5 + 분담금 3.8 + 부대 0.5</div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; font-size:14px; color:var(--cb-ink-700);">손익분기 <span class="cb-num">10.8억</span> — 인근 신축 84㎡ 실거래와의 갭이 '지금 사도 되나'의 답입니다. <span style="color:var(--cb-ink-400);">(단지별 실거래 연동 예정)</span></div>
+
+          <div style="margin-top:12px; padding:12px 14px; background:var(--cb-accent-bg); border-radius:var(--radius-md); font-size:13px; color:var(--cb-ink-700);">
+            <b>분담금은 확정 전까지 변합니다.</b> 산본 우륵 실사례: 공사비 +100만원/평 → 분담금 <b>+18%</b> (헤럴드경제). 그래서 우리는 추정을 <b>박제</b>하고 총회 확정과 <b>대조</b>합니다 — 아래 예측공시.
+          </div>
+
+          <div style="margin-top:14px;"><button type="button" class="cb-btn cb-btn-secondary" style="height:36px;" id="caseToCalc">↓ 내 조건으로 직접 계산</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 시점별 필요현금 타임라인 (T3에서 시각화) ═══ -->
+    <section>
+      <div class="cb-container cb-data">
+        <div class="sec-head">
+          <h2>시점별 필요현금 타임라인</h2>
+          <div class="sub">계약 → 이주 → 중도금 → 분담금 납부까지, 언제 얼마의 현금이 필요한지</div>
+        </div>
+        <div class="cb-timeline" id="timelineHost"></div>
+        <p class="disclaim" style="margin-top:12px;">※ 시점 구분(계약금 10% / 잔금 90% / 분담금 중도금 60%·잔금 40%)은 <b>일반 가정</b>이며 단지·계약 조건에 따라 다릅니다. 각 막대 = 해당 시점 소요 현금(합산 시 총투입비 규모). 확정=솔리드, 추정=빗금·파선.</p>
+      </div>
+    </section>
+
+    <!-- ═══ 4출력 카드 (T2에서 계산 연결) ═══ -->
+    <section style="padding-top:0;">
+      <div class="cb-container">
+        <div class="cb-card-grid">
+          <div class="cb-card">
+            <div class="top"><span class="cb-label">예상 분담금</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
+            <div class="val cb-num cb-num-lg" id="out-bundam">—</div>
+            <div class="hint">조합원분양가 − 권리가액</div>
+            <div class="src">느티마을 3단지 총회 확정 기준 (범위 1.85–3.83억) · 공사비 상승 시 확정범위 초과분은 외삽 추정</div>
+          </div>
+          <div class="cb-card">
+            <div class="top"><span class="cb-label">총투입비</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
+            <div class="val cb-num cb-num-lg" id="out-total">—</div>
+            <div class="hint">호가 + 분담금 + 금융·부대비용</div>
+            <div class="src">입력값 기준 계산</div>
+          </div>
+          <div class="cb-card">
+            <div class="top"><span class="cb-label">필요현금</span><span class="cb-grade cb-grade-c">C 모델추정</span></div>
+            <div class="val cb-num cb-num-lg" id="out-cash">—</div>
+            <div class="hint">호가 외 추가 현금 (분담금+이자+부대)</div>
+            <div class="src">이주비·중도금 이자 가정 포함 · 시점별 최고는 타임라인 참고</div>
+          </div>
+          <div class="cb-card">
+            <div class="top"><span class="cb-label">손익분기 호가</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
+            <div class="val cb-num cb-num-lg" id="out-bep">—</div>
+            <div class="hint">이 값 아래로 팔면 손해</div>
+            <div class="src">= 총투입비</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 예측공시 위젯 (S2에서 박제 로직) ═══ -->
+    <section style="padding-top:0;">
+      <div class="cb-container cb-data">
+        <div class="cb-pledge">
+          <div class="head">
+            <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" fill="none"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <span class="t">예측 공시 <span id="pledgeNo">№1</span></span>
+            <span class="cb-chip-wait" id="pledgeChip">확정 대기</span>
+          </div>
+          <div class="sub">조합원 분담금 · 전용 84㎡ · 리모델링</div>
+          <div class="val cb-num cb-num-lg" id="pledgeVal" style="margin-top:8px;">—</div>
+          <div class="stamp" id="pledgeStamp">아직 박제 전</div>
+          <div class="pledge-cmp" id="pledgeCompare" hidden></div>
+          <div class="rule" id="pledgeError">총회 관리처분(인가) 확정 공시가 나오면 <b>박제값과 자동 대조</b>해 오차를 공개합니다. 이 대조 이력이 CLEARBUILD의 신뢰 기록입니다.</div>
+          <div class="pledge-act">
+            <button type="button" class="cb-btn cb-btn-secondary" id="pledgeStampBtn" style="height:34px;">이 추정, 지금 박제하기</button>
+            <a href="#" id="pledgeBasisLink" hidden>박제 기준 보기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA 페어 (S2에서 ?ref+Supabase 연결) ═══ -->
+    <section style="padding-top:0;">
+      <div class="cb-container cb-data">
+        <div class="cb-cta">
+          <div class="msg"><b>이 시점별 필요현금, 조달 계획이 궁금하세요?</b><br>필요현금 타임라인에 맞춘 자금조달 연결을 신청하세요. (수요 확인용 · 중개 아님)</div>
+          <div class="btns">
+            <button class="cb-btn cb-btn-primary cb-btn-lg" id="ctaFund">자금조달 연결 신청</button>
+            <button class="cb-btn cb-btn-secondary cb-btn-lg" id="ctaAlert">확정값 나오면 알림</button>
+          </div>
+        </div>
+        <form class="cb-fund-form" id="fundForm" hidden>
+          <label for="fundContact" style="font-size:12.5px; font-weight:600; color:var(--cb-ink-500);">연락처 (이메일 또는 휴대폰)</label>
+          <div class="row">
+            <input id="fundContact" inputmode="email" placeholder="you@example.com 또는 010-0000-0000" autocomplete="off" />
+            <button type="submit" class="cb-btn cb-btn-primary" id="fundSubmit">신청</button>
+          </div>
+          <div class="msg2" id="fundMsg"></div>
+          <p class="disclaim" style="margin-top:8px;">※ 자금조달 <b>수요 확인용</b> 신청입니다. CLEARBUILD는 대출을 중개·모집하지 않으며, 연결의 법적 형태는 검토 중입니다. 연락처는 이 목적에만 사용됩니다.</p>
+        </form>
+        <form class="cb-fund-form" id="alertForm" hidden>
+          <label for="alertContact" style="font-size:12.5px; font-weight:600; color:var(--cb-ink-500);">이메일 (총회 확정값 나오면 알림)</label>
+          <div class="row">
+            <input id="alertContact" type="email" inputmode="email" placeholder="you@example.com" autocomplete="off" />
+            <button type="submit" class="cb-btn cb-btn-primary" id="alertSubmit">구독</button>
+          </div>
+          <div class="msg2" id="alertMsg"></div>
+          <p class="disclaim" style="margin-top:8px;">※ 무가입·무료. 이 단지 총회 확정 공시가 나오면 1회 알림. 이메일은 이 목적에만 사용됩니다.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ═══ 근거·출처 ═══ -->
+    <section style="padding-top:0;">
+      <div class="cb-container cb-data">
+        <div class="sec-head"><h2>근거 · 출처</h2><div class="sub">모든 숫자에는 출처와 기준일, 신뢰등급이 붙습니다.</div></div>
+        <div class="cb-src-list">
+          <div class="cb-src-row">
+            <span class="k">분담금 기준</span>
+            <span class="s">느티마을 3단지 총회 확정 최대 3.8억 (향·동호수별 1.85–3.83억) · <a href="https://v.daum.net/v/20230328171658696" target="_blank" rel="noopener">헤럴드경제</a></span>
+            <span class="d">2023</span>
+            <span class="cb-grade cb-grade-b">B</span>
+          </div>
+          <div class="cb-src-row">
+            <span class="k">공사비 민감도</span>
+            <span class="s">산본 우륵(전용 59㎡) 실사례 공사비 +100만원/평 → 분담금 약 +18% 참고 적용</span>
+            <span class="d">추정</span>
+            <span class="cb-grade cb-grade-c">C</span>
+          </div>
+          <div class="cb-src-row">
+            <span class="k">이주비·이자·부대비용</span>
+            <span class="s">예시 가정값 — 조합·개인 대출조건에 따라 다름 (본인 값으로 조정 필요)</span>
+            <span class="d">가정</span>
+            <span class="cb-grade cb-grade-c">C</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="cb-footer">
+      <div class="cb-container">
+        <div style="font-weight:700; color:var(--cb-navy-700); margin-bottom:var(--sp-4);">CLEARBUILD — 정비사업 판단·데이터 인프라</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:16px;">
+          <div>
+            <div class="cb-label" style="text-transform:none;">무엇을 하나</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">정비사업 매물의 시점별 필요현금·총투입비를 근거와 함께 계산하는 판단·데이터 인프라.</div>
+          </div>
+          <div>
+            <div class="cb-label" style="text-transform:none;">데이터 출처</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">조합 총회자료·정비계획·권리변동계획 원본, 공개 실거래·언론(헤럴드경제 등), 118개 단지 커뮤니티 VOC(15.4만 건).</div>
+          </div>
+          <div>
+            <div class="cb-label" style="text-transform:none;">검증 방법</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">단지별 수작업 검증 후 신뢰등급 A(공시확정)/B(시장추정)/C(모델추정) 부여. C등급은 계산에서 제외.</div>
+          </div>
+          <div>
+            <div class="cb-label" style="text-transform:none;">팀 · 연락처</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">CLEARBUILD (오원기 · 정휘준) · <a href="mailto:clearbuild@example.com">clearbuild@example.com</a></div>
+          </div>
+        </div>
+        <p class="disclaim">본 페이지는 매수·매도·보유 <b>판단에 필요한 숫자와 출처</b>를 제공할 뿐, 특정 행위를 권유하지 않습니다. CLEARBUILD는 대출·매물을 <b>중개·모집하지 않습니다.</b> 분담금은 총회 의결 전 확정되지 않으며, 표시 수치는 신뢰등급(A/B/C)과 출처를 전제로 한 추정입니다.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ═══ Umami (index.html 재활용) ═══ -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="1747d3d8-aa53-4000-bdfb-79c51fb639f9"></script>
+  <!-- ═══ Supabase (index.html 재활용 · S2 CTA에서 사용) ═══ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+  /* ───────────── 배관 재활용 (index.html과 동일) ───────────── */
+  var SUPABASE_URL = 'https://lynmnuftfybbegdxjfbz.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bm1udWZ0ZnliYmVnZHhqZmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0Njk3OTUsImV4cCI6MjA5OTA0NTc5NX0.66hZ9W29yoscoC8ibbUeHQluG8ecEo-nI5a8F19beGE';
+  var sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+  var REF = (new URLSearchParams(location.search).get('ref') || 'danji');
+
+  /* ───────────── 사업유형 셀렉터: 유형 분기 구조 선반영 (T1) ───────────── */
+  // 엔진은 전 정비유형을 열어두되(아키텍처), 깊이(실데이터·공식)는 리모델링부터 롤아웃.
+  var TYPES = [
+    { id:'redevelopment',  label:'재개발',   ready:false, formula:'권리가액 = 감정가 × 비례율' },
+    { id:'reconstruction', label:'재건축',   ready:false, formula:'권리가액 = 감정가 × 비례율' },
+    { id:'remodeling',     label:'리모델링', ready:true,  formula:'권리변동계획 체계' },   // ← 데모 앵커(느티마을3)
+    { id:'street',         label:'가로주택', ready:false, formula:'소규모정비 체계' }
+  ];
+  var activeType = 'remodeling';
+
+  function typeById(id){ return TYPES.filter(function(t){ return t.id===id; })[0]; }
+
+  function renderTypeSeg(){
+    var seg = document.getElementById('typeSeg');
+    seg.innerHTML = '';
+    TYPES.forEach(function(t){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = t.label;
+      b.setAttribute('data-type', t.id);
+      b.setAttribute('aria-pressed', String(t.id===activeType));
+      if(!t.ready){ b.title = t.label + ' 계산 로직 준비 중 (리모델링부터 깊게)'; }
+      b.addEventListener('click', function(){ selectType(t.id); });
+      seg.appendChild(b);
+    });
+  }
+
+  function selectType(id){
+    activeType = id;
+    var t = typeById(id);
+    // 셀렉터 상태 갱신
+    document.querySelectorAll('#typeSeg button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-type')===id));
+    });
+    // 유형 분기 안내: 리모델링=데이터 있음 / 그 외=선반영(준비 중)
+    var note = document.getElementById('typeNote');
+    if(t.ready){
+      note.classList.remove('on'); note.innerHTML = '';
+    } else {
+      note.classList.add('on');
+      note.innerHTML = '<b>' + t.label + '</b>은 계산 공식(<b>' + t.formula + '</b>)이 엔진에 선반영돼 있고, 실데이터·정확 산식은 <b>리모델링 beachhead</b> 검증 뒤 순차 확장합니다. 지금 깊게 계산되는 유형은 <b>리모델링(느티마을 3단지)</b>입니다.';
+    }
+    // Umami: 유형 전환 측정
+    if(window.umami) window.umami.track('danji-type', { type:id });
+    calc();  // 유형 전환 시 재계산 (리모델링만 실계산, 그 외는 '준비 중')
+  }
+
+  /* ───────────── T2: 계산 엔진 (index.html 검증 로직 재활용 · 리모델링/느티마을3 앵커) ───────────── */
+  // 앵커: 공사비 750만원/평 → 전용84㎡ 분담금 3.8억(느티마을3 총회확정 최대, B). 민감도 +100만원/평→+18%.
+  var BASE_COST = 750, BASE_BUNDAM = 38000, SENS = 0.0018;   // 전부 만원 기준
+  function round100(m){ return Math.round(m/100)*100; }
+  function eok(m){ var v = round100(m); if(v<=0) return '—'; return (Math.round(v/1000)/10).toLocaleString()+'억'; }
+  function commaNum(v){ var n = parseFloat(String(v||'').replace(/,/g,'')); return (isNaN(n)||n<0) ? 0 : n; }
+  function gv(id){ var e = document.getElementById(id); return e ? e.value : 0; }
+  function setOut(id, txt){ var e = document.getElementById(id); if(e) e.textContent = txt; }
+
+  var range = document.getElementById('costRange');
+  var costVal = document.getElementById('costVal');
+  var ask = document.getElementById('askInput');
+
+  function syncRange(){
+    var pct = (range.value - range.min) / (range.max - range.min) * 100;
+    range.style.setProperty('--fill', pct + '%');
+    costVal.textContent = Number(range.value).toLocaleString() + '만원/평';
+  }
+
+  /* ───────────── T3: 시점별 필요현금 타임라인 (SVG · 디자인시스템 §5.5) ───────────── */
+  function fmtEok(m){ var v=round100(m); return (Math.round(v/1000)/10).toLocaleString()+'억'; }
+  function fmtCash(m){ var v=round100(m); if(v<=0) return '0'; if(v<10000) return v.toLocaleString()+'만'; return (Math.round(v/100)/100).toLocaleString()+'억'; }
+  function topRectPath(x,base,w,h,r){
+    var yTop=base-h; if(h<r) r=Math.max(0,h);
+    return 'M'+x+','+base+' V'+(yTop+r)+' Q'+x+','+yTop+' '+(x+r)+','+yTop
+         +' H'+(x+w-r)+' Q'+(x+w)+','+yTop+' '+(x+w)+','+(yTop+r)+' V'+base+' Z';
+  }
+  function renderTimelineEmpty(label){
+    var host=document.getElementById('timelineHost');
+    host.innerHTML='<div class="tl-empty">'+(label||'')+' 유형은 시점별 필요현금 데이터가 준비 중입니다.<br>지금 깊게 계산되는 유형은 <b>리모델링(느티마을 3단지)</b>입니다.</div>';
+  }
+  function renderTimeline(buckets){
+    var host=document.getElementById('timelineHost');
+    var W=720,H=260,padL=44,padR=16,padT=28,padB=54;
+    var plotW=W-padL-padR, plotH=H-padT-padB, base=padT+plotH;
+    var amts=buckets.map(function(b){return b.amt;});
+    var max=Math.max.apply(null,amts.concat([1]));
+    var maxIdx=amts.indexOf(Math.max.apply(null,amts));
+    var n=buckets.length, band=plotW/n, barW=Math.min(40,band*0.5);
+    var s='<defs><pattern id="cbhatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">'
+        + '<line x1="0" y1="0" x2="0" y2="6" stroke="rgba(255,255,255,.5)" stroke-width="1.4"/></pattern></defs>';
+    for(var g=0; g<=3; g++){
+      var gy=padT+plotH-(plotH*g/3), gval=max*g/3;
+      s+='<line class="tl-grid" x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'"/>';
+      s+='<text class="tl-axis" x="'+(padL-8)+'" y="'+(gy+4)+'" text-anchor="end">'+(g===0?'0':fmtEok(gval))+'</text>';
+    }
+    buckets.forEach(function(b,i){
+      var x=padL+band*i+(band-barW)/2, cx=x+barW/2, h=(b.amt/max)*plotH;
+      if(b.amt<=0){
+        s+='<rect class="tl-ghost" x="'+x+'" y="'+(base-24)+'" width="'+barW+'" height="24" rx="4"/>';
+        s+='<text class="tl-axis" x="'+cx+'" y="'+(base-30)+'" text-anchor="middle">미산정</text>';
+      } else {
+        s+='<path class="tl-bar '+(b.est?'tl-bar-e':'tl-bar-c')+'" tabindex="0" data-i="'+i+'" d="'+topRectPath(x,base,barW,h,4)+'"/>';
+        if(b.est) s+='<path d="'+topRectPath(x,base,barW,h,4)+'" fill="url(#cbhatch)" pointer-events="none"/>';
+        if(i===maxIdx || b.now) s+='<text class="tl-val" x="'+cx+'" y="'+(base-h-8)+'" text-anchor="middle">'+fmtCash(b.amt)+'</text>';
+      }
+      s+='<text class="tl-xk" x="'+cx+'" y="'+(base+18)+'" text-anchor="middle">'+b.key+'</text>';
+      s+='<text class="tl-xw" x="'+cx+'" y="'+(base+34)+'" text-anchor="middle">'+b.when+'</text>';
+      if(b.now){
+        s+='<line class="tl-nowrule" x1="'+cx+'" y1="'+padT+'" x2="'+cx+'" y2="'+base+'"/>';
+        s+='<rect class="tl-nowchip" x="'+(cx-15)+'" y="'+(padT-17)+'" width="30" height="15" rx="3"/>';
+        s+='<text class="tl-now" x="'+cx+'" y="'+(padT-6)+'" text-anchor="middle">지금</text>';
+      }
+    });
+    s+='<rect class="tl-legc" x="'+(W-padR-116)+'" y="'+(padT-20)+'" width="9" height="9"/>';
+    s+='<text class="tl-leg" x="'+(W-padR-103)+'" y="'+(padT-12)+'">확정</text>';
+    s+='<rect class="tl-lege" x="'+(W-padR-66)+'" y="'+(padT-20)+'" width="9" height="9"/>';
+    s+='<rect x="'+(W-padR-66)+'" y="'+(padT-20)+'" width="9" height="9" fill="url(#cbhatch)"/>';
+    s+='<text class="tl-leg" x="'+(W-padR-53)+'" y="'+(padT-12)+'">추정</text>';
+    host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" class="tl-svg" role="img" aria-label="시점별 필요현금 타임라인">'+s+'</svg><div class="tl-tip" id="tlTip" hidden></div>';
+    var tip=document.getElementById('tlTip');
+    function showTip(p,e){
+      var b=buckets[+p.getAttribute('data-i')];
+      tip.innerHTML='<b>'+b.key+'</b> · '+b.when+'<br><span class="cb-num">'+fmtCash(b.amt)+'</span> <span class="cb-grade cb-grade-'+b.grade.toLowerCase()+'">'+b.grade+'</span><br><span class="s">'+b.src+'</span>';
+      tip.hidden=false;
+      var r=host.getBoundingClientRect();
+      if(e&&e.clientX){ tip.style.left=(e.clientX-r.left+12)+'px'; tip.style.top=(e.clientY-r.top+12)+'px'; }
+      else { var pr=p.getBoundingClientRect(); tip.style.left=(pr.left-r.left+pr.width/2)+'px'; tip.style.top=(pr.top-r.top-8)+'px'; }
+    }
+    host.querySelectorAll('.tl-bar').forEach(function(p){
+      p.addEventListener('mouseenter',function(e){ showTip(p,e); });
+      p.addEventListener('mousemove',function(e){ var r=host.getBoundingClientRect(); tip.style.left=(e.clientX-r.left+12)+'px'; tip.style.top=(e.clientY-r.top+12)+'px'; });
+      p.addEventListener('mouseleave',function(){ tip.hidden=true; });
+      p.addEventListener('click',function(e){ showTip(p,e); });
+      p.addEventListener('focus',function(){ showTip(p,null); });
+      p.addEventListener('blur',function(){ tip.hidden=true; });
+    });
+  }
+
+  /* ───────────── S2 T4/T5: 예측공시 박제 (localStorage 불변 기록) ───────────── */
+  var calcDoneFired = false;
+  function nowStamp(){
+    var d = new Date(); function p(n){ return (n<10?'0':'')+n; }
+    return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes())+' KST';
+  }
+  function pledgeKey(){ return 'cb_pledge_neuti3_'+activeType; }
+  function loadPledge(){ try{ return JSON.parse(localStorage.getItem(pledgeKey())); }catch(e){ return null; } }
+  function renderPledge(curBundam){
+    var wrap=document.querySelector('.cb-pledge');
+    var valEl=document.getElementById('pledgeVal'), stampEl=document.getElementById('pledgeStamp'),
+        cmpEl=document.getElementById('pledgeCompare'), btn=document.getElementById('pledgeStampBtn'),
+        link=document.getElementById('pledgeBasisLink');
+    var st=loadPledge();
+    if(st){
+      valEl.textContent=fmtCash(st.value);
+      stampEl.textContent=st.ts+' 박제 · 수정 불가';
+      var diff=curBundam-st.value;
+      cmpEl.hidden=false;
+      cmpEl.innerHTML='현재 입력 기준 추정 <span class="cb-num">'+fmtCash(curBundam)+'</span> · 박제 대비 '
+        +(diff===0?'동일':(diff>0?'+':'−')+fmtCash(Math.abs(diff)));
+      btn.hidden=true; link.hidden=false; if(wrap) wrap.classList.add('stamped');
+    } else {
+      valEl.textContent=fmtCash(curBundam)+' (미박제)';
+      stampEl.textContent='아직 박제 전 — 지금 값을 고정하면 총회 확정과 대조됩니다';
+      cmpEl.hidden=true; btn.hidden=false; link.hidden=true;
+    }
+  }
+  function stampPledge(curBundam, curCost){
+    try{ localStorage.setItem(pledgeKey(), JSON.stringify({ value:curBundam, cost:curCost, ts:nowStamp(), n:1 })); }catch(e){}
+    if(window.umami) window.umami.track('danji-pledge', { type:activeType, value:curBundam });
+    renderPledge(curBundam);
+  }
+  (function(){
+    var b=document.getElementById('pledgeStampBtn');
+    if(b) b.addEventListener('click', function(){
+      var c=parseInt(document.getElementById('costRange').value,10);
+      stampPledge(round100(BASE_BUNDAM*(1+SENS*(c-BASE_COST))), c);
+    });
+    var lk=document.getElementById('pledgeBasisLink');
+    if(lk) lk.addEventListener('click', function(e){ e.preventDefault();
+      var st=loadPledge(); if(st) alert('박제 기준\n\n분담금 추정: '+fmtCash(st.value)+'\n박제 시각: '+st.ts+'\n기준 공사비: '+st.cost+'만원/평\n\n총회 확정 공시가 나오면 이 값과 자동 대조해 오차를 공개합니다.');
+    });
+  })();
+
+  function calc(){
+    var t = typeById(activeType);
+    var ids = ['out-bundam','out-total','out-cash','out-bep'];
+    if(!t.ready){   // 리모델링 외: 공식은 선반영, 실계산은 롤아웃 전
+      ids.forEach(function(id){ var e=document.getElementById(id); if(e){ e.textContent='준비 중'; e.classList.add('muted-out'); } });
+      var pv0=document.getElementById('pledgeVal'); if(pv0) pv0.textContent='—';
+      var ps=document.getElementById('pledgeStamp'); if(ps) ps.textContent='리모델링에서만 예측공시 제공';
+      var pb=document.getElementById('pledgeStampBtn'); if(pb) pb.hidden=true;
+      var pc=document.getElementById('pledgeCompare'); if(pc) pc.hidden=true;
+      renderTimelineEmpty(t.label);
+      return;
+    }
+    ids.forEach(function(id){ var e=document.getElementById(id); if(e) e.classList.remove('muted-out'); });
+    var c = parseInt(range.value, 10);
+    var bundam = round100(BASE_BUNDAM * (1 + SENS * (c - BASE_COST)));            // 분담금(만원)
+    var move = commaNum(gv('aMove')), rate = commaNum(gv('aRate')),
+        months = commaNum(gv('aMonths')), fee = round100(commaNum(gv('aFee')));
+    var interest = round100(move * (rate/100) * (months/12));                      // 이주비 이자(만원)
+    var extra = bundam + interest + fee;                                           // 호가 외 추가현금
+    var askMan = commaNum(ask.value);
+    var total = askMan > 0 ? askMan + extra : 0;
+    setOut('out-bundam', eok(bundam));
+    setOut('out-cash', eok(extra));
+    setOut('out-total', total > 0 ? eok(total) : '호가 입력 시');
+    setOut('out-bep', total > 0 ? eok(total) : '—');
+    renderPledge(bundam);
+    if(total>0 && !calcDoneFired){ calcDoneFired=true; if(window.umami) window.umami.track('danji-calc-done', { ref:REF }); }
+
+    // 시점별 필요현금 버킷 — 잔차를 잔금/분담금잔금에 흡수해 합계 = 총투입비 정확히 일치.
+    var contract = round100(askMan*0.10);
+    var balance  = askMan - contract;                 // 매수 잔차 흡수
+    var midPay   = round100(bundam*0.60);
+    var lastPay  = bundam - midPay;                    // 분담금 잔차 흡수
+    var buckets = [
+      { key:'계약금',        when:'지금',   amt: contract,      grade:'B', est:false, now:true, src:'매물 호가의 10% (가정)' },
+      { key:'매수 잔금',     when:'+2개월', amt: balance,       grade:'B', est:false, src:'매물 호가의 90% (가정)' },
+      { key:'이주비 이자',   when:'이주~입주', amt: interest,   grade:'C', est:true,  src:'이주비 대출 이자 (가정)' },
+      { key:'분담금 중도금', when:'공사 중', amt: midPay,        grade:'B', est:true,  src:'분담금 60% 추정' },
+      { key:'분담금 잔금+부대', when:'입주 시', amt: lastPay + fee, grade:'B', est:true,  src:'분담금 40% + 부대비용 (추정)' }
+    ];
+    renderTimeline(buckets);
+  }
+
+  var _debounce;
+  function recalc(){ clearTimeout(_debounce); _debounce = setTimeout(calc, 120); }
+
+  range.addEventListener('input', function(){ syncRange(); recalc(); });
+  ask.addEventListener('input', function(){
+    var n = ask.value.replace(/[^0-9]/g,'');
+    ask.value = n ? Number(n).toLocaleString() : '';
+    recalc();
+  });
+  ['aMove','aRate','aMonths','aFee'].forEach(function(id){
+    var e = document.getElementById(id); if(e) e.addEventListener('input', recalc);
+  });
+
+  /* CTA (T1: 자리만 · S2에서 ?ref+Supabase 저장 연결) */
+  var fundForm=document.getElementById('fundForm'), fundMsg=document.getElementById('fundMsg'), fundContact=document.getElementById('fundContact');
+  document.getElementById('ctaFund').addEventListener('click', function(){
+    fundForm.hidden=!fundForm.hidden;
+    if(!fundForm.hidden){ fundContact.focus(); if(window.umami) window.umami.track('danji-cta-fund', { ref:REF, type:activeType }); }
+  });
+  fundForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v=(fundContact.value||'').trim();
+    if(v.length<5){ fundMsg.textContent='연락처를 확인해 주세요.'; fundMsg.style.color='var(--cb-danger)'; return; }
+    var isEmail=v.indexOf('@')>-1;
+    var btn=document.getElementById('fundSubmit'); btn.disabled=true; btn.textContent='신청 중…';
+    var c=parseInt(document.getElementById('costRange').value,10);
+    var cur=round100(BASE_BUNDAM*(1+SENS*(c-BASE_COST)));
+    var payload={ complex:'느티마을 3단지', owner_type:'매수희망자',
+      interest:'[자금조달연결] 유형='+activeType+' · 예상분담금='+fmtCash(cur), email:isEmail?v:null, phone:isEmail?null:v, ref:REF };
+    function done(m,bad){ btn.disabled=false; btn.textContent='신청'; fundMsg.textContent=m; fundMsg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
+    if(sb){
+      sb.from('reservations').insert(payload).then(function(res){
+        if(res.error){ done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); return; }
+        if(window.umami) window.umami.track('danji-fund-request', { ref:REF, type:activeType });
+        fundContact.value=''; done('신청 접수됐습니다. (수요 확인용 · 중개 아님)', false);
+      });
+    } else {
+      if(window.umami) window.umami.track('danji-fund-request', { ref:REF, type:activeType, offline:1 });
+      done('신청 접수됐습니다.', false);
+    }
+  });
+  var alertForm=document.getElementById('alertForm'), alertMsg=document.getElementById('alertMsg'), alertContact=document.getElementById('alertContact');
+  document.getElementById('ctaAlert').addEventListener('click', function(){
+    alertForm.hidden=!alertForm.hidden;
+    if(!alertForm.hidden){ if(fundForm) fundForm.hidden=true; alertContact.focus(); if(window.umami) window.umami.track('danji-cta-alert', { ref:REF, type:activeType }); }
+  });
+  alertForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v=(alertContact.value||'').trim();
+    if(v.indexOf('@')<1){ alertMsg.textContent='이메일을 확인해 주세요.'; alertMsg.style.color='var(--cb-danger)'; return; }
+    var btn=document.getElementById('alertSubmit'); btn.disabled=true; btn.textContent='구독 중…';
+    var payload={ complex:'느티마을 3단지', owner_type:'매수희망자', interest:'[확정알림] 유형='+activeType, email:v, phone:null, ref:REF };
+    function done(m,bad){ btn.disabled=false; btn.textContent='구독'; alertMsg.textContent=m; alertMsg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
+    if(sb){
+      sb.from('reservations').insert(payload).then(function(res){
+        if(res.error){ done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); return; }
+        if(window.umami) window.umami.track('danji-alert-request', { ref:REF, type:activeType });
+        alertContact.value=''; done('구독 완료 — 확정값 나오면 알려드릴게요.', false);
+      });
+    } else { if(window.umami) window.umami.track('danji-alert-request', { ref:REF, type:activeType, offline:1 }); done('구독 완료.', false); }
+  });
+
+  /* init */
+  // 프리필: ?ask= & cost= & type= (발표 시연·중개사 링크)
+  (function(){
+    var q=new URLSearchParams(location.search);
+    var qa=q.get('ask'); if(qa && /^[0-9,]+$/.test(qa)) ask.value=Number(qa.replace(/,/g,'')).toLocaleString();
+    var qc=parseInt(q.get('cost'),10); if(!isNaN(qc) && qc>=+range.min && qc<=+range.max) range.value=qc;
+    var qt=q.get('type'); if(qt && typeById(qt)) activeType=qt;
+  })();
+  var _c2c=document.getElementById('caseToCalc');
+  if(_c2c) _c2c.addEventListener('click', function(){ ask.scrollIntoView({behavior:'smooth', block:'center'}); ask.focus(); });
+  renderTypeSeg();
+  syncRange();
+  calc();
+  window.addEventListener('load', function(){ if(window.umami) window.umami.track('danji-view', { ref:REF }); });
+  </script>
+</body>
+</html>
