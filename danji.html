@@ -500,19 +500,19 @@
     <section style="padding-top:0;">
       <div class="cb-container">
         <div class="sec-head">
-          <h2>우리 데이터 커버리지</h2>
-          <div class="sub">느티마을 3단지는 우리가 깊게 판 단지 중 하나입니다. 전체 커버리지를 <b>숨기지 않고</b> 공개합니다 — 넓이가 아니라 깊이의 정직함이 우리 자산입니다.</div>
+          <h2>서비스 중인 정비사업 구역</h2>
+          <div class="sub">CLEARBUILD가 데이터를 제공하는 정비사업장입니다. 커버리지를 그대로 공개합니다.</div>
         </div>
         <div class="cb-card" style="padding:0; overflow:hidden;">
           <div id="coverageMap" style="width:100%; height:380px; background:var(--cb-surface-2);"></div>
           <div style="display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center; padding:14px var(--sp-5); border-top:1px solid var(--cb-line-100); font-size:12.5px; color:var(--cb-ink-500);">
-            <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#1A3F7A;display:inline-block;"></span> 깊은 계산 <b id="cov-deep" class="cb-num" style="color:var(--cb-ink-900);">3</b></span>
-            <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:#8494AA;display:inline-block;"></span> 위치 디렉토리 <b id="cov-all" class="cb-num" style="color:var(--cb-ink-900);">118</b></span>
-            <span>· 분담금 확인 <b class="cb-num" style="color:var(--cb-ink-700);">48</b> <span style="color:var(--cb-ink-400);">(VOC·문서 기준)</span></span>
-            <span style="margin-left:auto; color:var(--cb-ink-400);">경쟁 지도는 채움율을 숨깁니다 — 우리는 공개합니다</span>
+            <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#1A3F7A;display:inline-block;"></span> 계산 제공 <b id="cov-deep" class="cb-num" style="color:var(--cb-ink-900);">3</b></span>
+            <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:#8494AA;display:inline-block;"></span> 정비사업 구역 <b id="cov-all" class="cb-num" style="color:var(--cb-ink-900);">118</b></span>
+            <span>· 분담금 데이터 <b class="cb-num" style="color:var(--cb-ink-700);">48</b> <span style="color:var(--cb-ink-400);">(VOC·문서)</span></span>
+            <span style="margin-left:auto; color:var(--cb-ink-400);">채움율 그대로 공개</span>
           </div>
         </div>
-        <p class="disclaim" style="margin-top:10px;">핀을 누르면 단지 상태가 보입니다. 데이터 준비 중인 단지는 "확정값 알림"으로 수요를 받아 다음 깊이 롤아웃 우선순위를 정합니다.</p>
+        <p class="disclaim" style="margin-top:10px;">핀을 누르면 단지 상태가 보입니다. 데이터 준비 중인 곳은 "확정값 알림"으로 수요를 받아 우선순위를 정합니다.</p>
       </div>
     </section>
 
@@ -870,12 +870,13 @@
       pts.forEach(function(z){
         var isDeep=!!z.hasBundam; if(isDeep) deep++;
         var ll=new naver.maps.LatLng(z.lat,z.lng); b.extend(ll);
-        var sz=isDeep?14:10, color=isDeep?'#1A3F7A':'#8494AA';
-        var m=new naver.maps.Marker({position:ll,map:map,icon:{content:'<div style="width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:'+color+';border:2px solid #fff;box-shadow:0 1px 3px rgba(15,34,68,.35);"></div>',anchor:new naver.maps.Point(sz/2+2,sz/2+2)}});
+        var color=isDeep?'#1A3F7A':'#8494AA', w=isDeep?28:22, h=isDeep?36:28, dot=isDeep?5:4;
+        var pin='<svg width="'+w+'" height="'+h+'" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 1px 2px rgba(15,34,68,.35));"><path d="M13 0C5.8 0 0 5.8 0 13c0 8.7 13 21 13 21s13-12.3 13-21C26 5.8 20.2 0 13 0z" fill="'+color+'" stroke="#fff" stroke-width="1.6"/><circle cx="13" cy="13" r="'+dot+'" fill="#fff"/></svg>';
+        var m=new naver.maps.Marker({position:ll,map:map,icon:{content:pin,anchor:new naver.maps.Point(w/2,h)},zIndex:isDeep?100:1});
         naver.maps.Event.addListener(m,'click',function(){
           window.__pinName=z.name;
           var body=isDeep
-            ? '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#176B43;font-weight:600;">깊은 계산 데이터 있음</span><br><a href="/danji.html" style="color:#2255A4;">계산 예시 보기 →</a>'
+            ? '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#176B43;font-weight:600;">계산 서비스 제공 중</span><br><a href="/danji.html" style="color:#2255A4;">계산 예시 보기 →</a>'
             : '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#5D6B80;">데이터 준비 중</span><br><a href="#" onclick="cbAlertFor();return false;" style="color:#2255A4;">확정값 알림 받기 →</a>';
           iw.setContent('<div style="padding:10px 12px;font-size:13px;line-height:1.55;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#333D4E;">'+body+'</div>');
           iw.open(map,m);
