@@ -94,6 +94,15 @@
   .soon{display:inline-block; margin-top:9px; font-size:10.5px; font-weight:600; color:var(--cb-accent-text); background:var(--cb-accent-bg); padding:2px 8px; border-radius:999px;}
   .src-note{margin-top:13px; font-size:12px; color:var(--cb-ink-400); line-height:1.55;}
   .src-note b{color:var(--cb-ink-700);}
+  .pricerows{margin-top:4px;}
+  .prow{display:grid; grid-template-columns:1.15fr .7fr 1.1fr 1fr; gap:8px; align-items:baseline; padding:11px 2px; border-bottom:1px solid var(--cb-line-100); font-size:13.5px;}
+  .prow:last-child{border-bottom:none;}
+  .pm2{color:var(--cb-ink-900); font-weight:600;}
+  .pcnt{color:var(--cb-ink-400); font-size:12.5px;}
+  .pmed{color:var(--cb-ink-700);}
+  .pmed b{color:var(--cb-navy-700); font-size:15.5px; font-weight:700;}
+  .plast{color:var(--cb-ink-500); font-size:12.5px; text-align:right;}
+  @media(max-width:560px){ .prow{grid-template-columns:1fr 1fr; row-gap:2px;} .plast{text-align:left;} }
 
   /* info rows */
   .rows{display:flex; flex-direction:column;}
@@ -164,16 +173,20 @@
 
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function qp(k){ var m=new RegExp('[?&]'+k+'=([^&]*)').exec(location.search); return m?decodeURIComponent(m[1].replace(/\+/g,' ')):''; }
+  function fmtEok(manwon){ return (manwon/10000).toFixed(1)+'억'; }
 
   fetch('/complexes.json').then(function(r){return r.json();}).then(function(list){
     var want=qp('complex').trim();
     var z=null;
     for(var i=0;i<list.length;i++){ if((list[i].name||'').trim()===want){ z=list[i]; break; } }
     if(!z){ document.getElementById('app').innerHTML='<div class="notfound">단지를 찾지 못했습니다.<br><br><a href="/danji.html">← 커버리지 지도로 돌아가기</a></div>'; return; }
-    render(z);
+    fetch('/prices.json').then(function(r){return r.json();}).then(function(pj){
+      render(z, (pj&&pj.prices)||{}, (pj&&pj.meta)||{});
+    }).catch(function(){ render(z, {}, {}); });
   }).catch(function(){ document.getElementById('app').innerHTML='<div class="notfound">데이터를 불러오지 못했습니다.<br><br><a href="/danji.html">← 돌아가기</a></div>'; });
 
-  function render(z){
+  function render(z, prices, meta){
+    prices=prices||{}; meta=meta||{};
     var deep=!!z.hasBundam;
     var precise=(z.geoSource==='addr');
     var statusBadge=deep
@@ -211,6 +224,31 @@
 
     var markSvg='<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8z" fill="#fff"/><circle cx="12" cy="10" r="3" fill="#1A3F7A"/></svg>';
 
+    var pd=prices[z.name], priceCard;
+    if(pd && pd.items && pd.items.length){
+      var prows=pd.items.map(function(it){
+        return '<div class="prow"><span class="pm2">전용 '+it.m2+'㎡</span>'
+          +'<span class="pcnt cb-num">'+it.count+'건</span>'
+          +'<span class="pmed">중앙 <b class="cb-num">'+fmtEok(it.median)+'</b></span>'
+          +'<span class="plast">최근 <span class="cb-num">'+fmtEok(it.last)+'</span></span></div>';
+      }).join('');
+      priceCard='<div class="card"><h2>실거래가</h2>'
+        +'<div class="csub">'+esc(meta.source||'국토부 실거래가')+' · '+esc(meta.type||'아파트 매매')+(meta.period?' · '+esc(meta.period):'')+(meta.downloaded?' ('+esc(meta.downloaded)+' 기준)':'')+'</div>'
+        +'<div class="pricerows">'+prows+'</div>'
+        +'<div class="src-note">신고가 기준 <b>실거래</b>입니다(매물 호가와 다를 수 있음). 사서 들어갈 때의 <b>실제 부담</b>은 아래 총투입비로 계산합니다.</div>'
+        +'</div>';
+    } else {
+      priceCard='<div class="card"><h2>실거래·시세</h2>'
+        +'<div class="csub">국토부 실거래가(신고가 기준) 연동 준비 중</div>'
+        +'<div class="tiles">'
+          +'<div class="tile"><div class="k">평균 매매가</div><div class="v pending">준비 중</div><div class="skelbar"></div><span class="soon">국토부 연동 예정</span></div>'
+          +'<div class="tile"><div class="k">최근 실거래가</div><div class="v pending">준비 중</div><div class="skelbar"></div><span class="soon">국토부 연동 예정</span></div>'
+          +'<div class="tile"><div class="k">공시가격</div><div class="v pending">준비 중</div><div class="skelbar"></div><span class="soon">시세 하한 앵커</span></div>'
+        +'</div>'
+        +'<div class="src-note">CLEARBUILD는 KB식 추정 시세가 아니라 <b>국토부 실거래 신고가</b>를 기준으로 삼습니다 — 방어 가능한 숫자만 붙입니다. 연동 완료 시 평형별로 표기됩니다.</div>'
+        +'</div>';
+    }
+
     var html=''
       +'<div class="crumb"><a href="/danji.html">커버리지 지도</a><span class="sep">›</span><b>'+esc(z.name)+'</b></div>'
 
@@ -225,16 +263,7 @@
 
       +'<div class="card flush"><div id="miniMap"></div></div>'
 
-      +'<div class="card">'
-        +'<h2>실거래·시세</h2>'
-        +'<div class="csub">국토부 실거래가(신고가 기준) 연동 준비 중</div>'
-        +'<div class="tiles">'
-          +'<div class="tile"><div class="k">평균 매매가</div><div class="v pending" id="avgPrice">준비 중</div><div class="skelbar"></div><span class="soon">국토부 연동 예정</span></div>'
-          +'<div class="tile"><div class="k">최근 실거래가</div><div class="v pending" id="lastPrice">준비 중</div><div class="skelbar"></div><span class="soon">국토부 연동 예정</span></div>'
-          +'<div class="tile"><div class="k">공시가격</div><div class="v pending" id="pubPrice">준비 중</div><div class="skelbar"></div><span class="soon">시세 하한 앵커</span></div>'
-        +'</div>'
-        +'<div class="src-note">CLEARBUILD는 KB식 추정 시세가 아니라 <b>국토부 실거래 신고가</b>를 기준으로 삼습니다 — 방어 가능한 숫자만 붙입니다. 연동 완료 시 평형별로 표기됩니다.</div>'
-      +'</div>'
+      +priceCard
 
       +'<div class="card">'
         +'<h2>사업 정보</h2>'
