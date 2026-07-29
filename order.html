@@ -116,28 +116,28 @@
     <div id="cart-body"><div class="cart-empty">담긴 리포트가 없어요. 위에서 필요한 리포트를 담아 주세요.</div></div>
   </div>
 
-  <!-- ③ 주문자 정보 + 주문하기 (B-17-01) -->
+  <!-- ③ 주문자 정보 + 주문하기 (B-17-01) · maxlength = Day18 크기 초과 방어 -->
   <h2>3. 주문자 정보</h2>
   <div class="card">
     <form id="order-form" novalidate>
       <label for="f-name">이름 <span class="req">*</span></label>
-      <input type="text" id="f-name" placeholder="예) 오원기" autocomplete="name">
+      <input type="text" id="f-name" placeholder="예) 오원기" autocomplete="name" maxlength="40">
       <div class="err-msg" id="e-name"></div>
 
       <label for="f-phone">연락처 <span class="req">*</span></label>
-      <input type="tel" id="f-phone" placeholder="010-0000-0000" autocomplete="tel">
+      <input type="tel" id="f-phone" placeholder="010-0000-0000" autocomplete="tel" maxlength="13">
       <div class="err-msg" id="e-phone"></div>
 
       <label for="f-email">이메일 <span class="req">*</span></label>
-      <input type="email" id="f-email" placeholder="report@example.com" autocomplete="email">
+      <input type="email" id="f-email" placeholder="report@example.com" autocomplete="email" maxlength="100">
       <div class="hint">리포트·결제 안내를 이 주소로 보내드려요.</div>
       <div class="err-msg" id="e-email"></div>
 
       <label for="f-address">관심 단지 / 주소 <span class="opt">(선택)</span></label>
-      <input type="text" id="f-address" placeholder="예) 성남시 분당구 느티마을 3단지" autocomplete="off">
+      <input type="text" id="f-address" placeholder="예) 성남시 분당구 느티마을 3단지" autocomplete="off" maxlength="100">
 
       <label for="f-note">요청 메모 <span class="opt">(선택)</span></label>
-      <input type="text" id="f-note" placeholder="예) 전용 84㎡ 위주로 봐 주세요" autocomplete="off">
+      <input type="text" id="f-note" placeholder="예) 전용 84㎡ 위주로 봐 주세요" autocomplete="off" maxlength="200">
 
       <label class="consent" for="f-consent">
         <input type="checkbox" id="f-consent">
@@ -162,7 +162,7 @@
   </div>
 
   <p class="foot">
-    ※ 학습본(Day17 · 주문 접수 흐름 실습)입니다. 실제 결제·배송·PG 연동은 포함하지 않습니다.<br>
+    ※ 학습본(Day17 주문 접수 흐름 + Day18 엣지 케이스·오류 처리)입니다. 실제 결제·배송·PG 연동은 포함하지 않습니다.<br>
     주문 목록은 PII를 뺀 <code>orders_public</code> 뷰에서만 읽습니다(Day14 보안 패턴).
   </p>
 </div>
@@ -181,16 +181,25 @@
     { id:'p3', name:'분담금 시뮬레이션 심화',  price:20000, desc:'공사비·분양가 시나리오별로 내 분담금이 얼마나 흔들리는지 민감도 분석' }
   ];
   var CART = {}; // { productId: qty }
+  var MAX_QTY = 20; // Day18: 수량 상한 (비현실적 값 방지)
+  var LIMITS = { name:40, address:100, note:200 }; // Day18: 크기 초과 방어
 
   var won = function(n){ return n.toLocaleString('ko-KR') + '원'; };
   var byId = function(id){ return document.getElementById(id); };
+
+  // Day18 보안: innerHTML 렌더 전 HTML 이스케이프 (XSS 방어 — anon이 items에 임의 문자열 INSERT 가능)
+  function escapeHtml(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
 
   // ── 상품 목록 렌더 ──
   function renderProducts(){
     var html = PRODUCTS.map(function(p){
       return '<div class="card"><div class="prod"><div class="info">' +
-        '<div class="name">' + p.name + '</div>' +
-        '<div class="desc">' + p.desc + '</div>' +
+        '<div class="name">' + escapeHtml(p.name) + '</div>' +
+        '<div class="desc">' + escapeHtml(p.desc) + '</div>' +
         '<div class="price">' + won(p.price) + '</div>' +
         '</div><button class="add-btn" data-add="' + p.id + '">담기</button></div></div>';
     }).join('');
@@ -198,10 +207,11 @@
   }
 
   // ── 장바구니 상태 관리 (B-17-01) ──
-  function addToCart(id){ CART[id] = (CART[id] || 0) + 1; renderCart(); }
+  function addToCart(id){ CART[id] = Math.min((CART[id] || 0) + 1, MAX_QTY); renderCart(); }
   function changeQty(id, delta){
     CART[id] = (CART[id] || 0) + delta;
     if(CART[id] <= 0){ delete CART[id]; }
+    else if(CART[id] > MAX_QTY){ CART[id] = MAX_QTY; } // Day18: 수량 상한
     renderCart();
   }
   function removeFromCart(id){ delete CART[id]; renderCart(); }
@@ -226,7 +236,7 @@
     var rows = ids.map(function(id){
       var p = product(id), qty = CART[id];
       return '<div class="cart-row">' +
-        '<div style="flex:1"><div class="cn">' + p.name + '</div><div class="cp">' + won(p.price) + ' / 건</div></div>' +
+        '<div style="flex:1"><div class="cn">' + escapeHtml(p.name) + '</div><div class="cp">' + won(p.price) + ' / 건</div></div>' +
         '<div class="qty"><button data-dec="' + id + '">−</button><span>' + qty + '</span><button data-inc="' + id + '">+</button></div>' +
         '<div class="lt">' + won(p.price * qty) + '</div>' +
         '<button class="rm" data-rm="' + id + '">삭제</button></div>';
@@ -252,12 +262,19 @@
   var submitLabel = submitBtn.textContent;
   var msgEl = byId('form-msg');
   var infoEl = byId('info-line');
+  var submitting = false; // Day18: 중복 제출(연타) 차단 플래그
 
   function setInvalid(id, bad){ byId(id).classList.toggle('invalid', !!bad); }
   function setErr(id, text){ byId(id).textContent = text || ''; }
   function setFormMsg(text, ok){
     msgEl.textContent = text;
     msgEl.className = 'form-msg ' + (ok === null ? '' : ok ? 'ok' : 'err');
+  }
+  // Day18: 버튼 상태를 성공/실패/예외 어느 경로로 끝나든 항상 복구 (try/finally 역할)
+  function restoreBtn(){
+    submitting = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = submitLabel;
   }
   function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
   function isValidPhone(v){ return /^01[016789][-\s]?\d{3,4}[-\s]?\d{4}$/.test(v); }
@@ -269,31 +286,30 @@
   //      1) Slack 워크스페이스에서 Incoming Webhook URL 발급
   //      2) Supabase → Database → Webhooks → orders 테이블 INSERT 트리거 생성
   //      3) 대상 URL = 위 Slack Webhook (payload에 customer_name·items·total_price 포함)
-  //    이렇게 하면 주문 INSERT 시 Supabase가 서버에서 Slack으로 알림을 쏩니다(anon 키 노출 없음).
   function notifyOperator(order){
-    // 설계 자리표시자: 서버(Supabase Webhook)가 담당하므로 여기선 로그만 남깁니다.
     console.info('[알림 설계] 주문 접수됨 → 운영자 알림 대상:', order.customer_name, order.total_price + '원');
   }
 
-  // ── 주문 접수 (B-17-01) ──
+  // ── 주문 접수 (B-17-01) + Day18 엣지 케이스 처리 ──
   form.addEventListener('submit', function(e){
     e.preventDefault();
+    if(submitting) return; // Day18: 연타/재진입 차단 (응답 전 중복 제출 방지)
     infoEl.classList.remove('show');
 
-    var name    = byId('f-name').value.trim();
+    var name    = byId('f-name').value.trim();  // trim = 빈 입력(스페이스만) 방어
     var phone   = byId('f-phone').value.trim();
     var email   = byId('f-email').value.trim();
     var address = byId('f-address').value.trim();
     var note    = byId('f-note').value.trim();
     var consent = byId('f-consent').checked;
 
-    // ⓐ 빈 장바구니 (B-17-04 오류 1: 필수 조건 미충족)
+    // ⓐ 빈 장바구니
     if(Object.keys(CART).length === 0){
       setFormMsg('장바구니가 비어 있어요. 위에서 리포트를 먼저 담은 뒤 접수해 주세요.', false);
       return;
     }
 
-    // ⓑ 필수값 검증 (B-17-04 오류 2: 필수값 누락 · 한국어 · 무슨 일+어떻게)
+    // ⓑ 필수값 검증 (B-17-04 · 한국어 · 무슨 일+어떻게)
     var ok = true;
     setErr('e-name', name ? '' : '이름을 입력해 주세요. 리포트 발급 시 확인에 씁니다.'); setInvalid('f-name', !name); if(!name) ok = false;
 
@@ -309,9 +325,15 @@
 
     if(!ok){ setFormMsg('입력을 확인해 주세요. 빨간 안내가 있는 칸을 채우면 접수됩니다.', false); return; }
 
-    // 연타 방지
+    // ⓒ Day18 크기 초과 방어 (maxlength 보완 — 붙여넣기·값 조작 대비, 코드로도 한국어 안내)
+    if(name.length > LIMITS.name){ setErr('e-name','이름은 최대 ' + LIMITS.name + '자까지 입력할 수 있어요.'); setInvalid('f-name',true); setFormMsg('입력을 확인해 주세요.', false); return; }
+    if(address.length > LIMITS.address){ setFormMsg('관심 단지/주소는 최대 ' + LIMITS.address + '자까지 입력할 수 있어요.', false); return; }
+    if(note.length > LIMITS.note){ setFormMsg('요청 메모는 최대 ' + LIMITS.note + '자까지 입력할 수 있어요.', false); return; }
+
+    // 연타 방지 (Day18: 즉시 잠금 + "처리 중…")
+    submitting = true;
     submitBtn.disabled = true;
-    submitBtn.textContent = '접수 중…';
+    submitBtn.textContent = '처리 중…';
     setFormMsg('', null);
 
     var order = {
@@ -320,37 +342,41 @@
       email: email,
       address: address || null,
       note: note || null,
-      items: JSON.stringify(cartItems()), // 장바구니를 JSON 문자열 한 칸으로 축약
+      items: JSON.stringify(cartItems()),
       total_price: cartTotal(),
       status: '접수',
       ref: (new URLSearchParams(location.search).get('ref') || 'order')
     };
 
-    // orders 원장에 익명 INSERT
-    sb.from('orders').insert(order).then(function(res){
-      submitBtn.disabled = false;
-      submitBtn.textContent = submitLabel;
+    // Day18 네트워크 단절 방어: 10초 넘게 응답 없으면 무한 "처리 중…" 대신 안내
+    var timeout = new Promise(function(_, reject){
+      setTimeout(function(){ reject(new Error('network-timeout')); }, 10000);
+    });
 
-      if(res.error){
-        // B-17-04 오류 3: 저장 실패 (한국어 · 무슨 일+어떻게)
+    Promise.race([ sb.from('orders').insert(order), timeout ]).then(function(res){
+      if(res && res.error){
         console.error('[주문 저장 실패]', res.error); // 디버깅용 유지
+        restoreBtn();
         setFormMsg('주문 저장에 실패했어요. 잠시 후 다시 시도하고, 계속 안 되면 새로고침 후 다시 접수해 주세요.', false);
         return;
       }
-      // 성공: 완료 메시지 + 장바구니 비우기 + 목록 재조회 (영속화 확인)
-      notifyOperator(order);            // B-17-03 알림 훅
+      // 성공: 완료 메시지 + 장바구니 비우기 + 목록 재조회 (기존 성공 흐름 유지 = 회귀)
+      notifyOperator(order);
       form.reset();
       clearCart();
+      restoreBtn();
       setFormMsg('주문이 접수됐어요. 결제·리포트 발급 안내를 연락처로 보내드릴게요.', true);
       infoEl.textContent = '접수된 주문은 운영자에게 전달됩니다. (알림 연동 활성화 시 이메일·Slack으로 자동 통지)';
       infoEl.classList.add('show');
-      if(window.umami){ window.umami.track('order-submit'); } // 전환 이벤트
-      fetchOrders();                    // 방금 넣은 주문이 목록에 즉시 반영
+      if(window.umami){ window.umami.track('order-submit'); }
+      fetchOrders();
     }).catch(function(err){
-      submitBtn.disabled = false;
-      submitBtn.textContent = submitLabel;
-      console.error('[주문 저장 예외]', err); // 디버깅용 유지
-      setFormMsg('주문 저장에 실패했어요. 인터넷 연결을 확인한 뒤 다시 접수해 주세요.', false);
+      console.error('[주문 저장 예외/타임아웃]', err); // 디버깅용 유지
+      restoreBtn(); // 실패해도 버튼 반드시 복구 (영영 잠김 방지)
+      var msg = (err && err.message === 'network-timeout')
+        ? '네트워크가 불안정해 접수가 지연되고 있어요. 인터넷 연결을 확인한 뒤 다시 시도해 주세요.'
+        : '주문 저장에 실패했어요. 인터넷 연결을 확인한 뒤 다시 접수해 주세요.';
+      setFormMsg(msg, false);
     });
   });
 
@@ -358,8 +384,8 @@
   function itemsSummary(itemsJson){
     try{
       var arr = JSON.parse(itemsJson || '[]');
-      if(!arr.length) return '(상품 없음)';
-      var head = arr[0].name + '×' + arr[0].qty;
+      if(!Array.isArray(arr) || !arr.length) return '(상품 없음)';
+      var head = (arr[0].name || '?') + '×' + (arr[0].qty || 1);
       return arr.length === 1 ? head : head + ' 외 ' + (arr.length - 1) + '건';
     }catch(e){ return '(상품 정보 확인 불가)'; }
   }
@@ -377,16 +403,16 @@
       el.innerHTML = '<div class="list-empty">아직 접수된 주문이 없어요.</div>';
       return;
     }
+    // Day18 XSS 방어: 뷰에서 온 값(anon이 넣었을 수 있는 items 포함)은 전부 escapeHtml
     el.innerHTML = rows.map(function(o){
       return '<div class="order-item"><div class="oi-top">' +
-        '<span class="oi-name">' + (o.customer_name || '익명') + '<span class="status-chip">' + (o.status || '접수') + '</span></span>' +
-        '<span class="oi-sum">' + won(o.total_price || 0) + '</span></div>' +
-        '<div class="oi-items">' + itemsSummary(o.items) + '</div>' +
-        '<div class="oi-meta">' + fmtTime(o.created_at) + ' 접수</div></div>';
+        '<span class="oi-name">' + escapeHtml(o.customer_name || '익명') + '<span class="status-chip">' + escapeHtml(o.status || '접수') + '</span></span>' +
+        '<span class="oi-sum">' + won(Number(o.total_price) || 0) + '</span></div>' +
+        '<div class="oi-items">' + escapeHtml(itemsSummary(o.items)) + '</div>' +
+        '<div class="oi-meta">' + escapeHtml(fmtTime(o.created_at)) + ' 접수</div></div>';
     }).join('');
   }
   function fetchOrders(){
-    // 처음 로드 + 주문 성공 직후 모두 호출 → 방금 넣은 주문이 즉시 보임
     sb.from('orders_public').select('*').order('created_at', { ascending:false }).limit(20)
       .then(function(res){
         if(res.error){
@@ -405,7 +431,7 @@
   // 초기 렌더
   renderProducts();
   renderCart();
-  fetchOrders(); // 새로고침·재접속해도 저장된 주문이 다시 표시됨 (영속화)
+  fetchOrders();
 </script>
 </body>
 </html>
