@@ -18,7 +18,7 @@
     --cb-bg:#F6F8FB; --cb-surface:#FFFFFF; --cb-surface-2:#F1F4F9;
     --cb-ink-900:#131A26; --cb-ink-700:#333D4E; --cb-ink-500:#5D6B80; --cb-ink-400:#8494AA;
     --cb-line-300:#C7D0DC; --cb-line-200:#DDE3EC; --cb-line-100:#EBEFF5;
-    --cb-navy-100:#E8EEF8; --cb-navy-600:#2255A4; --cb-navy-700:#1A3F7A; --cb-navy-900:#0F2244;
+    --cb-navy-100:#E8EEF8; --cb-navy-400:#6E97E0; --cb-navy-600:#2255A4; --cb-navy-700:#1A3F7A; --cb-navy-900:#0F2244;
     --cb-success:#1E7F4F; --cb-success-bg:#E7F4EC;
     --cb-grade-a:#176B43; --cb-grade-a-bg:#E7F4EC; --cb-grade-a-line:#BFE3CE;
     --cb-grade-c:#4A5568; --cb-grade-c-bg:#EDF0F5; --cb-grade-c-line:#D3DAE5;
@@ -34,7 +34,7 @@
     --cb-bg:#0B111E; --cb-surface:#121A2B; --cb-surface-2:#1A2436;
     --cb-ink-900:#E9EDF5; --cb-ink-700:#A9B4C7; --cb-ink-500:#77839B; --cb-ink-400:#5D6B80;
     --cb-line-300:#33415C; --cb-line-200:#26324A; --cb-line-100:#1F2A40;
-    --cb-navy-100:#1A2A47; --cb-navy-600:#8FB0EE; --cb-navy-700:#7AA1E8;
+    --cb-navy-100:#1A2A47; --cb-navy-400:#6E97E0; --cb-navy-600:#8FB0EE; --cb-navy-700:#7AA1E8; --cb-navy-900:#0A1830;
     --cb-success:#5CC896; --cb-success-bg:#16241C;
     --cb-grade-a:#5CC896; --cb-grade-a-bg:#16241C; --cb-grade-a-line:#24483A;
     --cb-grade-c:#9FACC2; --cb-grade-c-bg:#1C2536; --cb-grade-c-line:#33415C;
@@ -47,68 +47,101 @@
   body{background:var(--cb-bg); color:var(--cb-ink-700); font-family:var(--font-sans); font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased;}
   .cb-num{font-family:var(--font-num); font-variant-numeric:tabular-nums; letter-spacing:-.01em;}
   a{color:var(--cb-navy-600); text-decoration:none;}
-  .wrap{max-width:820px; margin:0 auto; padding:0 20px;}
+  .wrap{max-width:840px; margin:0 auto; padding:0 20px;}
 
   /* topbar */
-  .topbar{border-bottom:1px solid var(--cb-line-200); background:var(--cb-surface);}
+  .topbar{border-bottom:1px solid var(--cb-line-200); background:var(--cb-surface); position:sticky; top:0; z-index:50;}
   .topbar .wrap{display:flex; align-items:center; justify-content:space-between; height:56px;}
   .brand{font-weight:800; letter-spacing:-.02em; color:var(--cb-ink-900); font-size:16px;}
   .back{font-size:13.5px; color:var(--cb-ink-500);}
   .back:hover{color:var(--cb-navy-600);}
 
+  /* breadcrumb */
+  .crumb{padding:16px 0 0; font-size:12.5px; color:var(--cb-ink-400);}
+  .crumb a{color:var(--cb-ink-500);}
+  .crumb b{color:var(--cb-ink-700); font-weight:600;}
+  .crumb .sep{margin:0 7px; color:var(--cb-line-300);}
+
   /* hero */
-  .hero{padding:28px 0 8px;}
-  .hero h1{font-size:27px; line-height:1.25; letter-spacing:-.02em; color:var(--cb-ink-900); font-weight:800;}
-  .hero .meta{margin-top:6px; color:var(--cb-ink-500); font-size:14.5px;}
+  .hero{display:flex; gap:16px; align-items:flex-start; padding:14px 0 6px;}
+  .hero .mark{flex-shrink:0; width:54px; height:54px; border-radius:15px; background:linear-gradient(150deg,var(--cb-navy-700),var(--cb-navy-900)); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-2);}
+  .hero .mark svg{width:27px; height:27px; display:block;}
+  .hero h1{font-size:27px; line-height:1.22; letter-spacing:-.025em; color:var(--cb-ink-900); font-weight:800;}
+  .hero .meta{margin-top:5px; color:var(--cb-ink-500); font-size:14px;}
   .badges{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;}
-  .badge{font-size:12.5px; font-weight:600; padding:4px 10px; border-radius:999px; border:1px solid transparent;}
+  .badge{font-size:12.5px; font-weight:600; padding:4px 11px; border-radius:999px; border:1px solid transparent;}
   .badge.provide{color:var(--cb-grade-a); background:var(--cb-grade-a-bg); border-color:var(--cb-grade-a-line);}
   .badge.prep{color:var(--cb-grade-c); background:var(--cb-grade-c-bg); border-color:var(--cb-grade-c-line);}
-  .badge.type{color:var(--cb-navy-700); background:var(--cb-navy-100); border-color:transparent;}
+  .badge.type{color:var(--cb-navy-700); background:var(--cb-navy-100);}
 
   /* card */
   .card{background:var(--cb-surface); border:1px solid var(--cb-line-200); border-radius:var(--radius-lg); box-shadow:var(--shadow-1); padding:20px; margin-top:16px;}
-  .card h2{font-size:15px; color:var(--cb-ink-900); font-weight:700; letter-spacing:-.01em; margin-bottom:2px;}
-  .card .csub{font-size:13px; color:var(--cb-ink-400); margin-bottom:14px;}
+  .card.flush{padding:0; overflow:hidden;}
+  .card h2{position:relative; padding-left:13px; font-size:15px; color:var(--cb-ink-900); font-weight:700; letter-spacing:-.01em; margin-bottom:3px;}
+  .card h2::before{content:''; position:absolute; left:0; top:3px; bottom:3px; width:3px; border-radius:2px; background:var(--cb-accent);}
+  .card .csub{font-size:12.5px; color:var(--cb-ink-400); margin:0 0 14px 13px;}
 
-  #miniMap{width:100%; height:220px; border-radius:var(--radius-md); border:1px solid var(--cb-line-200); background:var(--cb-surface-2);}
+  #miniMap{width:100%; height:230px; background:var(--cb-surface-2);}
 
   /* price tiles */
   .tiles{display:grid; grid-template-columns:repeat(3,1fr); gap:12px;}
   .tile{background:var(--cb-surface-2); border:1px solid var(--cb-line-100); border-radius:var(--radius-md); padding:14px;}
   .tile .k{font-size:12.5px; color:var(--cb-ink-500);}
-  .tile .v{margin-top:6px; font-size:19px; font-weight:700; color:var(--cb-ink-900);}
-  .tile .v.pending{color:var(--cb-ink-400); font-weight:600; font-size:15px;}
-  .tile .n{margin-top:4px; font-size:11.5px; color:var(--cb-ink-400);}
-  .src-note{margin-top:12px; font-size:12px; color:var(--cb-ink-400); line-height:1.5;}
+  .tile .v{margin-top:6px; font-size:20px; font-weight:700; color:var(--cb-ink-900); font-family:var(--font-num); font-variant-numeric:tabular-nums;}
+  .tile .v.pending{color:var(--cb-ink-400); font-weight:600; font-size:15px; font-family:var(--font-sans);}
+  .tile .skelbar{margin-top:9px; height:7px; border-radius:4px; background:linear-gradient(90deg,var(--cb-line-100) 0%,var(--cb-line-200) 50%,var(--cb-line-100) 100%); background-size:200% 100%; animation:shimmer 1.6s linear infinite;}
+  @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+  .soon{display:inline-block; margin-top:9px; font-size:10.5px; font-weight:600; color:var(--cb-accent-text); background:var(--cb-accent-bg); padding:2px 8px; border-radius:999px;}
+  .src-note{margin-top:13px; font-size:12px; color:var(--cb-ink-400); line-height:1.55;}
+  .src-note b{color:var(--cb-ink-700);}
 
   /* info rows */
-  .rows{display:flex; flex-direction:column; gap:0;}
+  .rows{display:flex; flex-direction:column;}
   .row{display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--cb-line-100); font-size:14px;}
   .row:last-child{border-bottom:none;}
   .row .rk{color:var(--cb-ink-500); flex-shrink:0;}
   .row .rv{color:var(--cb-ink-900); text-align:right; font-weight:500;}
 
   /* angle card (our edge) */
-  .angle{background:linear-gradient(180deg,var(--cb-navy-100),var(--cb-surface)); border-color:var(--cb-line-200);}
-  .angle .lead{font-size:16px; color:var(--cb-ink-900); font-weight:700; letter-spacing:-.01em;}
-  .angle p{font-size:13.5px; color:var(--cb-ink-500); margin-top:6px;}
-  .btn{display:inline-flex; align-items:center; gap:6px; margin-top:14px; padding:11px 18px; border-radius:var(--radius-md); font-size:14.5px; font-weight:600; cursor:pointer; border:1px solid transparent; font-family:inherit;}
+  .angle{background:linear-gradient(165deg,var(--cb-navy-100),var(--cb-surface) 62%); border-color:var(--cb-line-200);}
+  .angle .lead{font-size:17px; color:var(--cb-ink-900); font-weight:800; letter-spacing:-.02em;}
+  .angle p{font-size:13.5px; color:var(--cb-ink-500); margin-top:7px;}
+  .angle p b{color:var(--cb-ink-700);}
+
+  /* cost concept bar */
+  .costwrap{margin-top:16px;}
+  .costcap{font-size:12px; color:var(--cb-ink-500); margin-bottom:7px;}
+  .costbar{display:flex; height:40px; border-radius:9px; overflow:hidden; border:1px solid var(--cb-line-200); box-shadow:var(--shadow-1);}
+  .costbar .seg{display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:700; color:#fff; white-space:nowrap; letter-spacing:-.01em;}
+  .costlegend{display:flex; gap:16px; flex-wrap:wrap; margin-top:9px; font-size:11.5px; color:var(--cb-ink-500);}
+  .costlegend span{display:inline-flex; align-items:center;}
+  .costlegend .dot{width:9px; height:9px; border-radius:3px; margin-right:6px;}
+  .costfoot{margin-top:7px; font-size:11px; color:var(--cb-ink-400);}
+
+  .btn{display:inline-flex; align-items:center; gap:6px; margin-top:16px; padding:12px 20px; border-radius:var(--radius-md); font-size:14.5px; font-weight:700; cursor:pointer; border:1px solid transparent; font-family:inherit; letter-spacing:-.01em; transition:background .16s;}
   .btn-primary{background:var(--cb-navy-700); color:#fff;}
   .btn-primary:hover{background:var(--cb-navy-900);}
-  .btn-accent{background:var(--cb-accent-bg); color:var(--cb-accent-text); border-color:var(--cb-accent);}
+  .btn-accent{background:var(--cb-accent); color:#fff;}
+  .btn-accent:hover{filter:brightness(.93);}
 
   /* alert form */
   .alertbox{margin-top:14px; display:none;}
   .alertbox.on{display:block;}
-  .field{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;}
+  .field{display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;}
   .field input{flex:1; min-width:200px; padding:11px 12px; border:1px solid var(--cb-line-300); border-radius:var(--radius-md); font-size:14.5px; font-family:inherit; background:var(--cb-surface); color:var(--cb-ink-900);}
   .field input:focus{outline:none; border-color:var(--cb-navy-600); box-shadow:0 0 0 3px rgba(59,114,212,.22);}
-  .msg{margin-top:8px; font-size:13px; min-height:18px;}
+  .field .btn{margin-top:0;}
+  .msg{margin-top:9px; font-size:13px; min-height:18px;}
 
-  .disclaim{margin:24px 0 40px; font-size:12px; color:var(--cb-ink-400); line-height:1.6;}
-  .notfound{padding:80px 0; text-align:center; color:var(--cb-ink-500);}
-  @media(max-width:560px){ .tiles{grid-template-columns:1fr;} .hero h1{font-size:23px;} }
+  /* trust band */
+  .trust{margin-top:16px; padding:15px 17px; background:var(--cb-surface-2); border:1px solid var(--cb-line-100); border-radius:var(--radius-md); font-size:12.5px; color:var(--cb-ink-500); line-height:1.65;}
+  .trust b{color:var(--cb-ink-700); font-weight:600;}
+
+  .disclaim{margin:22px 0 44px; font-size:11.5px; color:var(--cb-ink-400); line-height:1.6;}
+  .notfound,.loading{padding:90px 0; text-align:center; color:var(--cb-ink-500);}
+  .loading .l{max-width:360px; margin:0 auto 12px; height:14px; border-radius:7px; background:linear-gradient(90deg,var(--cb-line-100) 0%,var(--cb-line-200) 50%,var(--cb-line-100) 100%); background-size:200% 100%; animation:shimmer 1.6s linear infinite;}
+  .loading .l.s{max-width:220px;}
+  @media(max-width:560px){ .tiles{grid-template-columns:1fr;} .hero h1{font-size:23px;} .hero .mark{width:46px;height:46px;} }
   </style>
 
   <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=a4kxw68xe0"></script>
@@ -121,7 +154,7 @@
     <a class="back" href="/danji.html">← 커버리지 지도로</a>
   </div></div>
 
-  <main class="wrap" id="app"><div class="notfound">불러오는 중…</div></main>
+  <main class="wrap" id="app"><div class="loading"><div class="l"></div><div class="l s"></div></div></main>
 
   <script>
   var SUPABASE_URL='https://lynmnuftfybbegdxjfbz.supabase.co';
@@ -136,9 +169,9 @@
     var want=qp('complex').trim();
     var z=null;
     for(var i=0;i<list.length;i++){ if((list[i].name||'').trim()===want){ z=list[i]; break; } }
-    if(!z){ document.getElementById('app').innerHTML='<div class="notfound">단지를 찾지 못했습니다.<br><a href="/danji.html">← 커버리지 지도로 돌아가기</a></div>'; return; }
+    if(!z){ document.getElementById('app').innerHTML='<div class="notfound">단지를 찾지 못했습니다.<br><br><a href="/danji.html">← 커버리지 지도로 돌아가기</a></div>'; return; }
     render(z);
-  }).catch(function(){ document.getElementById('app').innerHTML='<div class="notfound">데이터를 불러오지 못했습니다.<br><a href="/danji.html">← 돌아가기</a></div>'; });
+  }).catch(function(){ document.getElementById('app').innerHTML='<div class="notfound">데이터를 불러오지 못했습니다.<br><br><a href="/danji.html">← 돌아가기</a></div>'; });
 
   function render(z){
     var deep=!!z.hasBundam;
@@ -146,41 +179,66 @@
     var statusBadge=deep
       ? '<span class="badge provide">분담금 데이터 제공</span>'
       : '<span class="badge prep">데이터 준비 중</span>';
+
+    var costbar=''
+      +'<div class="costwrap">'
+        +'<div class="costcap">총투입비 구성 — 개념도</div>'
+        +'<div class="costbar">'
+          +'<div class="seg" style="flex:55;background:var(--cb-navy-700);">매물 호가</div>'
+          +'<div class="seg" style="flex:32;background:var(--cb-accent);">분담금</div>'
+          +'<div class="seg" style="flex:13;background:var(--cb-navy-400);">이자·부대</div>'
+        +'</div>'
+        +'<div class="costlegend">'
+          +'<span><i class="dot" style="background:var(--cb-navy-700);"></i>매물 호가</span>'
+          +'<span><i class="dot" style="background:var(--cb-accent);"></i>예상 분담금</span>'
+          +'<span><i class="dot" style="background:var(--cb-navy-400);"></i>이자·부대비용</span>'
+        +'</div>'
+        +'<div class="costfoot">실제 금액·비율은 매물 호가와 단지별 확정 분담금으로 계산됩니다.</div>'
+      +'</div>';
+
     var angle=deep
-      ? '<div class="lead">사서 들어가면 실제로 얼마?</div>'
-        +'<p>이 단지는 분담금 데이터를 확보해, 매물 호가에 분담금·이자·부대비용을 더한 <b>총투입비</b>와 <b>시점별 필요현금</b>을 계산해 드립니다. 시세만 보면 안 보이는 숫자입니다.</p>'
+      ? '<div class="lead">사서 들어가면, 실제로 얼마?</div>'
+        +'<p>이 단지는 분담금 데이터를 확보했습니다. 매물 호가에 <b>분담금·이자·부대비용</b>을 더한 <b>총투입비</b>와, 지금부터 입주까지 <b>시점별 필요현금</b>까지 계산해 드립니다 — 시세만 보면 안 보이는 숫자입니다.</p>'
+        +costbar
         +'<a class="btn btn-primary" href="/danji.html">분담금·필요현금 계산 열기 →</a>'
       : '<div class="lead">이 구역, 분담금 데이터 확보 중입니다</div>'
-        +'<p>위치·사업유형은 확인했고, 분담금·필요현금 계산은 아직 준비 중입니다. 확정되면 가장 먼저 알려드릴게요.</p>'
+        +'<p>위치·사업유형은 확인했고, 분담금·필요현금 계산은 준비 중입니다. 확정되면 가장 먼저 알려드릴게요.</p>'
         +'<button class="btn btn-accent" id="ctaAlert">확정값 알림 받기</button>'
         +'<div class="alertbox" id="alertBox">'
-          +'<div class="field"><input id="alertEmail" type="email" placeholder="이메일 주소" autocomplete="email" /><button class="btn btn-primary" id="alertSubmit" style="margin-top:0;">구독</button></div>'
+          +'<div class="field"><input id="alertEmail" type="email" placeholder="이메일 주소" autocomplete="email" /><button class="btn btn-primary" id="alertSubmit">구독</button></div>'
           +'<div class="msg" id="alertMsg"></div>'
         +'</div>';
 
+    var markSvg='<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8z" fill="#fff"/><circle cx="12" cy="10" r="3" fill="#1A3F7A"/></svg>';
+
     var html=''
+      +'<div class="crumb"><a href="/danji.html">커버리지 지도</a><span class="sep">›</span><b>'+esc(z.name)+'</b></div>'
+
       +'<section class="hero">'
-        +'<h1>'+esc(z.name)+'</h1>'
-        +'<div class="meta">'+esc(z.region||'')+(z.address?' · '+esc(z.address):'')+'</div>'
-        +'<div class="badges">'+statusBadge+'<span class="badge type">'+esc(z.type||'정비사업')+'</span></div>'
+        +'<div class="mark">'+markSvg+'</div>'
+        +'<div>'
+          +'<h1>'+esc(z.name)+'</h1>'
+          +'<div class="meta">'+esc(z.region||'')+(z.address?' · '+esc(z.address):'')+'</div>'
+          +'<div class="badges">'+statusBadge+'<span class="badge type">'+esc(z.type||'정비사업')+'</span></div>'
+        +'</div>'
       +'</section>'
 
-      +'<div class="card"><div id="miniMap"></div></div>'
+      +'<div class="card flush"><div id="miniMap"></div></div>'
 
       +'<div class="card">'
         +'<h2>실거래·시세</h2>'
-        +'<div class="csub">국토부 실거래가(신고가 기준) 연동 준비 중입니다.</div>'
+        +'<div class="csub">국토부 실거래가(신고가 기준) 연동 준비 중</div>'
         +'<div class="tiles">'
-          +'<div class="tile"><div class="k">평균 매매가</div><div class="v pending" id="avgPrice">준비 중</div><div class="n">최근 6개월 median</div></div>'
-          +'<div class="tile"><div class="k">최근 실거래가</div><div class="v pending" id="lastPrice">준비 중</div><div class="n">최근 신고 건</div></div>'
-          +'<div class="tile"><div class="k">공시가격</div><div class="v pending" id="pubPrice">준비 중</div><div class="n">시세 하한 앵커</div></div>'
+          +'<div class="tile"><div class="k">평균 매매가</div><div class="v pending" id="avgPrice">준비 중</div><div class="skelbar"></div><span class="soon">국토부 연동 예정</span></div>'
+          +'<div class="tile"><div class="k">최근 실거래가</div><div class="v pending" id="lastPrice">준비 중</div><div class="skelbar"></div><span class="soon">국토부 연동 예정</span></div>'
+          +'<div class="tile"><div class="k">공시가격</div><div class="v pending" id="pubPrice">준비 중</div><div class="skelbar"></div><span class="soon">시세 하한 앵커</span></div>'
         +'</div>'
-        +'<div class="src-note">CLEARBUILD는 KB식 추정 시세 대신 <b>국토부 실거래 신고가</b>를 기준으로 삼습니다 — 방어 가능한 숫자만 붙입니다. 연동 완료 시 평형별로 표기됩니다.</div>'
+        +'<div class="src-note">CLEARBUILD는 KB식 추정 시세가 아니라 <b>국토부 실거래 신고가</b>를 기준으로 삼습니다 — 방어 가능한 숫자만 붙입니다. 연동 완료 시 평형별로 표기됩니다.</div>'
       +'</div>'
 
       +'<div class="card">'
         +'<h2>사업 정보</h2>'
-        +'<div class="rows">'
+        +'<div class="rows" style="margin-top:6px;">'
           +'<div class="row"><span class="rk">사업유형</span><span class="rv">'+esc(z.type||'—')+'</span></div>'
           +'<div class="row"><span class="rk">위치</span><span class="rv">'+esc(z.region||'—')+'</span></div>'
           +(z.address?'<div class="row"><span class="rk">주소</span><span class="rv">'+esc(z.address)+'</span></div>':'')
@@ -191,7 +249,9 @@
 
       +'<div class="card angle">'+angle+'</div>'
 
-      +'<p class="disclaim">CLEARBUILD는 정보·계산 서비스이며, 부동산 중개·투자 권유·조합원 모집을 하지 않습니다. 실거래는 국토교통부 신고 자료, 위치는 공개 주소 기준입니다. 확정 분담금은 조합 총회 자료를 따르며, 관계자 정정 요청은 clearbuild@example.com 으로 받습니다.</p>';
+      +'<div class="trust"><b>데이터 출처</b> — 위치: 공개 주소 지오코딩 · 실거래: 국토교통부 신고 자료(연동 준비) · 확정 분담금: 조합 총회 자료 기준. 숫자에는 항상 출처와 신뢰등급을 붙입니다.</div>'
+
+      +'<p class="disclaim">CLEARBUILD는 정보·계산 서비스이며 부동산 중개·투자 권유·조합원 모집을 하지 않습니다. 관계자 공식자료 정정 요청은 clearbuild@example.com 으로 받습니다.</p>';
 
     document.getElementById('app').innerHTML=html;
     if(window.umami) window.umami.track('detail-view',{ name:z.name, deep:deep });
@@ -202,7 +262,7 @@
         var ll=new naver.maps.LatLng(z.lat,z.lng);
         var map=new naver.maps.Map('miniMap',{center:ll,zoom:precise?16:13,scrollWheel:false,draggable:true,
           logoControl:false,mapDataControl:false,scaleControl:false,zoomControl:true,zoomControlOptions:{position:naver.maps.Position.TOP_RIGHT}});
-        var color=deep?'#1A3F7A':'#8494AA', w=deep?32:26, h=deep?40:32, dot=deep?6:5;
+        var color=deep?'#1A3F7A':'#8494AA', w=deep?34:28, h=deep?42:34, dot=deep?6:5;
         var pin='<svg width="'+w+'" height="'+h+'" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 1px 2px rgba(15,34,68,.35));"><path d="M13 0C5.8 0 0 5.8 0 13c0 8.7 13 21 13 21s13-12.3 13-21C26 5.8 20.2 0 13 0z" fill="'+color+'" stroke="#fff" stroke-width="1.6"/><circle cx="13" cy="13" r="'+dot+'" fill="#fff"/></svg>';
         new naver.maps.Marker({position:ll,map:map,icon:{content:pin,anchor:new naver.maps.Point(w/2,h)}});
       }
