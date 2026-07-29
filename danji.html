@@ -444,6 +444,11 @@
           </div>
         </div>
         <form class="cb-fund-form" id="fundForm" hidden>
+          <div style="margin-bottom:10px;">
+            <span style="font-size:12.5px; font-weight:600; color:var(--cb-ink-500); display:block; margin-bottom:6px;">나는</span>
+            <label style="margin-right:16px; font-size:14px; cursor:pointer;"><input type="radio" name="fundOwner" value="매수희망자" checked> 매수 희망자</label>
+            <label style="font-size:14px; cursor:pointer;"><input type="radio" name="fundOwner" value="조합원"> 보유 조합원</label>
+          </div>
           <label for="fundContact" style="font-size:12.5px; font-weight:600; color:var(--cb-ink-500);">연락처 (이메일 또는 휴대폰)</label>
           <div class="row">
             <input id="fundContact" inputmode="email" placeholder="you@example.com 또는 010-0000-0000" autocomplete="off" />
@@ -532,6 +537,7 @@
             <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">CLEARBUILD (오원기 · 정휘준) · <a href="mailto:ellemercury88@gmail.com">ellemercury88@gmail.com</a></div>
           </div>
         </div>
+        <p style="font-size:12.5px; color:var(--cb-ink-500); background:var(--cb-navy-50); border-radius:var(--radius-md); padding:10px 14px; margin-bottom:12px;"><b>조합·정비업체 관계자께</b> — 공식 총회·관리처분 자료를 제공해주시면 해당 단지를 <b>A등급(공시 확정)</b>으로 반영합니다. 추정이 조합 발표보다 높든 낮든 다투지 않고, <b>공식 숫자가 있으면 그대로 씁니다.</b> 정정·반영 요청 clearbuild@example.com</p>
         <p class="disclaim">본 페이지는 매수·매도·보유 <b>판단에 필요한 숫자와 출처</b>를 제공할 뿐, 특정 행위를 권유하지 않습니다. CLEARBUILD는 대출·매물을 <b>중개·모집하지 않습니다.</b> 분담금은 총회 의결 전 확정되지 않으며, 표시 수치는 신뢰등급(A/B/C)과 출처를 전제로 한 추정입니다.</p>
       </div>
     </footer>
@@ -801,8 +807,9 @@
     var btn=document.getElementById('fundSubmit'); btn.disabled=true; btn.textContent='신청 중…';
     var c=parseInt(document.getElementById('costRange').value,10);
     var cur=round100(BASE_BUNDAM*(1+SENS*(c-BASE_COST)));
-    var payload={ complex:'느티마을 3단지', owner_type:'매수희망자',
-      interest:'[자금조달연결] 유형='+activeType+' · 예상분담금='+fmtCash(cur), email:isEmail?v:null, phone:isEmail?null:v, ref:REF };
+    var _own=(document.querySelector('input[name="fundOwner"]:checked')||{}).value||'매수희망자';
+    var payload={ complex:'느티마을 3단지', owner_type:_own,
+      interest:'[자금조달연결] 유형='+activeType+' · '+_own+' · 예상분담금='+fmtCash(cur), email:isEmail?v:null, phone:isEmail?null:v, ref:REF };
     function done(m,bad){ btn.disabled=false; btn.textContent='신청'; fundMsg.textContent=m; fundMsg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
     if(!sb){ done('일시 오류 — 저장 서버에 연결하지 못했어요. 잠시 후 다시 시도해 주세요.', true); return; }
     var settled=false, to=setTimeout(function(){ if(settled) return; settled=true; done('응답이 지연됩니다 — 네트워크 확인 후 다시 시도해 주세요.', true); }, 8000);
