@@ -270,6 +270,8 @@
   @keyframes cb-enter{to{opacity:1; transform:none;}}
   @media(prefers-reduced-motion:reduce){ .enter{animation:none; opacity:1; transform:none;} }
   </style>
+  <!-- 커버리지 지도용 NAVER Maps (사전 지오코딩 완료 → geocoder 서브모듈 불필요) -->
+  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=a4kxw68xe0"></script>
 </head>
 <body>
 
@@ -486,6 +488,26 @@
             <span class="cb-grade cb-grade-c">C</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ═══ 우리 데이터 커버리지 (S4-3 커버리지 증명 지도) ═══ -->
+    <section style="padding-top:0;">
+      <div class="cb-container">
+        <div class="sec-head">
+          <h2>우리 데이터 커버리지</h2>
+          <div class="sub">느티마을 3단지는 우리가 깊게 판 단지 중 하나입니다. 전체 커버리지를 <b>숨기지 않고</b> 공개합니다 — 넓이가 아니라 깊이의 정직함이 우리 자산입니다.</div>
+        </div>
+        <div class="cb-card" style="padding:0; overflow:hidden;">
+          <div id="coverageMap" style="width:100%; height:380px; background:var(--cb-surface-2);"></div>
+          <div style="display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center; padding:14px var(--sp-5); border-top:1px solid var(--cb-line-100); font-size:12.5px; color:var(--cb-ink-500);">
+            <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#1A3F7A;display:inline-block;"></span> 깊은 계산 <b id="cov-deep" class="cb-num" style="color:var(--cb-ink-900);">3</b></span>
+            <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:#8494AA;display:inline-block;"></span> 위치 디렉토리 <b id="cov-all" class="cb-num" style="color:var(--cb-ink-900);">118</b></span>
+            <span>· 분담금 확인 <b class="cb-num" style="color:var(--cb-ink-700);">48</b> <span style="color:var(--cb-ink-400);">(VOC·문서 기준)</span></span>
+            <span style="margin-left:auto; color:var(--cb-ink-400);">경쟁 지도는 채움율을 숨깁니다 — 우리는 공개합니다</span>
+          </div>
+        </div>
+        <p class="disclaim" style="margin-top:10px;">핀을 누르면 단지 상태가 보입니다. 데이터 준비 중인 단지는 "확정값 알림"으로 수요를 받아 다음 깊이 롤아웃 우선순위를 정합니다.</p>
       </div>
     </section>
 
@@ -801,7 +823,7 @@
     var v=(alertContact.value||'').trim();
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ alertMsg.textContent='이메일 형식을 확인해 주세요.'; alertMsg.style.color='var(--cb-danger)'; return; }
     var btn=document.getElementById('alertSubmit'); btn.disabled=true; btn.textContent='구독 중…';
-    var payload={ complex:'느티마을 3단지', owner_type:'매수희망자', interest:'[확정알림] 유형='+activeType, email:v, phone:null, ref:REF };
+    var payload={ complex:(window.__alertComplex||'느티마을 3단지'), owner_type:'매수희망자', interest:'[확정알림] 유형='+activeType, email:v, phone:null, ref:REF };
     function done(m,bad){ btn.disabled=false; btn.textContent='구독'; alertMsg.textContent=m; alertMsg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
     if(!sb){ done('일시 오류 — 저장 서버에 연결하지 못했어요. 잠시 후 다시 시도해 주세요.', true); return; }
     var settled=false, to=setTimeout(function(){ if(settled) return; settled=true; done('응답이 지연됩니다 — 네트워크 확인 후 다시 시도해 주세요.', true); }, 8000);
@@ -827,7 +849,37 @@
   syncRange();
   if(activeType !== 'remodeling') selectType(activeType); else calc();
   document.addEventListener('click', function(e){ var tip=document.getElementById('tlTip'); if(tip && e.target && e.target.closest && !e.target.closest('.tl-bar')) tip.hidden=true; });
-  window.addEventListener('load', function(){ if(window.umami) window.umami.track('danji-view', { ref:REF }); });
+  /* ───────────── S4-3: 커버리지 증명 지도 ───────────── */
+  function cbAlertFor(){ window.__alertComplex=window.__pinName||null; var f=document.getElementById('alertForm'); if(f){ f.hidden=false; var i=document.getElementById('alertContact'); if(i) i.focus(); f.scrollIntoView({behavior:'smooth',block:'center'}); } }
+  function initCoverage(){
+    if(!(window.naver && naver.maps && naver.maps.Map)) return setTimeout(initCoverage,300);
+    fetch('complexes.json').then(function(r){return r.json();}).then(function(arr){
+      if(!Array.isArray(arr)) arr=arr.complexes||arr.zones||[];
+      var pts=arr.filter(function(z){return z.lat&&z.lng;});
+      if(!pts.length) return;
+      var map=new naver.maps.Map('coverageMap',{zoom:9,center:new naver.maps.LatLng(37.4,127.0),scrollWheel:false});
+      var b=new naver.maps.LatLngBounds(), deep=0;
+      var iw=new naver.maps.InfoWindow({maxWidth:230,borderColor:'#DDE3EC',borderWidth:1,disableAnchor:true,backgroundColor:'#fff'});
+      pts.forEach(function(z){
+        var isDeep=!!z.hasBundam; if(isDeep) deep++;
+        var ll=new naver.maps.LatLng(z.lat,z.lng); b.extend(ll);
+        var sz=isDeep?14:10, color=isDeep?'#1A3F7A':'#8494AA';
+        var m=new naver.maps.Marker({position:ll,map:map,icon:{content:'<div style="width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:'+color+';border:2px solid #fff;box-shadow:0 1px 3px rgba(15,34,68,.35);"></div>',anchor:new naver.maps.Point(sz/2+2,sz/2+2)}});
+        naver.maps.Event.addListener(m,'click',function(){
+          window.__pinName=z.name;
+          var body=isDeep
+            ? '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#176B43;font-weight:600;">깊은 계산 데이터 있음</span><br><a href="/danji.html" style="color:#2255A4;">계산 예시 보기 →</a>'
+            : '<b>'+z.name+'</b><br>'+(z.region||'')+' · '+(z.type||'')+'<br><span style="color:#5D6B80;">데이터 준비 중</span><br><a href="#" onclick="cbAlertFor();return false;" style="color:#2255A4;">확정값 알림 받기 →</a>';
+          iw.setContent('<div style="padding:10px 12px;font-size:13px;line-height:1.55;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#333D4E;">'+body+'</div>');
+          iw.open(map,m);
+        });
+      });
+      try{ map.fitBounds(b); }catch(e){}
+      var cd=document.getElementById('cov-deep'); if(cd) cd.textContent=deep;
+      var ca=document.getElementById('cov-all'); if(ca) ca.textContent=pts.length;
+    }).catch(function(){});
+  }
+  window.addEventListener('load', function(){ if(window.umami) window.umami.track('danji-view', { ref:REF }); initCoverage(); });
   </script>
 </body>
 </html>
