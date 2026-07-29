@@ -503,11 +503,11 @@
           </div>
           <div>
             <div class="cb-label" style="text-transform:none;">검증 방법</div>
-            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">단지별 수작업 검증 후 신뢰등급 A(공시확정)/B(시장추정)/C(모델추정) 부여. C등급은 계산에서 제외.</div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">단지별 수작업 검증 후 신뢰등급 A(공시확정)/B(시장추정)/C(모델추정) 부여. C등급(모델·가정값)은 배지로 분리 표기하고, 사용자가 수정 가능한 가정으로만 계산에 반영.</div>
           </div>
           <div>
             <div class="cb-label" style="text-transform:none;">팀 · 연락처</div>
-            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">CLEARBUILD (오원기 · 정휘준) · <a href="mailto:clearbuild@example.com">clearbuild@example.com</a></div>
+            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">CLEARBUILD (오원기 · 정휘준) · <a href="mailto:ellemercury88@gmail.com">ellemercury88@gmail.com</a></div>
           </div>
         </div>
         <p class="disclaim">본 페이지는 매수·매도·보유 <b>판단에 필요한 숫자와 출처</b>를 제공할 뿐, 특정 행위를 권유하지 않습니다. CLEARBUILD는 대출·매물을 <b>중개·모집하지 않습니다.</b> 분담금은 총회 의결 전 확정되지 않으며, 표시 수치는 신뢰등급(A/B/C)과 출처를 전제로 한 추정입니다.</p>
@@ -663,7 +663,7 @@
   }
 
   /* ───────────── S2 T4/T5: 예측공시 박제 (localStorage 불변 기록) ───────────── */
-  var calcDoneFired = false;
+  var calcDoneFired = false, userTouched = false;
   function nowStamp(){
     var d = new Date(); function p(n){ return (n<10?'0':'')+n; }
     return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes())+' KST';
@@ -716,6 +716,7 @@
       var ps=document.getElementById('pledgeStamp'); if(ps) ps.textContent='리모델링에서만 예측공시 제공';
       var pb=document.getElementById('pledgeStampBtn'); if(pb) pb.hidden=true;
       var pc=document.getElementById('pledgeCompare'); if(pc) pc.hidden=true;
+      var plk=document.getElementById('pledgeBasisLink'); if(plk) plk.hidden=true;
       renderTimelineEmpty(t.label);
       return;
     }
@@ -733,7 +734,7 @@
     setOut('out-total', total > 0 ? eok(total) : '호가 입력 시');
     setOut('out-bep', total > 0 ? eok(total) : '—');
     renderPledge(bundam);
-    if(total>0 && !calcDoneFired){ calcDoneFired=true; if(window.umami) window.umami.track('danji-calc-done', { ref:REF }); }
+    if(total>0 && userTouched && !calcDoneFired){ calcDoneFired=true; if(window.umami) window.umami.track('danji-calc-done', { ref:REF }); }
 
     // 시점별 필요현금 버킷 — 잔차를 잔금/분담금잔금에 흡수해 합계 = 총투입비 정확히 일치.
     var contract = round100(askMan*0.10);
@@ -751,7 +752,7 @@
   }
 
   var _debounce;
-  function recalc(){ clearTimeout(_debounce); _debounce = setTimeout(calc, 120); }
+  function recalc(){ userTouched=true; clearTimeout(_debounce); _debounce = setTimeout(calc, 120); }
 
   range.addEventListener('input', function(){ syncRange(); recalc(); });
   ask.addEventListener('input', function(){
@@ -767,12 +768,13 @@
   var fundForm=document.getElementById('fundForm'), fundMsg=document.getElementById('fundMsg'), fundContact=document.getElementById('fundContact');
   document.getElementById('ctaFund').addEventListener('click', function(){
     fundForm.hidden=!fundForm.hidden;
-    if(!fundForm.hidden){ fundContact.focus(); if(window.umami) window.umami.track('danji-cta-fund', { ref:REF, type:activeType }); }
+    if(!fundForm.hidden){ if(alertForm) alertForm.hidden=true; fundContact.focus(); if(window.umami) window.umami.track('danji-cta-fund', { ref:REF, type:activeType }); }
   });
   fundForm.addEventListener('submit', function(e){
     e.preventDefault();
     var v=(fundContact.value||'').trim();
-    if(v.length<5){ fundMsg.textContent='연락처를 확인해 주세요.'; fundMsg.style.color='var(--cb-danger)'; return; }
+    var okC=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)||/^01[016789]-?\d{3,4}-?\d{4}$/.test(v);
+    if(!okC){ fundMsg.textContent='이메일 또는 휴대폰 형식을 확인해 주세요.'; fundMsg.style.color='var(--cb-danger)'; return; }
     var isEmail=v.indexOf('@')>-1;
     var btn=document.getElementById('fundSubmit'); btn.disabled=true; btn.textContent='신청 중…';
     var c=parseInt(document.getElementById('costRange').value,10);
@@ -780,16 +782,14 @@
     var payload={ complex:'느티마을 3단지', owner_type:'매수희망자',
       interest:'[자금조달연결] 유형='+activeType+' · 예상분담금='+fmtCash(cur), email:isEmail?v:null, phone:isEmail?null:v, ref:REF };
     function done(m,bad){ btn.disabled=false; btn.textContent='신청'; fundMsg.textContent=m; fundMsg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
-    if(sb){
-      sb.from('reservations').insert(payload).then(function(res){
-        if(res.error){ done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); return; }
-        if(window.umami) window.umami.track('danji-fund-request', { ref:REF, type:activeType });
-        fundContact.value=''; done('신청 접수됐습니다. (수요 확인용 · 중개 아님)', false);
-      });
-    } else {
-      if(window.umami) window.umami.track('danji-fund-request', { ref:REF, type:activeType, offline:1 });
-      done('신청 접수됐습니다.', false);
-    }
+    if(!sb){ done('일시 오류 — 저장 서버에 연결하지 못했어요. 잠시 후 다시 시도해 주세요.', true); return; }
+    var settled=false, to=setTimeout(function(){ if(settled) return; settled=true; done('응답이 지연됩니다 — 네트워크 확인 후 다시 시도해 주세요.', true); }, 8000);
+    sb.from('reservations').insert(payload).then(function(res){
+      if(settled) return; settled=true; clearTimeout(to);
+      if(res.error){ done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); return; }
+      if(window.umami) window.umami.track('danji-fund-request', { ref:REF, type:activeType });
+      fundContact.value=''; done('신청 접수됐습니다. (수요 확인용 · 중개 아님)', false);
+    }, function(){ if(settled) return; settled=true; clearTimeout(to); done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); });
   });
   var alertForm=document.getElementById('alertForm'), alertMsg=document.getElementById('alertMsg'), alertContact=document.getElementById('alertContact');
   document.getElementById('ctaAlert').addEventListener('click', function(){
@@ -799,24 +799,25 @@
   alertForm.addEventListener('submit', function(e){
     e.preventDefault();
     var v=(alertContact.value||'').trim();
-    if(v.indexOf('@')<1){ alertMsg.textContent='이메일을 확인해 주세요.'; alertMsg.style.color='var(--cb-danger)'; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ alertMsg.textContent='이메일 형식을 확인해 주세요.'; alertMsg.style.color='var(--cb-danger)'; return; }
     var btn=document.getElementById('alertSubmit'); btn.disabled=true; btn.textContent='구독 중…';
     var payload={ complex:'느티마을 3단지', owner_type:'매수희망자', interest:'[확정알림] 유형='+activeType, email:v, phone:null, ref:REF };
     function done(m,bad){ btn.disabled=false; btn.textContent='구독'; alertMsg.textContent=m; alertMsg.style.color=bad?'var(--cb-danger)':'var(--cb-success)'; }
-    if(sb){
-      sb.from('reservations').insert(payload).then(function(res){
-        if(res.error){ done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); return; }
-        if(window.umami) window.umami.track('danji-alert-request', { ref:REF, type:activeType });
-        alertContact.value=''; done('구독 완료 — 확정값 나오면 알려드릴게요.', false);
-      });
-    } else { if(window.umami) window.umami.track('danji-alert-request', { ref:REF, type:activeType, offline:1 }); done('구독 완료.', false); }
+    if(!sb){ done('일시 오류 — 저장 서버에 연결하지 못했어요. 잠시 후 다시 시도해 주세요.', true); return; }
+    var settled=false, to=setTimeout(function(){ if(settled) return; settled=true; done('응답이 지연됩니다 — 네트워크 확인 후 다시 시도해 주세요.', true); }, 8000);
+    sb.from('reservations').insert(payload).then(function(res){
+      if(settled) return; settled=true; clearTimeout(to);
+      if(res.error){ done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); return; }
+      if(window.umami) window.umami.track('danji-alert-request', { ref:REF, type:activeType });
+      alertContact.value=''; done('구독 완료 — 확정값 나오면 알려드릴게요.', false);
+    }, function(){ if(settled) return; settled=true; clearTimeout(to); done('저장 실패 — 잠시 후 다시 시도해 주세요.', true); });
   });
 
   /* init */
   // 프리필: ?ask= & cost= & type= (발표 시연·중개사 링크)
   (function(){
     var q=new URLSearchParams(location.search);
-    var qa=q.get('ask'); if(qa && /^[0-9,]+$/.test(qa)) ask.value=Number(qa.replace(/,/g,'')).toLocaleString();
+    var qa=q.get('ask'); if(qa && /^\d[\d,]{0,9}$/.test(qa)) ask.value=Number(qa.replace(/,/g,'')).toLocaleString();
     var qc=parseInt(q.get('cost'),10); if(!isNaN(qc) && qc>=+range.min && qc<=+range.max) range.value=qc;
     var qt=q.get('type'); if(qt && typeById(qt)) activeType=qt;
   })();
@@ -824,7 +825,8 @@
   if(_c2c) _c2c.addEventListener('click', function(){ ask.scrollIntoView({behavior:'smooth', block:'center'}); ask.focus(); });
   renderTypeSeg();
   syncRange();
-  calc();
+  if(activeType !== 'remodeling') selectType(activeType); else calc();
+  document.addEventListener('click', function(e){ var tip=document.getElementById('tlTip'); if(tip && e.target && e.target.closest && !e.target.closest('.tl-bar')) tip.hidden=true; });
   window.addEventListener('load', function(){ if(window.umami) window.umami.track('danji-view', { ref:REF }); });
   </script>
 </body>
