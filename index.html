@@ -378,15 +378,19 @@
     }
     .btn-white:hover { background: #f0f4ff; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(0,0,0,0.25); }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--dark);
-      color: rgba(255,255,255,0.4);
-      text-align: center;
-      padding: 28px 24px;
-      font-size: 12px;
-    }
-    footer span { color: rgba(255,255,255,0.6); }
+    /* ── FOOTER (다크 · danji 클린 푸터 톤) ── */
+    footer { background:#0F2244; color:rgba(255,255,255,0.55); padding:48px 24px 40px; font-size:12.5px; text-align:left; }
+    footer .foot-wrap { max-width:1152px; margin:0 auto; }
+    footer .ft-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:18px; }
+    @media(max-width:680px){ footer .ft-grid { grid-template-columns:1fr; gap:16px; } }
+    footer .ft-h { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,0.85); }
+    footer .ft-grid p { color:rgba(255,255,255,0.5); line-height:1.6; margin-top:6px; }
+    footer .ft-grid p b { color:rgba(255,255,255,0.82); font-weight:600; }
+    footer .ft-disc { font-size:11.5px; color:rgba(255,255,255,0.4); line-height:1.6; padding-top:16px; border-top:1px solid rgba(255,255,255,0.12); }
+    footer .ft-disc b { color:rgba(255,255,255,0.62); }
+    footer .ft-bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.12); }
+    footer .ft-bar .fb-brand { font-weight:800; color:#fff; letter-spacing:-.01em; }
+    footer .ft-bar a { color:rgba(255,255,255,0.72); }
 
     /* ── TABS ── */
     .tabbar {
@@ -1194,11 +1198,18 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-contact">
-    <a href="mailto:ellemercury88@gmail.com" class="footer-link">✉️ ellemercury88@gmail.com</a>
-    <button type="button" class="footer-link footer-share" id="share-btn">🔗 링크 복사</button>
+  <div class="foot-wrap">
+    <div class="ft-grid">
+      <div><div class="ft-h">데이터 출처</div><p>조합 총회자료·정비계획·권리변동계획, 공개 실거래·언론(헤럴드경제 등), 118개 단지 커뮤니티 VOC 15.4만 건.</p></div>
+      <div><div class="ft-h">검증 · 신뢰등급</div><p>단지별 수작업 검증 후 <b>A 공시확정 · B 시장추정 · C 모델추정</b> 부여. C는 배지로 분리, 수정 가능한 가정으로만 반영.</p></div>
+      <div><div class="ft-h">관계자 정정 채널</div><p>조합·정비업체 공식 자료를 주시면 해당 단지를 <b>A등급(공시 확정)</b>으로 반영합니다. 공식 숫자가 있으면 그대로 씁니다.</p></div>
+    </div>
+    <p class="ft-disc">CLEARBUILD는 매수·매도·보유 판단에 필요한 <b>숫자와 출처</b>를 제공할 뿐 특정 행위를 권유하지 않으며, 대출·매물을 <b>중개·모집하지 않습니다.</b> 분담금은 총회 의결 전 확정되지 않으며, 표시 수치는 신뢰등급(A/B/C)·출처를 전제로 한 추정입니다.</p>
+    <div class="ft-bar">
+      <span><span class="fb-brand">CLEARBUILD</span> · 정비사업 의사결정 도구 · © 2026</span>
+      <span class="footer-contact"><a href="mailto:ellemercury88@gmail.com" class="footer-link">ellemercury88@gmail.com</a><button type="button" class="footer-link footer-share" id="share-btn">링크 복사</button></span>
+    </div>
   </div>
-  <p><span>CLEARBUILD</span> &nbsp;·&nbsp; 정비사업 의사결정 도구 &nbsp;·&nbsp; © 2026</p>
 </footer>
 
 <!-- NAVER 지도 (사전신청 단지 맵핑) -->

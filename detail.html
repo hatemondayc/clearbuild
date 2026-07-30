@@ -162,6 +162,11 @@
   .loading .l{max-width:360px; margin:0 auto 12px; height:14px; border-radius:7px; background:linear-gradient(90deg,var(--cb-line-100) 0%,var(--cb-line-200) 50%,var(--cb-line-100) 100%); background-size:200% 100%; animation:shimmer 1.6s linear infinite;}
   .loading .l.s{max-width:220px;}
   @media(max-width:560px){ .tiles{grid-template-columns:1fr;} .hero h1{font-size:23px;} .hero .mark{width:46px;height:46px;} }
+  /* footer (danji 톤 통일) */
+  .ft{border-top:1px solid var(--cb-line-200); margin-top:10px; padding:22px 0 44px;}
+  .ft .wrap{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--cb-ink-400);}
+  .ft b{font-weight:800; color:var(--cb-navy-700); letter-spacing:-.01em;}
+  .ft a{color:var(--cb-ink-500);}
   </style>
 
   <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=a4kxw68xe0"></script>
@@ -175,6 +180,11 @@
   </div></div>
 
   <main class="wrap" id="app"><div class="loading"><div class="l"></div><div class="l s"></div></div></main>
+
+  <footer class="ft"><div class="wrap">
+    <span><b>CLEARBUILD</b> · 정비사업 판단·데이터 인프라 · © 2026</span>
+    <a href="mailto:ellemercury88@gmail.com">ellemercury88@gmail.com</a>
+  </div></footer>
 
   <script>
   var SUPABASE_URL='https://lynmnuftfybbegdxjfbz.supabase.co';

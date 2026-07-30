@@ -309,6 +309,13 @@
   .cb-foot-bar{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-top:18px; padding-top:16px; border-top:1px solid var(--cb-line-100);}
   .cb-foot-bar .cb-foot-brand{font-weight:800; color:var(--cb-navy-700); letter-spacing:-.01em;}
   .cb-foot-bar a{color:var(--cb-ink-500);}
+  .cb-danji-head{padding-top:var(--sp-6);}
+  .cb-danji-name{font-size:clamp(22px,3vw,28px); font-weight:800; letter-spacing:-.025em; color:var(--cb-ink-900); line-height:1.2;}
+  .cb-danji-sub{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin-top:9px; font-size:14px; color:var(--cb-ink-500);}
+  .cb-danji-badges{display:inline-flex; gap:6px;}
+  .cb-danji-type{font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; background:var(--cb-navy-100); color:var(--cb-navy-700);}
+  .cb-danji-stage{font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; background:var(--cb-grade-a-bg); color:var(--cb-grade-a); border:1px solid var(--cb-grade-a-line);}
+  .cb-div{border:0; border-top:1px solid var(--cb-line-200); margin:var(--sp-5) 0 0;}
   .disclaim{margin-top:var(--sp-4); font-size:12px; color:var(--cb-ink-400); line-height:1.6;}
   .enter{opacity:0; transform:translateY(6px); animation:cb-enter var(--dur-3) var(--ease) forwards;}
   @keyframes cb-enter{to{opacity:1; transform:none;}}
@@ -323,11 +330,6 @@
   <header class="cb-topbar">
     <div class="cb-container row">
       <a class="cb-brand" href="/">CLEARBUILD<span> · 단지</span></a>
-      <div class="cb-complex">
-        <span class="name" id="complexName">느티마을 3단지</span>
-        <span class="meta" id="complexMeta">분당 정자동 · 전용 59→84㎡ · 리모델링</span>
-      </div>
-      <span class="cb-stage" id="stageBadge">이주 완료</span>
       <div class="spacer"></div>
       <!-- 사업유형 셀렉터 (분기 선반영) -->
       <div class="cb-seg" role="group" aria-label="사업유형 선택" id="typeSeg"></div>
@@ -336,9 +338,20 @@
   </header>
 
   <main>
+    <!-- ═══ 단지 헤더 (단지명·정확한 위치·진행상황) ═══ -->
+    <div class="cb-container">
+      <div class="cb-danji-head enter">
+        <div class="cb-danji-name" id="complexName">느티마을 3단지</div>
+        <div class="cb-danji-sub">
+          <span id="complexMeta">분당 정자동 · 전용 59→84㎡</span>
+          <span class="cb-danji-badges"><span class="cb-danji-type">리모델링</span><span class="cb-danji-stage" id="stageBadge">이주 완료</span></span>
+        </div>
+      </div>
+      <hr class="cb-div">
+    </div>
     <!-- ═══ 히어로 + 입력 ═══ -->
     <div class="cb-container">
-      <div class="hero enter">
+      <div class="hero">
         <h1 id="heroTitle">이 매물, 지금 사면 <em>언제 얼마</em>가 필요할까?</h1>
         <p class="lede">호가만 보면 반쪽 가격표입니다. 분담금·금융비용까지 더한 총투입비와, 계약부터 입주까지 시점별 필요현금을 근거·출처와 함께 계산합니다.</p>
         <div class="cb-demo-badge">심층 계산 데모 · <b>느티마을 3단지</b> — 전체 정비사업장은 아래 <b>커버리지 지도</b>에서</div>
