@@ -175,6 +175,10 @@
   .br-label{font-size:14px; font-weight:600; color:var(--cb-ink-700); display:inline-flex; align-items:center; gap:6px;}
   .br-hint{font-size:11.5px; color:var(--cb-ink-400); line-height:1.4;}
   .br-val{font-size:18px; font-weight:700; color:var(--cb-ink-900); white-space:nowrap; font-variant-numeric:tabular-nums; letter-spacing:-.01em;}
+  /* danji 실거래 평형 행(반응형) */
+  .dj-rr{display:grid; grid-template-columns:1fr .7fr 1.2fr 1fr; gap:8px; align-items:baseline; padding:11px 2px; border-bottom:1px solid var(--cb-line-100); font-size:14px;}
+  .dj-rr.nb{border-bottom:none;}
+  @media(max-width:560px){ .dj-rr{grid-template-columns:1fr 1fr; row-gap:3px;} }
   .cb-card .top{display:flex; align-items:flex-start; justify-content:space-between; gap:8px;}
   .cb-card .top .cb-label{text-transform:none; letter-spacing:.02em; font-size:12.5px;}
   .cb-card .val{margin-top:var(--sp-3);}
@@ -398,13 +402,13 @@
             <h2>실거래가 · 느티마을 3단지</h2>
             <div class="sub">국토부 실거래가 공개시스템(rt.molit.go.kr) · 아파트 매매 · 최근 1년</div>
           </div>
-          <div style="display:grid; grid-template-columns:1fr .7fr 1.2fr 1fr; gap:8px; align-items:baseline; padding:11px 2px; border-bottom:1px solid var(--cb-line-100); font-size:14px;">
+          <div class="dj-rr">
             <span style="color:var(--cb-ink-900); font-weight:600;">전용 59㎡</span>
             <span style="color:var(--cb-ink-400); font-size:12.5px;">4건</span>
             <span style="color:var(--cb-ink-700);">중앙 <b class="cb-num" style="color:var(--cb-navy-700); font-size:15px;">20.1억</b></span>
             <span style="color:var(--cb-ink-500); font-size:12.5px; text-align:right;">최근 <span class="cb-num">20.1억</span></span>
           </div>
-          <div style="display:grid; grid-template-columns:1fr .7fr 1.2fr 1fr; gap:8px; align-items:baseline; padding:11px 2px; font-size:14px;">
+          <div class="dj-rr nb">
             <span style="color:var(--cb-ink-900); font-weight:600;">전용 67㎡</span>
             <span style="color:var(--cb-ink-400); font-size:12.5px;">3건</span>
             <span style="color:var(--cb-ink-700);">중앙 <b class="cb-num" style="color:var(--cb-navy-700); font-size:15px;">19.7억</b></span>
