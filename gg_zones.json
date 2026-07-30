@@ -3,7 +3,13 @@
   "source": "경기데이터드림 GenrlimprvBizpropls",
   "as_of": "2026-07-30",
   "count": 533,
-  "geocoded": 0
+  "geocoded": 533,
+  "geo_src": {
+   "dong": 143,
+   "addr": 375,
+   "sigun": 9,
+   "kw": 6
+  }
  },
  "zones": [
   {
@@ -14,9 +20,9 @@
    "grp": "done",
    "addr": "경기도 고양시 성사동 715번지",
    "hshld": 1260,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.654636,
+   "lng": 126.841234,
+   "geo": "dong"
   },
   {
    "name": "관산Ⅱ-1구역",
@@ -26,9 +32,9 @@
    "grp": "init",
    "addr": "경기도 고양시 덕양구 관산동 178-57번지 일원",
    "hshld": 435,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.68829,
+   "lng": 126.867568,
+   "geo": "addr"
   },
   {
    "name": "행신Ⅰ-1구역",
@@ -38,9 +44,9 @@
    "grp": "mid",
    "addr": "경기도 고양시 덕양구 행신동 222번지 일원",
    "hshld": 662,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.623576,
+   "lng": 126.845311,
+   "geo": "addr"
   },
   {
    "name": "일산Ⅰ-2구역",
@@ -50,9 +56,9 @@
    "grp": "mid",
    "addr": "경기도 고양시 일산동 960-16번지 일원",
    "hshld": 94,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.686644,
+   "lng": 126.765203,
+   "geo": "addr"
   },
   {
    "name": "고양 Ⅰ-1구역",
@@ -62,9 +68,9 @@
    "grp": "mid",
    "addr": "경기도 고양시 덕양구 고양동 22-2번지 일원(제일복지회관 주변)",
    "hshld": 196,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.708435,
+   "lng": 126.901258,
+   "geo": "addr"
   },
   {
    "name": "고양Ⅰ-2구역",
@@ -74,9 +80,9 @@
    "grp": "mid",
    "addr": "경기도 고양시 덕양구 고양동 92-1번지 일원(한양연립 주변)",
    "hshld": 160,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.704292,
+   "lng": 126.898889,
+   "geo": "addr"
   },
   {
    "name": "행신 Ⅱ-1구역",
@@ -86,9 +92,9 @@
    "grp": "mid",
    "addr": "경기도 고양시 행신동 173-1번지일원(행신지구 재건축 주변)",
    "hshld": 267,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.620477,
+   "lng": 126.844521,
+   "geo": "addr"
   },
   {
    "name": "능곡 2-1",
@@ -98,9 +104,9 @@
    "grp": "build",
    "addr": "경기도 고양시 덕양구 토당동 251-12번지 일원",
    "hshld": 534,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.624658,
+   "lng": 126.818189,
+   "geo": "dong"
   },
   {
    "name": "관산1차",
@@ -110,9 +116,9 @@
    "grp": "done",
    "addr": "경기도 고양시 관산동 178-52번지 일원",
    "hshld": 33,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.687988,
+   "lng": 126.862554,
+   "geo": "dong"
   },
   {
    "name": "일산Ⅱ-1구역(탄현주공)",
@@ -122,9 +128,9 @@
    "grp": "done",
    "addr": "경기도 고양시 탄현동 28번지 일원",
    "hshld": 33,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.69435,
+   "lng": 126.768452,
+   "geo": "dong"
   },
   {
    "name": "주교성사1단지",
@@ -134,9 +140,9 @@
    "grp": "done",
    "addr": "경기도 고양시 덕양구 성사동 869",
    "hshld": 1050,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.661058,
+   "lng": 126.839676,
+   "geo": "addr"
   },
   {
    "name": "주공8,9단지구역",
@@ -146,9 +152,9 @@
    "grp": "mid",
    "addr": "경기도 과천시 부림동 41번지 일원",
    "hshld": 2120,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.435428,
+   "lng": 126.999311,
+   "geo": "addr"
   },
   {
    "name": "주공7-2단지",
@@ -158,9 +164,9 @@
    "grp": "done",
    "addr": "경기도 과천시 별양동 3번지 일원",
    "hshld": 400,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.43183,
+   "lng": 126.997593,
+   "geo": "addr"
   },
   {
    "name": "주공12단지",
@@ -170,9 +176,9 @@
    "grp": "done",
    "addr": "경기도 과천시 갈현동 369 일원",
    "hshld": 44,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.409788,
+   "lng": 126.982492,
+   "geo": "dong"
   },
   {
    "name": "주공1단지",
@@ -182,9 +188,9 @@
    "grp": "done",
    "addr": "경기도 과천시 중앙동 37번지 일원",
    "hshld": 1062,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.433151,
+   "lng": 126.993456,
+   "geo": "dong"
   },
   {
    "name": "주공7-1단지",
@@ -194,9 +200,9 @@
    "grp": "done",
    "addr": "경기도 과천시 부림동 49번지 일원",
    "hshld": 722,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.433461,
+   "lng": 126.998612,
+   "geo": "dong"
   },
   {
    "name": "주공2단지",
@@ -206,9 +212,9 @@
    "grp": "done",
    "addr": "경기도 과천시 원문동 2, 별양동 8번지 일원",
    "hshld": 1620,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.418232,
+   "lng": 126.985693,
+   "geo": "addr"
   },
   {
    "name": "주공6단지",
@@ -218,9 +224,9 @@
    "grp": "done",
    "addr": "경기도 과천시 별양동 52번지 일원",
    "hshld": 1262,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.424234,
+   "lng": 126.993764,
+   "geo": "dong"
   },
   {
    "name": "주공4단지구역",
@@ -230,9 +236,9 @@
    "grp": "build",
    "addr": "경기도 과천시 별양동 7번지 일원",
    "hshld": 1110,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.426553,
+   "lng": 126.993988,
+   "geo": "addr"
   },
   {
    "name": "주암장군마을",
@@ -242,9 +248,9 @@
    "grp": "build",
    "addr": "경기도 과천시 주암동 63-9번지 일원",
    "hshld": 420,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.462859,
+   "lng": 127.033203,
+   "geo": "addr"
   },
   {
    "name": "주공10단지구역",
@@ -254,9 +260,9 @@
    "grp": "mid",
    "addr": "경기도 과천시 중앙동 67번지 일원",
    "hshld": 632,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.434186,
+   "lng": 126.994736,
+   "geo": "addr"
   },
   {
    "name": "주공5단지구역",
@@ -266,9 +272,9 @@
    "grp": "mid",
    "addr": "경기도 과천시 별양동 6번지 일원",
    "hshld": 800,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.429151,
+   "lng": 126.995733,
+   "geo": "addr"
   },
   {
    "name": "광명철산",
@@ -278,9 +284,9 @@
    "grp": "done",
    "addr": "경기도 광명시 철산동 510",
    "hshld": 1952,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.490749,
+   "lng": 126.867941,
+   "geo": "dong"
   },
   {
    "name": "광명삼각주",
@@ -290,9 +296,9 @@
    "grp": "done",
    "addr": "경기도 광명시 철산동 606",
    "hshld": 281,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.490749,
+   "lng": 126.867941,
+   "geo": "dong"
   },
   {
    "name": "광명신촌마을",
@@ -302,9 +308,9 @@
    "grp": "done",
    "addr": "경기도 광명시 소하동 4-1 일원",
    "hshld": 919,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.450073,
+   "lng": 126.893955,
+   "geo": "addr"
   },
   {
    "name": "철산주공13단지",
@@ -314,9 +320,9 @@
    "grp": "init",
    "addr": "경기도 광명시 nan",
    "hshld": 2460,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.478567,
+   "lng": 126.864648,
+   "geo": "sigun"
   },
   {
    "name": "하안주공5단지",
@@ -326,9 +332,9 @@
    "grp": "init",
    "addr": "경기도 광명시 nan",
    "hshld": 2049,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.478567,
+   "lng": 126.864648,
+   "geo": "sigun"
   },
   {
    "name": "하안주공8단지",
@@ -338,9 +344,9 @@
    "grp": "init",
    "addr": "경기도 광명시 nan",
    "hshld": 1680,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.478567,
+   "lng": 126.864648,
+   "geo": "sigun"
   },
   {
    "name": "철산주공8,9단지",
@@ -350,9 +356,9 @@
    "grp": "done",
    "addr": "경기도 광명시 철산2동 235",
    "hshld": 2064,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.482576,
+   "lng": 126.869846,
+   "geo": "addr"
   },
   {
    "name": "철산주공7단지",
@@ -362,9 +368,9 @@
    "grp": "done",
    "addr": "경기도 광명시 철산3동 233",
    "hshld": 599,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.477059,
+   "lng": 126.872551,
+   "geo": "dong"
   },
   {
    "name": "철산주공4단지",
@@ -374,9 +380,9 @@
    "grp": "done",
    "addr": "경기도 광명시 철산3동 452",
    "hshld": 470,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.477059,
+   "lng": 126.872551,
+   "geo": "dong"
   },
   {
    "name": "철산두산위브아파트",
@@ -386,9 +392,9 @@
    "grp": "done",
    "addr": "경기도 광명시 철산동 50번지 일대",
    "hshld": 517,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.490749,
+   "lng": 126.867941,
+   "geo": "dong"
   },
   {
    "name": "철산주공10,11단지",
@@ -398,9 +404,9 @@
    "grp": "build",
    "addr": "경기도 광명시 철산2동 105",
    "hshld": 1080,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.485556,
+   "lng": 126.868697,
+   "geo": "addr"
   },
   {
    "name": "철산주공12단지",
@@ -410,9 +416,9 @@
    "grp": "init",
    "addr": "경기도 광명시 nan",
    "hshld": 1800,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.478567,
+   "lng": 126.864648,
+   "geo": "sigun"
   },
   {
    "name": "하안주공3·4단지",
@@ -422,9 +428,9 @@
    "grp": "init",
    "addr": "경기도 광명시 nan",
    "hshld": 3556,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.478567,
+   "lng": 126.864648,
+   "geo": "sigun"
   },
   {
    "name": "광육재건축단지",
@@ -434,9 +440,9 @@
    "grp": "done",
    "addr": "경기도 광명시 광명6동 354-24",
    "hshld": 241,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.47107,
+   "lng": 126.84865,
+   "geo": "dong"
   },
   {
    "name": "광명5동(월드메르디앙아파트)",
@@ -446,9 +452,9 @@
    "grp": "done",
    "addr": "경기도 광명시 광명동 776-49",
    "hshld": 273,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.488628,
+   "lng": 126.862685,
+   "geo": "dong"
   },
   {
    "name": "철산주공2단지아파트",
@@ -458,9 +464,9 @@
    "grp": "done",
    "addr": "경기도 광명시 철산동 373",
    "hshld": 1000,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.490749,
+   "lng": 126.867941,
+   "geo": "dong"
   },
   {
    "name": "철산주공3단지아파트",
@@ -470,9 +476,9 @@
    "grp": "done",
    "addr": "경기도 광명시 철산동 552",
    "hshld": 1900,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.490749,
+   "lng": 126.867941,
+   "geo": "dong"
   },
   {
    "name": "하안주공본1단지아파트",
@@ -482,9 +488,9 @@
    "grp": "done",
    "addr": "경기도 광명시 하안동 764",
    "hshld": 2440,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.465162,
+   "lng": 126.869225,
+   "geo": "dong"
   },
   {
    "name": "하안주공본2단지아파트",
@@ -494,9 +500,9 @@
    "grp": "done",
    "addr": "경기도 광명시 하안동 769",
    "hshld": 940,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.465162,
+   "lng": 126.869225,
+   "geo": "dong"
   },
   {
    "name": "수택1지구",
@@ -506,9 +512,9 @@
    "grp": "done",
    "addr": "경기도 구리시 수택동532번지일원",
    "hshld": 305,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.60148,
+   "lng": 127.144172,
+   "geo": "addr"
   },
   {
    "name": "한성1차아파트",
@@ -518,9 +524,9 @@
    "grp": "init",
    "addr": "경기도 구리시 nan",
    "hshld": 490,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.594352,
+   "lng": 127.129642,
+   "geo": "sigun"
   },
   {
    "name": "수택동 재개발",
@@ -530,9 +536,9 @@
    "grp": "mid",
    "addr": "경기도 구리시 수택동 454-9번지 일원",
    "hshld": 1783,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.593871,
+   "lng": 127.143775,
+   "geo": "addr"
   },
   {
    "name": "딸기원2지구",
@@ -542,9 +548,9 @@
    "grp": "build",
    "addr": "경기도 구리시 교문동 339일원",
    "hshld": 477,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.599795,
+   "lng": 127.118965,
+   "geo": "addr"
   },
   {
    "name": "수택지구",
@@ -554,9 +560,9 @@
    "grp": "done",
    "addr": "경기도 구리시 수택동556번지 일원",
    "hshld": 257,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.594352,
+   "lng": 127.129642,
+   "geo": "sigun"
   },
   {
    "name": "인창주택",
@@ -566,9 +572,9 @@
    "grp": "done",
    "addr": "경기도 구리시 인창동320-2 일원",
    "hshld": 375,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.594352,
+   "lng": 127.129642,
+   "geo": "sigun"
   },
   {
    "name": "군포2구역",
@@ -578,9 +584,9 @@
    "grp": "init",
    "addr": "경기도 군포시 군포시 당동 768번지 일원",
    "hshld": 1955,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.352414,
+   "lng": 126.942426,
+   "geo": "addr"
   },
   {
    "name": "금정4구역",
@@ -590,9 +596,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 금정동 754번지 일원",
    "hshld": 839,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.360032,
+   "lng": 126.944972,
+   "geo": "addr"
   },
   {
    "name": "GTX금정역 역세권1구역",
@@ -602,9 +608,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 산본동 75번지 일원",
    "hshld": 951,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.375291,
+   "lng": 126.939814,
+   "geo": "addr"
   },
   {
    "name": "금정2구역",
@@ -614,9 +620,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 금정동 762-11번지 일원",
    "hshld": 670,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.362453,
+   "lng": 126.944951,
+   "geo": "addr"
   },
   {
    "name": "금정역세권1구역",
@@ -626,9 +632,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 금정동 727번지 일원",
    "hshld": 812,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.365708,
+   "lng": 126.940649,
+   "geo": "addr"
   },
   {
    "name": "금정역 역세권",
@@ -638,9 +644,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 산본동 1028번지 일원",
    "hshld": 1021,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.369288,
+   "lng": 126.941898,
+   "geo": "addr"
   },
   {
    "name": "산본1동1지구",
@@ -650,9 +656,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 산본동 79-8번지 일원",
    "hshld": 1661,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.373961,
+   "lng": 126.940554,
+   "geo": "addr"
   },
   {
    "name": "금정역 산본1동2지구",
@@ -662,9 +668,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 산본동 227-7번지 일원",
    "hshld": 560,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.368953,
+   "lng": 126.939473,
+   "geo": "addr"
   },
   {
    "name": "군포1구역",
@@ -674,9 +680,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 당동 731번지 일원",
    "hshld": 674,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.358412,
+   "lng": 126.946808,
+   "geo": "addr"
   },
   {
    "name": "군포3구역",
@@ -686,9 +692,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 당동 738번지 일원",
    "hshld": 488,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.355337,
+   "lng": 126.944071,
+   "geo": "addr"
   },
   {
    "name": "금정3구역",
@@ -698,9 +704,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 군포시 금정동 766번지 일원",
    "hshld": 564,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.362013,
+   "lng": 126.946119,
+   "geo": "addr"
   },
   {
    "name": "군포10구역",
@@ -710,9 +716,9 @@
    "grp": "mid",
    "addr": "경기도 군포시 당동 781번지 일원",
    "hshld": 610,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.351777,
+   "lng": 126.945954,
+   "geo": "addr"
   },
   {
    "name": "산본주공아파트",
@@ -722,9 +728,9 @@
    "grp": "done",
    "addr": "경기도 군포시 군포시 산본동 208외 5",
    "hshld": 1728,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.373354,
+   "lng": 126.93856,
+   "geo": "dong"
   },
   {
    "name": "양곡마을",
@@ -734,9 +740,9 @@
    "grp": "done",
    "addr": "경기도 김포시 양촌읍 양곡리 403-4",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.655433,
+   "lng": 126.626726,
+   "geo": "addr"
   },
   {
    "name": "서암",
@@ -746,9 +752,9 @@
    "grp": "done",
    "addr": "경기도 김포시 통진읍 서암리 758-22",
    "hshld": 126,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.692999,
+   "lng": 126.599546,
+   "geo": "addr"
   },
   {
    "name": "평내1",
@@ -758,9 +764,9 @@
    "grp": "mid",
    "addr": "경기도 남양주시 평내동 산84-11일원",
    "hshld": 1260,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.648369,
+   "lng": 127.236097,
+   "geo": "dong"
   },
   {
    "name": "금곡2",
@@ -770,9 +776,9 @@
    "grp": "mid",
    "addr": "경기도 남양주시 금곡동 159-59 일원",
    "hshld": 413,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.636656,
+   "lng": 127.211386,
+   "geo": "addr"
   },
   {
    "name": "퇴계원2",
@@ -782,9 +788,9 @@
    "grp": "mid",
    "addr": "경기도 남양주시 퇴계원읍 퇴계원리 109-8일원",
    "hshld": 285,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.653109,
+   "lng": 127.144371,
+   "geo": "addr"
   },
   {
    "name": "퇴계원7",
@@ -794,9 +800,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 퇴계원읍 퇴계원리 329-69일원",
    "hshld": 211,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.647441,
+   "lng": 127.139357,
+   "geo": "addr"
   },
   {
    "name": "퇴계원4",
@@ -806,9 +812,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 퇴계원읍 퇴계원리 82-13일원",
    "hshld": 166,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.656523,
+   "lng": 127.143134,
+   "geo": "addr"
   },
   {
    "name": "퇴계원1",
@@ -818,9 +824,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 퇴계원읍 퇴계원리 261-16일원",
    "hshld": 468,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.652806,
+   "lng": 127.14429,
+   "geo": "addr"
   },
   {
    "name": "금곡5",
@@ -830,9 +836,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 금곡동 산108-1일원",
    "hshld": 270,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.632413,
+   "lng": 127.203675,
+   "geo": "addr"
   },
   {
    "name": "오남1",
@@ -842,9 +848,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 오남읍 오남리 683-5 일원",
    "hshld": 2296,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.688723,
+   "lng": 127.211782,
+   "geo": "addr"
   },
   {
    "name": "퇴계원5",
@@ -854,9 +860,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 퇴계원읍 퇴계원리 272일원",
    "hshld": 263,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.654293,
+   "lng": 127.140713,
+   "geo": "addr"
   },
   {
    "name": "금곡7",
@@ -866,9 +872,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 금곡동 158-7일원",
    "hshld": 164,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.635519,
+   "lng": 127.212801,
+   "geo": "addr"
   },
   {
    "name": "금곡6",
@@ -878,9 +884,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 금곡동 162-42일원",
    "hshld": 560,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.637491,
+   "lng": 127.213343,
+   "geo": "addr"
   },
   {
    "name": "호평1",
@@ -890,9 +896,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 호평동 184-1일원",
    "hshld": 172,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.657693,
+   "lng": 127.247129,
+   "geo": "addr"
   },
   {
    "name": "진접7",
@@ -902,9 +908,9 @@
    "grp": "init",
    "addr": "경기도 남양주시 진접읍 내각리 산31-7일원",
    "hshld": 228,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.705697,
+   "lng": 127.160421,
+   "geo": "addr"
   },
   {
    "name": "지금2지구",
@@ -914,9 +920,9 @@
    "grp": "done",
    "addr": "경기도 남양주시 지금동 129-65 일원",
    "hshld": 1470,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.601782,
+   "lng": 127.163129,
+   "geo": "dong"
   },
   {
    "name": "도농3개통",
@@ -926,9 +932,9 @@
    "grp": "done",
    "addr": "경기도 남양주시 도농동 294 일원",
    "hshld": 212,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.600257,
+   "lng": 127.152717,
+   "geo": "dong"
   },
   {
    "name": "남광,신우",
@@ -938,9 +944,9 @@
    "grp": "done",
    "addr": "경기도 남양주시 도농동 2-5 일원",
    "hshld": 177,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.600257,
+   "lng": 127.152717,
+   "geo": "dong"
   },
   {
    "name": "평내2 (양지,삼창아파트)",
@@ -950,9 +956,9 @@
    "grp": "done",
    "addr": "경기도 남양주시 평내동 103-2일원",
    "hshld": 1005,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.648858,
+   "lng": 127.241852,
+   "geo": "addr"
   },
   {
    "name": "생연동 주공생연아파트",
@@ -962,9 +968,9 @@
    "grp": "done",
    "addr": "경기도 동두천시 생연동 284번지 일원",
    "hshld": 300,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.900095,
+   "lng": 127.064848,
+   "geo": "addr"
   },
   {
    "name": "중앙",
@@ -974,9 +980,9 @@
    "grp": "init",
    "addr": "경기도 동두천시 생연동 483번지 일원",
    "hshld": 295,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.907362,
+   "lng": 127.065584,
+   "geo": "dong"
   },
   {
    "name": "생연동 국민주택",
@@ -986,9 +992,9 @@
    "grp": "mid",
    "addr": "경기도 동두천시 동두천시 생연동 704번지 일원",
    "hshld": 120,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.899591,
+   "lng": 127.054684,
+   "geo": "addr"
   },
   {
    "name": "싸리말",
@@ -998,9 +1004,9 @@
    "grp": "done",
    "addr": "경기도 동두천시 보산동 314번지 일원",
    "hshld": 185,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.917707,
+   "lng": 127.061285,
+   "geo": "dong"
   },
   {
    "name": "안흥",
@@ -1010,9 +1016,9 @@
    "grp": "done",
    "addr": "경기도 동두천시 안흥동 38번지 일원",
    "hshld": 225,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.93023,
+   "lng": 127.046597,
+   "geo": "addr"
   },
   {
    "name": "생연1-1",
@@ -1022,9 +1028,9 @@
    "grp": "done",
    "addr": "경기도 동두천시 생연동 515-5번지 일원",
    "hshld": 408,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.910708,
+   "lng": 127.059695,
+   "geo": "addr"
   },
   {
    "name": "괴안 3-2(역곡조공2차아파트)",
@@ -1034,9 +1040,9 @@
    "grp": "init",
    "addr": "경기도 부천시 괴안동 33",
    "hshld": 320,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.477355,
+   "lng": 126.804273,
+   "geo": "addr"
   },
   {
    "name": "괴안 3-1(역곡조공1차아파트)",
@@ -1046,9 +1052,9 @@
    "grp": "init",
    "addr": "경기도 부천시 괴안동 36",
    "hshld": 224,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.479328,
+   "lng": 126.80416,
+   "geo": "addr"
   },
   {
    "name": "심곡본 3-1(부천롯데아파트)",
@@ -1058,9 +1064,9 @@
    "grp": "init",
    "addr": "경기도 부천시 심곡본동 615-1",
    "hshld": 463,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.477025,
+   "lng": 126.779333,
+   "geo": "addr"
   },
   {
    "name": "심곡본 3-2(부천극동아파트)",
@@ -1070,9 +1076,9 @@
    "grp": "init",
    "addr": "경기도 부천시 심곡본동 566-1",
    "hshld": 495,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.477079,
+   "lng": 126.781305,
+   "geo": "addr"
   },
   {
    "name": "소사본 3-2(부천한신아파트)",
@@ -1082,9 +1088,9 @@
    "grp": "init",
    "addr": "경기도 부천시 소사본동 277-12",
    "hshld": 916,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.474165,
+   "lng": 126.800476,
+   "geo": "addr"
   },
   {
    "name": "송내 3-1(송내동신아파트)",
@@ -1094,9 +1100,9 @@
    "grp": "init",
    "addr": "경기도 부천시 송내동 441-8",
    "hshld": 380,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.479234,
+   "lng": 126.763118,
+   "geo": "addr"
   },
   {
    "name": "고강 3-1(고강1,2차 아파트)",
@@ -1106,9 +1112,9 @@
    "grp": "init",
    "addr": "경기도 부천시 고강동 246-5",
    "hshld": 338,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.530093,
+   "lng": 126.823077,
+   "geo": "addr"
   },
   {
    "name": "원종 3-3(동진아파트)",
@@ -1118,9 +1124,9 @@
    "grp": "init",
    "addr": "경기도 부천시 원종동 180-3",
    "hshld": 250,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.530791,
+   "lng": 126.807165,
+   "geo": "addr"
   },
   {
    "name": "소사본 3-1(성지아파트)",
@@ -1130,9 +1136,9 @@
    "grp": "init",
    "addr": "경기도 부천시 소사본동 91-68",
    "hshld": 264,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.481128,
+   "lng": 126.790205,
+   "geo": "addr"
   },
   {
    "name": "약대 3-1(약대현대아파트)",
@@ -1142,9 +1148,9 @@
    "grp": "init",
    "addr": "경기도 부천시 약대동 169-6",
    "hshld": 290,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.511632,
+   "lng": 126.773476,
+   "geo": "addr"
   },
   {
    "name": "송내 3-2(현대아파트)",
@@ -1154,9 +1160,9 @@
    "grp": "init",
    "addr": "경기도 부천시 송내동 450-1",
    "hshld": 717,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.478722,
+   "lng": 126.765228,
+   "geo": "addr"
   },
   {
    "name": "원종 3-1(원종주공아파트)",
@@ -1166,9 +1172,9 @@
    "grp": "init",
    "addr": "경기도 부천시 원종동 129-19",
    "hshld": 490,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.52868,
+   "lng": 126.801668,
+   "geo": "addr"
   },
   {
    "name": "괴안3-4(염광아파트)",
@@ -1178,9 +1184,9 @@
    "grp": "init",
    "addr": "경기도 부천시 괴안동 164-6",
    "hshld": 382,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.476011,
+   "lng": 126.804867,
+   "geo": "addr"
   },
   {
    "name": "고강 3-2(미도아파트)",
@@ -1190,9 +1196,9 @@
    "grp": "init",
    "addr": "경기도 부천시 고강동 327-7",
    "hshld": 340,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.525019,
+   "lng": 126.825971,
+   "geo": "addr"
   },
   {
    "name": "괴안 3-5(삼익세라믹아파트)",
@@ -1202,9 +1208,9 @@
    "grp": "init",
    "addr": "경기도 부천시 괴안동 204-16",
    "hshld": 781,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.475869,
+   "lng": 126.801719,
+   "geo": "addr"
   },
   {
    "name": "원종 3-2(동문1차아파트)",
@@ -1214,9 +1220,9 @@
    "grp": "init",
    "addr": "경기도 부천시 원종동 70-1",
    "hshld": 280,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.530516,
+   "lng": 126.804117,
+   "geo": "addr"
   },
   {
    "name": "괴안 3-3(삼익3차 아파트)",
@@ -1226,9 +1232,9 @@
    "grp": "init",
    "addr": "경기도 부천시 괴안동 204-1",
    "hshld": 682,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.47702,
+   "lng": 126.802556,
+   "geo": "addr"
   },
   {
    "name": "괴안 3-6(괴안대진아파트)",
@@ -1238,9 +1244,9 @@
    "grp": "init",
    "addr": "경기도 부천시 괴안동 171-6",
    "hshld": 290,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.480274,
+   "lng": 126.806651,
+   "geo": "addr"
   },
   {
    "name": "괴안 3-7(거산아파트)",
@@ -1250,9 +1256,9 @@
    "grp": "init",
    "addr": "경기도 부천시 괴안동 171-8",
    "hshld": 260,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.480612,
+   "lng": 126.807523,
+   "geo": "addr"
   },
   {
    "name": "심곡3-1",
@@ -1262,9 +1268,9 @@
    "grp": "init",
    "addr": "경기도 부천시 심곡동 194",
    "hshld": 99,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.488361,
+   "lng": 126.78236,
+   "geo": "addr"
   },
   {
    "name": "심곡본동 제1",
@@ -1274,9 +1280,9 @@
    "grp": "init",
    "addr": "경기도 부천시 심곡본동 804",
    "hshld": 155,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.477516,
+   "lng": 126.77427,
+   "geo": "addr"
   },
   {
    "name": "역곡1-2",
@@ -1286,9 +1292,9 @@
    "grp": "init",
    "addr": "경기도 부천시 역곡동 75-3",
    "hshld": 315,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.48619,
+   "lng": 126.809534,
+   "geo": "addr"
   },
   {
    "name": "성곡2-1",
@@ -1298,9 +1304,9 @@
    "grp": "mid",
    "addr": "경기도 부천시 원종동 352",
    "hshld": 296,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.517084,
+   "lng": 126.807402,
+   "geo": "addr"
   },
   {
    "name": "도당1-1",
@@ -1310,9 +1316,9 @@
    "grp": "mid",
    "addr": "경기도 부천시 도당동 266-4",
    "hshld": 2567,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.506287,
+   "lng": 126.783398,
+   "geo": "addr"
   },
   {
    "name": "소사1-1",
@@ -1322,9 +1328,9 @@
    "grp": "mid",
    "addr": "경기도 부천시 소사동 8-5",
    "hshld": 551,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.485082,
+   "lng": 126.791046,
+   "geo": "addr"
   },
   {
    "name": "소사3",
@@ -1334,9 +1340,9 @@
    "grp": "mid",
    "addr": "경기도 부천시 소사동 48-21",
    "hshld": 1555,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.483672,
+   "lng": 126.792941,
+   "geo": "addr"
   },
   {
    "name": "소사본1-1",
@@ -1346,9 +1352,9 @@
    "grp": "mid",
    "addr": "경기도 부천시 소사본동 88-39",
    "hshld": 603,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.482016,
+   "lng": 126.789516,
+   "geo": "addr"
   },
   {
    "name": "괴안3D",
@@ -1358,9 +1364,9 @@
    "grp": "build",
    "addr": "경기도 부천시 괴안동 201",
    "hshld": 590,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.489014,
+   "lng": 126.818988,
+   "geo": "addr"
   },
   {
    "name": "송내1-1",
@@ -1370,9 +1376,9 @@
    "grp": "build",
    "addr": "경기도 부천시 송내동 338",
    "hshld": 885,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.486785,
+   "lng": 126.757184,
+   "geo": "addr"
   },
   {
    "name": "계수.범박",
@@ -1382,9 +1388,9 @@
    "grp": "done",
    "addr": "경기도 부천시 계수동 1-6",
    "hshld": 1077,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.465212,
+   "lng": 126.808086,
+   "geo": "dong"
   },
   {
    "name": "약대1",
@@ -1394,9 +1400,9 @@
    "grp": "done",
    "addr": "경기도 부천시 약대동 216",
    "hshld": 195,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.513282,
+   "lng": 126.771283,
+   "geo": "dong"
   },
   {
    "name": "괴안1-6",
@@ -1406,9 +1412,9 @@
    "grp": "done",
    "addr": "경기도 부천시 괴안동 203-2",
    "hshld": 770,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.478372,
+   "lng": 126.806921,
+   "geo": "dong"
   },
   {
    "name": "심곡본1-1",
@@ -1418,9 +1424,9 @@
    "grp": "done",
    "addr": "경기도 부천시 심곡본동 801",
    "hshld": 220,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.480711,
+   "lng": 126.780043,
+   "geo": "dong"
   },
   {
    "name": "약대주공",
@@ -1430,9 +1436,9 @@
    "grp": "done",
    "addr": "경기도 부천시 약대동 181",
    "hshld": 1040,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.513282,
+   "lng": 126.771283,
+   "geo": "dong"
   },
   {
    "name": "삼경아파트",
@@ -1442,9 +1448,9 @@
    "grp": "done",
    "addr": "경기도 부천시 원종동 144",
    "hshld": 363,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.525964,
+   "lng": 126.805278,
+   "geo": "dong"
   },
   {
    "name": "동원아파트",
@@ -1454,9 +1460,9 @@
    "grp": "done",
    "addr": "경기도 부천시 송내동 463-3",
    "hshld": 323,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.483951,
+   "lng": 126.756068,
+   "geo": "dong"
   },
   {
    "name": "중동주공",
@@ -1466,9 +1472,9 @@
    "grp": "done",
    "addr": "경기도 부천시 중동 884외3 (현, 1288,1289)",
    "hshld": 2560,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.487842,
+   "lng": 126.768186,
+   "geo": "dong"
   },
   {
    "name": "백동단지",
@@ -1478,9 +1484,9 @@
    "grp": "done",
    "addr": "경기도 부천시 소사본동 157-1 외 99",
    "hshld": 99,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.476228,
+   "lng": 126.792162,
+   "geo": "dong"
   },
   {
    "name": "송내1-2",
@@ -1490,9 +1496,9 @@
    "grp": "done",
    "addr": "경기도 부천시 송내동 427-32",
    "hshld": 671,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.483951,
+   "lng": 126.756068,
+   "geo": "dong"
   },
   {
    "name": "약대2",
@@ -1502,9 +1508,9 @@
    "grp": "done",
    "addr": "경기도 부천시 약대동 204",
    "hshld": 520,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.510811,
+   "lng": 126.771235,
+   "geo": "addr"
   },
   {
    "name": "중동1-1",
@@ -1514,9 +1520,9 @@
    "grp": "done",
    "addr": "경기도 부천시 중동 780",
    "hshld": 114,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.487842,
+   "lng": 126.768186,
+   "geo": "dong"
   },
   {
    "name": "태평3",
@@ -1526,9 +1532,9 @@
    "grp": "init",
    "addr": "경기도 성남시 수정구 태평동 4580",
    "hshld": 3646,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.44692,
+   "lng": 127.13132,
+   "geo": "addr"
   },
   {
    "name": "삼익상대원아파트",
@@ -1538,9 +1544,9 @@
    "grp": "init",
    "addr": "경기도 성남시 중원구 상대원동 152-3",
    "hshld": 264,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.437534,
+   "lng": 127.167979,
+   "geo": "addr"
   },
   {
    "name": "단대동",
@@ -1550,9 +1556,9 @@
    "grp": "done",
    "addr": "경기도 성남시 산성대로 383번길 14(단대동 177)",
    "hshld": 746,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.44734,
+   "lng": 127.156563,
+   "geo": "addr"
   },
   {
    "name": "삼남아파트",
@@ -1562,9 +1568,9 @@
    "grp": "done",
    "addr": "경기도 성남시 중원구 중앙동 578",
    "hshld": 235,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.436931,
+   "lng": 127.149852,
+   "geo": "addr"
   },
   {
    "name": "신흥(신흥주공+통보8차)",
@@ -1574,9 +1580,9 @@
    "grp": "done",
    "addr": "경기도 성남시 수정구 신흥동 6951",
    "hshld": 2406,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.453075,
+   "lng": 127.146997,
+   "geo": "addr"
   },
   {
    "name": "금광3",
@@ -1586,9 +1592,9 @@
    "grp": "done",
    "addr": "경기도 성남시 중원구 금광동 2600",
    "hshld": 638,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.448324,
+   "lng": 127.172356,
+   "geo": "addr"
   },
   {
    "name": "금광1",
@@ -1598,9 +1604,9 @@
    "grp": "done",
    "addr": "경기도 성남시 중원구 금광동 34",
    "hshld": 7499,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.445055,
+   "lng": 127.162431,
+   "geo": "dong"
   },
   {
    "name": "중1",
@@ -1610,9 +1616,9 @@
    "grp": "done",
    "addr": "경기도 성남시 중원구 중앙동 2979",
    "hshld": 3715,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.44293,
+   "lng": 127.15628,
+   "geo": "dong"
   },
   {
    "name": "신흥2",
@@ -1622,9 +1628,9 @@
    "grp": "done",
    "addr": "경기도 성남시 수정구 신흥동 1132",
    "hshld": 6488,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.448652,
+   "lng": 127.147887,
+   "geo": "addr"
   },
   {
    "name": "도환중1",
@@ -1634,9 +1640,9 @@
    "grp": "build",
    "addr": "경기도 성남시 중원구 중앙동 912",
    "hshld": 1345,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.440645,
+   "lng": 127.14942,
+   "geo": "addr"
   },
   {
    "name": "산성",
@@ -1646,9 +1652,9 @@
    "grp": "build",
    "addr": "경기도 성남시 수정구 산성동 1336",
    "hshld": 4499,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.454464,
+   "lng": 127.151543,
+   "geo": "addr"
   },
   {
    "name": "도환중2",
@@ -1658,9 +1664,9 @@
    "grp": "mid",
    "addr": "경기도 성남시 중원구 중앙동 196",
    "hshld": 713,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.44317,
+   "lng": 127.155075,
+   "geo": "addr"
   },
   {
    "name": "상대원2",
@@ -1670,9 +1676,9 @@
    "grp": "mid",
    "addr": "경기도 성남시 중원구 상대원동 3910",
    "hshld": 6075,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.437406,
+   "lng": 127.155792,
+   "geo": "addr"
   },
   {
    "name": "성지?궁전아파트",
@@ -1682,9 +1688,9 @@
    "grp": "mid",
    "addr": "경기도 성남시 중원구 상대원동 195-5",
    "hshld": 709,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.439358,
+   "lng": 127.179088,
+   "geo": "addr"
   },
   {
    "name": "은행주공아파트",
@@ -1694,9 +1700,9 @@
    "grp": "mid",
    "addr": "경기도 성남시 중원구 은행동 550",
    "hshld": 2111,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.459055,
+   "lng": 127.169644,
+   "geo": "addr"
   },
   {
    "name": "수진1",
@@ -1706,9 +1712,9 @@
    "grp": "mid",
    "addr": "경기도 성남시 수정구 수진동 963",
    "hshld": 6544,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.438458,
+   "lng": 127.13566,
+   "geo": "addr"
   },
   {
    "name": "상대원3",
@@ -1718,9 +1724,9 @@
    "grp": "init",
    "addr": "경기도 성남시 중원구 상대원동 2780",
    "hshld": 10486,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.437428,
+   "lng": 127.161695,
+   "geo": "addr"
   },
   {
    "name": "은행동현대아파트",
@@ -1730,9 +1736,9 @@
    "grp": "init",
    "addr": "경기도 성남시 중원구 은행동 1932-6",
    "hshld": 1258,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.451929,
+   "lng": 127.163447,
+   "geo": "addr"
   },
   {
    "name": "미도아파트",
@@ -1742,9 +1748,9 @@
    "grp": "init",
    "addr": "경기도 성남시 수정구 단대동 182",
    "hshld": 280,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.446845,
+   "lng": 127.155927,
+   "geo": "addr"
   },
   {
    "name": "선경상대원2차아파트",
@@ -1754,9 +1760,9 @@
    "grp": "init",
    "addr": "경기도 성남시 중원구 상대원동 279-1",
    "hshld": 2510,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.440503,
+   "lng": 127.169312,
+   "geo": "addr"
   },
   {
    "name": "청구아파트",
@@ -1766,9 +1772,9 @@
    "grp": "init",
    "addr": "경기도 성남시 수정구 신흥동 2464-1",
    "hshld": 493,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.444133,
+   "lng": 127.150953,
+   "geo": "addr"
   },
   {
    "name": "일성아파트",
@@ -1778,9 +1784,9 @@
    "grp": "init",
    "addr": "경기도 성남시 중원구 상대원동 178-6",
    "hshld": 270,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.440907,
+   "lng": 127.180296,
+   "geo": "addr"
   },
   {
    "name": "시영(황송마을)아파트",
@@ -1790,9 +1796,9 @@
    "grp": "init",
    "addr": "경기도 성남시 중원구 금광동 2450-1",
    "hshld": 990,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.44429,
+   "lng": 127.169915,
+   "geo": "addr"
   },
   {
    "name": "두산아파트",
@@ -1802,9 +1808,9 @@
    "grp": "init",
    "addr": "경기도 성남시 수정구 신흥동 2024",
    "hshld": 570,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.445003,
+   "lng": 127.149529,
+   "geo": "addr"
   },
   {
    "name": "성남동현대아파트",
@@ -1814,9 +1820,9 @@
    "grp": "init",
    "addr": "경기도 성남시 중원구 성남동 3120",
    "hshld": 375,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.429167,
+   "lng": 127.140859,
+   "geo": "addr"
   },
   {
    "name": "삼익금광아파트",
@@ -1826,9 +1832,9 @@
    "grp": "init",
    "addr": "경기도 성남시 중원구 금광동 3950",
    "hshld": 498,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.449422,
+   "lng": 127.161523,
+   "geo": "addr"
   },
   {
    "name": "한신아파트",
@@ -1838,9 +1844,9 @@
    "grp": "init",
    "addr": "경기도 성남시 수정구 신흥동 2463-1",
    "hshld": 585,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.444829,
+   "lng": 127.152041,
+   "geo": "addr"
   },
   {
    "name": "선경논골아파트",
@@ -1850,9 +1856,9 @@
    "grp": "init",
    "addr": "경기도 성남시 수정구 단대동 6",
    "hshld": 426,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.46171,
+   "lng": 127.157288,
+   "geo": "addr"
   },
   {
    "name": "은행2지구",
@@ -1862,9 +1868,9 @@
    "grp": "done",
    "addr": "경기도 성남시 은행2동 1342",
    "hshld": 7669,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.456259,
+   "lng": 127.16723,
+   "geo": "addr"
   },
   {
    "name": "신흥1",
@@ -1874,9 +1880,9 @@
    "grp": "init",
    "addr": "경기도 성남시 수정구 신흥동 4900",
    "hshld": 5709,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.440973,
+   "lng": 127.140268,
+   "geo": "addr"
   },
   {
    "name": "태평2",
@@ -1886,9 +1892,9 @@
    "grp": "done",
    "addr": "경기도 성남시 수정구 남문로 69번길 11",
    "hshld": 1219,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.447154,
+   "lng": 127.134526,
+   "geo": "addr"
   },
   {
    "name": "태평4",
@@ -1898,9 +1904,9 @@
    "grp": "done",
    "addr": "경기도 성남시 수정구 남문로 135번길 11",
    "hshld": 499,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.449068,
+   "lng": 127.141005,
+   "geo": "addr"
   },
   {
    "name": "수진2",
@@ -1910,9 +1916,9 @@
    "grp": "done",
    "addr": "경기도 성남시 수정구 수정로88번길 18",
    "hshld": 905,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.438993,
+   "lng": 127.130809,
+   "geo": "addr"
   },
   {
    "name": "단대",
@@ -1922,9 +1928,9 @@
    "grp": "done",
    "addr": "경기도 성남시 수정구 단대동 108-6",
    "hshld": 1897,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.44939,
+   "lng": 127.155362,
+   "geo": "dong"
   },
   {
    "name": "중3",
@@ -1934,9 +1940,9 @@
    "grp": "done",
    "addr": "경기도 성남시 중원구 중동 1500",
    "hshld": 898,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.443133,
+   "lng": 127.155588,
+   "geo": "kw"
   },
   {
    "name": "건우아파트",
@@ -1946,9 +1952,9 @@
    "grp": "done",
    "addr": "경기도 성남시 수정구 태평동 7346",
    "hshld": 470,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.450064,
+   "lng": 127.133791,
+   "geo": "addr"
   },
   {
    "name": "삼창아파트",
@@ -1958,9 +1964,9 @@
    "grp": "done",
    "addr": "경기도 성남시 중원구 중앙동 3748-1",
    "hshld": 544,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.44293,
+   "lng": 127.15628,
+   "geo": "dong"
   },
   {
    "name": "산성2지구",
@@ -1970,9 +1976,9 @@
    "grp": "done",
    "addr": "경기도 성남시 산성동 513",
    "hshld": 712,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.455491,
+   "lng": 127.154716,
+   "geo": "addr"
   },
   {
    "name": "신흥3",
@@ -1982,9 +1988,9 @@
    "grp": "init",
    "addr": "경기도 성남시 수정구 신흥동 2890",
    "hshld": 4625,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.443056,
+   "lng": 127.145761,
+   "geo": "addr"
   },
   {
    "name": "매탄주공2단지아파트",
@@ -1994,9 +2000,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 63",
    "hshld": 2820,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "115-1",
@@ -2006,9 +2012,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 62",
    "hshld": 145,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "115-2구역",
@@ -2018,9 +2024,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 61",
    "hshld": 5822,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "111-5구역",
@@ -2030,9 +2036,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 60",
    "hshld": 941,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "111-4",
@@ -2042,9 +2048,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 59",
    "hshld": 406,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "115-6",
@@ -2054,9 +2060,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 58",
    "hshld": 1672,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "115-8",
@@ -2066,9 +2072,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 57",
    "hshld": 2830,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "113-7구역(평동지구)",
@@ -2078,9 +2084,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 56",
    "hshld": 916,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "115-9",
@@ -2090,9 +2096,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 55",
    "hshld": 2061,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "113-12",
@@ -2102,9 +2108,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 54",
    "hshld": 518,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "111-1",
@@ -2114,9 +2120,9 @@
    "grp": "build",
    "addr": "경기도 수원시 영통구 원천동 53",
    "hshld": 1660,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "113-6",
@@ -2126,9 +2132,9 @@
    "grp": "build",
    "addr": "경기도 수원시 영통구 원천동 52",
    "hshld": 1819,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "115-10",
@@ -2138,9 +2144,9 @@
    "grp": "build",
    "addr": "경기도 수원시 영통구 원천동 51",
    "hshld": 1018,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "111-3",
@@ -2150,9 +2156,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 50",
    "hshld": 395,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "115-3",
@@ -2162,9 +2168,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 49",
    "hshld": 980,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.280442,
+   "lng": 127.05261,
+   "geo": "addr"
   },
   {
    "name": "115-12구역",
@@ -2174,9 +2180,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 48",
    "hshld": 1185,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "영통 2구역(매탄주공 4,5단지)",
@@ -2186,9 +2192,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 47",
    "hshld": 2440,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "영통1구역",
@@ -2198,9 +2204,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 46",
    "hshld": 907,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.260466,
+   "lng": 127.067634,
+   "geo": "addr"
   },
   {
    "name": "권선 1구역(동남아파트)",
@@ -2210,9 +2216,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 45",
    "hshld": 380,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "팔달 1구역(현대아파트)",
@@ -2222,9 +2228,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 44",
    "hshld": 563,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "권선 2구역(성일아파트)",
@@ -2234,9 +2240,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 43",
    "hshld": 370,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "구운1(삼환아파트)",
@@ -2246,9 +2252,9 @@
    "grp": "mid",
    "addr": "경기도 수원시 영통구 원천동 42",
    "hshld": 1687,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "팔달2매산(성매매집결지)",
@@ -2258,9 +2264,9 @@
    "grp": "init",
    "addr": "경기도 수원시 영통구 원천동 41",
    "hshld": 93,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "세류1(미영아파트)",
@@ -2270,9 +2276,9 @@
    "grp": "init",
    "addr": "경기도 수원시 영통구 원천동 40",
    "hshld": 600,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "망포1(청와아파트)",
@@ -2282,9 +2288,9 @@
    "grp": "init",
    "addr": "경기도 수원시 영통구 원천동 39",
    "hshld": 353,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "우만1(우만주공1,2단지)",
@@ -2294,9 +2300,9 @@
    "grp": "init",
    "addr": "경기도 수원시 영통구 원천동 38",
    "hshld": 1484,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "원천1(아주아파트)",
@@ -2306,9 +2312,9 @@
    "grp": "init",
    "addr": "경기도 수원시 영통구 원천동 37",
    "hshld": 230,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "파장1(삼익아파트)",
@@ -2318,9 +2324,9 @@
    "grp": "init",
    "addr": "경기도 수원시 영통구 원천동 36",
    "hshld": 220,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "영통 3구역(원천 주공)",
@@ -2330,9 +2336,9 @@
    "grp": "init",
    "addr": "경기도 수원시 영통구 원천동 35",
    "hshld": 1320,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.277153,
+   "lng": 127.046717,
+   "geo": "addr"
   },
   {
    "name": "천천주공",
@@ -2342,9 +2348,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 74",
    "hshld": 1990,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "권선주공 2단지아파트",
@@ -2354,9 +2360,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 73",
    "hshld": 758,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "화서주공 2단지아파트",
@@ -2366,9 +2372,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 72",
    "hshld": 1630,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "송림아파트",
@@ -2378,9 +2384,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 71",
    "hshld": 350,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "권선주공 1.3차아파트",
@@ -2390,9 +2396,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 70",
    "hshld": 1166,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "행궁지구",
@@ -2402,9 +2408,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 69",
    "hshld": 1680,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "매산지구",
@@ -2414,9 +2420,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 68",
    "hshld": 1247,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "113-4구역(세류지구)",
@@ -2426,9 +2432,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 67",
    "hshld": 2787,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "우람아파트",
@@ -2438,9 +2444,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 66",
    "hshld": 696,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "향원아파트",
@@ -2450,9 +2456,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 65",
    "hshld": 590,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "인계주공아파트",
@@ -2462,9 +2468,9 @@
    "grp": "done",
    "addr": "경기도 수원시 영통구 원천동 64",
    "hshld": 830,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.273462,
+   "lng": 127.053213,
+   "geo": "dong"
   },
   {
    "name": "대야동",
@@ -2474,9 +2480,9 @@
    "grp": "done",
    "addr": "경기도 시흥시 대야동 303일대",
    "hshld": 673,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.458202,
+   "lng": 126.810925,
+   "geo": "addr"
   },
   {
    "name": "복음자리",
@@ -2486,9 +2492,9 @@
    "grp": "done",
    "addr": "경기도 시흥시 신천동 33일대",
    "hshld": 234,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.435556,
+   "lng": 126.78187,
+   "geo": "dong"
   },
   {
    "name": "대야동 삼보",
@@ -2498,9 +2504,9 @@
    "grp": "init",
    "addr": "경기도 시흥시 대야동 275",
    "hshld": 335,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.448214,
+   "lng": 126.796344,
+   "geo": "addr"
   },
   {
    "name": "신천동 동진",
@@ -2510,9 +2516,9 @@
    "grp": "init",
    "addr": "경기도 시흥시 신천동 858",
    "hshld": 474,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.436027,
+   "lng": 126.789292,
+   "geo": "addr"
   },
   {
    "name": "은행2",
@@ -2522,9 +2528,9 @@
    "grp": "init",
    "addr": "경기도 시흥시 은행동 276-10",
    "hshld": 783,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.432071,
+   "lng": 126.795109,
+   "geo": "addr"
   },
   {
    "name": "포동1",
@@ -2534,9 +2540,9 @@
    "grp": "init",
    "addr": "경기도 시흥시 포동 2",
    "hshld": 1275,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.40796,
+   "lng": 126.786533,
+   "geo": "addr"
   },
   {
    "name": "목감1",
@@ -2546,9 +2552,9 @@
    "grp": "init",
    "addr": "경기도 시흥시 조남동 171-4",
    "hshld": 1534,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.38589,
+   "lng": 126.859791,
+   "geo": "addr"
   },
   {
    "name": "은행동 산호",
@@ -2558,9 +2564,9 @@
    "grp": "init",
    "addr": "경기도 시흥시 은행동 243-1",
    "hshld": 370,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.435995,
+   "lng": 126.797194,
+   "geo": "addr"
   },
   {
    "name": "은행1",
@@ -2570,9 +2576,9 @@
    "grp": "mid",
    "addr": "경기도 시흥시 은행동 251-6",
    "hshld": 401,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.434524,
+   "lng": 126.796507,
+   "geo": "addr"
   },
   {
    "name": "목감2",
@@ -2582,9 +2588,9 @@
    "grp": "mid",
    "addr": "경기도 시흥시 목감동 242-9",
    "hshld": 800,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.384639,
+   "lng": 126.860479,
+   "geo": "addr"
   },
   {
    "name": "거모3",
@@ -2594,9 +2600,9 @@
    "grp": "mid",
    "addr": "경기도 시흥시 거모동 1474-1",
    "hshld": 492,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.346206,
+   "lng": 126.782165,
+   "geo": "addr"
   },
   {
    "name": "대야3",
@@ -2606,9 +2612,9 @@
    "grp": "build",
    "addr": "경기도 시흥시 대야동 284",
    "hshld": 1025,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.44935,
+   "lng": 126.793641,
+   "geo": "addr"
   },
   {
    "name": "성포예술인",
@@ -2618,9 +2624,9 @@
    "grp": "init",
    "addr": "경기도 안산시 성포동 예술인아파트",
    "hshld": 1485,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.320647,
+   "lng": 126.849516,
+   "geo": "dong"
   },
   {
    "name": "월피연립1",
@@ -2630,9 +2636,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 월피동 443",
    "hshld": 292,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.328167,
+   "lng": 126.850785,
+   "geo": "addr"
   },
   {
    "name": "와동연립1",
@@ -2642,9 +2648,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 와동 830-1",
    "hshld": 344,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.333345,
+   "lng": 126.820156,
+   "geo": "addr"
   },
   {
    "name": "와동연립2",
@@ -2654,9 +2660,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 와동 723-2",
    "hshld": 503,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.332592,
+   "lng": 126.824728,
+   "geo": "addr"
   },
   {
    "name": "와동연립3",
@@ -2666,9 +2672,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 와동 829",
    "hshld": 255,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.333478,
+   "lng": 126.817484,
+   "geo": "addr"
   },
   {
    "name": "성포연립1",
@@ -2678,9 +2684,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 성포동 585-2",
    "hshld": 339,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.319565,
+   "lng": 126.850031,
+   "geo": "addr"
   },
   {
    "name": "와동연립4",
@@ -2690,9 +2696,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 와동 851-1",
    "hshld": 226,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.331971,
+   "lng": 126.823718,
+   "geo": "addr"
   },
   {
    "name": "군자주공11,12",
@@ -2702,9 +2708,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 선부동 1078",
    "hshld": 2810,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.330324,
+   "lng": 126.812638,
+   "geo": "addr"
   },
   {
    "name": "선경성포",
@@ -2714,9 +2720,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 성포동 592",
    "hshld": 1768,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.325688,
+   "lng": 126.843225,
+   "geo": "addr"
   },
   {
    "name": "현대2월피",
@@ -2726,9 +2732,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 월피동 448",
    "hshld": 770,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.331019,
+   "lng": 126.850172,
+   "geo": "addr"
   },
   {
    "name": "우성",
@@ -2738,9 +2744,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 본오동 872-20",
    "hshld": 1080,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.297699,
+   "lng": 126.865077,
+   "geo": "addr"
   },
   {
    "name": "한양상록수",
@@ -2750,9 +2756,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 본오동 880",
    "hshld": 2222,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.295208,
+   "lng": 126.860896,
+   "geo": "addr"
   },
   {
    "name": "한양수정",
@@ -2762,9 +2768,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 선부동 1086",
    "hshld": 1870,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.33935,
+   "lng": 126.815809,
+   "geo": "addr"
   },
   {
    "name": "한양공작",
@@ -2774,9 +2780,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 선부동 1085",
    "hshld": 2040,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.340091,
+   "lng": 126.812851,
+   "geo": "addr"
   },
   {
    "name": "한양월피",
@@ -2786,9 +2792,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 월피동 447",
    "hshld": 1362,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.332312,
+   "lng": 126.848289,
+   "geo": "addr"
   },
   {
    "name": "태영",
@@ -2798,9 +2804,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 본오동 879-15",
    "hshld": 672,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.299013,
+   "lng": 126.860866,
+   "geo": "addr"
   },
   {
    "name": "월드상록수",
@@ -2810,9 +2816,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 사동 1346",
    "hshld": 626,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.287014,
+   "lng": 126.854184,
+   "geo": "addr"
   },
   {
    "name": "군자주공15",
@@ -2822,9 +2828,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 선부동 1080",
    "hshld": 1210,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.335391,
+   "lng": 126.815562,
+   "geo": "addr"
   },
   {
    "name": "월피주공1",
@@ -2834,9 +2840,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 월피동 444",
    "hshld": 860,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.329099,
+   "lng": 126.84904,
+   "geo": "addr"
   },
   {
    "name": "본오1,2차",
@@ -2846,9 +2852,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 사동 1505",
    "hshld": 1585,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.280894,
+   "lng": 126.853337,
+   "geo": "addr"
   },
   {
    "name": "상록수요진",
@@ -2858,9 +2864,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 사동 1345-1",
    "hshld": 598,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.290472,
+   "lng": 126.849569,
+   "geo": "addr"
   },
   {
    "name": "선경상록",
@@ -2870,9 +2876,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 사동 1345",
    "hshld": 550,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.292057,
+   "lng": 126.850302,
+   "geo": "addr"
   },
   {
    "name": "한양산호",
@@ -2882,9 +2888,9 @@
    "grp": "init",
    "addr": "경기도 안산시 단원구 선부동 1081",
    "hshld": 1086,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.336691,
+   "lng": 126.813283,
+   "geo": "addr"
   },
   {
    "name": "성포주공11",
@@ -2894,9 +2900,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 성포동 591",
    "hshld": 1975,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.32483,
+   "lng": 126.847955,
+   "geo": "addr"
   },
   {
    "name": "신우아파트",
@@ -2906,9 +2912,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 사동 1344-1",
    "hshld": 502,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.288945,
+   "lng": 126.85426,
+   "geo": "addr"
   },
   {
    "name": "예누림아파트",
@@ -2918,9 +2924,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 사동 1344",
    "hshld": 576,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.290141,
+   "lng": 126.854015,
+   "geo": "addr"
   },
   {
    "name": "현대1차상록수",
@@ -2930,9 +2936,9 @@
    "grp": "init",
    "addr": "경기도 안산시 상록구 사동 1345-2",
    "hshld": 478,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.288903,
+   "lng": 126.85039,
+   "geo": "addr"
   },
   {
    "name": "주공4단지",
@@ -2942,9 +2948,9 @@
    "grp": "init",
    "addr": "경기도 안산시 성포동 588",
    "hshld": 780,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.319639,
+   "lng": 126.84348,
+   "geo": "addr"
   },
   {
    "name": "주공10단지",
@@ -2954,9 +2960,9 @@
    "grp": "init",
    "addr": "경기도 안산시 성포동 584",
    "hshld": 1380,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.321682,
+   "lng": 126.84722,
+   "geo": "addr"
   },
   {
    "name": "주공7단지",
@@ -2966,9 +2972,9 @@
    "grp": "init",
    "addr": "경기도 안산시 고잔동 670",
    "hshld": 1020,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.327244,
+   "lng": 126.839371,
+   "geo": "addr"
   },
   {
    "name": "주공8단지",
@@ -2978,9 +2984,9 @@
    "grp": "init",
    "addr": "경기도 안산시 고잔동 671",
    "hshld": 1020,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.325457,
+   "lng": 126.839303,
+   "geo": "addr"
   },
   {
    "name": "주공9단지",
@@ -2990,9 +2996,9 @@
    "grp": "init",
    "addr": "경기도 안산시 고잔동 672",
    "hshld": 1320,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.323552,
+   "lng": 126.839202,
+   "geo": "addr"
   },
   {
    "name": "초지연립상단지",
@@ -3002,9 +3008,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 초지동 605",
    "hshld": 832,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.309276,
+   "lng": 126.760813,
+   "geo": "addr"
   },
   {
    "name": "고잔연립1단지",
@@ -3014,9 +3020,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 고잔동 586",
    "hshld": 723,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.321939,
+   "lng": 126.832292,
+   "geo": "dong"
   },
   {
    "name": "중앙주공2단지",
@@ -3026,9 +3032,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 고잔동 538",
    "hshld": 450,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.321939,
+   "lng": 126.832292,
+   "geo": "dong"
   },
   {
    "name": "동명아파트",
@@ -3038,9 +3044,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 선부동 1082",
    "hshld": 600,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.337769,
+   "lng": 126.81124,
+   "geo": "addr"
   },
   {
    "name": "군자주공4단지",
@@ -3050,9 +3056,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 초지동 604",
    "hshld": 766,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.3113,
+   "lng": 126.760668,
+   "geo": "addr"
   },
   {
    "name": "건건동1",
@@ -3062,9 +3068,9 @@
    "grp": "done",
    "addr": "경기도 안산시 건건동 606",
    "hshld": 267,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.30689,
+   "lng": 126.905465,
+   "geo": "dong"
   },
   {
    "name": "원곡연립3단지",
@@ -3074,9 +3080,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 원곡동 848",
    "hshld": 792,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.333295,
+   "lng": 126.790859,
+   "geo": "dong"
   },
   {
    "name": "군자주공8단지",
@@ -3086,9 +3092,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 선부동 959",
    "hshld": 272,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.334179,
+   "lng": 126.804371,
+   "geo": "dong"
   },
   {
    "name": "성포주공3단지",
@@ -3098,9 +3104,9 @@
    "grp": "done",
    "addr": "경기도 안산시 상록구 성포동 587",
    "hshld": 700,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.320647,
+   "lng": 126.849516,
+   "geo": "dong"
   },
   {
    "name": "중앙주공1단지",
@@ -3110,9 +3116,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 고잔동 532",
    "hshld": 500,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.321939,
+   "lng": 126.832292,
+   "geo": "dong"
   },
   {
    "name": "군자주공5단지",
@@ -3122,9 +3128,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 초지동 603-1",
    "hshld": 400,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.313627,
+   "lng": 126.764678,
+   "geo": "addr"
   },
   {
    "name": "현대1차아파트",
@@ -3134,9 +3140,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 성포동 592-2",
    "hshld": 570,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.324715,
+   "lng": 126.845026,
+   "geo": "addr"
   },
   {
    "name": "고잔연립3",
@@ -3146,9 +3152,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 고잔동 665-1",
    "hshld": 768,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.323417,
+   "lng": 126.821679,
+   "geo": "addr"
   },
   {
    "name": "군자주공9",
@@ -3158,9 +3164,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 선부동 967",
    "hshld": 540,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.335599,
+   "lng": 126.805667,
+   "geo": "addr"
   },
   {
    "name": "주공5단지2",
@@ -3170,9 +3176,9 @@
    "grp": "build",
    "addr": "경기도 안산시 고잔동 674",
    "hshld": 538,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.321774,
+   "lng": 126.835742,
+   "geo": "addr"
   },
   {
    "name": "주공6단지",
@@ -3182,9 +3188,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 고잔동 676-2",
    "hshld": 590,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.325807,
+   "lng": 126.836268,
+   "geo": "addr"
   },
   {
    "name": "팔곡일동1",
@@ -3194,9 +3200,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 팔곡일동 264-5",
    "hshld": 299,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.304384,
+   "lng": 126.900123,
+   "geo": "addr"
   },
   {
    "name": "고잔연립2",
@@ -3206,9 +3212,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 고잔동 576",
    "hshld": 898,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.324787,
+   "lng": 126.825439,
+   "geo": "addr"
   },
   {
    "name": "초지연립1단지",
@@ -3218,9 +3224,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 초지동 590",
    "hshld": 1026,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.323269,
+   "lng": 126.767086,
+   "geo": "addr"
   },
   {
    "name": "선부연립1",
@@ -3230,9 +3236,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 선부동 963",
    "hshld": 735,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.33364,
+   "lng": 126.802691,
+   "geo": "addr"
   },
   {
    "name": "고잔연립7",
@@ -3242,9 +3248,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 고잔동 613-1",
    "hshld": 415,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.33004,
+   "lng": 126.830507,
+   "geo": "addr"
   },
   {
    "name": "고잔연립4",
@@ -3254,9 +3260,9 @@
    "grp": "init",
    "addr": "경기도 안산시 고잔동 661-3",
    "hshld": 1129,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.325595,
+   "lng": 126.821619,
+   "geo": "addr"
   },
   {
    "name": "군자주공10",
@@ -3266,9 +3272,9 @@
    "grp": "init",
    "addr": "경기도 안산시 선부동 1083",
    "hshld": 790,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.337902,
+   "lng": 126.809089,
+   "geo": "addr"
   },
   {
    "name": "월드아파트",
@@ -3278,9 +3284,9 @@
    "grp": "init",
    "addr": "경기도 안산시 본오동 872",
    "hshld": 1070,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.29985,
+   "lng": 126.865115,
+   "geo": "addr"
   },
   {
    "name": "고잔연립5",
@@ -3290,9 +3296,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 고잔동 610",
    "hshld": 1072,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.330128,
+   "lng": 126.827053,
+   "geo": "addr"
   },
   {
    "name": "고잔연립6",
@@ -3302,9 +3308,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 고잔동 612",
    "hshld": 411,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.329039,
+   "lng": 126.829553,
+   "geo": "addr"
   },
   {
    "name": "인정프린스아파트",
@@ -3314,9 +3320,9 @@
    "grp": "build",
    "addr": "경기도 안산시 상록구 건건동 894-10",
    "hshld": 540,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.302158,
+   "lng": 126.90496,
+   "geo": "addr"
   },
   {
    "name": "고잔연립9",
@@ -3326,9 +3332,9 @@
    "grp": "build",
    "addr": "경기도 안산시 고잔동 648-1",
    "hshld": 299,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.328746,
+   "lng": 126.839294,
+   "geo": "addr"
   },
   {
    "name": "주공5단지1",
@@ -3338,9 +3344,9 @@
    "grp": "mid",
    "addr": "경기도 안산시 고잔동 675",
    "hshld": 570,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.323677,
+   "lng": 126.836116,
+   "geo": "addr"
   },
   {
    "name": "군자주공6단지",
@@ -3350,9 +3356,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 선부동 953",
    "hshld": 1080,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.334179,
+   "lng": 126.804371,
+   "geo": "dong"
   },
   {
    "name": "군자주공7단지",
@@ -3362,9 +3368,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 선부동 961",
    "hshld": 480,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.334179,
+   "lng": 126.804371,
+   "geo": "dong"
   },
   {
    "name": "원곡연립2단지",
@@ -3374,9 +3380,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 원곡동 838",
    "hshld": 1123,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.333295,
+   "lng": 126.790859,
+   "geo": "dong"
   },
   {
    "name": "원곡연립1단지",
@@ -3386,9 +3392,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 원곡동 829",
    "hshld": 1126,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.333295,
+   "lng": 126.790859,
+   "geo": "dong"
   },
   {
    "name": "선부동3",
@@ -3398,9 +3404,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 선부동 1007",
    "hshld": 1165,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.342326,
+   "lng": 126.802751,
+   "geo": "addr"
   },
   {
    "name": "고잔연립8",
@@ -3410,9 +3416,9 @@
    "grp": "done",
    "addr": "경기도 안산시 고잔동 631-1",
    "hshld": 297,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.329685,
+   "lng": 126.835605,
+   "geo": "addr"
   },
   {
    "name": "선부동2",
@@ -3422,9 +3428,9 @@
    "grp": "done",
    "addr": "경기도 안산시 단원구 선부동 998",
    "hshld": 350,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.339422,
+   "lng": 126.801637,
+   "geo": "addr"
   },
   {
    "name": "산호연립",
@@ -3434,9 +3440,9 @@
    "grp": "done",
    "addr": "경기도 안산시 상록구 건건동 894-14",
    "hshld": 123,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.302294,
+   "lng": 126.90289,
+   "geo": "addr"
   },
   {
    "name": "아양주공 1단지 아파트",
@@ -3446,9 +3452,9 @@
    "grp": "init",
    "addr": "경기도 안성시 아양동 300번지 일원",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.006835,
+   "lng": 127.262963,
+   "geo": "addr"
   },
   {
    "name": "금산주공 아파트",
@@ -3458,9 +3464,9 @@
    "grp": "init",
    "addr": "경기도 안성시 금산동 100번지 일원",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.013173,
+   "lng": 127.267047,
+   "geo": "addr"
   },
   {
    "name": "옥산주공 아파트",
@@ -3470,9 +3476,9 @@
    "grp": "init",
    "addr": "경기도 안성시 옥산동 10번지 일원",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.012399,
+   "lng": 127.252395,
+   "geo": "addr"
   },
   {
    "name": "호계주공아파트주변",
@@ -3482,9 +3488,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계1동 977",
    "hshld": 900,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.371641,
+   "lng": 126.961105,
+   "geo": "dong"
   },
   {
    "name": "안양8동행정복지센터 주변",
@@ -3494,9 +3500,9 @@
    "grp": "init",
    "addr": "경기도 안양시 안양8동 564-5",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.383444,
+   "lng": 126.930462,
+   "geo": "addr"
   },
   {
    "name": "우주타운 주변",
@@ -3506,9 +3512,9 @@
    "grp": "init",
    "addr": "경기도 안양시 석수2동 323-7",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.412814,
+   "lng": 126.911595,
+   "geo": "addr"
   },
   {
    "name": "삼봉",
@@ -3518,9 +3524,9 @@
    "grp": "init",
    "addr": "경기도 안양시 박달2동 605-15",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.40089,
+   "lng": 126.897995,
+   "geo": "addr"
   },
   {
    "name": "극동아파트",
@@ -3530,9 +3536,9 @@
    "grp": "init",
    "addr": "경기도 안양시 박달동 139-202",
    "hshld": 320,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.399776,
+   "lng": 126.902856,
+   "geo": "addr"
   },
   {
    "name": "만안초등학교 주변",
@@ -3542,9 +3548,9 @@
    "grp": "init",
    "addr": "경기도 안양시 안양2동 857-17",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.408686,
+   "lng": 126.91481,
+   "geo": "addr"
   },
   {
    "name": "만안도서관 주변",
@@ -3554,9 +3560,9 @@
    "grp": "init",
    "addr": "경기도 안양시 안양6동 540-16",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.385103,
+   "lng": 126.928585,
+   "geo": "addr"
   },
   {
    "name": "인덕원중학교(A블럭)",
@@ -3566,9 +3572,9 @@
    "grp": "init",
    "addr": "경기도 안양시 관양동 1485-18",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.401936,
+   "lng": 126.973461,
+   "geo": "addr"
   },
   {
    "name": "인덕원중학교(B블럭)",
@@ -3578,9 +3584,9 @@
    "grp": "init",
    "addr": "경기도 안양시 관양동 1491-59",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.400553,
+   "lng": 126.973876,
+   "geo": "addr"
   },
   {
    "name": "정우오승아파트",
@@ -3590,9 +3596,9 @@
    "grp": "init",
    "addr": "경기도 안양시 안양동 9111-1",
    "hshld": 471,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.386127,
+   "lng": 126.91565,
+   "geo": "dong"
   },
   {
    "name": "뉴골든아파트",
@@ -3602,9 +3608,9 @@
    "grp": "init",
    "addr": "경기도 안양시 안양동 1024-1",
    "hshld": 231,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.39017,
+   "lng": 126.910394,
+   "geo": "addr"
   },
   {
    "name": "금호타운아파트",
@@ -3614,9 +3620,9 @@
    "grp": "init",
    "addr": "경기도 안양시 박달동 149-1",
    "hshld": 793,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.399046,
+   "lng": 126.901512,
+   "geo": "addr"
   },
   {
    "name": "박달우성아파트",
@@ -3626,9 +3632,9 @@
    "grp": "init",
    "addr": "경기도 안양시 박달동 85",
    "hshld": 1020,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.400466,
+   "lng": 126.907957,
+   "geo": "addr"
   },
   {
    "name": "삼천리태하양수아파트",
@@ -3638,9 +3644,9 @@
    "grp": "init",
    "addr": "경기도 안양시 호계동 843-1",
    "hshld": 296,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.363432,
+   "lng": 126.965226,
+   "geo": "addr"
   },
   {
    "name": "푸른마을삼성아파트",
@@ -3650,9 +3656,9 @@
    "grp": "init",
    "addr": "경기도 안양시 호계동 931",
    "hshld": 245,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.380052,
+   "lng": 126.952192,
+   "geo": "addr"
   },
   {
    "name": "호계럭키아파트",
@@ -3662,9 +3668,9 @@
    "grp": "init",
    "addr": "경기도 안양시 동안구 호계동 570",
    "hshld": 794,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.376026,
+   "lng": 126.951269,
+   "geo": "addr"
   },
   {
    "name": "안양9동행정복지센터 주변",
@@ -3674,9 +3680,9 @@
    "grp": "init",
    "addr": "경기도 안양시 안양9동 1031-27",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.38975,
+   "lng": 126.908821,
+   "geo": "addr"
   },
   {
    "name": "성결대학교 주변",
@@ -3686,9 +3692,9 @@
    "grp": "init",
    "addr": "경기도 안양시 안양8동 410-10",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.382233,
+   "lng": 126.928515,
+   "geo": "addr"
   },
   {
    "name": "대흥아파트 주변",
@@ -3698,9 +3704,9 @@
    "grp": "init",
    "addr": "경기도 안양시 박달1동 9-27",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.403667,
+   "lng": 126.909129,
+   "geo": "kw"
   },
   {
    "name": "수촌마을(A블럭)",
@@ -3710,9 +3716,9 @@
    "grp": "init",
    "addr": "경기도 안양시 관양동 1392",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.407021,
+   "lng": 126.954977,
+   "geo": "addr"
   },
   {
    "name": "수촌마을(B블럭)",
@@ -3722,9 +3728,9 @@
    "grp": "init",
    "addr": "경기도 안양시 관양동 1388-20",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.404752,
+   "lng": 126.954803,
+   "geo": "addr"
   },
   {
    "name": "관양초등학교 주변",
@@ -3734,9 +3740,9 @@
    "grp": "init",
    "addr": "경기도 안양시 관양동 1413-11",
    "hshld": 738,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.407223,
+   "lng": 126.961086,
+   "geo": "addr"
   },
   {
    "name": "부림마을",
@@ -3746,9 +3752,9 @@
    "grp": "init",
    "addr": "경기도 안양시 관양동 1471",
    "hshld": 1275,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.403495,
+   "lng": 126.969716,
+   "geo": "addr"
   },
   {
    "name": "중촌마을",
@@ -3758,9 +3764,9 @@
    "grp": "init",
    "addr": "경기도 안양시 관양동 1425",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.405432,
+   "lng": 126.962717,
+   "geo": "addr"
   },
   {
    "name": "무림아파트",
@@ -3770,9 +3776,9 @@
    "grp": "init",
    "addr": "경기도 안양시 석수동 275-2",
    "hshld": 202,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.415842,
+   "lng": 126.909449,
+   "geo": "addr"
   },
   {
    "name": "박달신안아파트",
@@ -3782,9 +3788,9 @@
    "grp": "init",
    "addr": "경기도 안양시 박달동 152",
    "hshld": 385,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.400925,
+   "lng": 126.899701,
+   "geo": "addr"
   },
   {
    "name": "석수럭키아파트",
@@ -3794,9 +3800,9 @@
    "grp": "init",
    "addr": "경기도 안양시 만안구 석수동 296",
    "hshld": 735,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.409329,
+   "lng": 126.907859,
+   "geo": "addr"
   },
   {
    "name": "진흥5차아파트",
@@ -3806,9 +3812,9 @@
    "grp": "init",
    "addr": "경기도 안양시 만안구 안양동 908-4",
    "hshld": 432,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.400545,
+   "lng": 126.911413,
+   "geo": "addr"
   },
   {
    "name": "프라자아파트",
@@ -3818,9 +3824,9 @@
    "grp": "init",
    "addr": "경기도 안양시 만안구 안양동 762-2",
    "hshld": 658,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.393668,
+   "lng": 126.912153,
+   "geo": "addr"
   },
   {
    "name": "벽산아파트",
@@ -3830,9 +3836,9 @@
    "grp": "init",
    "addr": "경기도 안양시 만안구 안양동 627-72",
    "hshld": 275,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.39639,
+   "lng": 126.922224,
+   "geo": "addr"
   },
   {
    "name": "충훈부 일원",
@@ -3842,9 +3848,9 @@
    "grp": "init",
    "addr": "경기도 안양시 만안구 석수동 768-6",
    "hshld": 2473,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.406044,
+   "lng": 126.897015,
+   "geo": "addr"
   },
   {
    "name": "종합운동장 동측",
@@ -3854,9 +3860,9 @@
    "grp": "mid",
    "addr": "경기도 안양시 동안구 비산동 1047-20",
    "hshld": 1329,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.404754,
+   "lng": 126.951962,
+   "geo": "addr"
   },
   {
    "name": "종합운동장 북측",
@@ -3866,9 +3872,9 @@
    "grp": "mid",
    "addr": "경기도 안양시 동안구 비산동 1015-22",
    "hshld": 910,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.407745,
+   "lng": 126.948294,
+   "geo": "addr"
   },
   {
    "name": "현대아파트",
@@ -3878,9 +3884,9 @@
    "grp": "mid",
    "addr": "경기도 안양시 동안구 관양1동 1396",
    "hshld": 904,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.407772,
+   "lng": 126.958044,
+   "geo": "addr"
   },
   {
    "name": "상록",
@@ -3890,9 +3896,9 @@
    "grp": "mid",
    "addr": "경기도 안양시 만안구 안양8동 398-32",
    "hshld": 1103,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.381029,
+   "lng": 126.931087,
+   "geo": "addr"
   },
   {
    "name": "향림아파트",
@@ -3902,9 +3908,9 @@
    "grp": "mid",
    "addr": "경기도 안양시 안양시 만안구 안양동43-1",
    "hshld": 251,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.413533,
+   "lng": 126.919108,
+   "geo": "addr"
   },
   {
    "name": "미륭아파트",
@@ -3914,9 +3920,9 @@
    "grp": "mid",
    "addr": "경기도 안양시 동안구 비산2동 406",
    "hshld": 576,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.398433,
+   "lng": 126.943108,
+   "geo": "addr"
   },
   {
    "name": "박달신한아파트",
@@ -3926,9 +3932,9 @@
    "grp": "build",
    "addr": "경기도 안양시 만안구 박달2동 111-1",
    "hshld": 370,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.403852,
+   "lng": 126.904725,
+   "geo": "addr"
   },
   {
    "name": "안양역세권",
@@ -3938,9 +3944,9 @@
    "grp": "build",
    "addr": "경기도 안양시 만안구 안양2동 841-5",
    "hshld": 449,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.404454,
+   "lng": 126.918193,
+   "geo": "addr"
   },
   {
    "name": "뉴타운맨션 삼호아파트",
@@ -3950,9 +3956,9 @@
    "grp": "build",
    "addr": "경기도 안양시 동안구 비산3동 354-10",
    "hshld": 2052,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.402244,
+   "lng": 126.945087,
+   "geo": "addr"
   },
   {
    "name": "화창",
@@ -3962,9 +3968,9 @@
    "grp": "build",
    "addr": "경기도 안양시 만안구 석수2동 348",
    "hshld": 359,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.413917,
+   "lng": 126.909338,
+   "geo": "dong"
   },
   {
    "name": "비산초교 주변",
@@ -3974,9 +3980,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 비산3동 281-1",
    "hshld": 1950,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.407485,
+   "lng": 126.943753,
+   "geo": "addr"
   },
   {
    "name": "삼신6차아파트",
@@ -3986,9 +3992,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계3동 651-1",
    "hshld": 332,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.367609,
+   "lng": 126.95116,
+   "geo": "addr"
   },
   {
    "name": "진흥아파트",
@@ -3998,9 +4004,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양1동 97-3",
    "hshld": 1998,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.39859,
+   "lng": 126.927595,
+   "geo": "addr"
   },
   {
    "name": "융창아파트 주변",
@@ -4010,9 +4016,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계2동 929",
    "hshld": 1561,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.381271,
+   "lng": 126.949349,
+   "geo": "addr"
   },
   {
    "name": "호계온천 주변",
@@ -4022,9 +4028,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계2동 915",
    "hshld": 538,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.387792,
+   "lng": 126.948141,
+   "geo": "addr"
   },
   {
    "name": "냉천",
@@ -4034,9 +4040,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양5동 618",
    "hshld": 1771,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.391389,
+   "lng": 126.922837,
+   "geo": "addr"
   },
   {
    "name": "비산1동주민센터 주변",
@@ -4046,9 +4052,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 비산1동 554",
    "hshld": 137,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.399053,
+   "lng": 126.934419,
+   "geo": "dong"
   },
   {
    "name": "덕현",
@@ -4058,9 +4064,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계1동 992",
    "hshld": 2559,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.371641,
+   "lng": 126.961105,
+   "geo": "dong"
   },
   {
    "name": "삼영아파트 주변",
@@ -4070,9 +4076,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양2동 34-1",
    "hshld": 519,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.412459,
+   "lng": 126.916146,
+   "geo": "addr"
   },
   {
    "name": "예술공원입구 주변",
@@ -4082,9 +4088,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양2동 18-1",
    "hshld": 405,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.405097,
+   "lng": 126.917829,
+   "geo": "dong"
   },
   {
    "name": "구사거리",
@@ -4094,9 +4100,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계3동 661-1",
    "hshld": 620,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.367643,
+   "lng": 126.958605,
+   "geo": "dong"
   },
   {
    "name": "임곡3",
@@ -4106,9 +4112,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 비산1동 515-2",
    "hshld": 2229,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.399053,
+   "lng": 126.934419,
+   "geo": "dong"
   },
   {
    "name": "호원초등학교 주변",
@@ -4118,9 +4124,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계1동 956",
    "hshld": 2585,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.371641,
+   "lng": 126.961105,
+   "geo": "dong"
   },
   {
    "name": "소곡지구",
@@ -4130,9 +4136,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양6동 585-2",
    "hshld": 1068,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.390033,
+   "lng": 126.930579,
+   "geo": "dong"
   },
   {
    "name": "진흥로얄아파트",
@@ -4142,9 +4148,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 비산2동 577-1",
    "hshld": 239,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.397956,
+   "lng": 126.938752,
+   "geo": "dong"
   },
   {
    "name": "비산2동주민자치센터주변",
@@ -4154,9 +4160,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 비산2동 419-30",
    "hshld": 864,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.397954,
+   "lng": 126.938751,
+   "geo": "kw"
   },
   {
    "name": "덕천",
@@ -4166,9 +4172,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양7동 148-1",
    "hshld": 4910,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.391448,
+   "lng": 126.933708,
+   "geo": "dong"
   },
   {
    "name": "청원아파트주변",
@@ -4178,9 +4184,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양2동 80-4",
    "hshld": 247,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.405097,
+   "lng": 126.917829,
+   "geo": "dong"
   },
   {
    "name": "백조아파트지구",
@@ -4190,9 +4196,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수동 374-5",
    "hshld": 472,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.433123,
+   "lng": 126.904599,
+   "geo": "addr"
   },
   {
    "name": "호계주공아파트주변",
@@ -4202,9 +4208,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계1동 977",
    "hshld": 900,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.371641,
+   "lng": 126.961105,
+   "geo": "dong"
   },
   {
    "name": "주공아파트주변(단독주택)",
@@ -4214,9 +4220,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계1동 981",
    "hshld": 48,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.371641,
+   "lng": 126.961105,
+   "geo": "dong"
   },
   {
    "name": "석수한신아파트주변지구",
@@ -4226,9 +4232,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수동 417-3",
    "hshld": 577,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.432629,
+   "lng": 126.901016,
+   "geo": "addr"
   },
   {
    "name": "백조아파트지구",
@@ -4238,9 +4244,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수동 374-5",
    "hshld": 472,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.433123,
+   "lng": 126.904599,
+   "geo": "addr"
   },
   {
    "name": "석수주공2단지지구",
@@ -4250,9 +4256,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수3동 788",
    "hshld": 848,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.406575,
+   "lng": 126.902671,
+   "geo": "addr"
   },
   {
    "name": "석수주공3단지지구",
@@ -4262,9 +4268,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수3동 787",
    "hshld": 425,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.408125,
+   "lng": 126.898983,
+   "geo": "addr"
   },
   {
    "name": "박달1동 연합지구",
@@ -4274,9 +4280,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 박달1동 37",
    "hshld": 313,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.403667,
+   "lng": 126.909129,
+   "geo": "kw"
   },
   {
    "name": "동삼아파트지구",
@@ -4286,9 +4292,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수2동 485-8",
    "hshld": 224,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.426333,
+   "lng": 126.903298,
+   "geo": "addr"
   },
   {
    "name": "삼영아파트 주변",
@@ -4298,9 +4304,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양2동 34-1",
    "hshld": 519,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.412459,
+   "lng": 126.916146,
+   "geo": "addr"
   },
   {
    "name": "예술공원입구 주변",
@@ -4310,9 +4316,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양2동 18-1",
    "hshld": 405,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.405097,
+   "lng": 126.917829,
+   "geo": "dong"
   },
   {
    "name": "구사거리",
@@ -4322,9 +4328,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계3동 661-1",
    "hshld": 620,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.367643,
+   "lng": 126.958605,
+   "geo": "dong"
   },
   {
    "name": "임곡3",
@@ -4334,9 +4340,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 비산1동 515-2",
    "hshld": 2229,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.399053,
+   "lng": 126.934419,
+   "geo": "dong"
   },
   {
    "name": "호원초등학교 주변",
@@ -4346,9 +4352,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계1동 956",
    "hshld": 2585,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.371641,
+   "lng": 126.961105,
+   "geo": "dong"
   },
   {
    "name": "소곡지구",
@@ -4358,9 +4364,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양6동 585-2",
    "hshld": 1068,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.390033,
+   "lng": 126.930579,
+   "geo": "dong"
   },
   {
    "name": "진흥로얄아파트",
@@ -4370,9 +4376,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 비산2동 577-1",
    "hshld": 239,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.397956,
+   "lng": 126.938752,
+   "geo": "dong"
   },
   {
    "name": "비산2동주민자치센터주변",
@@ -4382,9 +4388,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 비산2동 419-30",
    "hshld": 864,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.397954,
+   "lng": 126.938751,
+   "geo": "kw"
   },
   {
    "name": "덕천",
@@ -4394,9 +4400,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양7동 148-1",
    "hshld": 4910,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.391448,
+   "lng": 126.933708,
+   "geo": "dong"
   },
   {
    "name": "청원아파트주변",
@@ -4406,9 +4412,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 안양2동 80-4",
    "hshld": 247,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.405097,
+   "lng": 126.917829,
+   "geo": "dong"
   },
   {
    "name": "주공아파트주변(단독주택)",
@@ -4418,9 +4424,9 @@
    "grp": "done",
    "addr": "경기도 안양시 동안구 호계1동 981",
    "hshld": 48,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.371641,
+   "lng": 126.961105,
+   "geo": "dong"
   },
   {
    "name": "석수한신아파트주변지구",
@@ -4430,9 +4436,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수동 417-3",
    "hshld": 577,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.432629,
+   "lng": 126.901016,
+   "geo": "addr"
   },
   {
    "name": "석수주공2단지지구",
@@ -4442,9 +4448,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수3동 788",
    "hshld": 848,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.406575,
+   "lng": 126.902671,
+   "geo": "addr"
   },
   {
    "name": "석수주공3단지지구",
@@ -4454,9 +4460,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수3동 787",
    "hshld": 425,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.408125,
+   "lng": 126.898983,
+   "geo": "addr"
   },
   {
    "name": "박달1동 연합지구",
@@ -4466,9 +4472,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 박달1동 37",
    "hshld": 313,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.403667,
+   "lng": 126.909129,
+   "geo": "kw"
   },
   {
    "name": "동삼아파트지구",
@@ -4478,9 +4484,9 @@
    "grp": "done",
    "addr": "경기도 안양시 만안구 석수2동 485-8",
    "hshld": 224,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.426333,
+   "lng": 126.903298,
+   "geo": "addr"
   },
   {
    "name": "오매장터",
@@ -4490,9 +4496,9 @@
    "grp": "done",
    "addr": "경기도 오산시 오산동 354-4번지 일원",
    "hshld": 433,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.153133,
+   "lng": 127.072856,
+   "geo": "dong"
   },
   {
    "name": "오산경일신안",
@@ -4502,9 +4508,9 @@
    "grp": "mid",
    "addr": "경기도 오산시 원동 785-1번지 일원",
    "hshld": 110,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.14324,
+   "lng": 127.071171,
+   "geo": "addr"
   },
   {
    "name": "기흥6",
@@ -4514,9 +4520,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 고매동 385-4",
    "hshld": 320,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.224542,
+   "lng": 127.099034,
+   "geo": "dong"
   },
   {
    "name": "신갈2",
@@ -4526,9 +4532,9 @@
    "grp": "done",
    "addr": "경기도 용인시 기흥구 신갈동 33-4",
    "hshld": 318,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.276221,
+   "lng": 127.108609,
+   "geo": "addr"
   },
   {
    "name": "상갈1",
@@ -4538,9 +4544,9 @@
    "grp": "done",
    "addr": "경기도 용인시 기흥구 상갈동 102-5",
    "hshld": 218,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.267715,
+   "lng": 127.106112,
+   "geo": "addr"
   },
   {
    "name": "마평1",
@@ -4550,9 +4556,9 @@
    "grp": "done",
    "addr": "경기도 용인시 처인구 마평동 732",
    "hshld": 352,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.236473,
+   "lng": 127.210946,
+   "geo": "addr"
   },
   {
    "name": "삼가1",
@@ -4562,9 +4568,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 삼가동 110",
    "hshld": 145,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.23832,
+   "lng": 127.162217,
+   "geo": "dong"
   },
   {
    "name": "용인2",
@@ -4574,9 +4580,9 @@
    "grp": "done",
    "addr": "경기도 용인시 처인구 역북동 795",
    "hshld": 209,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.23892,
+   "lng": 127.197662,
+   "geo": "addr"
   },
   {
    "name": "용인3(역북1)",
@@ -4586,9 +4592,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 역북동 454 (동일)",
    "hshld": 562,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.246204,
+   "lng": 127.188112,
+   "geo": "dong"
   },
   {
    "name": "김량장1",
@@ -4598,9 +4604,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 김량장동 226-6",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.237213,
+   "lng": 127.202676,
+   "geo": "addr"
   },
   {
    "name": "마평2",
@@ -4610,9 +4616,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 마평동 612-4",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.230248,
+   "lng": 127.232691,
+   "geo": "dong"
   },
   {
    "name": "고림2",
@@ -4622,9 +4628,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 고림동 794-29",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.23884,
+   "lng": 127.215875,
+   "geo": "addr"
   },
   {
    "name": "수지5",
@@ -4634,9 +4640,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 693",
    "hshld": 576,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.32623,
+   "lng": 127.088476,
+   "geo": "addr"
   },
   {
    "name": "마북1",
@@ -4646,9 +4652,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 마북동 295-7",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.296702,
+   "lng": 127.117109,
+   "geo": "addr"
   },
   {
    "name": "처인1",
@@ -4658,9 +4664,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 김량장동 201-3",
    "hshld": 91,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.240466,
+   "lng": 127.201578,
+   "geo": "addr"
   },
   {
    "name": "처인2",
@@ -4670,9 +4676,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 마평동 605-1",
    "hshld": 290,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.231995,
+   "lng": 127.214203,
+   "geo": "addr"
   },
   {
    "name": "처인3",
@@ -4682,9 +4688,9 @@
    "grp": "init",
    "addr": "경기도 용인시 이동읍 천리 118-1",
    "hshld": 202,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.189047,
+   "lng": 127.20955,
+   "geo": "addr"
   },
   {
    "name": "수지4",
@@ -4694,9 +4700,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 690",
    "hshld": 368,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.328509,
+   "lng": 127.091048,
+   "geo": "addr"
   },
   {
    "name": "기흥8",
@@ -4706,9 +4712,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 신갈동 14-4",
    "hshld": 247,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.278461,
+   "lng": 127.107201,
+   "geo": "addr"
   },
   {
    "name": "기흥7",
@@ -4718,9 +4724,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 구갈동 396",
    "hshld": 624,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.278834,
+   "lng": 127.112503,
+   "geo": "addr"
   },
   {
    "name": "김량주공아파트(용인1구역)",
@@ -4730,9 +4736,9 @@
    "grp": "done",
    "addr": "경기도 용인시 처인구 김량장동 526",
    "hshld": 450,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.236329,
+   "lng": 127.196842,
+   "geo": "addr"
   },
   {
    "name": "신갈주공아파트(기흥2구역)",
@@ -4742,9 +4748,9 @@
    "grp": "done",
    "addr": "경기도 용인시 기흥구 신갈동 733",
    "hshld": 560,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.281821,
+   "lng": 127.110303,
+   "geo": "addr"
   },
   {
    "name": "용인9",
@@ -4754,9 +4760,9 @@
    "grp": "done",
    "addr": "경기도 용인시 처인구 마평동 740",
    "hshld": 211,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.230248,
+   "lng": 127.232691,
+   "geo": "dong"
   },
   {
    "name": "용인10",
@@ -4766,9 +4772,9 @@
    "grp": "done",
    "addr": "경기도 용인시 처인구 마평동 601",
    "hshld": 242,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.230248,
+   "lng": 127.232691,
+   "geo": "dong"
   },
   {
    "name": "양지1",
@@ -4778,9 +4784,9 @@
    "grp": "done",
    "addr": "경기도 용인시 처인구 양지면 양지리 383",
    "hshld": 175,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.235473,
+   "lng": 127.279849,
+   "geo": "dong"
   },
   {
    "name": "포곡1",
@@ -4790,9 +4796,9 @@
    "grp": "done",
    "addr": "경기도 용인시 처인구 포곡읍 전대리 150",
    "hshld": 134,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.277794,
+   "lng": 127.230844,
+   "geo": "dong"
   },
   {
    "name": "처인6",
@@ -4802,9 +4808,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 김량장동 4-2",
    "hshld": 755,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.229858,
+   "lng": 127.211712,
+   "geo": "addr"
   },
   {
    "name": "기흥3",
@@ -4814,9 +4820,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 구갈동 385",
    "hshld": 205,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.276922,
+   "lng": 127.112725,
+   "geo": "addr"
   },
   {
    "name": "기흥4",
@@ -4826,9 +4832,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 신갈동 116-2",
    "hshld": 299,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.280286,
+   "lng": 127.109991,
+   "geo": "addr"
   },
   {
    "name": "기흥5",
@@ -4838,9 +4844,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 구갈동 384-1",
    "hshld": 200,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.276753,
+   "lng": 127.114776,
+   "geo": "addr"
   },
   {
    "name": "삼가2",
@@ -4850,9 +4856,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 삼가동 216",
    "hshld": 53,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.23832,
+   "lng": 127.162217,
+   "geo": "dong"
   },
   {
    "name": "처인4",
@@ -4862,9 +4868,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 유방동 1007-1",
    "hshld": 375,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.265072,
+   "lng": 127.2161,
+   "geo": "addr"
   },
   {
    "name": "처인5",
@@ -4874,9 +4880,9 @@
    "grp": "init",
    "addr": "경기도 용인시 처인구 유방동 1007-50",
    "hshld": 330,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.264362,
+   "lng": 127.216445,
+   "geo": "addr"
   },
   {
    "name": "수지9",
@@ -4886,9 +4892,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 694",
    "hshld": 190,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.326867,
+   "lng": 127.086342,
+   "geo": "addr"
   },
   {
    "name": "수지8",
@@ -4898,9 +4904,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 692",
    "hshld": 619,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.326472,
+   "lng": 127.090677,
+   "geo": "addr"
   },
   {
    "name": "수지7",
@@ -4910,9 +4916,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 700-1",
    "hshld": 1168,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.326272,
+   "lng": 127.09429,
+   "geo": "addr"
   },
   {
    "name": "수지6",
@@ -4922,9 +4928,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 664",
    "hshld": 1620,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.331502,
+   "lng": 127.096363,
+   "geo": "addr"
   },
   {
    "name": "수지11",
@@ -4934,9 +4940,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 699",
    "hshld": 416,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.323801,
+   "lng": 127.093881,
+   "geo": "addr"
   },
   {
    "name": "수지10",
@@ -4946,9 +4952,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 703",
    "hshld": 470,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.325501,
+   "lng": 127.098153,
+   "geo": "addr"
   },
   {
    "name": "수지12",
@@ -4958,9 +4964,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 691",
    "hshld": 612,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.327559,
+   "lng": 127.092912,
+   "geo": "addr"
   },
   {
    "name": "기흥1",
@@ -4970,9 +4976,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 구갈동 380",
    "hshld": 570,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.278684,
+   "lng": 127.114875,
+   "geo": "addr"
   },
   {
    "name": "기흥2",
@@ -4982,9 +4988,9 @@
    "grp": "init",
    "addr": "경기도 용인시 기흥구 구갈동 385-1",
    "hshld": 384,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.276222,
+   "lng": 127.113245,
+   "geo": "addr"
   },
   {
    "name": "수지1",
@@ -4994,9 +5000,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 663-1",
    "hshld": 1137,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.330822,
+   "lng": 127.093954,
+   "geo": "addr"
   },
   {
    "name": "수지3",
@@ -5006,9 +5012,9 @@
    "grp": "init",
    "addr": "경기도 용인시 수지구 풍덕천동 692-1",
    "hshld": 420,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.327185,
+   "lng": 127.091374,
+   "geo": "addr"
   },
   {
    "name": "수지2",
@@ -5018,9 +5024,9 @@
    "grp": "mid",
    "addr": "경기도 용인시 수지구 풍덕천동 698-2",
    "hshld": 774,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.324869,
+   "lng": 127.093111,
+   "geo": "addr"
   },
   {
    "name": "모현1",
@@ -5030,9 +5036,9 @@
    "grp": "mid",
    "addr": "경기도 용인시 처인구 모현읍 왕산리 789",
    "hshld": 242,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.329645,
+   "lng": 127.242349,
+   "geo": "dong"
   },
   {
    "name": "용인7",
@@ -5042,9 +5048,9 @@
    "grp": "mid",
    "addr": "경기도 용인시 처인구 김량장동 159",
    "hshld": 143,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.235278,
+   "lng": 127.201914,
+   "geo": "dong"
   },
   {
    "name": "이동2",
@@ -5054,9 +5060,9 @@
    "grp": "build",
    "addr": "경기도 용인시 처인구 이동읍 천리 748-2",
    "hshld": 105,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.193721,
+   "lng": 127.208511,
+   "geo": "addr"
   },
   {
    "name": "고림1",
@@ -5066,9 +5072,9 @@
    "grp": "build",
    "addr": "경기도 용인시 처인구 고림동 772-20",
    "hshld": 112,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.23761,
+   "lng": 127.217812,
+   "geo": "addr"
   },
   {
    "name": "풍덕천1",
@@ -5078,9 +5084,9 @@
    "grp": "build",
    "addr": "경기도 용인시 수지구 풍덕천동 678-1",
    "hshld": 215,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.331848,
+   "lng": 127.100517,
+   "geo": "addr"
   },
   {
    "name": "용인8",
@@ -5090,9 +5096,9 @@
    "grp": "build",
    "addr": "경기도 용인시 처인구 김량장동 309-1",
    "hshld": 603,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.233478,
+   "lng": 127.206161,
+   "geo": "addr"
   },
   {
    "name": "부곡가구역",
@@ -5102,9 +5108,9 @@
    "grp": "mid",
    "addr": "경기도 의왕시 삼동 192-244번지일원",
    "hshld": 961,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.321755,
+   "lng": 126.9515,
+   "geo": "addr"
   },
   {
    "name": "부곡다구역",
@@ -5114,9 +5120,9 @@
    "grp": "mid",
    "addr": "경기도 의왕시 삼동 146번지일원",
    "hshld": 1324,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.316712,
+   "lng": 126.952969,
+   "geo": "addr"
   },
   {
    "name": "오전라구역",
@@ -5126,9 +5132,9 @@
    "grp": "mid",
    "addr": "경기도 의왕시 오전동 323-3번지 일원",
    "hshld": 161,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.351259,
+   "lng": 126.972748,
+   "geo": "addr"
   },
   {
    "name": "고천나구역",
@@ -5138,9 +5144,9 @@
    "grp": "mid",
    "addr": "경기도 의왕시 고천동 265번지 일원",
    "hshld": 737,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.347536,
+   "lng": 126.975953,
+   "geo": "addr"
   },
   {
    "name": "오전다구역",
@@ -5150,9 +5156,9 @@
    "grp": "mid",
    "addr": "경기도 의왕시 오전동 350-1번지일원",
    "hshld": 1763,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.351617,
+   "lng": 126.975093,
+   "geo": "addr"
   },
   {
    "name": "고천가구역",
@@ -5162,9 +5168,9 @@
    "grp": "mid",
    "addr": "경기도 의왕시 고천동 276-8번지일원",
    "hshld": 149,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.347252,
+   "lng": 126.975103,
+   "geo": "addr"
   },
   {
    "name": "내손라구역",
@@ -5174,9 +5180,9 @@
    "grp": "build",
    "addr": "경기도 의왕시 내손동 661번지일원",
    "hshld": 1360,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.392024,
+   "lng": 126.98377,
+   "geo": "addr"
   },
   {
    "name": "내손다구역",
@@ -5186,9 +5192,9 @@
    "grp": "build",
    "addr": "경기도 의왕시 내손동 683번지일원",
    "hshld": 1397,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.385214,
+   "lng": 126.980122,
+   "geo": "addr"
   },
   {
    "name": "오전나구역",
@@ -5198,9 +5204,9 @@
    "grp": "build",
    "addr": "경기도 의왕시 오전동 32-5번지일원",
    "hshld": 233,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.360897,
+   "lng": 126.964956,
+   "geo": "addr"
   },
   {
    "name": "오전가구역",
@@ -5210,9 +5216,9 @@
    "grp": "done",
    "addr": "경기도 의왕시 오전동 52번지일원",
    "hshld": 654,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.353598,
+   "lng": 126.971579,
+   "geo": "dong"
   },
   {
    "name": "청화아파트",
@@ -5222,9 +5228,9 @@
    "grp": "done",
    "addr": "경기도 의왕시 포일동 643번지",
    "hshld": 420,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.3913,
+   "lng": 126.979789,
+   "geo": "addr"
   },
   {
    "name": "오전마구역",
@@ -5234,9 +5240,9 @@
    "grp": "done",
    "addr": "경기도 의왕시 오전동 324-4번지일원",
    "hshld": 41,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.353598,
+   "lng": 126.971579,
+   "geo": "dong"
   },
   {
    "name": "포일주공아파트",
@@ -5246,9 +5252,9 @@
    "grp": "done",
    "addr": "경기도 의왕시 내손동 844번지 일원",
    "hshld": 2230,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.38481,
+   "lng": 126.974627,
+   "geo": "addr"
   },
   {
    "name": "의왕내손주택",
@@ -5258,9 +5264,9 @@
    "grp": "done",
    "addr": "경기도 의왕시 내손동 842번지",
    "hshld": 519,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.388106,
+   "lng": 126.976585,
+   "geo": "addr"
   },
   {
    "name": "인스빌아파트",
@@ -5270,9 +5276,9 @@
    "grp": "init",
    "addr": "경기도 의왕시 왕곡동 592번지 일원",
    "hshld": 504,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.346723,
+   "lng": 126.980962,
+   "geo": "addr"
   },
   {
    "name": "백합목련아파트",
@@ -5282,9 +5288,9 @@
    "grp": "init",
    "addr": "경기도 의왕시 오전동 842번지 일원",
    "hshld": 814,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.355034,
+   "lng": 126.970486,
+   "geo": "addr"
   },
   {
    "name": "인덕원삼호아파트",
@@ -5294,9 +5300,9 @@
    "grp": "init",
    "addr": "경기도 의왕시 포일동 441-2번지 일원",
    "hshld": 684,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.397035,
+   "lng": 126.981111,
+   "geo": "addr"
   },
   {
    "name": "신안아파트",
@@ -5306,9 +5312,9 @@
    "grp": "init",
    "addr": "경기도 의왕시 오전동 216-1번지 일원",
    "hshld": 576,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.35776,
+   "lng": 126.967525,
+   "geo": "addr"
   },
   {
    "name": "장미아파트",
@@ -5318,9 +5324,9 @@
    "grp": "init",
    "addr": "경기도 의왕시 삼동 462-32번지 일원",
    "hshld": 520,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.322774,
+   "lng": 126.955814,
+   "geo": "addr"
   },
   {
    "name": "동백아파트",
@@ -5330,9 +5336,9 @@
    "grp": "init",
    "addr": "경기도 의왕시 오전동 849 일원",
    "hshld": 1074,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.35655,
+   "lng": 126.971211,
+   "geo": "addr"
   },
   {
    "name": "왕곡지역",
@@ -5342,9 +5348,9 @@
    "grp": "init",
    "addr": "경기도 의왕시 왕곡동 600번지 일원",
    "hshld": 1578,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.343632,
+   "lng": 126.977966,
+   "geo": "addr"
   },
   {
    "name": "무궁화아파트",
@@ -5354,9 +5360,9 @@
    "grp": "init",
    "addr": "경기도 의왕시 오전동 854 일원",
    "hshld": 370,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.35124,
+   "lng": 126.978982,
+   "geo": "addr"
   },
   {
    "name": "대우사원주택",
@@ -5366,9 +5372,9 @@
    "grp": "done",
    "addr": "경기도 의왕시 내손동 627번지일원",
    "hshld": 1276,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.378262,
+   "lng": 126.975693,
+   "geo": "dong"
   },
   {
    "name": "가능6구역",
@@ -5378,9 +5384,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 가능동 665-7번지 일원",
    "hshld": 179,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.747948,
+   "lng": 127.035576,
+   "geo": "addr"
   },
   {
    "name": "중앙1구역",
@@ -5390,9 +5396,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 의정부동 365-22번지 일원",
    "hshld": 328,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.733722,
+   "lng": 127.052987,
+   "geo": "addr"
   },
   {
    "name": "가능3구역",
@@ -5402,9 +5408,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 가능동 681-2번지 일원",
    "hshld": 789,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.748237,
+   "lng": 127.032962,
+   "geo": "addr"
   },
   {
    "name": "가능4구역",
@@ -5414,9 +5420,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 가능동 606-18번지 일원",
    "hshld": 634,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.751538,
+   "lng": 127.03633,
+   "geo": "addr"
   },
   {
    "name": "장암1구역",
@@ -5426,9 +5432,9 @@
    "grp": "build",
    "addr": "경기도 의정부시 신곡동 571-1번지 일원",
    "hshld": 209,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.737542,
+   "lng": 127.055494,
+   "geo": "addr"
   },
   {
    "name": "중앙3구역",
@@ -5438,9 +5444,9 @@
    "grp": "done",
    "addr": "경기도 의정부시 의정부동 394-11번지 일원",
    "hshld": 759,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.730119,
+   "lng": 127.050472,
+   "geo": "addr"
   },
   {
    "name": "가능1구역",
@@ -5450,9 +5456,9 @@
    "grp": "done",
    "addr": "경기도 의정부시 가능동 581-1번지 일원",
    "hshld": 245,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.750644,
+   "lng": 127.038616,
+   "geo": "dong"
   },
   {
    "name": "중앙2구역",
@@ -5462,9 +5468,9 @@
    "grp": "done",
    "addr": "경기도 의정부시 의정부동 380번지 일원",
    "hshld": 1858,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.73464,
+   "lng": 127.034034,
+   "geo": "dong"
   },
   {
    "name": "가능2구역",
@@ -5474,9 +5480,9 @@
    "grp": "done",
    "addr": "경기도 의정부시 가능동 224-24번지 일원",
    "hshld": 175,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.750644,
+   "lng": 127.038616,
+   "geo": "dong"
   },
   {
    "name": "장암4구역",
@@ -5486,9 +5492,9 @@
    "grp": "done",
    "addr": "경기도 의정부시 장암동 34-1번지 일원",
    "hshld": 174,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.726398,
+   "lng": 127.054271,
+   "geo": "dong"
   },
   {
    "name": "송산1구역",
@@ -5498,9 +5504,9 @@
    "grp": "done",
    "addr": "경기도 의정부시 용현동 241번지 일원",
    "hshld": 1580,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.733868,
+   "lng": 127.079978,
+   "geo": "dong"
   },
   {
    "name": "안말2",
@@ -5510,9 +5516,9 @@
    "grp": "done",
    "addr": "경기도 의정부시 호원동 252번지 일원",
    "hshld": 108,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.713292,
+   "lng": 127.042955,
+   "geo": "addr"
   },
   {
    "name": "의정부9구역",
@@ -5522,9 +5528,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 의정부동 404-13번지 일원",
    "hshld": 952,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.745324,
+   "lng": 127.040216,
+   "geo": "addr"
   },
   {
    "name": "가능중앙구역",
@@ -5534,9 +5540,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 가능동 619번지 일원",
    "hshld": 903,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.751444,
+   "lng": 127.03796,
+   "geo": "addr"
   },
   {
    "name": "가재울구역",
@@ -5546,9 +5552,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 가능동 28-3번지 일원",
    "hshld": 105,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.753262,
+   "lng": 127.04338,
+   "geo": "addr"
   },
   {
    "name": "장암2구역",
@@ -5558,9 +5564,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 신곡동 602-13번지 일원",
    "hshld": 779,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.73497,
+   "lng": 127.05628,
+   "geo": "addr"
   },
   {
    "name": "가능8구역",
@@ -5570,9 +5576,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 nan",
    "hshld": 1016,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.738057,
+   "lng": 127.033899,
+   "geo": "sigun"
   },
   {
    "name": "호원2구역",
@@ -5582,9 +5588,9 @@
    "grp": "mid",
    "addr": "경기도 의정부시 호원동 250-17번지 일원",
    "hshld": 442,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.712822,
+   "lng": 127.044245,
+   "geo": "addr"
   },
   {
    "name": "장암6구역",
@@ -5594,9 +5600,9 @@
    "grp": "mid",
    "addr": "경기도 의정부시 신곡동 351-12번지 일원",
    "hshld": 255,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.731384,
+   "lng": 127.059648,
+   "geo": "addr"
   },
   {
    "name": "의정부역2구역",
@@ -5606,9 +5612,9 @@
    "grp": "mid",
    "addr": "경기도 의정부시 의정부동 584-9번지 일원",
    "hshld": 353,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.732062,
+   "lng": 127.045757,
+   "geo": "addr"
   },
   {
    "name": "가능11구역",
@@ -5618,9 +5624,9 @@
    "grp": "init",
    "addr": "경기도 의정부시 가능동 355-3번지 일원",
    "hshld": 47,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.753197,
+   "lng": 127.031271,
+   "geo": "addr"
   },
   {
    "name": "장암5구역",
@@ -5630,9 +5636,9 @@
    "grp": "mid",
    "addr": "경기도 의정부시 신곡동 406번지 일원",
    "hshld": 912,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.733604,
+   "lng": 127.063153,
+   "geo": "addr"
   },
   {
    "name": "장암3구역",
@@ -5642,9 +5648,9 @@
    "grp": "build",
    "addr": "경기도 의정부시 신곡동 435-3번지 일원",
    "hshld": 460,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.735197,
+   "lng": 127.059861,
+   "geo": "addr"
   },
   {
    "name": "금오1구역",
@@ -5654,9 +5660,9 @@
    "grp": "build",
    "addr": "경기도 의정부시 금오동 65-3번지 일원",
    "hshld": 432,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.758267,
+   "lng": 127.076572,
+   "geo": "addr"
   },
   {
    "name": "이천관고동",
@@ -5666,9 +5672,9 @@
    "grp": "mid",
    "addr": "경기도 이천시 관고동 226번지 일원",
    "hshld": 284,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.281295,
+   "lng": 127.434959,
+   "geo": "addr"
   },
   {
    "name": "협신연립",
@@ -5678,9 +5684,9 @@
    "grp": "build",
    "addr": "경기도 파주시 아동동 275-13",
    "hshld": 96,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.770001,
+   "lng": 126.777422,
+   "geo": "addr"
   },
   {
    "name": "문산3리지구",
@@ -5690,9 +5696,9 @@
    "grp": "mid",
    "addr": "경기도 파주시 문산읍 문산리81-61 일원",
    "hshld": 285,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.860076,
+   "lng": 126.784531,
+   "geo": "addr"
   },
   {
    "name": "문산1-5",
@@ -5702,9 +5708,9 @@
    "grp": "mid",
    "addr": "경기도 파주시 문산읍 문산리 31-1번지일원",
    "hshld": 394,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.855756,
+   "lng": 126.782959,
+   "geo": "addr"
   },
   {
    "name": "금촌2동제2지구",
@@ -5714,9 +5720,9 @@
    "grp": "build",
    "addr": "경기도 파주시 금촌동 337-15",
    "hshld": 319,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.762212,
+   "lng": 126.772342,
+   "geo": "addr"
   },
   {
    "name": "새말지구",
@@ -5726,9 +5732,9 @@
    "grp": "mid",
    "addr": "경기도 파주시 금촌동390-36",
    "hshld": 950,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.768362,
+   "lng": 126.772542,
+   "geo": "addr"
   },
   {
    "name": "초원연립",
@@ -5738,9 +5744,9 @@
    "grp": "done",
    "addr": "경기도 파주시 문산읍 당동리 산38-1, 산38-8",
    "hshld": 37,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.85655,
+   "lng": 126.790958,
+   "geo": "dong"
   },
   {
    "name": "율목지구",
@@ -5750,9 +5756,9 @@
    "grp": "mid",
    "addr": "경기도 파주시 금촌동341",
    "hshld": 304,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.761411,
+   "lng": 126.772085,
+   "geo": "addr"
   },
   {
    "name": "합정1",
@@ -5762,9 +5768,9 @@
    "grp": "init",
    "addr": "경기도 평택시 합정동 829",
    "hshld": 1164,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 36.989852,
+   "lng": 127.090668,
+   "geo": "addr"
   },
   {
    "name": "세교지구",
@@ -5774,9 +5780,9 @@
    "grp": "done",
    "addr": "경기도 평택시 평택시 세교동 123",
    "hshld": 85,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 36.999844,
+   "lng": 127.082479,
+   "geo": "dong"
   },
   {
    "name": "지산지구",
@@ -5786,9 +5792,9 @@
    "grp": "done",
    "addr": "경기도 평택시 평택시 지산동 692",
    "hshld": 148,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.076806,
+   "lng": 127.059708,
+   "geo": "addr"
   },
   {
    "name": "서정주공2",
@@ -5798,9 +5804,9 @@
    "grp": "done",
    "addr": "경기도 평택시 서정동 13",
    "hshld": 450,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.067769,
+   "lng": 127.054711,
+   "geo": "dong"
   },
   {
    "name": "서정주공1",
@@ -5810,9 +5816,9 @@
    "grp": "done",
    "addr": "경기도 평택시 서정동 241",
    "hshld": 582,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.067769,
+   "lng": 127.054711,
+   "geo": "dong"
   },
   {
    "name": "비전주공2",
@@ -5822,9 +5828,9 @@
    "grp": "done",
    "addr": "경기도 평택시 비전동 143",
    "hshld": 810,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.000609,
+   "lng": 127.095251,
+   "geo": "dong"
   },
   {
    "name": "비전주공1",
@@ -5834,9 +5840,9 @@
    "grp": "done",
    "addr": "경기도 평택시 비전동 488",
    "hshld": 450,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.000609,
+   "lng": 127.095251,
+   "geo": "dong"
   },
   {
    "name": "두정지구",
@@ -5846,9 +5852,9 @@
    "grp": "done",
    "addr": "경기도 평택시 팽성읍 두정리 45-2",
    "hshld": null,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 36.9401,
+   "lng": 127.038011,
+   "geo": "addr"
   },
   {
    "name": "서정연립",
@@ -5858,9 +5864,9 @@
    "grp": "done",
    "addr": "경기도 평택시 서정동 780",
    "hshld": 420,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.067769,
+   "lng": 127.054711,
+   "geo": "dong"
   },
   {
    "name": "합정주공",
@@ -5870,9 +5876,9 @@
    "grp": "build",
    "addr": "경기도 평택시 합정동 835",
    "hshld": 1374,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 36.990053,
+   "lng": 127.096376,
+   "geo": "addr"
   },
   {
    "name": "세교1구역",
@@ -5882,9 +5888,9 @@
    "grp": "mid",
    "addr": "경기도 평택시 세교동 202-5",
    "hshld": 453,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.00299,
+   "lng": 127.075672,
+   "geo": "addr"
   },
   {
    "name": "송원.현대연립",
@@ -5894,9 +5900,9 @@
    "grp": "mid",
    "addr": "경기도 평택시 독곡동 359-5",
    "hshld": 156,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.084017,
+   "lng": 127.061019,
+   "geo": "addr"
   },
   {
    "name": "통복1",
@@ -5906,9 +5912,9 @@
    "grp": "init",
    "addr": "경기도 평택시 통복동 35-3",
    "hshld": 0,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 36.999493,
+   "lng": 127.087974,
+   "geo": "addr"
   },
   {
    "name": "독곡1",
@@ -5918,9 +5924,9 @@
    "grp": "init",
    "addr": "경기도 평택시 독곡동 464",
    "hshld": 483,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.08324,
+   "lng": 127.060851,
+   "geo": "addr"
   },
   {
    "name": "지산1",
@@ -5930,9 +5936,9 @@
    "grp": "init",
    "addr": "경기도 평택시 지산동 1029",
    "hshld": 360,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.081402,
+   "lng": 127.061382,
+   "geo": "addr"
   },
   {
    "name": "지산2",
@@ -5942,9 +5948,9 @@
    "grp": "init",
    "addr": "경기도 평택시 지산동 1089",
    "hshld": 299,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.078593,
+   "lng": 127.062738,
+   "geo": "addr"
   },
   {
    "name": "지산3",
@@ -5954,9 +5960,9 @@
    "grp": "init",
    "addr": "경기도 평택시 지산동 1028",
    "hshld": 300,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.080181,
+   "lng": 127.059986,
+   "geo": "addr"
   },
   {
    "name": "지산5",
@@ -5966,9 +5972,9 @@
    "grp": "init",
    "addr": "경기도 평택시 지산동 1095",
    "hshld": 414,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.074143,
+   "lng": 127.064876,
+   "geo": "addr"
   },
   {
    "name": "서정1",
@@ -5978,9 +5984,9 @@
    "grp": "init",
    "addr": "경기도 평택시 서정동 793",
    "hshld": 520,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.068882,
+   "lng": 127.060813,
+   "geo": "addr"
   },
   {
    "name": "서정2",
@@ -5990,9 +5996,9 @@
    "grp": "init",
    "addr": "경기도 평택시 서정동 794",
    "hshld": 420,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.068737,
+   "lng": 127.062641,
+   "geo": "addr"
   },
   {
    "name": "서정3",
@@ -6002,9 +6008,9 @@
    "grp": "init",
    "addr": "경기도 평택시 서정동 909-1",
    "hshld": 380,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.061548,
+   "lng": 127.059467,
+   "geo": "addr"
   },
   {
    "name": "이충1",
@@ -6014,9 +6020,9 @@
    "grp": "init",
    "addr": "경기도 평택시 이충동 478",
    "hshld": 490,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.054453,
+   "lng": 127.058528,
+   "geo": "addr"
   },
   {
    "name": "이충2",
@@ -6026,9 +6032,9 @@
    "grp": "init",
    "addr": "경기도 평택시 이충동 381",
    "hshld": 1266,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.053259,
+   "lng": 127.057603,
+   "geo": "addr"
   },
   {
    "name": "동삭1",
@@ -6038,9 +6044,9 @@
    "grp": "init",
    "addr": "경기도 평택시 동삭동 340-6",
    "hshld": 612,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.019215,
+   "lng": 127.098175,
+   "geo": "addr"
   },
   {
    "name": "남산1",
@@ -6050,9 +6056,9 @@
    "grp": "init",
    "addr": "경기도 평택시 팽성읍 남산리 산76-9",
    "hshld": 90,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 36.962917,
+   "lng": 127.065738,
+   "geo": "addr"
   },
   {
    "name": "송탄-01",
@@ -6062,9 +6068,9 @@
    "grp": "init",
    "addr": "경기도 평택시 신장동 624-22",
    "hshld": 0,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.084328,
+   "lng": 127.04865,
+   "geo": "addr"
   },
   {
    "name": "송탄-03",
@@ -6074,9 +6080,9 @@
    "grp": "init",
    "addr": "경기도 평택시 서정동 570-65",
    "hshld": 0,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.071867,
+   "lng": 127.048649,
+   "geo": "addr"
   },
   {
    "name": "송탄-04",
@@ -6086,9 +6092,9 @@
    "grp": "init",
    "addr": "경기도 평택시 신장동 267-292",
    "hshld": 0,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.074872,
+   "lng": 127.04756,
+   "geo": "addr"
   },
   {
    "name": "송탄-05",
@@ -6098,9 +6104,9 @@
    "grp": "init",
    "addr": "경기도 평택시 서정동 873-29",
    "hshld": 0,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.064595,
+   "lng": 127.056101,
+   "geo": "addr"
   },
   {
    "name": "송탄-06",
@@ -6110,9 +6116,9 @@
    "grp": "init",
    "addr": "경기도 평택시 서정동 893-13",
    "hshld": 0,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.062712,
+   "lng": 127.055672,
+   "geo": "addr"
   },
   {
    "name": "팽성-01",
@@ -6122,9 +6128,9 @@
    "grp": "init",
    "addr": "경기도 평택시 팽성읍 송화리 50-15",
    "hshld": 0,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 36.958531,
+   "lng": 127.050091,
+   "geo": "addr"
   },
   {
    "name": "평택1",
@@ -6134,9 +6140,9 @@
    "grp": "mid",
    "addr": "경기도 평택시 평택동 76",
    "hshld": 50,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 36.993764,
+   "lng": 127.083783,
+   "geo": "addr"
   },
   {
    "name": "송탄-02",
@@ -6146,9 +6152,9 @@
    "grp": "init",
    "addr": "경기도 평택시 신장동 280-46",
    "hshld": 0,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.077065,
+   "lng": 127.052069,
+   "geo": "addr"
   },
   {
    "name": "지산4",
@@ -6158,9 +6164,9 @@
    "grp": "init",
    "addr": "경기도 평택시 지산동 1091",
    "hshld": 216,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.076149,
+   "lng": 127.062822,
+   "geo": "addr"
   },
   {
    "name": "하남시청역 일원",
@@ -6170,9 +6176,9 @@
    "grp": "init",
    "addr": "경기도 하남시 신장동 446-18번지 일원",
    "hshld": 465,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.53853,
+   "lng": 127.209573,
+   "geo": "addr"
   },
   {
    "name": "C구역",
@@ -6182,9 +6188,9 @@
    "grp": "done",
    "addr": "경기도 하남시 덕풍동 285-31번지 일대",
    "hshld": 1046,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.533559,
+   "lng": 127.200579,
+   "geo": "dong"
   },
   {
    "name": "정남09",
@@ -6194,9 +6200,9 @@
    "grp": "init",
    "addr": "경기도 화성시 괘랑리 1163-22",
    "hshld": 94,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.168752,
+   "lng": 126.98467,
+   "geo": "addr"
   },
   {
    "name": "화산주택",
@@ -6206,9 +6212,9 @@
    "grp": "mid",
    "addr": "경기도 화성시 송산동 97-15",
    "hshld": 198,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.206833,
+   "lng": 127.018736,
+   "geo": "addr"
   },
   {
    "name": "안녕1-1",
@@ -6218,9 +6224,9 @@
    "grp": "init",
    "addr": "경기도 화성시 안녕동 46-4",
    "hshld": 546,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.20367,
+   "lng": 127.012201,
+   "geo": "addr"
   },
   {
    "name": "신현대2차아파트",
@@ -6230,9 +6236,9 @@
    "grp": "mid",
    "addr": "경기도 화성시 송산동 97-2",
    "hshld": 282,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.207572,
+   "lng": 127.019824,
+   "geo": "addr"
   },
   {
    "name": "신현대아파트",
@@ -6242,9 +6248,9 @@
    "grp": "mid",
    "addr": "경기도 화성시 송산동 97-129",
    "hshld": 264,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.207136,
+   "lng": 127.02088,
+   "geo": "addr"
   },
   {
    "name": "화남아파트",
@@ -6254,9 +6260,9 @@
    "grp": "init",
    "addr": "경기도 화성시 진안동 506",
    "hshld": 415,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.212276,
+   "lng": 127.037076,
+   "geo": "addr"
   },
   {
    "name": "향남01",
@@ -6266,9 +6272,9 @@
    "grp": "init",
    "addr": "경기도 화성시 상신리 623",
    "hshld": 128,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.100028,
+   "lng": 126.904003,
+   "geo": "addr"
   },
   {
    "name": "송산01",
@@ -6278,9 +6284,9 @@
    "grp": "init",
    "addr": "경기도 화성시 사강리 590",
    "hshld": 147,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.216907,
+   "lng": 126.735753,
+   "geo": "addr"
   },
   {
    "name": "매송03",
@@ -6290,9 +6296,9 @@
    "grp": "init",
    "addr": "경기도 화성시 원평리 77-15",
    "hshld": 74,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.250581,
+   "lng": 126.927895,
+   "geo": "addr"
   },
   {
    "name": "매송02",
@@ -6302,9 +6308,9 @@
    "grp": "init",
    "addr": "경기도 화성시 천천리 204-1",
    "hshld": 258,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.244642,
+   "lng": 126.946195,
+   "geo": "addr"
   },
   {
    "name": "매송01",
@@ -6314,9 +6320,9 @@
    "grp": "init",
    "addr": "경기도 화성시 어천리 469",
    "hshld": 161,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.250448,
+   "lng": 126.912969,
+   "geo": "addr"
   },
   {
    "name": "우정2-1",
@@ -6326,9 +6332,9 @@
    "grp": "init",
    "addr": "경기도 화성시 조암리 270-38",
    "hshld": 264,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.083527,
+   "lng": 126.818917,
+   "geo": "addr"
   },
   {
    "name": "봉담1-2",
@@ -6338,9 +6344,9 @@
    "grp": "init",
    "addr": "경기도 화성시 수영리 649-3",
    "hshld": 194,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.221484,
+   "lng": 126.949016,
+   "geo": "addr"
   },
   {
    "name": "진안1-2",
@@ -6350,9 +6356,9 @@
    "grp": "init",
    "addr": "경기도 화성시 진안동 524-7",
    "hshld": 42,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.210339,
+   "lng": 127.037724,
+   "geo": "addr"
   },
   {
    "name": "향남2-3",
@@ -6362,9 +6368,9 @@
    "grp": "init",
    "addr": "경기도 화성시 발안리133-2",
    "hshld": 135,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.130608,
+   "lng": 126.906598,
+   "geo": "addr"
   },
   {
    "name": "안녕03",
@@ -6374,9 +6380,9 @@
    "grp": "init",
    "addr": "경기도 화성시 송산동 142-3",
    "hshld": 439,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.209391,
+   "lng": 127.017646,
+   "geo": "addr"
   },
   {
    "name": "화산01",
@@ -6386,9 +6392,9 @@
    "grp": "init",
    "addr": "경기도 화성시 송산동 135-8",
    "hshld": 142,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.210576,
+   "lng": 127.012629,
+   "geo": "addr"
   },
   {
    "name": "향남02",
@@ -6398,9 +6404,9 @@
    "grp": "init",
    "addr": "경기도 화성시 평리 96-6",
    "hshld": 154,
-   "lat": null,
-   "lng": null,
-   "geo": null
+   "lat": 37.132615,
+   "lng": 126.907113,
+   "geo": "addr"
   }
  ]
 }
