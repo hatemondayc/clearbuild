@@ -1131,25 +1131,22 @@
       <p>단지와 관심사를 남겨 주시면 정식 출시 전에 먼저 안내드립니다.</p>
     </div>
 
-    <div class="signup-map" style="margin-bottom:20px;">
-      <label for="map-search" style="display:block;font-size:13px;font-weight:700;color:var(--dark,#1a1a1a);margin-bottom:6px;">단지 검색 <span style="color:var(--muted,#6b7280);font-weight:400;">— 지도에서 위치 확인</span></label>
-      <div style="display:flex;gap:8px;margin-bottom:10px;">
-        <select id="sido-filter" style="flex:1;padding:12px 10px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg,#f4f7fa);"><option value="">시·도 전체</option></select>
-        <select id="gu-filter" disabled style="flex:1;padding:12px 10px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg,#f4f7fa);"><option value="">시·군·구</option></select>
-      </div>
-      <div style="position:relative;margin-bottom:10px;">
-        <input type="text" id="map-search" placeholder="단지명 입력 (예: 느티마을)" autocomplete="off" style="width:100%;padding:12px 14px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:15px;font-family:inherit;background:var(--bg,#f4f7fa);" />
-        <div id="map-sugg" style="position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:6;background:#fff;border:1px solid var(--border,#e5e9f0);border-radius:10px;max-height:230px;overflow:auto;display:none;box-shadow:0 10px 28px rgba(20,42,69,.14);"></div>
-      </div>
-      <div id="naver-map" style="width:100%;height:230px;border-radius:12px;border:1px solid var(--border,#e5e9f0);background:#eef3fb;"></div>
-      <p id="map-hint" style="font-size:12px;color:var(--muted,#6b7280);margin-top:7px;">단지명을 입력하면 지도에 위치가 표시됩니다.</p>
-    </div>
-
     <form class="signup-form" id="signup-form" novalidate>
       <div class="field" id="f-complex">
-        <label for="in-complex">단지명 <span class="req">*</span></label>
-        <input type="text" id="in-complex" name="complex" placeholder="예: 산본 설악주공8단지" autocomplete="off" />
+        <label for="in-complex">단지명 <span class="req">*</span> <span style="color:var(--muted,#6b7280);font-weight:400;font-size:12px;">— 입력하면 지도에서 위치를 확인할 수 있어요</span></label>
+        <div style="position:relative;">
+          <input type="text" id="in-complex" name="complex" placeholder="단지명 입력 (예: 느티마을)" autocomplete="off" />
+          <div id="map-sugg" style="position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:6;background:#fff;border:1px solid var(--border,#e5e9f0);border-radius:10px;max-height:230px;overflow:auto;display:none;box-shadow:0 10px 28px rgba(20,42,69,.14);"></div>
+        </div>
         <span class="err">단지명을 입력해 주세요.</span>
+        <div id="map-panel" style="display:none;margin-top:12px;">
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <select id="sido-filter" style="flex:1;padding:12px 10px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg,#f4f7fa);"><option value="">시·도 전체</option></select>
+            <select id="gu-filter" disabled style="flex:1;padding:12px 10px;border:1px solid var(--border,#e5e9f0);border-radius:10px;font-size:14px;font-family:inherit;background:var(--bg,#f4f7fa);"><option value="">시·군·구</option></select>
+          </div>
+          <div id="naver-map" style="width:100%;height:230px;border-radius:12px;border:1px solid var(--border,#e5e9f0);background:#eef3fb;"></div>
+          <p id="map-hint" style="font-size:12px;color:var(--muted,#6b7280);margin-top:7px;">단지명을 입력하면 지도에 위치가 표시됩니다.</p>
+        </div>
       </div>
 
       <div class="field" id="f-owner">
@@ -1222,9 +1219,10 @@
     if (!mapEl) return;
     var map = new naver.maps.Map(mapEl, { center:new naver.maps.LatLng(37.4979,127.0276), zoom:10, scaleControl:false, mapDataControl:false });
     var marker = new naver.maps.Marker({ map:map, position:map.getCenter() });
-    var input = document.getElementById('map-search');
+    var input = document.getElementById('in-complex');   // 폼 단지명 필드 = 검색창 (통합)
     var hint = document.getElementById('map-hint');
-    var complexField = document.getElementById('in-complex');
+    var complexField = input;
+    var mapPanel = document.getElementById('map-panel');
     var sidoSel = document.getElementById('sido-filter');
     var guSel = document.getElementById('gu-filter');
     var suggEl = document.getElementById('map-sugg');
@@ -1306,7 +1304,15 @@
       suggEl.style.display='block';
     }
     function choose(name){ if (input) input.value = name; if (suggEl) suggEl.style.display='none'; search(name); }
+    function revealPanel(){
+      if (mapPanel && mapPanel.style.display === 'none'){
+        mapPanel.style.display = 'block';
+        if (window.__cbRefreshMap) window.__cbRefreshMap();
+      }
+    }
     if (input){
+      input.addEventListener('focus', revealPanel);
+      input.addEventListener('click', revealPanel);
       input.addEventListener('input', renderSugg);
       input.addEventListener('focus', renderSugg);
       input.addEventListener('change', function(){ if (suggEl) suggEl.style.display='none'; search(this.value); });
