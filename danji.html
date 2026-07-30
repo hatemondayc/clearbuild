@@ -82,8 +82,10 @@
   .cb-data{max-width:960px;}
   h1,h2,h3{color:var(--cb-ink-900); letter-spacing:-.01em;}
   a{color:var(--cb-navy-600); text-decoration:none;} a:hover{text-decoration:underline;}
-  section{padding:var(--sp-8) 0;}
-  @media(min-width:900px){ section{padding:var(--sp-9) 0;} }
+  /* 섹션 리듬 = 위쪽 단일 간격(겹침 방지·균일). 데스크톱 64 / 모바일 48 */
+  section{padding:var(--sp-7) 0 0;}
+  @media(min-width:900px){ section{padding:var(--sp-8) 0 0;} }
+  .cb-footer{margin-top:var(--sp-8);}
   .sec-head{margin-bottom:var(--sp-5);}
   .sec-head h2{font-size:22px; font-weight:600;}
   .sec-head .sub{font-size:13px; color:var(--cb-ink-500); margin-top:4px;}
@@ -338,7 +340,7 @@
     </div>
 
     <!-- ═══ 실사례 케이스 (T12 · 증거 한 장) ═══ -->
-    <section style="padding-top:0;">
+    <section>
       <div class="cb-container cb-data">
         <div class="cb-card" style="border-left:3px solid var(--cb-navy-700);">
           <div class="cb-label" style="text-transform:none; letter-spacing:.04em; color:var(--cb-navy-700);">실사례 · 느티마을 3단지 (리모델링)</div>
@@ -375,7 +377,7 @@
     </section>
 
     <!-- ═══ 실거래가 (느티3 · 국토부 · 단지 페이지 정보) ═══ -->
-    <section style="padding-top:0;">
+    <section>
       <div class="cb-container cb-data">
         <div class="cb-card">
           <div class="sec-head" style="margin-bottom:12px;">
@@ -418,8 +420,8 @@
     </section>
 
     <!-- ═══ 4출력 카드 (T2에서 계산 연결) ═══ -->
-    <section style="padding-top:0;">
-      <div class="cb-container">
+    <section>
+      <div class="cb-container cb-data">
         <div class="cb-card-grid">
           <div class="cb-card">
             <div class="top"><span class="cb-label">예상 분담금</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
@@ -450,7 +452,7 @@
     </section>
 
     <!-- ═══ 예측공시 위젯 (S2에서 박제 로직) ═══ -->
-    <section style="padding-top:0;">
+    <section>
       <div class="cb-container cb-data">
         <div class="cb-pledge">
           <div class="head">
@@ -473,7 +475,7 @@
     </section>
 
     <!-- ═══ CTA 페어 (S2에서 ?ref+Supabase 연결) ═══ -->
-    <section style="padding-top:0;">
+    <section>
       <div class="cb-container cb-data">
         <div class="cb-cta">
           <div class="msg"><b>이 시점별 필요현금, 조달 계획이 궁금하세요?</b><br>필요현금 타임라인에 맞춘 자금조달 연결을 신청하세요. (수요 확인용 · 중개 아님)</div>
@@ -509,7 +511,7 @@
     </section>
 
     <!-- ═══ 근거·출처 ═══ -->
-    <section style="padding-top:0;">
+    <section>
       <div class="cb-container cb-data">
         <div class="sec-head"><h2>근거 · 출처</h2><div class="sub">모든 숫자에는 출처와 기준일, 신뢰등급이 붙습니다.</div></div>
         <div class="cb-src-list">
@@ -536,7 +538,7 @@
     </section>
 
     <!-- ═══ 우리 데이터 커버리지 (S4-3 커버리지 증명 지도) ═══ -->
-    <section style="padding-top:0;">
+    <section>
       <div class="cb-container">
         <div class="sec-head">
           <h2>서비스 중인 정비사업 구역</h2>
