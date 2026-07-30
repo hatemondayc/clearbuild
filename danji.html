@@ -128,6 +128,11 @@
     border-color:var(--cb-line-200); box-shadow:var(--shadow-1);}
   .cb-seg button:disabled{color:var(--cb-ink-400); cursor:not-allowed;}
   .cb-seg button:focus-visible{outline:none; box-shadow:var(--shadow-focus);}
+  .cb-seg button.seg-na{opacity:.55;}
+  .seg-soon{margin-left:5px; font-size:9px; font-weight:700; padding:1px 5px; border-radius:999px; background:var(--cb-line-100); color:var(--cb-ink-400); vertical-align:middle; letter-spacing:0;}
+  /* 심층 계산 데모 배지(danji 정체성 명시) */
+  .cb-demo-badge{display:inline-flex; align-items:center; gap:6px; margin-top:var(--sp-4); padding:7px 13px; background:var(--cb-navy-50); border:1px solid var(--cb-navy-100); border-radius:999px; font-size:12.5px; color:var(--cb-ink-500);}
+  .cb-demo-badge b{color:var(--cb-navy-700);}
 
   /* ═══ 히어로 입력 — §5.7 ═══ */
   .hero{padding-top:var(--sp-7);}
@@ -326,6 +331,7 @@
       <div class="hero enter">
         <h1 id="heroTitle">이 매물, 지금 사면 <em>언제 얼마</em>가 필요할까?</h1>
         <p class="lede">호가만 보면 반쪽 가격표입니다. 분담금·금융비용까지 더한 총투입비와, 계약부터 입주까지 시점별 필요현금을 근거·출처와 함께 계산합니다.</p>
+        <div class="cb-demo-badge">심층 계산 데모 · <b>느티마을 3단지</b> — 전체 정비사업장은 아래 <b>커버리지 지도</b>에서</div>
 
         <div class="cb-inputs">
           <div class="cb-field">
@@ -634,10 +640,10 @@
     TYPES.forEach(function(t){
       var b = document.createElement('button');
       b.type = 'button';
-      b.textContent = t.label;
+      b.innerHTML = t.label + (t.ready ? '' : '<span class="seg-soon">예정</span>');
       b.setAttribute('data-type', t.id);
       b.setAttribute('aria-pressed', String(t.id===activeType));
-      if(!t.ready){ b.title = t.label + ' 계산 로직 준비 중 (리모델링부터 깊게)'; }
+      if(!t.ready){ b.classList.add('seg-na'); b.title = t.label + ' 계산 로직 준비 중 (리모델링부터 깊게)'; }
       b.addEventListener('click', function(){ selectType(t.id); });
       seg.appendChild(b);
     });
