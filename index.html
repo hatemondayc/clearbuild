@@ -1146,6 +1146,7 @@
           </div>
           <div id="naver-map" style="width:100%;height:230px;border-radius:12px;border:1px solid var(--border,#e5e9f0);background:#eef3fb;"></div>
           <p id="map-hint" style="font-size:12px;color:var(--muted,#6b7280);margin-top:7px;">단지명을 입력하면 지도에 위치가 표시됩니다.</p>
+          <p style="font-size:11.5px;color:#9aa4b2;margin-top:4px;">※ 현재 리모델링 단지 기준입니다. 재개발·재건축 사업장 정보는 순차 제공 예정입니다.</p>
         </div>
       </div>
 
@@ -1219,6 +1220,7 @@
     if (!mapEl) return;
     var map = new naver.maps.Map(mapEl, { center:new naver.maps.LatLng(37.4979,127.0276), zoom:10, scaleControl:false, mapDataControl:false });
     var marker = new naver.maps.Marker({ map:map, position:map.getCenter() });
+    var infoWin = new naver.maps.InfoWindow({ content:'', borderColor:'#e5e9f0', borderWidth:1, backgroundColor:'#fff', anchorSize:new naver.maps.Size(11,11), anchorColor:'#fff', pixelOffset:new naver.maps.Point(0,-4) });
     var input = document.getElementById('in-complex');   // 폼 단지명 필드 = 검색창 (통합)
     var hint = document.getElementById('map-hint');
     var complexField = input;
@@ -1244,18 +1246,37 @@
       }
     }).catch(function(){});
 
-    function pin(lat,lng,name){
+    function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];}); }
+    function cardHtml(name, data){
+      data = data || {};
+      var meta = [data.region, data.type || '리모델링'].filter(Boolean).join(' · ');
+      var spec = [];
+      if (data.hshld != null) spec.push(Number(data.hshld).toLocaleString('ko') + '세대');
+      if (data.builtYr != null) spec.push(data.builtYr + '년 준공');
+      var specLine = spec.length
+        ? '<div style="font-size:12.5px;color:#1a3f7a;margin-top:7px;font-weight:700;">' + spec.join(' · ') + '</div>'
+        : '<div style="font-size:11.5px;color:#9aa4b2;margin-top:7px;">세대수·준공연도 데이터 준비 중</div>';
+      return '<div style="padding:11px 13px;min-width:172px;max-width:230px;font-family:inherit;line-height:1.35;">' +
+             '<div style="font-weight:800;font-size:14px;color:#142a45;">' + esc(name) + '</div>' +
+             (meta ? '<div style="font-size:12px;color:#6b7280;margin-top:3px;">' + esc(meta) + '</div>' : '') +
+             specLine + '</div>';
+    }
+    var lastPin = { name:'', data:null };
+    function pin(lat,lng,name,data){
       var p = new naver.maps.LatLng(lat,lng);
       map.setCenter(p); map.setZoom(16); marker.setPosition(p);
       if (hint) hint.textContent = (name||'') + ' 위치를 표시했습니다.';
       if (complexField && name) complexField.value = name;
+      lastPin = { name:name, data:data };
+      infoWin.setContent(cardHtml(name, data));
+      infoWin.open(map, marker);
     }
-    function geocode(query, name){
+    function geocode(query, name, data){
       if (!(naver.maps.Service && naver.maps.Service.geocode)) { if(hint) hint.textContent='지도 인증 후 위치 표시가 가능합니다.'; return; }
       naver.maps.Service.geocode({ query:query }, function(status, response){
         if (status===naver.maps.Service.Status.OK && response.v2 && response.v2.addresses.length){
           var a = response.v2.addresses[0];
-          pin(parseFloat(a.y), parseFloat(a.x), name||query);
+          pin(parseFloat(a.y), parseFloat(a.x), name||query, data);
         } else if (hint){ hint.textContent='위치를 찾지 못했어요. 단지명을 더 정확히 입력해 보세요.'; }
       });
     }
@@ -1264,11 +1285,14 @@
       var c = LOOKUP[q];
       if (!c){ for (var k in LOOKUP){ if (k.indexOf(q)>-1 || q.indexOf(k)>-1){ c = LOOKUP[k]; break; } } }
       if (c){
-        if (c.lat!=null && c.lng!=null){ pin(c.lat, c.lng, c.name); return; }
-        geocode(c.geocodeQuery || c.address || c.name, c.name); return;   // 도로명주소로 정확 지오코딩
+        if (c.lat!=null && c.lng!=null){ pin(c.lat, c.lng, c.name, c); return; }
+        geocode(c.geocodeQuery || c.address || c.name, c.name, c); return;   // 도로명주소로 정확 지오코딩
       }
       geocode(q, q);
     }
+    naver.maps.Event.addListener(marker, 'click', function(){
+      if (lastPin.name){ infoWin.setContent(cardHtml(lastPin.name, lastPin.data)); infoWin.open(map, marker); }
+    });
     function fillGu(){
       if (!guSel) return;
       guSel.innerHTML = '<option value="">시·군·구</option>';
