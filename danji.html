@@ -599,7 +599,6 @@
           <div style="display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center; padding:14px var(--sp-5); border-top:1px solid var(--cb-line-100); font-size:12.5px; color:var(--cb-ink-500);">
             <span id="covLegend" style="display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center;"></span>
             <span id="geoStatus" style="color:var(--cb-navy-700); font-weight:600;"></span>
-            <span style="margin-left:auto; color:var(--cb-ink-400);">채움율 그대로 공개</span>
           </div>
         </div>
         <p class="disclaim" style="margin-top:10px;">핀을 누르면 단지 상태가 보입니다. 데이터 준비 중인 곳은 "확정값 알림"으로 수요를 받아 우선순위를 정합니다.</p>
@@ -1008,10 +1007,9 @@
       var h='';
       if(type==='리모델링'){
         h='<span style="display:inline-flex;align-items:center;">'+dot('#2563EB')+'계산 제공 <b class="cb-num" style="color:var(--cb-ink-900);margin-left:4px;">'+deep+'</b></span>'
-         +'<span style="display:inline-flex;align-items:center;">'+dot('#8494AA')+'리모델링 구역 <b class="cb-num" style="color:var(--cb-ink-900);margin-left:4px;">'+n+'</b></span>'
-         +'<span>· 분담금 데이터 <b class="cb-num" style="color:var(--cb-ink-700);">48</b> <span style="color:var(--cb-ink-400);">(VOC·문서)</span></span>';
+         +'<span style="display:inline-flex;align-items:center;">'+dot('#8494AA')+'데이터 준비 중 <b class="cb-num" style="color:var(--cb-ink-900);margin-left:4px;">'+(n-deep)+'</b></span>';
       } else if(n>0){
-        h='<span style="display:inline-flex;align-items:center;">'+dot('#8494AA')+en(type)+' 구역 <b class="cb-num" style="color:var(--cb-ink-900);margin-left:4px;">'+n+'</b> <span style="color:var(--cb-ink-400);margin-left:4px;">(경기)</span></span>';
+        h='<span style="display:inline-flex;align-items:center;">'+dot('#8494AA')+en(type)+' <b class="cb-num" style="color:var(--cb-ink-900);margin-left:4px;">'+n+'</b> <span style="color:var(--cb-ink-400);margin-left:4px;">데이터 준비 중 · 경기·서울·인천</span></span>';
       } else {
         h='<span style="color:var(--cb-ink-400);">'+en(type)+' — 데이터 준비 중</span>';
       }
