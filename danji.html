@@ -25,9 +25,9 @@
   <style>
   /* ═══ 디자인시스템 v0.1 — :root 토큰 (하위 호환 알리아스 포함) ═══ */
   :root {
-    --cb-bg:#F6F8FB; --cb-surface:#FFFFFF; --cb-surface-2:#F1F4F9;
+    --cb-bg:#F1F4F8; --cb-surface:#FFFFFF; --cb-surface-2:#F1F4F9;
     --cb-ink-900:#131A26; --cb-ink-700:#333D4E; --cb-ink-500:#5D6B80; --cb-ink-400:#8494AA;
-    --cb-line-300:#C7D0DC; --cb-line-200:#DDE3EC; --cb-line-100:#EBEFF5;
+    --cb-line-300:#C7D0DC; --cb-line-200:#E5EAF2; --cb-line-100:#EBEFF5;
     --cb-navy-50:#F2F6FC; --cb-navy-100:#E8EEF8; --cb-navy-200:#C9D9F4; --cb-navy-300:#A3BEEC;
     --cb-navy-400:#6E97E0; --cb-navy-500:#3B72D4; --cb-navy-600:#2255A4; --cb-navy-700:#1A3F7A;
     --cb-navy-800:#142F5C; --cb-navy-900:#0F2244; --cb-navy-950:#0A1830;
@@ -41,10 +41,10 @@
     --cb-chart-1:#2255A4; --cb-chart-est:#5C89DA; --cb-chart-marker:#B4540A;
     --cb-chart-2:#1E7F4F; --cb-chart-3:#8455A8; --cb-chart-grid:#EBEFF5;
     --font-sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
-    --font-num:"IBM Plex Mono",ui-monospace,"SF Mono",monospace;
+    --font-num:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;
     --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px;
     --radius-sm:4px; --radius-md:8px; --radius-lg:12px;
-    --shadow-1:0 1px 2px rgba(15,34,68,.06);
+    --shadow-1:0 1px 3px rgba(15,34,68,.07),0 8px 24px rgba(15,34,68,.05);
     --shadow-2:0 4px 16px rgba(15,34,68,.08),0 1px 2px rgba(15,34,68,.05);
     --shadow-focus:0 0 0 3px rgba(59,114,212,.28);
     --ease:cubic-bezier(.2,.7,.3,1); --dur-1:120ms; --dur-2:200ms; --dur-3:320ms;
@@ -294,7 +294,7 @@
       <div class="spacer"></div>
       <!-- 사업유형 셀렉터 (분기 선반영) -->
       <div class="cb-seg" role="group" aria-label="사업유형 선택" id="typeSeg"></div>
-      <span class="cb-grade cb-grade-b lg" title="이 단지 데이터 신뢰등급 (B: 시장추정 혼합)">B 시장추정</span>
+      <!-- 신뢰등급 배지는 헤더에서 제거(경고톤 회피) → 분담금 숫자 옆 B칩으로 컨텍스트 표시 -->
     </div>
   </header>
 
@@ -303,7 +303,7 @@
     <div class="cb-container">
       <div class="hero enter">
         <h1 id="heroTitle">이 매물, 지금 사면 <em>언제 얼마</em>가 필요할까?</h1>
-        <p class="lede">호가만 보면 반쪽 가격표입니다. 분담금·금융비용까지 더한 <b>총투입비</b>와, 계약부터 입주까지 <b>시점별 필요현금</b>을 근거·출처와 함께 계산합니다.</p>
+        <p class="lede">호가만 보면 반쪽 가격표입니다. 분담금·금융비용까지 더한 총투입비와, 계약부터 입주까지 시점별 필요현금을 근거·출처와 함께 계산합니다.</p>
 
         <div class="cb-inputs">
           <div class="cb-field">
@@ -358,7 +358,7 @@
             </div>
             <div>
               <div class="cb-label" style="text-transform:none;">= 총투입비 / 손익분기</div>
-              <div class="cb-num cb-num-lg" style="margin-top:4px; color:var(--cb-navy-700);">24.3억</div>
+              <div class="cb-num cb-num-xl" style="margin-top:4px; color:var(--cb-navy-700);">24.3억</div>
               <div style="font-size:12px; color:var(--cb-ink-400); margin-top:2px;">호가 20 + 분담금 3.8 + 부대 0.5</div>
             </div>
           </div>
@@ -398,7 +398,7 @@
           <div style="margin-top:14px; padding:14px 16px; background:var(--cb-navy-50); border:1px solid var(--cb-line-200); border-radius:var(--radius-md);">
             <div style="font-size:12.5px; color:var(--cb-ink-500);">리모델링 후 목표 = 전용 84㎡ · 인근 신축 84㎡ 실거래</div>
             <div style="font-size:15px; color:var(--cb-ink-900); font-weight:700; margin-top:5px;">더샵분당파크리버 84㎡ <span class="cb-num" style="color:var(--cb-navy-700);">중앙 17.0억</span> <span style="font-weight:400; font-size:12.5px; color:var(--cb-ink-400);">(최근 17.3억 · 24건)</span></div>
-            <div style="margin-top:10px; font-size:14px; color:var(--cb-ink-700); line-height:1.6;">총투입 <b class="cb-num">24.3억</b> vs 인근 신축 84㎡ <b class="cb-num">17.0억</b> → 시장은 <b>리모델링 프리미엄 약 7억</b>을 이미 매겼습니다. <b>정당한지는 당신의 판단</b> — 우리는 숨은 숫자만 깝니다.</div>
+            <div style="margin-top:10px; font-size:14px; color:var(--cb-ink-700); line-height:1.6;">총투입 <b class="cb-num">24.3억</b> vs 인근 신축 84㎡ <b class="cb-num">17.0억</b> → 리모델링 프리미엄 <b class="cb-num">약 7억</b>.</div>
           </div>
           <p class="disclaim" style="margin-top:12px;">신고가 기준 실거래(직거래 제외). 향·동호수·층 편차가 있으며, 리모델링 후 시세는 확정 아닌 인근 신축 참고값입니다.</p>
         </div>
@@ -466,6 +466,7 @@
           <div class="pledge-act">
             <button type="button" class="cb-btn cb-btn-secondary" id="pledgeStampBtn" style="height:34px;">이 추정, 지금 박제하기</button>
             <a href="#" id="pledgeBasisLink" hidden>박제 기준 보기</a>
+            <div class="rule" id="pledgeBasis" hidden style="margin-top:8px; flex-basis:100%;"></div>
           </div>
         </div>
       </div>
@@ -774,7 +775,9 @@
     });
     var lk=document.getElementById('pledgeBasisLink');
     if(lk) lk.addEventListener('click', function(e){ e.preventDefault();
-      var st=loadPledge(); if(st) alert('박제 기준\n\n분담금 추정: '+fmtCash(st.value)+'\n박제 시각: '+st.ts+'\n기준 공사비: '+st.cost+'만원/평\n\n총회 확정 공시가 나오면 이 값과 자동 대조해 오차를 공개합니다.');
+      var st=loadPledge(); var bx=document.getElementById('pledgeBasis'); if(!st||!bx) return;
+      bx.innerHTML='박제 기준 — 분담금 추정 <b>'+fmtCash(st.value)+'</b> · 박제 '+st.ts+' · 기준 공사비 '+st.cost+'만원/평. 총회 확정 공시가 나오면 자동 대조해 오차를 공개합니다.';
+      bx.hidden=!bx.hidden;
     });
   })();
 
