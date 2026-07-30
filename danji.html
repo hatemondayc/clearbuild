@@ -161,6 +161,20 @@
   .cb-card-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-4);}
   @media(max-width:1023px){ .cb-card-grid{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:639px){ .cb-card-grid{grid-template-columns:1fr;} }
+  /* 판단 보드 (토스식: 총투입비 큰 숫자 1 + 하위 3행) */
+  .cb-board{padding:0; overflow:hidden;}
+  .board-hero{padding:var(--sp-5) var(--sp-5) var(--sp-4);}
+  .board-hero-top{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .board-hero-top .cb-label{font-size:13px; text-transform:none; letter-spacing:.01em;}
+  .board-hero-num{font-size:clamp(32px,6.5vw,46px); font-weight:800; letter-spacing:-.03em; line-height:1.04; color:var(--cb-ink-900); margin-top:8px; font-variant-numeric:tabular-nums;}
+  .board-hero-sub{font-size:12.5px; color:var(--cb-ink-500); margin-top:10px;}
+  .board-rows{border-top:1px solid var(--cb-line-100);}
+  .board-row{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px var(--sp-5); border-bottom:1px solid var(--cb-line-100);}
+  .board-row:last-child{border-bottom:none;}
+  .br-left{display:flex; flex-direction:column; gap:3px; min-width:0;}
+  .br-label{font-size:14px; font-weight:600; color:var(--cb-ink-700); display:inline-flex; align-items:center; gap:6px;}
+  .br-hint{font-size:11.5px; color:var(--cb-ink-400); line-height:1.4;}
+  .br-val{font-size:18px; font-weight:700; color:var(--cb-ink-900); white-space:nowrap; font-variant-numeric:tabular-nums; letter-spacing:-.01em;}
   .cb-card .top{display:flex; align-items:flex-start; justify-content:space-between; gap:8px;}
   .cb-card .top .cb-label{text-transform:none; letter-spacing:.02em; font-size:12.5px;}
   .cb-card .val{margin-top:var(--sp-3);}
@@ -422,30 +436,25 @@
     <!-- ═══ 4출력 카드 (T2에서 계산 연결) ═══ -->
     <section>
       <div class="cb-container cb-data">
-        <div class="cb-card-grid">
-          <div class="cb-card">
-            <div class="top"><span class="cb-label">예상 분담금</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
-            <div class="val cb-num cb-num-lg" id="out-bundam">—</div>
-            <div class="hint">조합원분양가 − 권리가액</div>
-            <div class="src">느티마을 3단지 총회 확정 기준 (범위 1.85–3.83억) · 공사비 상승 시 확정범위 초과분은 외삽 추정</div>
+        <div class="cb-card cb-board">
+          <div class="board-hero">
+            <div class="board-hero-top"><span class="cb-label">총투입비 — 이 매물의 진짜 값</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
+            <div class="board-hero-num cb-num" id="out-total">—</div>
+            <div class="board-hero-sub">호가 + 분담금 + 금융·부대비용. 이 값이 곧 <b>손익분기</b>입니다.</div>
           </div>
-          <div class="cb-card">
-            <div class="top"><span class="cb-label">총투입비</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
-            <div class="val cb-num cb-num-lg" id="out-total">—</div>
-            <div class="hint">호가 + 분담금 + 금융·부대비용</div>
-            <div class="src">입력값 기준 계산</div>
-          </div>
-          <div class="cb-card">
-            <div class="top"><span class="cb-label">필요현금</span><span class="cb-grade cb-grade-c">C 모델추정</span></div>
-            <div class="val cb-num cb-num-lg" id="out-cash">—</div>
-            <div class="hint">호가 외 추가 현금 (분담금+이자+부대)</div>
-            <div class="src">이주비·중도금 이자 가정 포함 · 시점별 최고는 타임라인 참고</div>
-          </div>
-          <div class="cb-card">
-            <div class="top"><span class="cb-label">손익분기 호가</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
-            <div class="val cb-num cb-num-lg" id="out-bep">—</div>
-            <div class="hint">이 값 아래로 팔면 손해</div>
-            <div class="src">= 총투입비</div>
+          <div class="board-rows">
+            <div class="board-row">
+              <div class="br-left"><span class="br-label">예상 분담금 <span class="cb-grade cb-grade-b">B</span></span><span class="br-hint">조합원분양가 − 권리가액 · 느티3 총회 확정(1.85–3.83억)</span></div>
+              <span class="br-val cb-num" id="out-bundam">—</span>
+            </div>
+            <div class="board-row">
+              <div class="br-left"><span class="br-label">필요현금 <span class="cb-grade cb-grade-c">C</span></span><span class="br-hint">호가 외 추가 현금(분담금+이자+부대) · 시점별 최고는 타임라인</span></div>
+              <span class="br-val cb-num" id="out-cash">—</span>
+            </div>
+            <div class="board-row">
+              <div class="br-left"><span class="br-label">손익분기 호가 <span class="cb-grade cb-grade-b">B</span></span><span class="br-hint">이 값 아래로 팔면 손해 (= 총투입비)</span></div>
+              <span class="br-val cb-num" id="out-bep">—</span>
+            </div>
           </div>
         </div>
       </div>
