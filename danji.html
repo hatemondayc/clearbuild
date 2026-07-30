@@ -171,6 +171,8 @@
   .board-rows{border-top:1px solid var(--cb-line-100);}
   .board-row{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px var(--sp-5); border-bottom:1px solid var(--cb-line-100);}
   .board-row:last-child{border-bottom:none;}
+  .board-row.verdict{background:var(--cb-navy-50);}
+  .board-row.verdict .br-val{font-size:19px;}
   .br-left{display:flex; flex-direction:column; gap:3px; min-width:0;}
   .br-label{font-size:14px; font-weight:600; color:var(--cb-ink-700); display:inline-flex; align-items:center; gap:6px;}
   .br-hint{font-size:11.5px; color:var(--cb-ink-400); line-height:1.4;}
@@ -455,9 +457,9 @@
               <div class="br-left"><span class="br-label">필요현금 <span class="cb-grade cb-grade-c">C</span></span><span class="br-hint">호가 외 추가 현금(분담금+이자+부대) · 시점별 최고는 타임라인</span></div>
               <span class="br-val cb-num" id="out-cash">—</span>
             </div>
-            <div class="board-row">
-              <div class="br-left"><span class="br-label">손익분기 호가 <span class="cb-grade cb-grade-b">B</span></span><span class="br-hint">이 값 아래로 팔면 손해 (= 총투입비)</span></div>
-              <span class="br-val cb-num" id="out-bep">—</span>
+            <div class="board-row verdict">
+              <div class="br-left"><span class="br-label">인근 신축 84㎡ 대비 <span class="cb-grade cb-grade-b">B</span></span><span class="br-hint">총투입비 vs 더샵분당파크리버 84㎡ 17.0억(국토부) = 리모델링 프리미엄</span></div>
+              <span class="br-val cb-num" id="out-premium">—</span>
             </div>
           </div>
         </div>
@@ -798,7 +800,7 @@
 
   function calc(){
     var t = typeById(activeType);
-    var ids = ['out-bundam','out-total','out-cash','out-bep'];
+    var ids = ['out-bundam','out-total','out-cash','out-premium'];
     if(!t.ready){   // 리모델링 외: 공식은 선반영, 실계산은 롤아웃 전
       ids.forEach(function(id){ var e=document.getElementById(id); if(e){ e.textContent='준비 중'; e.classList.add('muted-out'); } });
       var pv0=document.getElementById('pledgeVal'); if(pv0) pv0.textContent='—';
@@ -821,7 +823,12 @@
     setOut('out-bundam', eok(bundam));
     setOut('out-cash', eok(extra));
     setOut('out-total', total > 0 ? eok(total) : '호가 입력 시');
-    setOut('out-bep', total > 0 ? eok(total) : '—');
+    var NEWBUILD = 170000; // 인근 신축 84㎡ 중앙 17.0억 (만원 · 국토부 더샵분당파크리버)
+    var pe = document.getElementById('out-premium');
+    if(pe){
+      if(total > 0){ var prem = total - NEWBUILD; pe.textContent = (prem>=0?'+':'−') + eok(Math.abs(prem)); pe.style.color = (prem>=0 ? 'var(--cb-danger)' : 'var(--cb-success)'); }
+      else { pe.textContent = '—'; pe.style.color = ''; }
+    }
     renderPledge(bundam);
     if(total>0 && userTouched && !calcDoneFired){ calcDoneFired=true; if(window.umami) window.umami.track('danji-calc-done', { ref:REF }); }
 
