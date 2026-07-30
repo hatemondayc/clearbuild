@@ -35,7 +35,7 @@
     --cb-warning:#8A5A00; --cb-warning-bg:#FBF2DF;
     --cb-danger:#B93838; --cb-danger-bg:#FAECEC;
     --cb-grade-a:#176B43; --cb-grade-a-bg:#E7F4EC; --cb-grade-a-line:#BFE3CE;
-    --cb-grade-b:#8A5A00; --cb-grade-b-bg:#FBF2DF; --cb-grade-b-line:#EBD9A9;
+    --cb-grade-b:#42506A; --cb-grade-b-bg:#EEF2F8; --cb-grade-b-line:#D6DEEA;
     --cb-grade-c:#4A5568; --cb-grade-c-bg:#EDF0F5; --cb-grade-c-line:#D3DAE5;
     --cb-accent:#B4540A; --cb-accent-text:#96450A; --cb-accent-bg:#F9EEE3;
     --cb-chart-1:#2563EB; --cb-chart-est:#5C89DA; --cb-chart-marker:#B4540A;
@@ -156,8 +156,8 @@
   .cb-scale{display:flex; justify-content:space-between; font-family:var(--font-num); font-size:12px; color:var(--cb-ink-400); margin-top:6px;}
 
   /* ═══ 카드 / 그리드 — §5.2 / §6.4 ═══ */
-  .cb-card{background:var(--cb-surface); border:1px solid var(--cb-line-200); border-radius:var(--radius-lg);
-    padding:var(--sp-5); box-shadow:var(--shadow-1);}
+  .cb-card{background:var(--cb-surface); border:1px solid var(--cb-line-100); border-radius:16px;
+    padding:var(--sp-5); box-shadow:var(--shadow-1); transition:box-shadow var(--dur-2) var(--ease);}
   .cb-card-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-4);}
   @media(max-width:1023px){ .cb-card-grid{grid-template-columns:repeat(2,1fr);} }
   @media(max-width:639px){ .cb-card-grid{grid-template-columns:1fr;} }
@@ -365,7 +365,7 @@
             </div>
           </div>
 
-          <div style="margin-top:16px; font-size:14px; color:var(--cb-ink-700); line-height:1.6;">손익분기 <span class="cb-num">24.3억</span> · 인근 신축 84㎡ 실거래 <span class="cb-num" style="color:var(--cb-navy-700);">17.0억</span> <span style="color:var(--cb-ink-400);">(더샵분당파크리버, 국토부)</span>. 시장은 <b>리모델링 프리미엄 약 7억</b>을 이미 매겼습니다 — 그게 정당한지는 <b>당신의 판단</b>입니다. 우리는 숨은 숫자만 깝니다.</div>
+          <div style="margin-top:16px; font-size:14px; color:var(--cb-ink-700); line-height:1.6;">손익분기 <span class="cb-num">24.3억</span> — 이게 '지금 사도 되나'의 기준선입니다. <span style="color:var(--cb-ink-400);">인근 신축 84㎡ 실거래와의 비교는 아래 실거래에서.</span></div>
 
           <div style="margin-top:12px; padding:12px 14px; background:var(--cb-accent-bg); border-radius:var(--radius-md); font-size:13px; color:var(--cb-ink-700);">
             <b>분담금은 확정 전까지 변합니다.</b> 산본 우륵 실사례: 공사비 +100만원/평 → 분담금 <b>+18%</b> (헤럴드경제). 그래서 우리는 추정을 <b>박제</b>하고 총회 확정과 <b>대조</b>합니다 — 아래 예측공시.
