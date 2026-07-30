@@ -18,7 +18,7 @@
     --cb-bg:#F1F4F8; --cb-surface:#FFFFFF; --cb-surface-2:#F1F4F9;
     --cb-ink-900:#131A26; --cb-ink-700:#333D4E; --cb-ink-500:#5D6B80; --cb-ink-400:#8494AA;
     --cb-line-300:#C7D0DC; --cb-line-200:#E5EAF2; --cb-line-100:#EBEFF5;
-    --cb-navy-100:#E8EEF8; --cb-navy-400:#6E97E0; --cb-navy-600:#2255A4; --cb-navy-700:#1A3F7A; --cb-navy-900:#0F2244;
+    --cb-navy-100:#E8EEF8; --cb-navy-400:#6E97E0; --cb-navy-600:#2563EB; --cb-navy-700:#2563EB; --cb-navy-900:#0F2244;
     --cb-success:#1E7F4F; --cb-success-bg:#E7F4EC;
     --cb-grade-a:#176B43; --cb-grade-a-bg:#E7F4EC; --cb-grade-a-line:#BFE3CE;
     --cb-grade-c:#4A5568; --cb-grade-c-bg:#EDF0F5; --cb-grade-c-line:#D3DAE5;
@@ -233,7 +233,7 @@
           +'<div class="msg" id="alertMsg"></div>'
         +'</div>';
 
-    var markSvg='<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8z" fill="#fff"/><circle cx="12" cy="10" r="3" fill="#1A3F7A"/></svg>';
+    var markSvg='<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8z" fill="#fff"/><circle cx="12" cy="10" r="3" fill="#2563EB"/></svg>';
 
     var pd=prices[z.name], priceCard;
     if(pd && pd.items && pd.items.length){
@@ -317,7 +317,7 @@
         var ll=new naver.maps.LatLng(z.lat,z.lng);
         var map=new naver.maps.Map('miniMap',{center:ll,zoom:precise?16:13,scrollWheel:false,draggable:false,
           logoControl:false,mapDataControl:false,scaleControl:false,zoomControl:true,zoomControlOptions:{position:naver.maps.Position.TOP_RIGHT}});
-        var color=deep?'#1A3F7A':'#8494AA', w=deep?34:28, h=deep?42:34, dot=deep?6:5;
+        var color=deep?'#2563EB':'#8494AA', w=deep?34:28, h=deep?42:34, dot=deep?6:5;
         var pin='<svg width="'+w+'" height="'+h+'" viewBox="0 0 26 34" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 1px 2px rgba(15,34,68,.35));"><path d="M13 0C5.8 0 0 5.8 0 13c0 8.7 13 21 13 21s13-12.3 13-21C26 5.8 20.2 0 13 0z" fill="'+color+'" stroke="#fff" stroke-width="1.6"/><circle cx="13" cy="13" r="'+dot+'" fill="#fff"/></svg>';
         new naver.maps.Marker({position:ll,map:map,icon:{content:pin,anchor:new naver.maps.Point(w/2,h)}});
       }

@@ -29,7 +29,7 @@
     --cb-ink-900:#131A26; --cb-ink-700:#333D4E; --cb-ink-500:#5D6B80; --cb-ink-400:#8494AA;
     --cb-line-300:#C7D0DC; --cb-line-200:#E5EAF2; --cb-line-100:#EBEFF5;
     --cb-navy-50:#F2F6FC; --cb-navy-100:#E8EEF8; --cb-navy-200:#C9D9F4; --cb-navy-300:#A3BEEC;
-    --cb-navy-400:#6E97E0; --cb-navy-500:#3B72D4; --cb-navy-600:#2255A4; --cb-navy-700:#1A3F7A;
+    --cb-navy-400:#6E97E0; --cb-navy-500:#3B72D4; --cb-navy-600:#2563EB; --cb-navy-700:#2563EB;
     --cb-navy-800:#142F5C; --cb-navy-900:#0F2244; --cb-navy-950:#0A1830;
     --cb-success:#1E7F4F; --cb-success-bg:#E7F4EC;
     --cb-warning:#8A5A00; --cb-warning-bg:#FBF2DF;
@@ -38,7 +38,7 @@
     --cb-grade-b:#8A5A00; --cb-grade-b-bg:#FBF2DF; --cb-grade-b-line:#EBD9A9;
     --cb-grade-c:#4A5568; --cb-grade-c-bg:#EDF0F5; --cb-grade-c-line:#D3DAE5;
     --cb-accent:#B4540A; --cb-accent-text:#96450A; --cb-accent-bg:#F9EEE3;
-    --cb-chart-1:#2255A4; --cb-chart-est:#5C89DA; --cb-chart-marker:#B4540A;
+    --cb-chart-1:#2563EB; --cb-chart-est:#5C89DA; --cb-chart-marker:#B4540A;
     --cb-chart-2:#1E7F4F; --cb-chart-3:#8455A8; --cb-chart-grid:#EBEFF5;
     --font-sans:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
     --font-num:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;
@@ -544,12 +544,12 @@
         </div>
         <div class="cb-card" style="padding:0; overflow:hidden; position:relative;">
           <div id="mapCtl" style="position:absolute; top:12px; left:12px; z-index:10; display:flex; gap:6px;">
-            <button id="ctlNear" type="button" style="padding:6px 12px;font-size:12px;font-weight:600;border:1px solid #1A3F7A;border-radius:999px;cursor:pointer;box-shadow:0 1px 3px rgba(15,34,68,.14);font-family:inherit;background:#1A3F7A;color:#fff;">내 주변</button>
+            <button id="ctlNear" type="button" style="padding:6px 12px;font-size:12px;font-weight:600;border:1px solid #2563EB;border-radius:999px;cursor:pointer;box-shadow:0 1px 3px rgba(15,34,68,.14);font-family:inherit;background:#2563EB;color:#fff;">내 주변</button>
             <button id="ctlAll" type="button" style="padding:6px 12px;font-size:12px;font-weight:600;border:1px solid #DDE3EC;border-radius:999px;cursor:pointer;box-shadow:0 1px 3px rgba(15,34,68,.14);font-family:inherit;background:#fff;color:#333D4E;">전국 보기</button>
           </div>
           <div id="coverageMap" style="width:100%; height:380px; background:var(--cb-surface-2);"></div>
           <div style="display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center; padding:14px var(--sp-5); border-top:1px solid var(--cb-line-100); font-size:12.5px; color:var(--cb-ink-500);">
-            <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#1A3F7A;display:inline-block;"></span> 계산 제공 <b id="cov-deep" class="cb-num" style="color:var(--cb-ink-900);">3</b></span>
+            <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#2563EB;display:inline-block;"></span> 계산 제공 <b id="cov-deep" class="cb-num" style="color:var(--cb-ink-900);">3</b></span>
             <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:#8494AA;display:inline-block;"></span> 정비사업 구역 <b id="cov-all" class="cb-num" style="color:var(--cb-ink-900);">118</b></span>
             <span>· 분담금 데이터 <b class="cb-num" style="color:var(--cb-ink-700);">48</b> <span style="color:var(--cb-ink-400);">(VOC·문서)</span></span>
             <span id="geoStatus" style="color:var(--cb-navy-700); font-weight:600;"></span>
@@ -934,15 +934,15 @@
       pts.forEach(function(z){
         var isDeep=!!z.hasBundam; if(isDeep) deep++;
         var ll=new naver.maps.LatLng(z.lat,z.lng); b.extend(ll);
-        var color=isDeep?'#1A3F7A':'#8494AA', w=isDeep?30:24, h=isDeep?38:30;
+        var color=isDeep?'#2563EB':'#8494AA', w=isDeep?30:24, h=isDeep?38:30;
         var m=new naver.maps.Marker({position:ll,map:map,icon:{content:houseSvg(color,w,h),anchor:new naver.maps.Point(w/2,h)},zIndex:isDeep?100:1});
         markers.push({m:m,ll:ll});
         naver.maps.Event.addListener(m,'click',function(){
           window.__pinName=z.name;
           var url='/detail.html?complex='+encodeURIComponent(z.name);
           var body=isDeep
-            ? '<b>'+en(z.name)+'</b><br>'+en(z.region||'')+' · '+en(z.type||'')+'<br><span style="color:#176B43;font-weight:600;">분담금 데이터 제공</span><br><a href="'+url+'" style="color:#2255A4;font-weight:600;">단지 상세 보기 →</a>'
-            : '<b>'+en(z.name)+'</b><br>'+en(z.region||'')+' · '+en(z.type||'')+'<br><span style="color:#5D6B80;">데이터 준비 중</span><br><a href="'+url+'" style="color:#2255A4;font-weight:600;">단지 상세 보기 →</a>';
+            ? '<b>'+en(z.name)+'</b><br>'+en(z.region||'')+' · '+en(z.type||'')+'<br><span style="color:#176B43;font-weight:600;">분담금 데이터 제공</span><br><a href="'+url+'" style="color:#2563EB;font-weight:600;">단지 상세 보기 →</a>'
+            : '<b>'+en(z.name)+'</b><br>'+en(z.region||'')+' · '+en(z.type||'')+'<br><span style="color:#5D6B80;">데이터 준비 중</span><br><a href="'+url+'" style="color:#2563EB;font-weight:600;">단지 상세 보기 →</a>';
           iw.setContent('<div style="padding:10px 12px;font-size:13px;line-height:1.55;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#333D4E;">'+body+'</div>');
           iw.open(map,m);
         });
@@ -956,8 +956,8 @@
       var userMarker=null, userCircle=null;
       var BTN='padding:6px 12px;font-size:12px;font-weight:600;border:1px solid;border-radius:999px;cursor:pointer;box-shadow:0 1px 3px rgba(15,34,68,.14);font-family:inherit;';
       function setActive(which){
-        if(btnNear) btnNear.style.cssText=BTN+(which==='near'?'background:#1A3F7A;color:#fff;border-color:#1A3F7A;':'background:#fff;color:#333D4E;border-color:#DDE3EC;');
-        if(btnAll) btnAll.style.cssText=BTN+(which==='all'?'background:#1A3F7A;color:#fff;border-color:#1A3F7A;':'background:#fff;color:#333D4E;border-color:#DDE3EC;');
+        if(btnNear) btnNear.style.cssText=BTN+(which==='near'?'background:#2563EB;color:#fff;border-color:#2563EB;':'background:#fff;color:#333D4E;border-color:#DDE3EC;');
+        if(btnAll) btnAll.style.cssText=BTN+(which==='all'?'background:#2563EB;color:#fff;border-color:#2563EB;':'background:#fff;color:#333D4E;border-color:#DDE3EC;');
       }
       function clearUser(){ if(userMarker){ userMarker.setMap(null); userMarker=null; } if(userCircle){ userCircle.setMap(null); userCircle=null; } }
       function showAll(){ clearUser(); try{ map.fitBounds(b); }catch(e){} setActive('all'); if(geoStatus) geoStatus.textContent=''; }
@@ -968,8 +968,8 @@
           var u=new naver.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
           clearUser();
           map.morph ? map.morph(u,12) : (map.setCenter(u),map.setZoom(12));
-          userMarker=new naver.maps.Marker({position:u,map:map,zIndex:300,icon:{content:'<div style="width:16px;height:16px;border-radius:50%;background:#2255A4;border:3px solid #fff;box-shadow:0 0 0 5px rgba(34,85,164,.22);"></div>',anchor:new naver.maps.Point(11,11)}});
-          userCircle=new naver.maps.Circle({map:map,center:u,radius:10000,strokeColor:'#1A3F7A',strokeOpacity:.4,strokeWeight:1,fillColor:'#1A3F7A',fillOpacity:.05});
+          userMarker=new naver.maps.Marker({position:u,map:map,zIndex:300,icon:{content:'<div style="width:16px;height:16px;border-radius:50%;background:#2563EB;border:3px solid #fff;box-shadow:0 0 0 5px rgba(34,85,164,.22);"></div>',anchor:new naver.maps.Point(11,11)}});
+          userCircle=new naver.maps.Circle({map:map,center:u,radius:10000,strokeColor:'#2563EB',strokeOpacity:.4,strokeWeight:1,fillColor:'#2563EB',fillOpacity:.05});
           var near=0; for(var i=0;i<markers.length;i++){ if(kmBetween(u,markers[i].ll)<=10) near++; }
           if(geoStatus){ geoStatus.textContent='내 주변 10km · '+near+'곳'+(near===0?' — 이 지역은 준비 중':''); geoStatus.style.color='var(--cb-navy-700)'; }
           setActive('near');
