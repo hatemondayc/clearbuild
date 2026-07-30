@@ -298,7 +298,17 @@
   .cb-fund-form .msg2{margin-top:8px; font-size:13px;}
   .cb-fund-form[hidden]{display:none;}
 
-  .cb-footer{border-top:1px solid var(--cb-line-200); padding:var(--sp-6) 0; font-size:12.5px; color:var(--cb-ink-400);}
+  .cb-footer{border-top:1px solid var(--cb-line-200); margin-top:var(--sp-8); padding:var(--sp-7) 0 var(--sp-6); font-size:12.5px; color:var(--cb-ink-400);}
+  .cb-foot-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:18px;}
+  @media(max-width:680px){ .cb-foot-grid{grid-template-columns:1fr; gap:16px;} }
+  .cb-foot-h{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--cb-ink-700);}
+  .cb-foot-grid p{font-size:12.5px; color:var(--cb-ink-500); line-height:1.6; margin-top:6px;}
+  .cb-foot-grid p b{color:var(--cb-ink-700);}
+  .cb-foot-disc{font-size:11.5px; color:var(--cb-ink-400); line-height:1.6; padding-top:16px; border-top:1px solid var(--cb-line-100);}
+  .cb-foot-disc b{color:var(--cb-ink-500);}
+  .cb-foot-bar{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-top:18px; padding-top:16px; border-top:1px solid var(--cb-line-100);}
+  .cb-foot-bar .cb-foot-brand{font-weight:800; color:var(--cb-navy-700); letter-spacing:-.01em;}
+  .cb-foot-bar a{color:var(--cb-ink-500);}
   .disclaim{margin-top:var(--sp-4); font-size:12px; color:var(--cb-ink-400); line-height:1.6;}
   .enter{opacity:0; transform:translateY(6px); animation:cb-enter var(--dur-3) var(--ease) forwards;}
   @keyframes cb-enter{to{opacity:1; transform:none;}}
@@ -586,27 +596,25 @@
 
     <footer class="cb-footer">
       <div class="cb-container">
-        <div style="font-weight:700; color:#1A3F7A; margin-bottom:var(--sp-4);">CLEARBUILD — 정비사업 판단·데이터 인프라</div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:16px;">
+        <div class="cb-foot-grid">
           <div>
-            <div class="cb-label" style="text-transform:none;">무엇을 하나</div>
-            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">정비사업 매물의 시점별 필요현금·총투입비를 근거와 함께 계산하는 판단·데이터 인프라.</div>
+            <div class="cb-foot-h">데이터 출처</div>
+            <p>조합 총회자료·정비계획·권리변동계획, 공개 실거래·언론(헤럴드경제 등), 118개 단지 커뮤니티 VOC 15.4만 건.</p>
           </div>
           <div>
-            <div class="cb-label" style="text-transform:none;">데이터 출처</div>
-            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">조합 총회자료·정비계획·권리변동계획 원본, 공개 실거래·언론(헤럴드경제 등), 118개 단지 커뮤니티 VOC(15.4만 건).</div>
+            <div class="cb-foot-h">검증 · 신뢰등급</div>
+            <p>단지별 수작업 검증 후 <b>A 공시확정 · B 시장추정 · C 모델추정</b> 부여. C는 배지로 분리, 수정 가능한 가정으로만 반영.</p>
           </div>
           <div>
-            <div class="cb-label" style="text-transform:none;">검증 방법</div>
-            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">단지별 수작업 검증 후 신뢰등급 A(공시확정)/B(시장추정)/C(모델추정) 부여. C등급(모델·가정값)은 배지로 분리 표기하고, 사용자가 수정 가능한 가정으로만 계산에 반영.</div>
-          </div>
-          <div>
-            <div class="cb-label" style="text-transform:none;">팀 · 연락처</div>
-            <div style="font-size:13px; color:var(--cb-ink-500); margin-top:4px;">CLEARBUILD (오원기 · 정휘준) · <a href="mailto:ellemercury88@gmail.com">ellemercury88@gmail.com</a></div>
+            <div class="cb-foot-h">관계자 정정 채널</div>
+            <p>조합·정비업체 공식 자료를 주시면 해당 단지를 <b>A등급(공시 확정)</b>으로 반영합니다. 공식 숫자가 있으면 그대로 씁니다.</p>
           </div>
         </div>
-        <p style="font-size:12.5px; color:var(--cb-ink-500); background:var(--cb-navy-50); border-radius:var(--radius-md); padding:10px 14px; margin-bottom:12px;"><b>조합·정비업체 관계자께</b> — 공식 총회·관리처분 자료를 제공해주시면 해당 단지를 <b>A등급(공시 확정)</b>으로 반영합니다. 추정이 조합 발표보다 높든 낮든 다투지 않고, <b>공식 숫자가 있으면 그대로 씁니다.</b> 정정·반영 요청 clearbuild@example.com</p>
-        <p class="disclaim">본 페이지는 매수·매도·보유 <b>판단에 필요한 숫자와 출처</b>를 제공할 뿐, 특정 행위를 권유하지 않습니다. CLEARBUILD는 대출·매물을 <b>중개·모집하지 않습니다.</b> 분담금은 총회 의결 전 확정되지 않으며, 표시 수치는 신뢰등급(A/B/C)과 출처를 전제로 한 추정입니다.</p>
+        <p class="cb-foot-disc">CLEARBUILD는 매수·매도·보유 판단에 필요한 <b>숫자와 출처</b>를 제공할 뿐 특정 행위를 권유하지 않으며, 대출·매물을 <b>중개·모집하지 않습니다.</b> 분담금은 총회 의결 전 확정되지 않으며, 표시 수치는 신뢰등급(A/B/C)·출처를 전제로 한 추정입니다.</p>
+        <div class="cb-foot-bar">
+          <span><span class="cb-foot-brand">CLEARBUILD</span> · 정비사업 판단·데이터 인프라 · © 2026</span>
+          <a href="mailto:ellemercury88@gmail.com">ellemercury88@gmail.com</a>
+        </div>
       </div>
     </footer>
   </main>
@@ -957,7 +965,7 @@
       if(!pts.length) return;
       var en=function(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
       var SEOUL=new naver.maps.LatLng(37.5665,126.9780);
-      var map=new naver.maps.Map('coverageMap',{zoom:11,center:SEOUL,scrollWheel:false});
+      var map=new naver.maps.Map('coverageMap',{zoom:11,center:SEOUL,scrollWheel:false,zoomControl:true,zoomControlOptions:{position:naver.maps.Position.RIGHT_CENTER,style:naver.maps.ZoomControlStyle.SMALL}});
       var b=new naver.maps.LatLngBounds(), deep=0, markers=[];
       var iw=new naver.maps.InfoWindow({maxWidth:230,borderColor:'#DDE3EC',borderWidth:1,disableAnchor:true,backgroundColor:'#fff'});
       pts.forEach(function(z){
@@ -981,7 +989,7 @@
 
       // ── 경기 정비구역 레이어 (533) + 시군 클러스터(줌아웃 시 묶음) ──
       fetch('/gg_zones.json').then(function(r){return r.json();}).then(function(gj){
-        var gz=((gj&&gj.zones)||[]).filter(function(z){return z.lat&&z.lng;});
+        var gz=((gj&&gj.zones)||[]).filter(function(z){return z.lat&&z.lng&&z.grp!=='done';});
         var GC={init:'#A3BEEC',mid:'#2563EB',build:'#1A3F7A',done:'#8494AA'}, ggDots=[], bySigun={};
         gz.forEach(function(z){
           var ll=new naver.maps.LatLng(z.lat,z.lng); b.extend(ll);
