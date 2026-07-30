@@ -568,6 +568,7 @@
           <div style="display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center; padding:14px var(--sp-5); border-top:1px solid var(--cb-line-100); font-size:12.5px; color:var(--cb-ink-500);">
             <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:11px;height:11px;border-radius:50%;background:#2563EB;display:inline-block;"></span> 계산 제공 <b id="cov-deep" class="cb-num" style="color:var(--cb-ink-900);">3</b></span>
             <span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:#8494AA;display:inline-block;"></span> 정비사업 구역 <b id="cov-all" class="cb-num" style="color:var(--cb-ink-900);">118</b></span>
+            <span id="cov-gg-wrap" style="display:none; align-items:center; gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:#2563EB;display:inline-block;"></span> 경기 정비구역 <b id="cov-gg" class="cb-num" style="color:var(--cb-ink-900);">0</b></span>
             <span>· 분담금 데이터 <b class="cb-num" style="color:var(--cb-ink-700);">48</b> <span style="color:var(--cb-ink-400);">(VOC·문서)</span></span>
             <span id="geoStatus" style="color:var(--cb-navy-700); font-weight:600;"></span>
             <span style="margin-left:auto; color:var(--cb-ink-400);">채움율 그대로 공개</span>
@@ -971,6 +972,25 @@
       });
       var cd=document.getElementById('cov-deep'); if(cd) cd.textContent=deep;
       var ca=document.getElementById('cov-all'); if(ca) ca.textContent=pts.length;
+
+      // ── 경기 정비구역 레이어 (533, 지오코딩 후 좌표 채워지면 자동 활성) ──
+      fetch('/gg_zones.json').then(function(r){return r.json();}).then(function(gj){
+        var gz=(gj&&gj.zones)||[], GC={init:'#A3BEEC',mid:'#2563EB',build:'#1A3F7A',done:'#8494AA'}, plotted=0;
+        gz.forEach(function(z){
+          if(!(z.lat&&z.lng)) return;
+          var ll=new naver.maps.LatLng(z.lat,z.lng); b.extend(ll); plotted++;
+          var col=GC[z.grp]||'#6E97E0';
+          var dot='<div style="width:9px;height:9px;border-radius:50%;background:'+col+';border:1.5px solid #fff;box-shadow:0 1px 2px rgba(15,34,68,.3);"></div>';
+          var m=new naver.maps.Marker({position:ll,map:map,icon:{content:dot,anchor:new naver.maps.Point(6,6)},zIndex:2});
+          markers.push({m:m,ll:ll});
+          naver.maps.Event.addListener(m,'click',function(){
+            var body='<b>'+en(z.name)+'</b><br>'+en(z.sigun)+' · '+en(z.type)+'<br><span style="color:#5D6B80;">'+en(z.step)+(z.hshld?' · '+z.hshld+'세대':'')+'</span><br><span style="color:#8494AA;font-size:11px;">경기 정비사업 · 데이터 준비 중</span>';
+            iw.setContent('<div style="padding:10px 12px;font-size:13px;line-height:1.55;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:#333D4E;">'+body+'</div>');
+            iw.open(map,m);
+          });
+        });
+        if(plotted>0){ var ge=document.getElementById('cov-gg'); if(ge) ge.textContent=plotted; var gw=document.getElementById('cov-gg-wrap'); if(gw) gw.style.display='inline-flex'; }
+      }).catch(function(){});
 
       // ── 뷰 컨트롤: 기본=전국 커버리지 그대로 공개, '내 주변'=버튼(제스처) ──
       var geoStatus=document.getElementById('geoStatus');
