@@ -72,6 +72,21 @@
     "builtYr": 1993
   },
   {
+    "name": "분당 느티마을 3단지",
+    "region": "성남시 분당구",
+    "address": "경기도 성남시 분당구 정자동",
+    "geocodeQuery": "성남시 분당구 느티마을 3단지",
+    "lat": 37.3818,
+    "lng": 127.1179,
+    "type": "리모델링",
+    "hasBundam": false,
+    "grade": null,
+    "confidence": "region",
+    "geoSource": "region",
+    "hshld": null,
+    "builtYr": null
+  },
+  {
     "name": "분당 한솔마을6단지",
     "region": "성남시 분당구",
     "address": "경기도 성남시 분당구 내정로 54",

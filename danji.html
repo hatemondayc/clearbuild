@@ -322,7 +322,7 @@
   @media(prefers-reduced-motion:reduce){ .enter{animation:none; opacity:1; transform:none;} }
   </style>
   <!-- 커버리지 지도용 NAVER Maps (사전 지오코딩 완료 → geocoder 서브모듈 불필요) -->
-  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=a4kxw68xe0"></script>
+  <script defer src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=a4kxw68xe0"></script>
 </head>
 <body>
 
@@ -601,7 +601,7 @@
             <span id="geoStatus" style="color:var(--cb-navy-700); font-weight:600;"></span>
           </div>
         </div>
-        <p class="disclaim" style="margin-top:10px;">핀을 누르면 단지 상태가 보입니다. 데이터 준비 중인 곳은 "확정값 알림"으로 수요를 받아 우선순위를 정합니다.</p>
+        <p class="disclaim" style="margin-top:10px;">핀을 누르면 단지 상태가 보이고, 상세 페이지에서 "확정값 알림"으로 수요를 받아 우선순위를 정합니다.</p>
       </div>
     </section>
 
@@ -853,7 +853,10 @@
     var NEWBUILD = 170000; // 인근 신축 84㎡ 중앙 17.0억 (만원 · 국토부 더샵분당파크리버)
     var pe = document.getElementById('out-premium');
     if(pe){
-      if(total > 0){ var prem = total - NEWBUILD; pe.textContent = (prem>=0?'+':'−') + eok(Math.abs(prem)); pe.style.color = (prem>=0 ? 'var(--cb-danger)' : 'var(--cb-success)'); }
+      if(total > 0){ var prem = total - NEWBUILD;
+        if(round100(Math.abs(prem)) <= 0){ pe.textContent = '±0'; pe.style.color = 'var(--cb-ink-400)'; }
+        else { pe.textContent = (prem>=0?'+':'−') + eok(Math.abs(prem)); pe.style.color = (prem>=0 ? 'var(--cb-danger)' : 'var(--cb-success)'); }
+      }
       else { pe.textContent = '—'; pe.style.color = ''; }
     }
     renderPledge(bundam);

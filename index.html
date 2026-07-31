@@ -1358,7 +1358,8 @@
   // ── Supabase 클라이언트 (익명 INSERT 전용 · 안전장치=RLS) ──
   var SUPABASE_URL = 'https://lynmnuftfybbegdxjfbz.supabase.co';
   var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bm1udWZ0ZnliYmVnZHhqZmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0Njk3OTUsImV4cCI6MjA5OTA0NTc5NX0.66hZ9W29yoscoC8ibbUeHQluG8ecEo-nI5a8F19beGE';
-  var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // CDN 로드 실패해도 페이지(탭·시뮬레이터)는 살아있게 — sb는 null로 두고 사용처에서 가드
+  var sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
   // ── 탭 전환 ──
   var panels = {
@@ -1562,29 +1563,49 @@
     submitBtn.textContent = '처리 중…';
     setFormMsg('', null);
 
-    // Supabase reservations 테이블에 서버 저장 (익명 INSERT)
-    sb.from('reservations').insert({
-      complex:    complex,
-      owner_type: owner,
-      interest:   interest,
-      email:      email,
-      phone:      phone || null,
-      ref:        (new URLSearchParams(location.search).get('ref') || 'home')
-    }).then(function(res) {
+    // 연결 가드: Supabase CDN 미로드 시
+    if (!sb) {
       submitBtn.disabled = false;
       submitBtn.textContent = submitLabel;
+      setFormMsg('연결 준비가 안 됐어요. 새로고침 후 다시 시도해 주세요.', false);
+      return;
+    }
 
-      if (res.error) {
+    // Supabase reservations 서버 저장 (익명 INSERT) + 8초 타임아웃(행잉 방지)
+    var settled = false;
+    function restoreBtn() { submitBtn.disabled = false; submitBtn.textContent = submitLabel; }
+    var timeout = new Promise(function(_, reject) {
+      setTimeout(function() { reject(new Error('timeout')); }, 8000);
+    });
+    Promise.race([
+      sb.from('reservations').insert({
+        complex:    complex,
+        owner_type: owner,
+        interest:   interest,
+        email:      email,
+        phone:      phone || null,
+        ref:        (new URLSearchParams(location.search).get('ref') || 'home')
+      }),
+      timeout
+    ]).then(function(res) {
+      if (settled) return; settled = true;
+      restoreBtn();
+      if (res && res.error) {
         setFormMsg('저장에 실패했어요. 잠시 후 다시 시도해 주세요.', false);
         return;
       }
-
       // 성공: 이 기기 미리보기 목록에도 반영 (서버는 읽기 차단이라 로컬 미러 유지)
       signups.unshift({ id: ++seq, complex: complex, owner: owner, email: email, phone: phone, interest: interest });
       saveSignups();
       render();
       form.reset();
       setFormMsg('사전신청이 접수됐습니다. 감사합니다!', true);
+    }).catch(function(err) {
+      if (settled) return; settled = true;
+      restoreBtn();
+      setFormMsg(err && err.message === 'timeout'
+        ? '네트워크가 불안정해요. 인터넷 연결을 확인한 뒤 다시 시도해 주세요.'
+        : '저장에 실패했어요. 잠시 후 다시 시도해 주세요.', false);
     });
   });
 
@@ -1634,7 +1655,7 @@
   // ── 실시간 신청 티커 (실제 reservations 데이터 · 개인정보 미조회) ──
   (function(){
     var el = document.getElementById('signup-ticker');
-    if (!el || typeof sb === 'undefined') return;
+    if (!el || !sb) return;
     function ownerLabel(o){ return o === '조합원' ? '조합원' : '매수희망자'; }
     sb.from('reservations_public').select('complex,owner_type,created_at').order('created_at',{ascending:false}).limit(15).then(function(res){
       if (res.error || !res.data || !res.data.length) return;
