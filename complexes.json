@@ -12,8 +12,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 462,
-    "builtYr": 2001,
-    "specSrc": "호갱노노"
+    "builtYr": 1998
   },
   {
     "name": "수지뜨리에체(죽전역)",
@@ -39,7 +38,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1989
   },
   {
     "name": "강동 고덕아남",
@@ -52,7 +52,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 1990,
+    "builtYr": 1994
   },
   {
     "name": "분당 느티마을 4단지(공무원)",
@@ -67,8 +69,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 1006,
-    "builtYr": 1994,
-    "specSrc": "호갱노노/KB부동산"
+    "builtYr": 1993
   },
   {
     "name": "분당 한솔마을6단지",
@@ -83,8 +84,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 1039,
-    "builtYr": 1995,
-    "specSrc": "호갱노노"
+    "builtYr": 1995
   },
   {
     "name": "강동 명일현대",
@@ -97,7 +97,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1993
   },
   {
     "name": "광주 봉선삼익2차",
@@ -123,7 +124,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1993
   },
   {
     "name": "서초 유원서초",
@@ -136,7 +138,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1989
   },
   {
     "name": "분당 매화마을2단지",
@@ -151,8 +154,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 1185,
-    "builtYr": 1995,
-    "specSrc": "주거환경신문"
+    "builtYr": 1993
   },
   {
     "name": "부천 상동라이프현대",
@@ -178,7 +180,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1972
   },
   {
     "name": "수지풍산",
@@ -206,8 +209,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 410,
-    "builtYr": 1992,
-    "specSrc": "호갱노노/KB부동산"
+    "builtYr": 1993
   },
   {
     "name": "동대문 신답극동",
@@ -235,8 +237,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 1329,
-    "builtYr": 1992,
-    "specSrc": "호갱노노/나무위키"
+    "builtYr": 1992
   },
   {
     "name": "송파현대(풍납)",
@@ -249,7 +250,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1989
   },
   {
     "name": "서초 잠원한신로얄",
@@ -262,7 +264,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1983
   },
   {
     "name": "강동 둔촌현대2차",
@@ -275,7 +278,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1992
   },
   {
     "name": "수지삼성래미안1차",
@@ -290,8 +294,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 576,
-    "builtYr": 1994,
-    "specSrc": "다음부동산/호갱노노"
+    "builtYr": 1994
   },
   {
     "name": "영통 삼성태영",
@@ -304,7 +307,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1993
   },
   {
     "name": "일산 문촌16단지뉴삼익",
@@ -343,7 +347,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1993
   },
   {
     "name": "창원 토월성원그랜드타운",
@@ -369,7 +374,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1993
   },
   {
     "name": "서초 반포엠브이",
@@ -382,7 +388,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1982
   },
   {
     "name": "용산 이촌강촌",
@@ -395,7 +402,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1971
   },
   {
     "name": "산본 율곡3단지",
@@ -410,8 +418,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 2042,
-    "builtYr": 1994,
-    "specSrc": "나무위키"
+    "builtYr": 1993
   },
   {
     "name": "영통 수원 매탄동남",
@@ -424,7 +431,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1992
   },
   {
     "name": "송파성지",
@@ -452,8 +460,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 994,
-    "builtYr": 1992,
-    "specSrc": "호갱노노"
+    "builtYr": 1992
   },
   {
     "name": "구로 신도림우성1차",
@@ -466,7 +473,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1989
   },
   {
     "name": "수지 풍덕천 동부",
@@ -494,8 +502,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 476,
-    "builtYr": 1993,
-    "specSrc": "호갱노노/SK에코플랜트"
+    "builtYr": 1993
   },
   {
     "name": "성동 금호벽산",
@@ -508,7 +515,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1992
   },
   {
     "name": "평촌 목련3단지(우성)",
@@ -523,8 +531,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 902,
-    "builtYr": 1992,
-    "specSrc": "KB부동산"
+    "builtYr": 1992
   },
   {
     "name": "용산 이촌코오롱",
@@ -537,7 +544,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 200,
+    "builtYr": 1970
   },
   {
     "name": "송파 거여4단지",
@@ -550,7 +559,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1993
   },
   {
     "name": "송파 거여5단지",
@@ -563,7 +573,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1993
   },
   {
     "name": "해운대상록아파트",
@@ -615,7 +626,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 400,
+    "builtYr": 1985
   },
   {
     "name": "광진 광나루현대",
@@ -641,7 +654,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 1140,
+    "builtYr": 1986
   },
   {
     "name": "수지 풍덕천 한국",
@@ -667,7 +682,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 714,
+    "builtYr": 1994
   },
   {
     "name": "강남 삼성동서광",
@@ -680,7 +697,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 112,
+    "builtYr": 1992
   },
   {
     "name": "영통 두산우성한신",
@@ -706,7 +725,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "region"
+    "geoSource": "region",
+    "builtYr": 2004
   },
   {
     "name": "강서 염창무학",
@@ -719,7 +739,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1990
   },
   {
     "name": "수지현대아파트",
@@ -732,7 +753,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1997
   },
   {
     "name": "강동 둔촌현대1차",
@@ -758,7 +780,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1988
   },
   {
     "name": "구로 신도림우성5차",
@@ -771,7 +794,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1989
   },
   {
     "name": "강서 등촌부영",
@@ -784,7 +808,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 712,
+    "builtYr": 1990
   },
   {
     "name": "마포 서강GS",
@@ -797,7 +823,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1991
   },
   {
     "name": "고양 화정별빛마을8단지",
@@ -810,7 +837,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "region"
+    "geoSource": "region",
+    "builtYr": 1992
   },
   {
     "name": "평촌 한가람신라",
@@ -825,8 +853,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 1068,
-    "builtYr": 1992,
-    "specSrc": "나무위키/다음부동산"
+    "builtYr": 1992
   },
   {
     "name": "평촌 한가람세경",
@@ -841,8 +868,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 1292,
-    "builtYr": 1996,
-    "specSrc": "나무위키"
+    "builtYr": 1996
   },
   {
     "name": "산본 개나리13단지",
@@ -857,8 +883,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 1778,
-    "builtYr": 1995,
-    "specSrc": "KB부동산/다음부동산"
+    "builtYr": 1993
   },
   {
     "name": "수지현대성우8단지",
@@ -873,8 +898,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 1239,
-    "builtYr": 1999,
-    "specSrc": "리얼캐스트/공식홈페이지"
+    "builtYr": 1998
   },
   {
     "name": "분당 무지개마을 4단지",
@@ -888,9 +912,8 @@
     "grade": null,
     "confidence": "high",
     "geoSource": "addr",
-    "hshld": 563,
-    "builtYr": 1995,
-    "specSrc": "직방/서울경제"
+    "hshld": 962,
+    "builtYr": 1993
   },
   {
     "name": "송파 가락금호",
@@ -903,7 +926,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1992
   },
   {
     "name": "송파 가락상아2차",
@@ -916,7 +940,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1993
   },
   {
     "name": "수지 풍덕천 보원",
@@ -942,7 +967,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1988
   },
   {
     "name": "송파 잠실동현대",
@@ -955,7 +981,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1992
   },
   {
     "name": "용산 이촌코스모스맨션",
@@ -968,7 +995,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1974
   },
   {
     "name": "광명 철산한신",
@@ -983,8 +1011,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 1568,
-    "builtYr": 1992,
-    "specSrc": "한국경제/헤럴드경제"
+    "builtYr": 1993
   },
   {
     "name": "영등포 문래현대5차",
@@ -997,7 +1024,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "region"
+    "geoSource": "region",
+    "builtYr": 1988
   },
   {
     "name": "수지초입마을(동아삼익풍림)",
@@ -1025,8 +1053,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 530,
-    "builtYr": 1993,
-    "specSrc": "부동산뱅크"
+    "builtYr": 1993
   },
   {
     "name": "인천 부개주공3단지",
@@ -1039,7 +1066,8 @@
     "hasBundam": true,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1992
   },
   {
     "name": "마포 한강삼성",
@@ -1052,7 +1080,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1992
   },
   {
     "name": "창원 남양피오르빌",
@@ -1104,7 +1133,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1988
   },
   {
     "name": "대구 범어우방청솔맨션",
@@ -1132,8 +1162,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 1710,
-    "builtYr": 1993,
-    "specSrc": "부동산뱅크/다음부동산"
+    "builtYr": 1993
   },
   {
     "name": "영통 신나무실5단지",
@@ -1159,7 +1188,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1999
   },
   {
     "name": "산본 우륵7단지(설악)",
@@ -1174,8 +1204,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 1312,
-    "builtYr": 1994,
-    "specSrc": "나무위키/호갱노노"
+    "builtYr": 1993
   },
   {
     "name": "창원 대동중앙아파트",
@@ -1201,7 +1230,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1994
   },
   {
     "name": "강동 선사현대",
@@ -1214,7 +1244,9 @@
     "hasBundam": true,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 3090,
+    "builtYr": 1989
   },
   {
     "name": "송파 가락쌍용1차",
@@ -1227,7 +1259,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 2048,
+    "builtYr": 1994
   },
   {
     "name": "서초 잠원동아",
@@ -1240,7 +1274,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1987
   },
   {
     "name": "용산 이촌한가람",
@@ -1253,7 +1288,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1974
   },
   {
     "name": "양천 신정7단지",
@@ -1266,7 +1302,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 654,
+    "builtYr": 1993
   },
   {
     "name": "강남 청담건영",
@@ -1279,7 +1317,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 360,
+    "builtYr": 1985
   },
   {
     "name": "양천 목동한신청구",
@@ -1292,7 +1332,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 1512,
+    "builtYr": 1997
   },
   {
     "name": "광명 중앙하이츠1차",
@@ -1307,8 +1349,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 909,
-    "builtYr": 1993,
-    "specSrc": "호갱노노/위클리한국주택경제"
+    "builtYr": 1993
   },
   {
     "name": "산본 퇴계3단지",
@@ -1323,8 +1364,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 1992,
-    "builtYr": 1995,
-    "specSrc": "건설타임즈"
+    "builtYr": 1995
   },
   {
     "name": "분당 한솔마을 5단지",
@@ -1339,8 +1379,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 1156,
-    "builtYr": 1994,
-    "specSrc": "KB부동산/아파트랭킹"
+    "builtYr": 1994
   },
   {
     "name": "광진 광장상록타워",
@@ -1353,7 +1392,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 540,
+    "builtYr": 1989
   },
   {
     "name": "송파 거여1단지",
@@ -1379,7 +1420,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1997
   },
   {
     "name": "구로 신도림우성2차",
@@ -1392,7 +1434,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1989
   },
   {
     "name": "산본 설악8단지",
@@ -1407,8 +1450,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 1471,
-    "builtYr": 1995,
-    "specSrc": "나무위키/호갱노노"
+    "builtYr": 1995
   },
   {
     "name": "양천 목동우성1차",
@@ -1421,7 +1463,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 332,
+    "builtYr": 1986
   },
   {
     "name": "서초 신반포청구",
@@ -1434,7 +1478,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1983
   },
   {
     "name": "성동 옥수극동",
@@ -1447,7 +1492,9 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "hshld": 900,
+    "builtYr": 1988
   },
   {
     "name": "영등포 문래대원",
@@ -1460,7 +1507,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1989
   },
   {
     "name": "평촌 초원2단지대림",
@@ -1475,8 +1523,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 1035,
-    "builtYr": 1993,
-    "specSrc": "현대엔지니어링/위클리한국주택경제"
+    "builtYr": 1993
   },
   {
     "name": "강동 둔촌현대3차",
@@ -1489,7 +1536,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1992
   },
   {
     "name": "동대문 이문삼익",
@@ -1569,8 +1617,7 @@
     "confidence": "high",
     "geoSource": "addr",
     "hshld": 709,
-    "builtYr": 1994,
-    "specSrc": "대한경제"
+    "builtYr": 1994
   },
   {
     "name": "성동 응봉신동아",
@@ -1583,7 +1630,8 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1990
   },
   {
     "name": "평촌 향촌현대4차",
@@ -1598,8 +1646,7 @@
     "confidence": "high",
     "geoSource": "region",
     "hshld": 552,
-    "builtYr": 1992,
-    "specSrc": "다방/리치고"
+    "builtYr": 1992
   },
   {
     "name": "서초 잠원노블레스",
@@ -1612,6 +1659,7 @@
     "hasBundam": false,
     "grade": null,
     "confidence": "high",
-    "geoSource": "addr"
+    "geoSource": "addr",
+    "builtYr": 1991
   }
 ]
