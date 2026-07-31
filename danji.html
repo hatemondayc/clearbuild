@@ -356,35 +356,6 @@
         <p class="lede">호가만 보면 반쪽 가격표입니다. 분담금·금융비용까지 더한 총투입비, 계약부터 입주까지 언제 얼마가 필요한지를 계산하고 숫자마다 근거와 출처를 붙입니다.</p>
         <div class="cb-demo-badge">이 페이지는 <b>느티마을 3단지</b> 심층 계산 데모입니다 — 전체 정비사업장은 아래 <b>커버리지 지도</b>에서</div>
 
-        <div class="cb-inputs">
-          <div class="cb-field">
-            <label for="askInput">매물 호가</label>
-            <div class="cb-price">
-              <input id="askInput" inputmode="numeric" value="200,000" aria-label="매물 호가 (만원)" />
-              <span class="suffix">만원</span>
-            </div>
-          </div>
-          <div class="cb-field cb-slider">
-            <label for="costRange">공사비 <span class="val" id="costVal">750만원/평</span></label>
-            <input type="range" class="cb-range" id="costRange" min="600" max="800" step="10" value="750" aria-label="평당 공사비" />
-            <div class="cb-scale"><span>600</span><span>시장 평균 750</span><span>800</span></div>
-          </div>
-        </div>
-
-        <!-- 유형 분기 안내 (리모델링 외 유형 선택 시 노출) -->
-        <div class="cb-type-note" id="typeNote"></div>
-
-        <!-- 가정값 (T2 계산 입력 · C등급) -->
-        <details class="cb-assume">
-          <summary>가정값 수정 (이주비·이자·부대비용)</summary>
-          <div class="grid">
-            <label>이주비 <input id="aMove" inputmode="numeric" value="20,000" /><span>만원</span></label>
-            <label>대출 이자율 <input id="aRate" type="number" step="0.1" value="4.5" /><span>%</span></label>
-            <label>대출 기간 <input id="aMonths" type="number" value="24" /><span>개월</span></label>
-            <label>취득·부대비용 <input id="aFee" inputmode="numeric" value="3,000" /><span>만원</span></label>
-          </div>
-          <p class="note">※ 이주비·이자율·부대비용은 <b>예시 가정값(C등급)</b> — 조합·개인 대출조건에 따라 다릅니다. 분담금만 총회 확정 기반 추정(B).</p>
-        </details>
       </div>
     </div>
 
@@ -456,22 +427,42 @@
       </div>
     </section>
 
-    <!-- ═══ 시점별 필요현금 타임라인 (T3에서 시각화) ═══ -->
-    <section>
+    <!-- ═══ 내 조건으로 계산 (입력 + 판정보드 + 타임라인 · 입력↔라이브 출력 인접) ═══ -->
+    <section id="calc">
       <div class="cb-container cb-data">
         <div class="sec-head">
-          <h2>시점별 필요현금 타임라인</h2>
-          <div class="sub">계약 → 이주 → 중도금 → 분담금 납부까지, 언제 현금이 얼마나 필요한지</div>
+          <h2>내 조건으로 계산</h2>
+          <div class="sub">호가·공사비를 바꾸면 아래 숫자가 바로 반영됩니다</div>
         </div>
-        <div class="cb-timeline" id="timelineHost"></div>
-        <p class="disclaim" style="margin-top:12px;">※ 시점 구분(계약금 10% / 잔금 90% / 분담금 중도금 60%·잔금 40%)은 <b>일반 가정</b>이며 단지·계약 조건에 따라 다릅니다. 각 막대 = 해당 시점 소요 현금(합산 시 총투입비 규모). 확정=솔리드, 추정=빗금·파선.</p>
-      </div>
-    </section>
 
-    <!-- ═══ 4출력 카드 (T2에서 계산 연결) ═══ -->
-    <section>
-      <div class="cb-container cb-data">
-        <div class="cb-card cb-board">
+        <div class="cb-inputs">
+          <div class="cb-field">
+            <label for="askInput">매물 호가</label>
+            <div class="cb-price">
+              <input id="askInput" inputmode="numeric" value="200,000" aria-label="매물 호가 (만원)" />
+              <span class="suffix">만원</span>
+            </div>
+          </div>
+          <div class="cb-field cb-slider">
+            <label for="costRange">공사비 <span class="val" id="costVal">750만원/평</span></label>
+            <input type="range" class="cb-range" id="costRange" min="600" max="800" step="10" value="750" aria-label="평당 공사비" />
+            <div class="cb-scale"><span>600</span><span>시장 평균 750</span><span>800</span></div>
+          </div>
+        </div>
+        <div class="cb-type-note" id="typeNote"></div>
+        <details class="cb-assume">
+          <summary>가정값 수정 (이주비·이자·부대비용)</summary>
+          <div class="grid">
+            <label>이주비 <input id="aMove" inputmode="numeric" value="20,000" /><span>만원</span></label>
+            <label>대출 이자율 <input id="aRate" type="number" step="0.1" value="4.5" /><span>%</span></label>
+            <label>대출 기간 <input id="aMonths" type="number" value="24" /><span>개월</span></label>
+            <label>취득·부대비용 <input id="aFee" inputmode="numeric" value="3,000" /><span>만원</span></label>
+          </div>
+          <p class="note">※ 이주비·이자율·부대비용은 <b>예시 가정값(C등급)</b> — 조합·개인 대출조건에 따라 다릅니다. 분담금만 총회 확정 기반 추정(B).</p>
+        </details>
+
+        <!-- 4출력 판정보드 (calc()가 갱신 · 입력 바로 아래에서 즉시 반응) -->
+        <div class="cb-card cb-board" style="margin-top:var(--sp-5);">
           <div class="board-hero">
             <div class="board-hero-top"><span class="cb-label">총투입비 — 이 매물의 진짜 값</span><span class="cb-grade cb-grade-b">B 시장추정</span></div>
             <div class="board-hero-num cb-num" id="out-total">—</div>
@@ -491,7 +482,16 @@
               <span class="br-val cb-num" id="out-premium">—</span>
             </div>
           </div>
+          <p class="disclaim" style="margin-top:12px;">분담금·필요현금은 <b>공사비</b> 기준(호가와 무관), 총투입비·프리미엄이 <b>호가</b>에 반응합니다.</p>
         </div>
+
+        <!-- 시점별 필요현금 타임라인 -->
+        <div class="sec-head" style="margin-top:var(--sp-5);">
+          <h2>시점별 필요현금 타임라인</h2>
+          <div class="sub">계약 → 이주 → 중도금 → 분담금 납부까지, 언제 현금이 얼마나 필요한지</div>
+        </div>
+        <div class="cb-timeline" id="timelineHost"></div>
+        <p class="disclaim" style="margin-top:12px;">※ 시점 구분(계약금 10% / 잔금 90% / 분담금 중도금 60%·잔금 40%)은 <b>일반 가정</b>이며 단지·계약 조건에 따라 다릅니다. 각 막대 = 해당 시점 소요 현금(합산 시 총투입비 규모). 확정=솔리드, 추정=빗금·파선.</p>
       </div>
     </section>
 
@@ -882,8 +882,13 @@
 
   range.addEventListener('input', function(){ syncRange(); recalc(); });
   ask.addEventListener('input', function(){
+    var digitsBefore = ask.value.slice(0, ask.selectionStart || 0).replace(/[^0-9]/g,'').length;
     var n = ask.value.replace(/[^0-9]/g,'');
     ask.value = n ? Number(n).toLocaleString() : '';
+    // 캐럿 복원: 앞쪽 숫자 개수 기준 위치 재계산 (콤마 재포맷 시 커서 끝 점프 방지)
+    var pos = 0, seen = 0;
+    while(pos < ask.value.length && seen < digitsBefore){ var cc = ask.value.charCodeAt(pos); if(cc >= 48 && cc <= 57) seen++; pos++; }
+    try { ask.setSelectionRange(pos, pos); } catch(e){}
     recalc();
   });
   ['aMove','aRate','aMonths','aFee'].forEach(function(id){
@@ -949,7 +954,7 @@
     var qt=q.get('type'); if(qt && typeById(qt)) activeType=qt;
   })();
   var _c2c=document.getElementById('caseToCalc');
-  if(_c2c) _c2c.addEventListener('click', function(){ ask.scrollIntoView({behavior:'smooth', block:'center'}); ask.focus(); });
+  if(_c2c) _c2c.addEventListener('click', function(){ var c=document.getElementById('calc'); (c||ask).scrollIntoView({behavior:'smooth', block:'start'}); if(ask) ask.focus(); });
   renderTypeSeg();
   syncRange();
   if(activeType !== 'remodeling') selectType(activeType); else calc();
