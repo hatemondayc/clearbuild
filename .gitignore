@@ -4,3 +4,12 @@ _workspace/
 
 # 준-RAG 자료 폴더 (로컬 전용, 배포 제외)
 knowledge/
+
+# 로컬 도구 설정
+.claude/settings.local.json
+
+# 백업·임시
+*.bak
+
+# 원천 raw 데이터 (재생성 절차는 README 참조)
+raw/
