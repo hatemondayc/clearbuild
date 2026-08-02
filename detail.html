@@ -6,7 +6,7 @@
   <title>단지 상세 — CLEARBUILD</title>
   <meta name="description" content="정비사업장 상세 — 사업유형·위치·실거래가(국토부 연동)·분담금/시점별 필요현금. 숫자엔 출처와 신뢰등급이 붙습니다." />
   <!-- 색인 허용: 단지 상세 = 무료 진입점. 단지별 title은 render()에서 설정 -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -196,12 +196,12 @@
   function qp(k){ var m=new RegExp('[?&]'+k+'=([^&]*)').exec(location.search); if(!m) return ''; try{ return decodeURIComponent(m[1].replace(/\+/g,' ')); }catch(e){ return m[1].replace(/\+/g,' '); } }
   function fmtEok(manwon){ var e=Number(manwon)/10000; return isFinite(e)?e.toFixed(1)+'억':'—'; }
 
-  fetch('/complexes.json').then(function(r){return r.json();}).then(function(list){
+  fetch('/data/complexes.json').then(function(r){return r.json();}).then(function(list){
     var want=qp('complex').trim();
     var z=null;
     for(var i=0;i<list.length;i++){ if((list[i].name||'').trim()===want){ z=list[i]; break; } }
     if(!z){ document.getElementById('app').innerHTML='<div class="notfound">단지를 찾지 못했습니다.<br><br><a href="/danji.html">← 커버리지 지도로 돌아가기</a></div>'; return; }
-    fetch('/prices.json').then(function(r){return r.json();}).then(function(pj){
+    fetch('/data/prices.json').then(function(r){return r.json();}).then(function(pj){
       render(z, (pj&&pj.prices)||{}, (pj&&pj.meta)||{});
     }).catch(function(){ render(z, {}, {}); });
   }).catch(function(){ document.getElementById('app').innerHTML='<div class="notfound">데이터를 불러오지 못했습니다.<br><br><a href="/danji.html">← 돌아가기</a></div>'; });

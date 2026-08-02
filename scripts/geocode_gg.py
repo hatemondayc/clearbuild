@@ -16,7 +16,7 @@ def clean(a):
 def dong(a):
     m = re.search(r'^(.*?(?:동|리|읍|면|가))(?:\s|$)', a)
     return m.group(1).strip() if m else a
-d = json.load(open('gg_zones.json', encoding='utf-8')); zones = d['zones']
+d = json.load(open('data/gg_zones.json', encoding='utf-8')); zones = d['zones']
 done = fail = 0
 for i, z in enumerate(zones):
     if z.get('lat'): continue
@@ -35,5 +35,5 @@ for i, z in enumerate(zones):
 d['meta']['geocoded'] = sum(1 for z in zones if z.get('lat'))
 from collections import Counter
 d['meta']['geo_src'] = dict(Counter(z.get('geo') for z in zones if z.get('lat')))
-json.dump(d, open('gg_zones.json','w',encoding='utf-8'), ensure_ascii=False, indent=1)
+json.dump(d, open('data/gg_zones.json','w',encoding='utf-8'), ensure_ascii=False, indent=1)
 print(f'DONE ok={done} fail={fail} coords={d["meta"]["geocoded"]}/{len(zones)} src={d["meta"]["geo_src"]}')

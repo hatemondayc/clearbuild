@@ -9,6 +9,28 @@
 - 라이브: https://clearbuild-site-theta.vercel.app/
 - 스택: 순수 HTML/CSS/JS (빌드 없음) + Supabase(리드 저장) + NAVER 지도 + Umami(분석)
 
+## 폴더 구조
+
+```
+kaist_clearbuild/
+├── index.html            # 홈 — 서비스 소개·정비구역 지도·사전신청 폼        (/)
+├── danji.html            # 단지 데모(느티마을3) — 계산·필요현금 타임라인·예측공시 (/danji.html)
+├── detail.html           # 단지별 상세 (danji 지도에서 ?complex= 로 진입)
+├── order.html            # ┐
+├── report.html           # │ KAIST 부트캠프 산출물 (제품과 무관·고아 페이지)
+├── lp.html               # │  — 상세는 아래 "부트캠프 라인" 참조
+├── admin.html            # ┘
+├── data/                 # 프런트가 fetch하는 JSON (complexes·gg_zones·prices)
+├── assets/               # 파비콘·OG 이미지
+├── scripts/              # 데이터 파이프라인 (지오코딩)
+├── docs/                 # 부트캠프 문서
+├── raw/                  # 원천 raw 데이터 (git 제외)
+├── robots.txt · sitemap.xml
+└── README.md
+```
+
+정적 사이트라 **서빙되는 HTML은 루트에 둔다**(경로 = URL). 나머지 리소스만 폴더로 분리.
+
 ## 페이지 지도
 
 ### 제품 라인 (핵심 — 서로만 링크)
@@ -32,27 +54,28 @@
 > 위 4개는 제품 3페이지·sitemap 어디서도 링크되지 않는다. KAIST 제출 URL로
 > 살아 있으므로 리뷰 기간 중에는 유지. 리뷰 종료 후 정리 예정.
 
-## 데이터 파일 (프런트가 fetch — 경로 변경 시 HTML 수정 필요)
+## 데이터 파일 (`data/` — 프런트가 fetch, 경로 변경 시 HTML 수정 필요)
 | 파일 | 내용 | 사용처 |
 |---|---|---|
-| `complexes.json` | 리모델링 단지 118곳 (세대수·준공연도·계산 파라미터) | index, danji, detail |
-| `gg_zones.json` | 경기·서울·인천 정비구역 1,116곳 + 좌표 | danji |
-| `prices.json` | 실거래가 | detail |
+| `data/complexes.json` | 리모델링 단지 118곳 (세대수·준공연도·계산 파라미터) | index, danji, detail |
+| `data/gg_zones.json` | 경기·서울·인천 정비구역 1,116곳 + 좌표 | danji |
+| `data/prices.json` | 실거래가 | detail |
 
 원천 raw는 `raw/`(git 제외). 재생성 절차는 아래 파이프라인 참조.
 
 ## 로컬 실행
 ```bash
-python3 -m http.server 8000   # 레포 루트에서. fetch가 절대경로(/...)라 file:// 로는 안 열림
+python3 -m http.server 8000   # 레포 루트에서. fetch가 절대경로(/data/...)라 file:// 로는 안 열림
 ```
 
 ## 배포
 `main`에 push → Vercel 자동 배포 (프로젝트: `clearbuild-site`). 빌드 스텝 없음.
+서빙 루트 = 레포 루트. HTML·robots·sitemap이 루트에 있으므로 별도 설정 불필요.
 
 ## 데이터 파이프라인 (지오코딩)
 ```bash
-python3 scripts/geocode_gg.py <KAKAO_REST_KEY>   # 레포 루트에서 실행 (cwd 기준)
-# gg_zones.json에서 좌표 없는 구역만 카카오 지오코딩 후 같은 파일에 덮어씀
+python3 scripts/geocode_gg.py <KAKAO_REST_KEY>   # 레포 루트에서 실행
+# data/gg_zones.json에서 좌표 없는 구역만 카카오 지오코딩 후 같은 파일에 덮어씀
 # KAKAO REST 키는 인자로만 전달 — 코드·커밋에 넣지 말 것
 ```
 

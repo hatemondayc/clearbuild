@@ -10,11 +10,11 @@
   <meta property="og:url" content="https://clearbuild-site-theta.vercel.app/danji.html" />
   <meta property="og:title" content="느티마을 3단지 분담금·시점별 필요현금 — CLEARBUILD" />
   <meta property="og:description" content="매물 호가에 분담금·이자·부대비용을 더한 총투입비와 '지금부터 입주까지 언제 얼마' 시점별 필요현금을 근거·출처와 함께 확인하세요." />
-  <meta property="og:image" content="https://clearbuild-site-theta.vercel.app/og-image.png" />
+  <meta property="og:image" content="https://clearbuild-site-theta.vercel.app/assets/og-image.png" />
   <meta property="og:locale" content="ko_KR" />
   <meta property="og:site_name" content="CLEARBUILD" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
 
   <!-- 폰트: 디자인시스템 v0.1 (Pretendard 본문 + IBM Plex Mono 숫자) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1078,8 +1078,8 @@
     naver.maps.Event.addListener(map,'zoom_changed', updateView);
 
     Promise.all([
-      fetch('complexes.json').then(function(r){return r.json();}).catch(function(){ return []; }),
-      fetch('/gg_zones.json').then(function(r){return r.json();}).catch(function(){ return {zones:[]}; })
+      fetch('data/complexes.json').then(function(r){return r.json();}).catch(function(){ return []; }),
+      fetch('/data/gg_zones.json').then(function(r){return r.json();}).catch(function(){ return {zones:[]}; })
     ]).then(function(res){
       var comp=Array.isArray(res[0])?res[0]:((res[0]&&(res[0].complexes||res[0].zones))||[]);
       comp.forEach(function(z){ if(z.lat&&z.lng) ALL.push({type:'리모델링', name:z.name, region:z.region||'', lat:z.lat, lng:z.lng, ll:new naver.maps.LatLng(z.lat,z.lng), isDeep:!!z.hasBundam}); });
