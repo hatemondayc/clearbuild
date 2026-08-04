@@ -6,299 +6,145 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>CLEARBUILD 관리</title>
   <style>
-    :root{
-      --bg:#f4f7fa; --white:#fff; --text:#1a1a1a; --muted:#6b7280;
-      --border:#e5e9f0; --blue:#3b72d4; --navy:#142a45;
-      --green:#1e7a46; --amber:#b7791f; --red:#d14343;
-    }
+    :root{ --bg:#f4f7fa; --white:#fff; --text:#1a1a1a; --muted:#6b7280; --border:#e5e9f0; --blue:#3b72d4; --navy:#142a45; --amber:#b7791f; }
     *{box-sizing:border-box; margin:0; padding:0;}
     [hidden]{display:none !important;}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",sans-serif;
-      background:var(--bg); color:var(--text); font-size:14px; line-height:1.4;}
-
+    body{font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",sans-serif; background:var(--bg); color:var(--text); font-size:14px; line-height:1.4;}
     #gate{min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:24px; text-align:center;}
-    #gate .lock{font-size:40px;}
-    #gate h1{font-size:18px; color:var(--navy);}
-    #gate p{font-size:13px; color:var(--muted);}
-
+    #gate .lock{font-size:40px;} #gate h1{font-size:18px; color:var(--navy);} #gate p{font-size:13px; color:var(--muted);}
     header{background:var(--navy); color:var(--white); padding:16px 20px; display:flex; align-items:baseline; gap:12px;}
-    header h1{font-size:17px; font-weight:700;}
-    header .sub{font-size:12px; color:#9db4d4;}
-    .wrap{max-width:1200px; margin:0 auto; padding:16px 20px;}
-
+    header h1{font-size:17px; font-weight:700;} header .sub{font-size:12px; color:#9db4d4;}
+    .wrap{max-width:1000px; margin:0 auto; padding:16px 20px;}
+    .banner{background:#fff7e6; border:1px solid #f0d9a8; color:#7a5a12; border-radius:8px; padding:10px 13px; font-size:12.5px; margin-bottom:14px; line-height:1.5;}
+    .banner b{color:#5a4209;}
     .stats{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;}
     .stat{background:var(--white); border:1px solid var(--border); border-radius:8px; padding:7px 13px; font-size:12.5px; color:var(--muted);}
     .stat b{color:var(--navy); font-size:15px; margin-left:5px;}
-
     .controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:14px;}
     .search{flex:1; min-width:200px; padding:9px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; background:var(--white);}
     .search:focus{outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,114,212,.12);}
     .seg{padding:9px 10px; border:1px solid var(--border); border-radius:8px; font-size:13px; font-family:inherit; background:var(--white); color:var(--text); cursor:pointer;}
-    .filters{display:flex; gap:4px; background:var(--white); border:1px solid var(--border); border-radius:8px; padding:3px;}
-    .filter-btn{border:0; background:none; padding:6px 12px; border-radius:6px; font-size:13px; color:var(--muted); cursor:pointer; font-family:inherit;}
-    .filter-btn.active{background:var(--blue); color:var(--white); font-weight:600;}
     .btn{border:1px solid var(--border); background:var(--white); padding:8px 12px; border-radius:8px; cursor:pointer; font-size:13px; color:var(--text); font-family:inherit;}
     .btn:hover{border-color:var(--blue); color:var(--blue);}
     .count{font-size:13px; color:var(--muted); margin-left:auto;}
-
     .table-wrap{background:var(--white); border:1px solid var(--border); border-radius:10px; overflow:auto;}
-    table{width:100%; border-collapse:collapse; min-width:800px;}
+    table{width:100%; border-collapse:collapse; min-width:480px;}
     th,td{text-align:left; padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle; white-space:nowrap;}
-    th{font-size:12px; color:var(--muted); font-weight:600; background:#fafbfd; position:sticky; top:0;}
-    th[data-key]{cursor:pointer; user-select:none;}
-    th[data-key]:hover{color:var(--text);}
-    th .arr{color:var(--blue); font-size:10px; margin-left:2px;}
-    tr:last-child td{border-bottom:0;}
-    td.col-date{color:var(--muted); font-size:12.5px;}
-    td .muted{color:var(--muted); font-size:12px;}
-    tbody tr{border-left:3px solid transparent;}
-    tbody tr.st-in_progress{border-left-color:var(--amber);}
-    tbody tr.st-done{border-left-color:var(--green); background:#fafdfb;}
-    tbody tr.st-done td{color:var(--muted);}
+    th{font-size:12px; color:var(--muted); font-weight:600; background:#fafbfd;} th[data-key]{cursor:pointer; user-select:none;} th .arr{color:var(--blue); font-size:10px; margin-left:2px;}
+    tr:last-child td{border-bottom:0;} td.col-date{color:var(--muted); font-size:12.5px;}
     .empty{text-align:center; color:var(--muted); padding:32px 12px;}
-    .copyable{cursor:pointer;}
-    .copyable:hover{color:var(--blue); text-decoration:underline;}
-
-    .status-sel{padding:5px 8px; border:1px solid var(--border); border-radius:7px; font-size:13px; font-family:inherit; background:var(--white); cursor:pointer;}
-    .note-in{width:100%; min-width:130px; padding:6px 9px; border:1px solid var(--border); border-radius:7px; font-size:13px; font-family:inherit; background:var(--white);}
-    .note-in:focus,.status-sel:focus{outline:none; border-color:var(--blue);}
-
-    #toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--navy); color:var(--white); padding:10px 18px; border-radius:8px; font-size:13px; opacity:0; pointer-events:none; transition:.2s; max-width:80vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-    #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
   </style>
 </head>
 <body>
-  <!-- 접근 거부 -->
   <div id="gate" hidden>
-    <div class="lock">🔒</div>
-    <h1>접근 권한이 없습니다</h1>
-    <p>올바른 접근 키가 필요합니다.</p>
+    <div class="lock">🔒</div><h1>접근 권한이 없습니다</h1><p>올바른 접근 키가 필요합니다.</p>
   </div>
 
-  <!-- 관리 화면 -->
   <div id="app" hidden>
-    <header>
-      <h1>CLEARBUILD 관리</h1>
-      <span class="sub">사전신청·문의 관리 화면</span>
-    </header>
+    <header><h1>CLEARBUILD 관리</h1><span class="sub">사전신청 활동 뷰 (마스킹)</span></header>
     <div class="wrap">
+      <div class="banner">
+        🔒 개인정보 보호를 위해 이 화면은 <b>단지·소유유형·접수시각만</b> 보여줍니다(마스킹 뷰).
+        <b>연락처(이메일·휴대폰)·상태·메모 열람과 팔로업·수정은 Supabase 대시보드</b>(인증된 접근)에서 하세요.
+        <br><span style="color:#8a7333;">※ 이 <code>?key=</code> 화면은 가림막일 뿐 인증이 아닙니다 — 원본 개인정보는 여기로 끌어오지 않습니다(D18).</span>
+      </div>
       <div class="stats" id="stats"></div>
       <div class="controls">
-        <input id="search" class="search" type="text" placeholder="검색 — 단지·이메일·휴대폰·관심·메모" autocomplete="off" />
+        <input id="search" class="search" type="text" placeholder="검색 — 단지" autocomplete="off" />
         <select id="seg" class="seg">
           <option value="all">소유 전체</option>
           <option value="조합원">조합원</option>
           <option value="매수 대기자">매수 대기자</option>
         </select>
-        <div class="filters">
-          <button class="filter-btn active" data-status="all">전체</button>
-          <button class="filter-btn" data-status="new">신규</button>
-          <button class="filter-btn" data-status="in_progress">처리중</button>
-          <button class="filter-btn" data-status="done">완료</button>
-        </div>
         <button id="csv" class="btn">⤓ CSV</button>
         <button id="refresh" class="btn">↻ 새로고침</button>
         <span id="count" class="count">0건</span>
       </div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th data-key="created_at">접수 시각<span class="arr"></span></th>
-              <th data-key="complex">단지<span class="arr"></span></th>
-              <th data-key="owner_type">소유<span class="arr"></span></th>
-              <th data-key="interest">관심<span class="arr"></span></th>
-              <th data-key="ref">채널<span class="arr"></span></th>
-              <th data-key="email">연락처<span class="arr"></span></th>
-              <th data-key="status">상태<span class="arr"></span></th>
-              <th>메모</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"><tr><td colspan="9" class="empty">불러오는 중…</td></tr></tbody>
+          <thead><tr>
+            <th data-key="created_at">접수 시각<span class="arr"></span></th>
+            <th data-key="complex">단지<span class="arr"></span></th>
+            <th data-key="owner_type">소유<span class="arr"></span></th>
+          </tr></thead>
+          <tbody id="tbody"><tr><td colspan="3" class="empty">불러오는 중…</td></tr></tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <div id="toast"></div>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // ── 설정 ─────────────────────────────────────────────
     var SUPABASE_URL = 'https://lynmnuftfybbegdxjfbz.supabase.co';
     var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bm1udWZ0ZnliYmVnZHhqZmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0Njk3OTUsImV4cCI6MjA5OTA0NTc5NX0.66hZ9W29yoscoC8ibbUeHQluG8ecEo-nI5a8F19beGE';
-    var ADMIN_KEY = 'cb-owen-2026';   // ← 본인만 아는 접근 키. 바꾸려면 이 값만 수정.
+    var ADMIN_KEY = 'cb-owen-2026';   // 가림막(인증 아님). 원본 PII는 Supabase 대시보드에서.
 
-    // ── 접근 보호 (?key=) ────────────────────────────────
     var params = new URLSearchParams(location.search);
-    if (params.get('key') !== ADMIN_KEY) {
-      document.getElementById('gate').hidden = false;
-    } else {
-      document.getElementById('app').hidden = false;
-      boot();
-    }
+    if (params.get('key') !== ADMIN_KEY) { document.getElementById('gate').hidden = false; }
+    else { document.getElementById('app').hidden = false; boot(); }
 
-    function boot() {
-      var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      var STATUS = [{v:'new',l:'신규'},{v:'in_progress',l:'처리중'},{v:'done',l:'완료'}];
-      function label(v){ for(var i=0;i<STATUS.length;i++){ if(STATUS[i].v===v) return STATUS[i].l; } return '신규'; }
+    function boot(){
+      var sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+      var rows = [], q = '', seg = 'all', sortKey = 'created_at', sortDir = 'desc';
+      var tbody = document.getElementById('tbody'), countEl = document.getElementById('count'), statsEl = document.getElementById('stats');
 
-      var rows = [], q = '', filter = 'all', seg = 'all', sortKey = 'created_at', sortDir = 'desc';
-      var tbody = document.getElementById('tbody');
-      var countEl = document.getElementById('count');
-      var statsEl = document.getElementById('stats');
-      var toastEl = document.getElementById('toast');
-
-      function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
-        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-      function fmtDate(iso){ if(!iso) return '';
-        try{ return new Date(iso).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',year:'2-digit',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }
-        catch(e){ return iso; } }
-      function toast(m){ toastEl.textContent=m; toastEl.classList.add('show'); setTimeout(function(){toastEl.classList.remove('show');},1500); }
-      function statusOrder(v){ var o={'new':0,'in_progress':1,'done':2}; var k=v||'new'; return o[k]!=null?o[k]:0; }
+      function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+      function fmtDate(iso){ if(!iso) return ''; try{ return new Date(iso).toLocaleString('ko-KR',{timeZone:'Asia/Seoul',year:'2-digit',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}); }catch(e){ return iso; } }
 
       function filtered(){
         var query = q.trim().toLowerCase();
         return rows.filter(function(r){
-          if (filter!=='all' && (r.status||'new')!==filter) return false;
           if (seg!=='all' && r.owner_type!==seg) return false;
           if (!query) return true;
-          return [r.complex,r.email,r.phone,r.interest,r.owner_type,r.ref,r.note].some(function(f){
-            return String(f||'').toLowerCase().indexOf(query)>-1; });
+          return String(r.complex||'').toLowerCase().indexOf(query)>-1;
         });
       }
       function sortList(list){
-        var dir = sortDir==='desc' ? -1 : 1;
-        return list.sort(function(a,b){
-          if (sortKey==='status') return (statusOrder(a.status)-statusOrder(b.status))*dir;
+        var dir = sortDir==='desc'?-1:1;
+        return list.slice().sort(function(a,b){
           if (sortKey==='created_at'){ var x=a.created_at||'', y=b.created_at||''; return (x<y?-1:x>y?1:0)*dir; }
           return String(a[sortKey]||'').localeCompare(String(b[sortKey]||''),'ko')*dir;
         });
       }
-
       function renderStats(){
-        var c={all:rows.length,'new':0,in_progress:0,done:0};
-        rows.forEach(function(r){ var s=r.status||'new'; if(c[s]!=null)c[s]++; });
-        statsEl.innerHTML =
-          '<span class="stat">전체<b>'+c.all+'</b></span>'+
-          '<span class="stat">신규<b>'+c['new']+'</b></span>'+
-          '<span class="stat">처리중<b>'+c.in_progress+'</b></span>'+
-          '<span class="stat">완료<b>'+c.done+'</b></span>';
+        var jo=0, my=0; rows.forEach(function(r){ if(r.owner_type==='조합원')jo++; else if(r.owner_type==='매수 대기자')my++; });
+        statsEl.innerHTML = '<span class="stat">전체<b>'+rows.length+'</b></span><span class="stat">조합원<b>'+jo+'</b></span><span class="stat">매수 대기자<b>'+my+'</b></span>';
       }
-
       function render(){
         renderStats();
         var list = sortList(filtered());
         countEl.textContent = list.length + ' / ' + rows.length + '건';
-        if (!list.length){ tbody.innerHTML='<tr><td colspan="7" class="empty">해당하는 문의가 없습니다.</td></tr>'; return; }
+        if (!list.length){ tbody.innerHTML='<tr><td colspan="3" class="empty">해당하는 신청이 없습니다.</td></tr>'; return; }
         tbody.innerHTML = list.map(function(r){
-          var st = r.status||'new';
-          var opts = STATUS.map(function(s){
-            return '<option value="'+s.v+'"'+(s.v===st?' selected':'')+'>'+s.l+'</option>'; }).join('');
-          return '<tr class="st-'+esc(st)+'">'+
-            '<td class="col-date">'+esc(fmtDate(r.created_at))+'</td>'+
-            '<td><strong>'+esc(r.complex)+'</strong></td>'+
-            '<td>'+esc(r.owner_type)+'</td>'+
-            '<td>'+esc(r.interest)+'</td>'+
-            '<td>'+esc(r.ref)+'</td>'+
-            '<td class="col-contact"><span class="copyable" data-copy="'+esc(r.email)+'">'+esc(r.email)+'</span>'+
-              (r.phone?'<br><span class="copyable muted" data-copy="'+esc(r.phone)+'">'+esc(r.phone)+'</span>':'')+'</td>'+
-            '<td><select class="status-sel" data-id="'+r.id+'">'+opts+'</select></td>'+
-            '<td><input class="note-in" data-id="'+r.id+'" value="'+esc(r.note)+'" placeholder="메모" /></td>'+
-          '</tr>';
+          return '<tr><td class="col-date">'+esc(fmtDate(r.created_at))+'</td><td><strong>'+esc(r.complex)+'</strong></td><td>'+esc(r.owner_type)+'</td></tr>';
         }).join('');
       }
-
       async function load(){
-        tbody.innerHTML = '<tr><td colspan="7" class="empty">불러오는 중…</td></tr>';
-        var res = await sb.from('reservations').select('*').order('created_at',{ascending:false});
-        if (res.error){ tbody.innerHTML='<tr><td colspan="7" class="empty">불러오기 실패: '+esc(res.error.message)+'</td></tr>'; return; }
+        tbody.innerHTML = '<tr><td colspan="3" class="empty">불러오는 중…</td></tr>';
+        if (!sb){ tbody.innerHTML='<tr><td colspan="3" class="empty">연결 준비가 안 됐어요. 새로고침 후 다시 시도해 주세요.</td></tr>'; return; }
+        var res = await sb.from('reservations_public').select('complex,owner_type,created_at').order('created_at',{ascending:false});
+        if (res.error){ tbody.innerHTML='<tr><td colspan="3" class="empty">불러오기 실패 — 잠시 후 다시 시도해 주세요.</td></tr>'; return; }
         rows = res.data || []; render();
       }
 
-      // ── CSV 내보내기 (현재 필터·정렬 반영) ──
       function csvCell(v){ v=String(v==null?'':v); if(/[",\r\n]/.test(v)) v='"'+v.replace(/"/g,'""')+'"'; return v; }
-      function toCSV(){
-        var list = sortList(filtered());
-        var head = ['접수시각','단지','소유유형','관심','채널','이메일','휴대폰','상태','메모'];
-        var lines = [head.join(',')];
-        list.forEach(function(r){
-          lines.push([fmtDate(r.created_at), r.complex, r.owner_type, r.interest, r.ref, r.email, r.phone, label(r.status||'new'), r.note].map(csvCell).join(','));
-        });
-        return '﻿' + lines.join('\r\n');   // BOM = 엑셀 한글 깨짐 방지
-      }
       function downloadCSV(){
-        var blob = new Blob([toCSV()], {type:'text/csv;charset=utf-8;'});
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a'); a.href=url; a.download='reservations.csv';
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        URL.revokeObjectURL(url); toast('CSV 내보냄 ('+sortList(filtered()).length+'건)');
+        var list = sortList(filtered());
+        var lines = ['접수시각,단지,소유유형'];
+        list.forEach(function(r){ lines.push([fmtDate(r.created_at), r.complex, r.owner_type].map(csvCell).join(',')); });
+        var blob = new Blob(['﻿'+lines.join('\r\n')], {type:'text/csv;charset=utf-8;'});
+        var url = URL.createObjectURL(blob), a = document.createElement('a'); a.href=url; a.download='reservations_activity.csv';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
       }
 
-      function copyText(t){
-        if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t); }
-        toast('복사됨: '+t);
-      }
-
-      // ── 이벤트 ──
       document.getElementById('search').addEventListener('input', function(e){ q=e.target.value; render(); });
       document.getElementById('seg').addEventListener('change', function(e){ seg=e.target.value; render(); });
       document.getElementById('csv').addEventListener('click', downloadCSV);
       document.getElementById('refresh').addEventListener('click', load);
-      var fbtns = document.querySelectorAll('.filter-btn');
-      for (var i=0;i<fbtns.length;i++){
-        fbtns[i].addEventListener('click', function(){
-          for (var j=0;j<fbtns.length;j++) fbtns[j].classList.remove('active');
-          this.classList.add('active'); filter=this.getAttribute('data-status'); render();
-        });
-      }
-
-      // 컬럼 정렬 (헤더 클릭 → 오름/내림 토글)
-      function updateArrows(){
-        var ths = document.querySelectorAll('th[data-key]');
-        for (var k=0;k<ths.length;k++){
-          ths[k].querySelector('.arr').textContent =
-            (ths[k].getAttribute('data-key')===sortKey) ? (sortDir==='asc'?'▲':'▼') : '';
-        }
-      }
-      var sortThs = document.querySelectorAll('th[data-key]');
-      for (var s=0;s<sortThs.length;s++){
-        sortThs[s].addEventListener('click', function(){
-          var key=this.getAttribute('data-key');
-          if (key===sortKey){ sortDir = (sortDir==='asc'?'desc':'asc'); }
-          else { sortKey=key; sortDir = (key==='created_at'?'desc':'asc'); }
-          updateArrows(); render();
-        });
-      }
+      var ths = document.querySelectorAll('th[data-key]');
+      function updateArrows(){ for(var k=0;k<ths.length;k++){ ths[k].querySelector('.arr').textContent = (ths[k].getAttribute('data-key')===sortKey)?(sortDir==='asc'?'▲':'▼'):''; } }
+      for (var s=0;s<ths.length;s++){ ths[s].addEventListener('click', function(){ var key=this.getAttribute('data-key'); if(key===sortKey){ sortDir=(sortDir==='asc'?'desc':'asc'); } else { sortKey=key; sortDir=(key==='created_at'?'desc':'asc'); } updateArrows(); render(); }); }
       updateArrows();
-
-      // 상태 변경 · 메모 저장 (위임)
-      tbody.addEventListener('change', async function(e){
-        var sel = e.target.closest ? e.target.closest('.status-sel') : null;
-        var inp = e.target.closest ? e.target.closest('.note-in') : null;
-        if (sel){
-          var id = parseInt(sel.getAttribute('data-id'),10), val = sel.value;
-          var r1 = await sb.from('reservations').update({status:val}).eq('id',id);
-          if (r1.error){ toast('상태 저장 실패'); return; }
-          var row1 = rows.find(function(x){return x.id===id;}); if(row1) row1.status=val;
-          var tr = sel.closest('tr'); if(tr) tr.className='st-'+val;
-          renderStats();
-          toast('상태 → '+label(val));
-        } else if (inp){
-          var id2 = parseInt(inp.getAttribute('data-id'),10), val2 = inp.value;
-          var r2 = await sb.from('reservations').update({note:val2}).eq('id',id2);
-          if (r2.error){ toast('메모 저장 실패'); return; }
-          var row2 = rows.find(function(x){return x.id===id2;}); if(row2) row2.note=val2;
-          toast('메모 저장됨');
-        }
-      });
-
-      // 연락처 클릭 → 복사 (위임)
-      tbody.addEventListener('click', function(e){
-        var c = e.target.closest ? e.target.closest('.copyable') : null;
-        if (c){ copyText(c.getAttribute('data-copy')); }
-      });
-
       load();
     }
   </script>
