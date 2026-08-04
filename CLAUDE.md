@@ -16,7 +16,10 @@ CLEARBUILD = 정비사업(재개발·재건축·리모델링·가로주택) **�
 | `detail.html` | 단지별 정보판(`?complex=`) — 실거래·월별 거래량·미니맵·알림폼 |
 | `admin.html` | 관리 화면(`?key=cb-owen-2026` = 가림막, 서버 인증 아님) |
 | `order.html`·`report.html` | **부트캠프 학습본**(리포트 주문/신청) — 실제 제품과 분리(두 lane) |
+| `agent.html` + `api/extract.js` | 운영자 **확정값 수집 Agent**(`?key=cb-owen-2026` 게이트) → 총회 문서 붙여넣기 → 렛서 게이트웨이로 추출 → `disclosure_facts` 저장(예측공시 해자 연료) |
 | `complexes.json`(118)·`prices.json`(국토부 실거래 3단지)·`gg_zones.json`(수도권 정비구역 1,116) | 데이터 |
+
+**서버리스 예외**: `api/extract.js`가 repo 유일 Vercel Node 서버리스 함수(CommonJS·`fetch` 내장·**의존성 0**·package.json 없음 유지). 렛서 게이트웨이(Anthropic 호환) `/v1/messages` 호출. 키는 **Vercel 환경변수에서만**: `ANTHROPIC_BASE_URL=https://gw.letsur.ai` · `ANTHROPIC_AUTH_TOKEN=sk-…`(클라 노출 금지). Supabase 테이블 `disclosure_facts`(anon INSERT RLS, ?key 게이트가 유일 가림막).
 
 ## 데이터·배관 (검증된 패턴 — 복사해서 재사용)
 - Supabase project ref `lynmnuftfybbegdxjfbz`. 테이블: `reservations`·`orders`·`report_requests`.
