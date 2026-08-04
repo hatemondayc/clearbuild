@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>확정값 수집 Agent · CLEARBUILD</title>
+<style>
+  :root{ --ink:#1a2233; --sub:#5d6b80; --line:#dde3ec; --blue:#2563eb; --bg:#f6f8fb; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:24px 16px 80px;}
+  h1{font-size:20px;margin:0 0 4px;}
+  .sub{color:var(--sub);font-size:13px;margin:0 0 20px;}
+  label{display:block;font-size:12px;font-weight:600;color:var(--sub);margin:14px 0 6px;}
+  input[type=text],textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font:inherit;background:#fff;}
+  textarea{min-height:200px;resize:vertical;}
+  .btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 18px;border:0;border-radius:8px;background:var(--blue);color:#fff;font:inherit;font-weight:600;cursor:pointer;}
+  .btn:disabled{opacity:.55;cursor:default;}
+  .btn-sec{background:#fff;color:var(--blue);border:1px solid var(--blue);}
+  .msg{font-size:13px;margin:10px 0;min-height:18px;}
+  .msg.err{color:#c0392b;} .msg.ok{color:#176b43;}
+  table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+  th{background:#eef2f8;font-size:12px;color:var(--sub);}
+  td input[type=text]{border:0;padding:2px 4px;background:transparent;}
+  td .src{width:100%;border:0;background:transparent;font-size:12px;color:var(--sub);resize:vertical;min-height:34px;font:inherit;}
+  select{border:1px solid var(--line);border-radius:6px;padding:3px 6px;font:inherit;}
+  .gate{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px;text-align:center;color:var(--sub);}
+  .hint{font-size:12px;color:var(--sub);margin-top:6px;}
+  .row-actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  code{background:#eef2f8;padding:1px 5px;border-radius:4px;font-size:12px;}
+  pre{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px;overflow:auto;font-size:12px;white-space:pre-wrap;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⏱ 확정값 수집 Agent</h1>
+  <p class="sub">총회 자료를 붙여넣으면 확정값을 뽑아 표로 정리 → 검토·승인 후 저장합니다. (예측공시 오차이력의 연료)</p>
+  <div id="app" hidden>
+    <label for="complex">단지명</label>
+    <input id="complex" type="text" placeholder="예: 느티마을 3단지" />
+    <label for="doc">총회 문서 (붙여넣기)</label>
+    <textarea id="doc" placeholder="총회 책자·공고문·회의록 텍스트를 그대로 붙여넣으세요. (개인정보는 빼주세요)"></textarea>
+    <div class="row-actions">
+      <button id="run" class="btn">확정값 추출</button>
+      <span id="msg" class="msg"></span>
+    </div>
+    <div id="result"></div>
+  </div>
+  <div id="gate" class="gate" hidden>
+    <p>이 페이지는 운영자 전용입니다.</p>
+    <p class="hint">접근 키가 포함된 링크로 열어주세요.</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var GATE_KEY = 'cb-owen-2026';
+  var q = new URLSearchParams(location.search);
+  if (q.get('key') !== GATE_KEY) { document.getElementById('gate').hidden = false; return; }
+  document.getElementById('app').hidden = false;
+
+  var SUPABASE_URL = 'https://lynmnuftfybbegdxjfbz.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bm1udWZ0ZnliYmVnZHhqZmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0Njk3OTUsImV4cCI6MjA5OTA0NTc5NX0.66hZ9W29yoscoC8ibbUeHQluG8ecEo-nI5a8F19beGE';
+  var sb = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+  var runBtn = document.getElementById('run');
+  var runLabel = runBtn.textContent;
+  var msg = document.getElementById('msg');
+  var resultEl = document.getElementById('result');
+
+  function setMsg(t, cls){ msg.textContent = t || ''; msg.className = 'msg' + (cls ? ' ' + cls : ''); }
+
+  runBtn.addEventListener('click', function(){
+    if (runBtn.disabled) return;
+    var complex = document.getElementById('complex').value.trim();
+    var text = document.getElementById('doc').value;
+    if (!text || text.trim().length < 10) { setMsg('총회 문서 텍스트를 붙여넣어 주세요.', 'err'); return; }
+
+    runBtn.disabled = true; runBtn.textContent = '추출 중…'; setMsg('모델이 문서를 읽는 중… (최대 1분)'); resultEl.innerHTML = '';
+    function restore(){ runBtn.disabled = false; runBtn.textContent = runLabel; }
+
+    var settled = false;
+    var timeout = new Promise(function(_, rej){ setTimeout(function(){ rej(new Error('timeout')); }, 58000); });
+    Promise.race([
+      fetch('/api/extract', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ text: text, complex: complex }) }).then(function(r){ return r.json().then(function(j){ return { status:r.status, body:j }; }); }),
+      timeout
+    ]).then(function(res){
+      if (settled) return; settled = true; restore();
+      var j = res.body || {};
+      if (!j.ok) {
+        setMsg(j.error || '추출에 실패했어요.', 'err');
+        if (j.raw) { var pre = document.createElement('pre'); pre.textContent = j.raw; resultEl.appendChild(pre); }
+        return;
+      }
+      if (!j.facts.length) { setMsg('문서에서 뽑을 확정값을 찾지 못했어요.', 'ok'); return; }
+      setMsg(j.facts.length + '개 추출됨 (모델 ' + (j.model||'') + '). 검토·수정 후 승인 항목만 저장하세요.', 'ok');
+      renderTable(j.facts, complex);
+    }).catch(function(err){
+      if (settled) return; settled = true; restore();
+      setMsg(err && err.message === 'timeout' ? '응답이 너무 늦어요. 문서를 줄여 다시 시도해 주세요.' : '네트워크 오류예요. 잠시 후 다시 시도해 주세요.', 'err');
+    });
+  });
+
+  function renderTable(facts, complex){
+    resultEl.innerHTML = '';
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    thead.innerHTML = '<tr><th>승인</th><th>항목</th><th>값</th><th>단위</th><th>등급</th><th>근거 문장</th></tr>';
+    table.appendChild(thead);
+    var tbody = document.createElement('tbody');
+    facts.forEach(function(f){
+      var tr = document.createElement('tr');
+      // 승인 체크
+      var tdChk = document.createElement('td'); var chk = document.createElement('input'); chk.type='checkbox'; chk.checked=true; chk.className='approve'; tdChk.appendChild(chk); tr.appendChild(tdChk);
+      // 값들 — 모두 .value로 세팅(innerHTML 미사용 = XSS 안전)
+      tr.appendChild(cellInput('item', f.item));
+      tr.appendChild(cellInput('value', f.value));
+      tr.appendChild(cellInput('unit', f.unit));
+      // 등급 select
+      var tdG = document.createElement('td'); var sel = document.createElement('select'); sel.className='grade';
+      ['A','B','C'].forEach(function(g){ var o=document.createElement('option'); o.value=g; o.textContent=g; if((f.grade||'B')===g) o.selected=true; sel.appendChild(o); });
+      tdG.appendChild(sel); tr.appendChild(tdG);
+      // 근거 문장 textarea
+      var tdS = document.createElement('td'); var ta = document.createElement('textarea'); ta.className='src'; ta.value = f.source_sentence || ''; tdS.appendChild(ta); tr.appendChild(tdS);
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    resultEl.appendChild(table);
+
+    var actions = document.createElement('div'); actions.className='row-actions';
+    var saveBtn = document.createElement('button'); saveBtn.className='btn'; saveBtn.textContent='승인 항목 저장';
+    var saveMsg = document.createElement('span'); saveMsg.className='msg';
+    actions.appendChild(saveBtn); actions.appendChild(saveMsg); resultEl.appendChild(actions);
+
+    saveBtn.addEventListener('click', function(){
+      if (saveBtn.disabled) return;
+      var cx = (document.getElementById('complex').value.trim()) || complex || '(미지정)';
+      var rows = [];
+      tbody.querySelectorAll('tr').forEach(function(tr){
+        if (!tr.querySelector('.approve').checked) return;
+        var g = get(tr,'item'), v = get(tr,'value');
+        if (!g || !v) return;
+        rows.push({ complex: cx, item: g, value: v, unit: get(tr,'unit') || null, grade: tr.querySelector('.grade').value, source_sentence: tr.querySelector('.src').value.trim() || null, status: '검토' });
+      });
+      if (!rows.length) { saveMsg.textContent = '저장할(승인된·값 있는) 항목이 없어요.'; saveMsg.className='msg err'; return; }
+      if (!sb) { saveMsg.textContent = '저장 서버 연결이 안 됐어요. 새로고침 후 다시 시도해 주세요.'; saveMsg.className='msg err'; return; }
+      saveBtn.disabled = true; saveBtn.textContent = '저장 중…'; saveMsg.textContent=''; saveMsg.className='msg';
+      var settled = false; var to = setTimeout(function(){ if(settled) return; settled=true; saveBtn.disabled=false; saveBtn.textContent='승인 항목 저장'; saveMsg.textContent='응답이 늦어요. 다시 시도해 주세요.'; saveMsg.className='msg err'; }, 8000);
+      sb.from('disclosure_facts').insert(rows).then(function(r){
+        if (settled) return; settled=true; clearTimeout(to); saveBtn.disabled=false; saveBtn.textContent='승인 항목 저장';
+        if (r.error) { saveMsg.textContent = '저장 실패 — 잠시 후 다시. (disclosure_facts 테이블 확인)'; saveMsg.className='msg err'; return; }
+        saveMsg.textContent = rows.length + '건 저장 완료 ✅'; saveMsg.className='msg ok';
+      }, function(){ if(settled) return; settled=true; clearTimeout(to); saveBtn.disabled=false; saveBtn.textContent='승인 항목 저장'; saveMsg.textContent='저장 실패 — 잠시 후 다시.'; saveMsg.className='msg err'; });
+    });
+  }
+
+  function cellInput(cls, val){ var td=document.createElement('td'); var i=document.createElement('input'); i.type='text'; i.className=cls; i.value = (val==null?'':String(val)); td.appendChild(i); return td; }
+  function get(tr, cls){ var el = tr.querySelector('input.'+cls); return el ? el.value.trim() : ''; }
+})();
+</script>
+</body>
+</html>
