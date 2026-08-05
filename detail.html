@@ -202,12 +202,15 @@
     for(var i=0;i<list.length;i++){ if((list[i].name||'').trim()===want){ z=list[i]; break; } }
     if(!z){ document.getElementById('app').innerHTML='<div class="notfound">단지를 찾지 못했습니다.<br><br><a href="/danji.html">← 커버리지 지도로 돌아가기</a></div>'; return; }
     fetch('/data/prices.json').then(function(r){return r.json();}).then(function(pj){
-      render(z, (pj&&pj.prices)||{}, (pj&&pj.meta)||{});
-    }).catch(function(){ render(z, {}, {}); });
+      var _prices=(pj&&pj.prices)||{}, _pmeta=(pj&&pj.meta)||{};
+      fetch('/data/forecasts.json').then(function(r){return r.json();}).then(function(fj){
+        render(z, _prices, _pmeta, (fj&&fj.forecasts)||{}, (fj&&fj.meta)||{});
+      }).catch(function(){ render(z, _prices, _pmeta, {}, {}); });
+    }).catch(function(){ render(z, {}, {}, {}, {}); });
   }).catch(function(){ document.getElementById('app').innerHTML='<div class="notfound">데이터를 불러오지 못했습니다.<br><br><a href="/danji.html">← 돌아가기</a></div>'; });
 
-  function render(z, prices, meta){
-    prices=prices||{}; meta=meta||{};
+  function render(z, prices, meta, forecasts, fmeta){
+    prices=prices||{}; meta=meta||{}; forecasts=forecasts||{}; fmeta=fmeta||{};
     var deep=!!z.hasBundam;
     var precise=(z.geoSource==='addr');
     var statusBadge=deep
@@ -284,6 +287,66 @@
         +'</div>';
     }
 
+    // ── 시세 예측공시 카드 (forecasts.json · 참고용 추정 · Chronos 제로샷) ──
+    var fc=forecasts[z.name], forecastCard='';
+    if(fc && fc.show && fc.forecast && fc.forecast.length && fc.history && fc.history.length){
+      var hh=fc.history, ff=fc.forecast, bt=fc.backtest||{};
+      var fmYm=function(y){ y=String(y); return y.length>=6? y.slice(2,4)+'.'+y.slice(4,6) : y; };
+      var W=600,H=200,pL=52,pR=16,pT=14,pB=14, pw=W-pL-pR, ph=H-pT-pB;
+      var n=hh.length, m=ff.length, tot=n+m, bi=n-1, xs=pw/(tot-1);
+      var X=function(i){ return pL+i*xs; };
+      var vals=[],vi,vj; for(vi=0;vi<n;vi++) vals.push(hh[vi].median);
+      for(vj=0;vj<m;vj++){ vals.push(ff[vj].p10); vals.push(ff[vj].p90); }
+      var dmin=Math.min.apply(null,vals), dmax=Math.max.apply(null,vals);
+      var drng=(dmax-dmin)||Math.abs(dmax)||1;
+      var Y=function(v){ return pT+(dmax-v)/drng*ph; };
+      var pct=function(v,d){ return (v/d*100).toFixed(2)+'%'; };
+      var hpts=hh.map(function(d,ii){ return X(ii).toFixed(1)+','+Y(d.median).toFixed(1); }).join(' ');
+      var fpts=[X(bi).toFixed(1)+','+Y(hh[bi].median).toFixed(1)].concat(ff.map(function(d,jj){ return X(n+jj).toFixed(1)+','+Y(d.p50).toFixed(1); })).join(' ');
+      var up=[X(bi).toFixed(1)+','+Y(hh[bi].median).toFixed(1)],ui,li;
+      for(ui=0;ui<m;ui++) up.push(X(n+ui).toFixed(1)+','+Y(ff[ui].p90).toFixed(1));
+      var lo=[]; for(li=m-1;li>=0;li--) lo.push(X(n+li).toFixed(1)+','+Y(ff[li].p10).toFixed(1));
+      var band=up.concat(lo).join(' ');
+      var last=ff[m-1];
+      // 선·밴드만 SVG(스케일). 축 라벨은 아래 HTML로 11px 고정 → 카드 폰트와 일치
+      var svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="display:block;height:auto;overflow:visible;" aria-hidden="true">'
+        +'<line x1="'+pL+'" y1="'+Y(dmax).toFixed(1)+'" x2="'+(W-pR)+'" y2="'+Y(dmax).toFixed(1)+'" stroke="var(--cb-line-200,#e8eaef)" stroke-width="1"/>'
+        +'<line x1="'+pL+'" y1="'+Y(dmin).toFixed(1)+'" x2="'+(W-pR)+'" y2="'+Y(dmin).toFixed(1)+'" stroke="var(--cb-line-200,#e8eaef)" stroke-width="1"/>'
+        +'<line x1="'+X(bi).toFixed(1)+'" y1="'+pT+'" x2="'+X(bi).toFixed(1)+'" y2="'+(pT+ph)+'" stroke="var(--cb-line-300,#c6ccd6)" stroke-width="1" stroke-dasharray="4 4"/>'
+        +'<polygon points="'+band+'" fill="var(--cb-accent)" opacity="0.14"/>'
+        +'<polyline points="'+hpts+'" fill="none" stroke="var(--cb-navy-700)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'
+        +'<polyline points="'+fpts+'" fill="none" stroke="var(--cb-accent)" stroke-width="2.5" stroke-dasharray="7 4" stroke-linejoin="round" stroke-linecap="round"/>'
+        +'<circle cx="'+X(bi).toFixed(1)+'" cy="'+Y(hh[bi].median).toFixed(1)+'" r="4" fill="var(--cb-navy-700)"/>'
+        +'<circle cx="'+X(tot-1).toFixed(1)+'" cy="'+Y(last.p50).toFixed(1)+'" r="4" fill="var(--cb-accent)"/>'
+        +'</svg>';
+      var lY='position:absolute;left:0;font-size:11px;line-height:1;color:var(--cb-ink-400,#8b939f);background:#fff;padding-right:4px;transform:translateY(-50%);';
+      var lX='position:absolute;top:100%;font-size:11px;line-height:1;color:var(--cb-ink-400,#8b939f);white-space:nowrap;padding-top:6px;';
+      var svgHtml='<div style="position:relative;width:100%;margin:8px 0 24px;">'
+        +svg
+        +'<span style="'+lY+'top:'+pct(Y(dmax),H)+'">'+esc(fmtEok(dmax))+'</span>'
+        +'<span style="'+lY+'top:'+pct(Y(dmin),H)+'">'+esc(fmtEok(dmin))+'</span>'
+        +'<span style="'+lX+'left:'+pct(X(0),W)+';">'+esc(fmYm(hh[0].ym))+'</span>'
+        +'<span style="'+lX+'left:'+pct(X(bi),W)+';transform:translateX(-50%);">'+esc(fmYm(hh[bi].ym))+'</span>'
+        +'<span style="'+lX+'left:'+pct(X(tot-1),W)+';transform:translateX(-100%);">'+esc(fmYm(last.ym))+'</span>'
+        +'</div>';
+      var mape=(bt.mape!=null?bt.mape:fmeta.backtest_mape), base=(bt.baseline_mape!=null?bt.baseline_mape:fmeta.baseline_mape);
+      var held=(bt.held_out!=null?bt.held_out:3);
+      var worse=(mape!=null && base!=null && Number(mape)>Number(base));
+      var errLine=(mape!=null && base!=null)
+        ? '<div class="src-note">직전 '+esc(held)+'개월 되맞춤 오차 — 모델 MAPE <b class="cb-num">'+esc(mape)+'%</b> · 단순반복 <b class="cb-num">'+esc(base)+'%</b>'+(worse?' · 이 표본에선 단순반복이 더 정확':'')+'</div>'
+        : '';
+      forecastCard='<div class="card"><h2>시세 예측공시 <span style="font-size:12px;font-weight:600;color:var(--cb-accent);">참고</span></h2>'
+        +'<div class="csub">국토부 실거래 median 기반 · 비확정 추정'+(fmeta.model?' · '+esc(fmeta.model):'')+'</div>'
+        +svgHtml
+        +'<div class="mdeal" style="margin-top:8px;">약 '+esc(m)+'개월 뒤 추정 <b class="cb-num" style="font-size:18px;color:var(--cb-navy-700);">'+esc(fmtEok(last.p50))+'</b> <span style="color:var(--cb-sub,#5d6b80);">(범위 '+esc(fmtEok(last.p10))+' ~ '+esc(fmtEok(last.p90))+')</span></div>'
+        +errLine
+        +'<div class="src-note">가격을 <b>단정하지 않습니다</b> — 추정을 박제해 두고 총회·실거래 확정과 대조합니다(예측공시). 출처·범위만 제공.</div>'
+        +'</div>';
+    } else if(fc && fc.show===false){
+      forecastCard='<div class="card"><h2>시세 예측공시 <span style="font-size:12px;font-weight:600;color:var(--cb-sub,#5d6b80);">참고</span></h2>'
+        +'<div class="src-note">표본이 부족해 예측을 보류합니다. 실거래가 더 쌓이면 추정 범위를 제공할 예정입니다.</div></div>';
+    }
+
     var html=''
       +'<div class="crumb"><a href="/danji.html">커버리지 지도</a><span class="sep">›</span><b>'+esc(z.name)+'</b></div>'
 
@@ -299,6 +362,7 @@
       +'<div class="card flush"><div id="miniMap"></div></div>'
 
       +priceCard
+      +forecastCard
 
       +'<div class="card">'
         +'<h2>사업 정보</h2>'
