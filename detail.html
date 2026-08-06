@@ -5,7 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>단지 상세 — CLEARBUILD</title>
   <meta name="description" content="정비사업장 상세 — 사업유형·위치·실거래가(국토부 연동)·분담금/시점별 필요현금. 숫자엔 출처와 신뢰등급이 붙습니다." />
-  <!-- 색인 허용: 단지 상세 = 무료 진입점. 단지별 title은 render()에서 설정 -->
+  <!-- 색인 허용: 단지 상세 = 무료 진입점. 단지별 title·OG·canonical은 render()에서 설정 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://clearbuild-site-theta.vercel.app/detail.html" id="og-url" />
+  <meta property="og:title" content="정비사업 단지 실거래·분담금 — CLEARBUILD" id="og-title" />
+  <meta property="og:description" content="정비사업장 실거래가·시세 예측공시·분담금·시점별 필요현금. 숫자엔 출처와 신뢰등급이 붙습니다." />
+  <meta property="og:image" content="https://clearbuild-site-theta.vercel.app/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="CLEARBUILD — 정비사업 단지 실거래·분담금·필요현금" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:site_name" content="CLEARBUILD" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="정비사업 단지 실거래·분담금 — CLEARBUILD" id="tw-title" />
+  <meta name="twitter:description" content="정비사업장 실거래가·시세 예측공시·분담금·필요현금 — 출처·신뢰등급 표기." />
+  <meta name="twitter:image" content="https://clearbuild-site-theta.vercel.app/assets/og-image.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -385,6 +399,16 @@
 
     document.getElementById('app').innerHTML=html;
     document.title=z.name+' 실거래·분담금 — CLEARBUILD';
+    // 단지별 OG·canonical 반영 (JS 크롤러·공유 대응 · 카톡봇은 정적 head 사용)
+    try{
+      var _url=location.origin+'/detail.html?complex='+encodeURIComponent(z.name);
+      var _tt=z.name+' 실거래·분담금 — CLEARBUILD';
+      var _set=function(id,a,v){ var e=document.getElementById(id); if(e) e.setAttribute(a,v); };
+      _set('og-url','content',_url); _set('og-title','content',_tt); _set('tw-title','content',_tt);
+      var _ca=document.querySelector('link[rel="canonical"]');
+      if(!_ca){ _ca=document.createElement('link'); _ca.rel='canonical'; document.head.appendChild(_ca); }
+      _ca.href=_url;
+    }catch(e){}
     if(window.umami) window.umami.track('detail-view',{ name:z.name, deep:deep });
 
     // mini map
