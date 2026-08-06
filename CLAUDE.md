@@ -26,7 +26,7 @@ CLEARBUILD = 정비사업(재개발·재건축·리모델링·가로주택) **�
 - **RLS = 익명(anon)에게 INSERT만.** 원장 anon SELECT/UPDATE/DELETE 차단.
 - **읽기는 PII 뺀 public 뷰로만**: `reservations_public`·`orders_public`(연락처·이메일·주소 제외, 이름 마스킹). ⚠️ **원장에 anon SELECT 절대 열지 말 것**(Day14 PII 유출 사고 이력).
 - supabase-js `.insert()`는 **minimal 경로 사용**. `.select()`(=`return=representation`)는 INSERT 후 RETURNING → SELECT 정책 검사에 걸림(Day17 401 원인). 되읽기 필요 없으면 붙이지 말 것.
-- Umami 이벤트: `danji-view`·`calc-done`·`cta-fund`·`fund-request`(=자금조달 척추 분자)·`pledge`·`alert-request`. 창업자 본인 트래픽은 지표에서 제외.
+- Umami 이벤트(실제 코드 접두어): **danji** = `danji-view`·`danji-calc-done`·`danji-cta-fund`·`danji-fund-request`(=자금조달 척추 분자)·`danji-pledge`·`danji-cta-alert`·`danji-alert-request` / **detail** = `detail-view`·`detail-cta-alert`·`detail-alert-request` / **index** `sim-run` / `order-submit`·`report-request`. **전환율 = `danji-fund-request` ÷ `danji-calc-done`**. 창업자 본인 트래픽은 지표에서 제외(Umami 대시보드 필터).
 
 ## 계산엔진 (danji.html · 회귀 주의)
 - 상수: `BASE_COST=750`·`BASE_BUNDAM=38000`·`SENS=0.0018`·`NEWBUILD=170000`.
