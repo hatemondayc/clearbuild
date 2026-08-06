@@ -36,6 +36,29 @@ function parseFacts(s) {
   return null;
 }
 
+function parseObj(s) {
+  if (!s) return null;
+  let t = String(s).trim();
+  const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fence) t = fence[1].trim();
+  try { const j = JSON.parse(t); return (j && typeof j === 'object' && !Array.isArray(j)) ? j : null; } catch (e) {}
+  const a = t.indexOf('{'), b = t.lastIndexOf('}');
+  if (a >= 0 && b > a) { try { const j = JSON.parse(t.slice(a, b + 1)); return (j && typeof j === 'object') ? j : null; } catch (e) {} }
+  return null;
+}
+
+// mode=minutes: 총회 전사문 → 의사록 초안(안건·발언요지·의결). 공식 의사록 아님(사람 검토 전제).
+const MINUTES_SYSTEM = [
+  '너는 한국 정비사업(재개발·재건축·리모델링) 조합 총회 전사문에서 의사록 초안을 만드는 도구다.',
+  '규칙:',
+  '- 전사문에 실제로 있는 내용만 쓴다. 없는 건 지어내지 않는다(불명확하면 "불명확").',
+  '- 안건별로 정리한다: 안건명(topic), 발언 요지(discussion, 핵심만), 의결 결과(resolution: 가결/부결/보류/연기/상정, 표수 있으면 포함).',
+  '- 음성 전사 오류로 보이는 표기는 문맥으로 자연스럽게 보정하되 원문 의미는 바꾸지 않는다.',
+  '- 이건 초안이며 공식 의사록이 아니다(사람 검토 전제).',
+  '출력: 오직 JSON 객체만. 설명·머리말·코드펜스 없이.',
+  '형식: {"title":"총회 제목","date":"일자(있으면, 없으면 빈 문자열)","agenda":[{"no":1,"topic":"안건명","discussion":"발언 요지","resolution":"의결 결과"}],"note":"특이사항(선택)"}'
+].join('\n');
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') { res.status(405).json({ ok: false, error: 'POST 요청만 허용됩니다.' }); return; }
 
@@ -52,11 +75,14 @@ module.exports = async function handler(req, res) {
   if (!body || typeof body !== 'object') body = {};
   const text = typeof body.text === 'string' ? body.text : '';
   const complex = typeof body.complex === 'string' ? body.complex.slice(0, 100) : '';
+  const mode = body.mode === 'minutes' ? 'minutes' : 'facts';
 
   if (!text || text.trim().length < 10) { res.status(400).json({ ok: false, error: '추출할 총회 문서 텍스트를 붙여넣어 주세요.' }); return; }
   if (text.length > MAX_INPUT) { res.status(413).json({ ok: false, error: `문서가 너무 깁니다. ${MAX_INPUT.toLocaleString()}자 이하로 나눠 주세요.` }); return; }
 
-  const userContent = `단지: ${complex || '(미지정)'}\n\n총회 문서:\n"""\n${text}\n"""`;
+  const userContent = mode === 'minutes'
+    ? `단지/총회: ${complex || '(미지정)'}\n\n총회 전사문:\n"""\n${text}\n"""`
+    : `단지: ${complex || '(미지정)'}\n\n총회 문서:\n"""\n${text}\n"""`;
 
   const controller = new AbortController();
   const to = setTimeout(function () { controller.abort(); }, CALL_TIMEOUT_MS);
@@ -70,7 +96,7 @@ module.exports = async function handler(req, res) {
         'authorization': 'Bearer ' + TOKEN,
         'x-api-key': TOKEN
       },
-      body: JSON.stringify({ model: MODEL, max_tokens: 4000, system: SYSTEM, messages: [{ role: 'user', content: userContent }] }),
+      body: JSON.stringify({ model: MODEL, max_tokens: 4000, system: (mode === 'minutes' ? MINUTES_SYSTEM : SYSTEM), messages: [{ role: 'user', content: userContent }] }),
       signal: controller.signal
     });
   } catch (err) {
@@ -98,6 +124,14 @@ module.exports = async function handler(req, res) {
   if (data && data.stop_reason === 'refusal') { res.status(200).json({ ok: false, error: '모델이 이 문서 처리를 거절했어요. 개인정보·민감정보를 빼고 다시 시도해 주세요.' }); return; }
 
   const raw = (Array.isArray(data.content) ? data.content : []).filter(function (b) { return b && b.type === 'text'; }).map(function (b) { return b.text || ''; }).join('');
+
+  if (mode === 'minutes') {
+    const minutes = parseObj(raw);
+    if (!minutes) { res.status(200).json({ ok: false, error: '의사록 초안을 JSON으로 해석하지 못했어요. 아래 원문을 확인해 주세요.', raw: raw.slice(0, 2000) }); return; }
+    res.status(200).json({ ok: true, minutes: minutes, model: (data && data.model) || MODEL, usage: (data && data.usage) || null });
+    return;
+  }
+
   const facts = parseFacts(raw);
   if (!facts) { res.status(200).json({ ok: false, error: '결과를 JSON으로 해석하지 못했어요. 아래 원문을 보고 수동 정리해 주세요.', raw: raw.slice(0, 2000) }); return; }
 

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>총회 기록기 (데모) · CLEARBUILD</title>
+<style>
+  :root{ --ink:#1a2233; --sub:#5d6b80; --line:#dde3ec; --blue:#2563eb; --bg:#f6f8fb; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;}
+  .wrap{max-width:900px;margin:0 auto;padding:24px 16px 80px;}
+  h1{font-size:20px;margin:0 0 4px;}
+  h2{font-size:15px;margin:28px 0 8px;}
+  .sub{color:var(--sub);font-size:13px;margin:0 0 16px;}
+  .note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--sub);margin:0 0 8px;}
+  label{display:block;font-size:12px;font-weight:600;color:var(--sub);margin:12px 0 6px;}
+  input[type=text],textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;background:#fff;}
+  textarea{min-height:60px;resize:vertical;}
+  .btn{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 16px;border:0;border-radius:8px;background:var(--blue);color:#fff;font:inherit;font-weight:600;cursor:pointer;}
+  .btn:disabled{opacity:.55;cursor:default;}
+  .btn-sec{background:#fff;color:var(--blue);border:1px solid var(--blue);}
+  .msg{font-size:13px;margin:10px 0;min-height:18px;}
+  .msg.err{color:#c0392b;} .msg.ok{color:#176b43;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .seg{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;}
+  .seg:last-child{border-bottom:0;}
+  .seg .t{flex:0 0 52px;color:var(--blue);font-variant-numeric:tabular-nums;font-weight:600;font-size:12px;}
+  .seg .x{flex:1;}
+  .meta{font-size:11px;color:var(--sub);margin:0 0 10px;}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
+  th{background:#eef2f8;font-size:12px;color:var(--sub);}
+  td .f{width:100%;border:0;padding:2px 4px;background:transparent;font:inherit;resize:vertical;min-height:30px;}
+  td .no{width:34px;text-align:center;color:var(--sub);}
+  .row-actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .gate{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px;text-align:center;color:var(--sub);}
+  .hint{font-size:12px;color:var(--sub);margin-top:6px;}
+  .pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#eef2f8;color:var(--sub);margin-left:6px;}
+  code{background:#eef2f8;padding:1px 5px;border-radius:4px;font-size:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎙 총회 기록기 <span class="pill">데모</span></h1>
+  <p class="sub">총회 녹음을 전사하고, 의사록 <b>초안</b>을 자동으로 만듭니다. 검토·확정은 사람이 합니다.</p>
+
+  <div id="app" hidden>
+    <div class="note">
+      <b>속기사 대체가 아닙니다.</b> 도정법 §125는 총회 기록으로 <b>속기록·녹음·영상 중 택일</b>을 인정합니다(속기사 자격 요구 조항 없음).
+      이 도구는 ① <b>법정 녹음 보관 의무 충족</b> + ② <b>의사록 초안 자동화</b> 두 가지를 돕습니다.
+      원본 녹음은 청산 시까지 보관하는 법정 증거자료이며, 아래 초안은 공식 의사록이 아니라 <b>사람 검토 전 초안</b>입니다.
+    </div>
+
+    <h2>1. 전사 타임라인</h2>
+    <p class="meta" id="asrMeta"></p>
+    <div id="timeline" class="card">불러오는 중…</div>
+
+    <h2>2. 의사록 초안</h2>
+    <p class="meta">전사문을 안건·발언요지·의결로 구조화한 초안입니다. 표를 직접 수정한 뒤 <code>의사록 텍스트 복사</code>로 가져가세요.</p>
+    <div class="row-actions">
+      <button id="regen" class="btn btn-sec">의사록 초안 재생성 (라이브)</button>
+      <span id="msg" class="msg"></span>
+    </div>
+    <div id="minutes"></div>
+  </div>
+
+  <div id="gate" class="gate" hidden>
+    <p>이 페이지는 운영자 전용 데모입니다.</p>
+    <p class="hint">접근 키가 포함된 링크로 열어주세요.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var GATE_KEY = 'cb-owen-2026';
+  var q = new URLSearchParams(location.search);
+  if (q.get('key') !== GATE_KEY) { document.getElementById('gate').hidden = false; return; }
+  document.getElementById('app').hidden = false;
+
+  var timelineEl = document.getElementById('timeline');
+  var asrMetaEl = document.getElementById('asrMeta');
+  var minutesEl = document.getElementById('minutes');
+  var regenBtn = document.getElementById('regen');
+  var regenLabel = regenBtn.textContent;
+  var msg = document.getElementById('msg');
+  var fullText = '';   // 전사 전체(재생성 입력)
+  var complexName = '느티마을 3단지 (데모)';
+
+  function setMsg(t, cls){ msg.textContent = t || ''; msg.className = 'msg' + (cls ? ' ' + cls : ''); }
+  function mmss(s){ s = Math.max(0, Math.round(Number(s) || 0)); var m = Math.floor(s/60), r = s%60; return m + ':' + (r<10?'0':'') + r; }
+
+  // env 없이도 보이는 예시 초안(샘플 전사 기반 · 전사 오류 보정본)
+  var EXAMPLE_MINUTES = {
+    title: '제38차 정기총회 회의록 (초안)',
+    date: '',
+    agenda: [
+      { no: 1, topic: '시공사 선정 변경', discussion: '공사비 인상으로 조합원 분담금이 평균 18% 상승 전망. 김 조합원: 분담금 인상 폭이 과다하다며 재검토 요청.', resolution: '찬성 233표로 가결' },
+      { no: 2, topic: '관리처분계획 변경', discussion: '안건 상정.', resolution: '대의원회 의결로 이관' },
+      { no: 3, topic: '이주비 대출 조건', discussion: '안건 상정.', resolution: '다음 총회로 연기' }
+    ],
+    note: '본 초안은 음성 전사 기반 자동 생성물이며 공식 의사록이 아님(사람 검토·확정 전제). 원본 녹음이 법정 증거자료(도정법 §125).'
+  };
+
+  // 전사 타임라인 로드 — data/minutes_demo.json만 읽음(정적 락)
+  (function loadTimeline(){
+    var ctrl = new AbortController();
+    var to = setTimeout(function(){ ctrl.abort(); }, 4000);
+    fetch('data/minutes_demo.json', { signal: ctrl.signal }).then(function(r){ return r.json(); }).then(function(d){
+      clearTimeout(to);
+      var m = (d && d.meta) || {};
+      asrMetaEl.textContent = (m.model || '') + (m.source ? ' · ' + m.source : '');
+      fullText = (d && d.full_text) ? String(d.full_text) : '';
+      renderTimeline((d && d.segments) || []);
+    }).catch(function(){
+      clearTimeout(to);
+      timelineEl.textContent = '전사 데이터를 불러오지 못했어요. 새로고침 후 다시 시도해 주세요.';
+    });
+  })();
+
+  function renderTimeline(segs){
+    timelineEl.innerHTML = '';
+    if (!segs.length) { timelineEl.textContent = '전사 세그먼트가 없어요.'; return; }
+    segs.forEach(function(s){
+      var row = document.createElement('div'); row.className = 'seg';
+      var t = document.createElement('div'); t.className = 't'; t.textContent = mmss(s.start);   // textContent = XSS 안전
+      var x = document.createElement('div'); x.className = 'x'; x.textContent = (s.text || '').trim();
+      row.appendChild(t); row.appendChild(x); timelineEl.appendChild(row);
+    });
+  }
+
+  // 의사록 초안 렌더(편집 가능 · 모두 .value/.textContent = innerHTML 미사용 = XSS 안전)
+  function renderMinutes(mn, sourceLabel){
+    minutesEl.innerHTML = '';
+    mn = mn || {};
+    var agenda = Array.isArray(mn.agenda) ? mn.agenda : [];
+
+    var src = document.createElement('p'); src.className = 'meta';
+    src.textContent = '출처: ' + (sourceLabel || '예시') + (mn.model ? ' · 모델 ' + mn.model : '');
+    minutesEl.appendChild(src);
+
+    var lt = document.createElement('label'); lt.textContent = '제목'; minutesEl.appendChild(lt);
+    var title = document.createElement('input'); title.type='text'; title.id='mn-title'; title.value = mn.title || ''; minutesEl.appendChild(title);
+
+    var ld = document.createElement('label'); ld.textContent = '일자'; minutesEl.appendChild(ld);
+    var date = document.createElement('input'); date.type='text'; date.id='mn-date'; date.placeholder='(불명확 시 비움)'; date.value = mn.date || ''; minutesEl.appendChild(date);
+
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    thead.innerHTML = '<tr><th>#</th><th>안건</th><th>발언 요지</th><th>의결</th></tr>';
+    table.appendChild(thead);
+    var tbody = document.createElement('tbody');
+    agenda.forEach(function(a, i){
+      var tr = document.createElement('tr');
+      var tdNo = document.createElement('td'); var no = document.createElement('input'); no.type='text'; no.className='f no'; no.value = (a.no != null ? a.no : (i+1)); tdNo.appendChild(no); tr.appendChild(tdNo);
+      tr.appendChild(cellArea('topic', a.topic));
+      tr.appendChild(cellArea('discussion', a.discussion));
+      tr.appendChild(cellArea('resolution', a.resolution));
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody); minutesEl.appendChild(table);
+
+    var ln = document.createElement('label'); ln.textContent = '특이사항'; minutesEl.appendChild(ln);
+    var note = document.createElement('textarea'); note.id='mn-note'; note.value = mn.note || ''; minutesEl.appendChild(note);
+
+    var actions = document.createElement('div'); actions.className='row-actions';
+    var copyBtn = document.createElement('button'); copyBtn.className='btn'; copyBtn.textContent='의사록 텍스트 복사';
+    var copyMsg = document.createElement('span'); copyMsg.className='msg';
+    actions.appendChild(copyBtn); actions.appendChild(copyMsg); minutesEl.appendChild(actions);
+
+    copyBtn.addEventListener('click', function(){
+      var out = assembleText(title.value, date.value, tbody, note.value);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(out).then(function(){ copyMsg.textContent='복사됨 ✅'; copyMsg.className='msg ok'; }, function(){ fallbackCopy(out, copyMsg); });
+      } else { fallbackCopy(out, copyMsg); }
+    });
+  }
+
+  function cellArea(cls, val){ var td=document.createElement('td'); var ta=document.createElement('textarea'); ta.className='f '+cls; ta.value=(val==null?'':String(val)); td.appendChild(ta); return td; }
+  function getf(tr, cls){ var el = tr.querySelector('.'+cls); return el ? el.value.trim() : ''; }
+
+  function assembleText(title, date, tbody, note){
+    var L = [];
+    if (title.trim()) L.push(title.trim());
+    if (date.trim()) L.push('일자: ' + date.trim());
+    L.push('');
+    tbody.querySelectorAll('tr').forEach(function(tr){
+      var no = getf(tr,'no'), topic = getf(tr,'topic'), disc = getf(tr,'discussion'), res = getf(tr,'resolution');
+      L.push('안건 ' + (no||'') + '. ' + topic);
+      if (disc) L.push('  - 발언 요지: ' + disc);
+      if (res) L.push('  - 의결: ' + res);
+      L.push('');
+    });
+    if (note.trim()) L.push('※ ' + note.trim());
+    return L.join('\n');
+  }
+
+  function fallbackCopy(text, el){
+    var ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); el.textContent='복사됨 ✅'; el.className='msg ok'; }
+    catch(e){ el.textContent='복사 실패 — 표에서 직접 선택해 복사해 주세요.'; el.className='msg err'; }
+    document.body.removeChild(ta);
+  }
+
+  // 기본 = 예시 초안(env 없이 보임)
+  renderMinutes(EXAMPLE_MINUTES, '예시');
+
+  // 재생성 = 라이브 렛서(Vercel env 켜져야 작동) — 실패해도 예시 초안 유지
+  regenBtn.addEventListener('click', function(){
+    if (regenBtn.disabled) return;
+    if (!fullText || fullText.trim().length < 10) { setMsg('전사문이 아직 로드되지 않았어요.', 'err'); return; }
+    regenBtn.disabled = true; regenBtn.textContent = '생성 중…'; setMsg('모델이 전사문을 정리하는 중… (최대 1분)');
+    function restore(){ regenBtn.disabled = false; regenBtn.textContent = regenLabel; }
+
+    var settled = false;
+    var timeout = new Promise(function(_, rej){ setTimeout(function(){ rej(new Error('timeout')); }, 58000); });
+    Promise.race([
+      fetch('/api/extract', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ mode:'minutes', text: fullText, complex: complexName }) }).then(function(r){ return r.json(); }),
+      timeout
+    ]).then(function(j){
+      if (settled) return; settled = true; restore();
+      j = j || {};
+      if (!j.ok || !j.minutes) { setMsg((j.error || '초안 생성에 실패했어요.') + ' (예시 초안을 유지합니다)', 'err'); return; }
+      var mn = j.minutes; if (j.model) mn.model = j.model;
+      renderMinutes(mn, '라이브'); setMsg('라이브 초안 생성됨. 검토·수정 후 복사하세요.', 'ok');
+    }).catch(function(err){
+      if (settled) return; settled = true; restore();
+      setMsg((err && err.message === 'timeout' ? '응답이 너무 늦어요.' : '서버가 아직 준비되지 않았어요.') + ' 예시 초안을 유지합니다.', 'err');
+    });
+  });
+})();
+</script>
+</body>
+</html>
