@@ -6,89 +6,223 @@
 <meta name="robots" content="noindex,nofollow" />
 <title>총회 기록기 (데모) · CLEARBUILD</title>
 <style>
-  :root{ --ink:#1a2233; --sub:#5d6b80; --line:#dde3ec; --blue:#2563eb; --bg:#f6f8fb; }
+  :root{
+    --bg:#0d1320; --rail:#0a0f1a; --panel:#141d2e; --panel2:#1a2438;
+    --line:#26314a; --ink:#e9eef7; --sub:#93a1ba; --faint:#5f6c85;
+    --accent:#22c7e6; --blue:#3b82f6; --rec:#ef4444; --ok:#34d399;
+  }
   *{box-sizing:border-box}
-  body{margin:0;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.5;}
-  .wrap{max-width:900px;margin:0 auto;padding:24px 16px 80px;}
-  h1{font-size:20px;margin:0 0 4px;}
-  h2{font-size:15px;margin:28px 0 8px;}
-  .sub{color:var(--sub);font-size:13px;margin:0 0 16px;}
-  .note{background:#fff;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--sub);margin:0 0 8px;}
-  label{display:block;font-size:12px;font-weight:600;color:var(--sub);margin:12px 0 6px;}
-  input[type=text],textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;background:#fff;}
-  textarea{min-height:60px;resize:vertical;}
-  .btn{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 16px;border:0;border-radius:8px;background:var(--blue);color:#fff;font:inherit;font-weight:600;cursor:pointer;}
-  .btn:disabled{opacity:.55;cursor:default;}
-  .btn-sec{background:#fff;color:var(--blue);border:1px solid var(--blue);}
-  .msg{font-size:13px;margin:10px 0;min-height:18px;}
-  .msg.err{color:#c0392b;} .msg.ok{color:#176b43;}
-  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
-  .seg{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;}
-  .seg:last-child{border-bottom:0;}
-  .seg .t{flex:0 0 52px;color:var(--blue);font-variant-numeric:tabular-nums;font-weight:600;font-size:12px;}
-  .seg .x{flex:1;}
-  .meta{font-size:11px;color:var(--sub);margin:0 0 10px;}
-  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px;}
-  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;}
-  th{background:#eef2f8;font-size:12px;color:var(--sub);}
-  td .f{width:100%;border:0;padding:2px 4px;background:transparent;font:inherit;resize:vertical;min-height:30px;}
-  td .no{width:34px;text-align:center;color:var(--sub);}
-  .row-actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-  .gate{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px;text-align:center;color:var(--sub);}
-  .hint{font-size:12px;color:var(--sub);margin-top:6px;}
-  .pill{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:#eef2f8;color:var(--sub);margin-left:6px;}
-  code{background:#eef2f8;padding:1px 5px;border-radius:4px;font-size:12px;}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.55;
+    font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;}
+  a{color:inherit;text-decoration:none}
+
+  /* ── shell ── */
+  .app-shell{display:grid;grid-template-columns:236px 1fr;min-height:100vh;}
+  .rail{background:var(--rail);border-right:1px solid var(--line);padding:18px 14px;
+    display:flex;flex-direction:column;gap:16px;position:sticky;top:0;height:100vh;}
+  .brand{font-weight:700;font-size:15px;display:flex;align-items:center;gap:7px}
+  .tag{font-size:10px;font-weight:700;background:#22c7e61a;color:var(--accent);
+    border:1px solid #22c7e644;padding:1px 7px;border-radius:999px}
+  .rec-new{display:flex;align-items:center;justify-content:center;gap:8px;height:42px;border:0;
+    border-radius:11px;background:linear-gradient(135deg,#ef4444,#f97316);color:#fff;
+    font:inherit;font-weight:700;cursor:pointer}
+  .rec-new:disabled{opacity:.5;cursor:default}
+  .rec-new .dot{width:9px;height:9px;border-radius:50%;background:#fff}
+  .nav{display:flex;flex-direction:column;gap:3px;margin-top:2px}
+  .nav-item{padding:9px 11px;border-radius:9px;font-size:13px;color:var(--sub);
+    display:flex;justify-content:space-between;gap:8px}
+  .nav-item.active{background:var(--panel);color:var(--ink);font-weight:600}
+  .rail-foot{margin-top:auto;font-size:11px;color:var(--faint);
+    border-top:1px solid var(--line);padding-top:12px;line-height:1.7}
+
+  /* ── main ── */
+  .main{padding:26px 30px 100px;max-width:940px}
+  .head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  .head h1{font-size:22px;margin:0}
+  .status{font-size:12px;font-weight:600;color:var(--ok);display:inline-flex;align-items:center;gap:5px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:0 0 22px}
+  h2{font-size:14px;margin:28px 0 10px;display:flex;align-items:center;gap:8px}
+  .pill{font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px}
+  .pill.ai{background:#3b82f61a;color:#93b4ff;border:1px solid #3b82f655}
+  .pill.asr{background:#22c7e61a;color:var(--accent);border:1px solid #22c7e655}
+  .lead{color:var(--sub);font-size:13px;margin:0 0 4px}
+
+  /* overview */
+  .ov{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px 22px}
+  .ov .k{font-size:11px;color:var(--sub);margin-bottom:4px}
+  .ov .v{font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .badge{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:7px;
+    background:var(--panel2);border:1px solid var(--line);color:var(--sub)}
+  .badge.type{color:var(--accent);border-color:#22c7e655;background:#22c7e614}
+  .ov-note{grid-column:1/-1;font-size:11px;color:var(--faint);
+    border-top:1px dashed var(--line);padding-top:11px;margin-top:2px}
+  .legal{border-left:3px solid var(--accent);font-size:12px;color:var(--sub)}
+  .legal b{color:var(--ink)}
+
+  /* player + transcript */
+  .player{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .pbtn{width:38px;height:38px;flex:0 0 38px;border-radius:50%;border:1px solid var(--line);
+    background:var(--panel2);color:var(--ink);cursor:pointer;font-size:13px}
+  .track{flex:1;height:6px;border-radius:6px;background:var(--panel2);overflow:hidden}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--blue))}
+  .ptime{font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums;min-width:80px;text-align:right}
+  .tl{display:flex;flex-direction:column}
+  .seg{display:flex;gap:12px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:background .12s}
+  .seg:hover{background:var(--panel)}
+  .seg.active{background:#22c7e614;box-shadow:inset 3px 0 0 var(--accent)}
+  .seg .t{flex:0 0 44px;color:var(--accent);font-weight:700;font-size:12px;
+    font-variant-numeric:tabular-nums;padding-top:1px}
+  .seg .x{flex:1;font-size:14px}
+
+  /* minutes doc */
+  .mtoolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0}
+  .btn{height:38px;padding:0 16px;border:0;border-radius:9px;background:var(--accent);
+    color:#04222a;font:inherit;font-weight:700;cursor:pointer}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.sec{background:transparent;color:var(--accent);border:1px solid #22c7e666}
+  .msg{font-size:13px;min-height:18px}
+  .msg.err{color:#fca5a5} .msg.ok{color:#6ee7b7}
+  .doc label{display:block;font-size:11px;color:var(--sub);margin:14px 0 5px;font-weight:600}
+  .doc>input,.doc textarea{width:100%;background:var(--panel2);border:1px solid var(--line);
+    border-radius:9px;padding:9px 11px;color:var(--ink);font:inherit}
+  textarea{min-height:56px;resize:vertical}
+  .ag{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin-top:12px}
+  .ag-head{display:flex;align-items:center;gap:11px}
+  .ag-no{width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:var(--accent);
+    color:#04222a;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .ag-head input.topic{flex:1;font-weight:700;font-size:15px;background:transparent;border:0;
+    padding:5px 2px;color:var(--ink);font-family:inherit}
+  .ag .f{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);
+    padding:6px 2px;color:var(--ink);font:inherit}
+  .ag textarea.f{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#0f1826}
+  .res-pill{flex:0 0 auto;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px}
+  .res-pass{background:#34d39922;color:#6ee7b7} .res-fail{background:#ef444422;color:#fca5a5}
+  .res-hold{background:#f59e0b22;color:#fcd34d} .res-etc{background:#26314a;color:#93a1ba}
+
+  /* recording widget */
+  .recw{position:fixed;left:16px;bottom:16px;width:220px;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 14px 44px #000a;z-index:30}
+  .recw .rt{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px}
+  .recw .rt .rd{width:10px;height:10px;border-radius:50%;background:var(--rec);animation:pulse 1s infinite}
+  @keyframes pulse{50%{opacity:.25}}
+  .recw .rtime{font-variant-numeric:tabular-nums;font-size:22px;margin:9px 0 12px}
+  .recw .rbtns{display:flex;gap:8px}
+  .recw .rbtns button{flex:1;height:34px;border:1px solid var(--line);background:var(--panel2);
+    color:var(--ink);border-radius:8px;cursor:pointer;font:inherit;font-size:13px}
+
+  /* gate + toast */
+  .gate{max-width:520px;margin:90px auto;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;padding:30px;text-align:center;color:var(--sub)}
+  .hint{font-size:12px;color:var(--faint);margin-top:8px}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--panel);
+    border:1px solid var(--line);color:var(--ink);padding:11px 18px;border-radius:11px;font-size:13px;
+    box-shadow:0 12px 34px #000a;z-index:40;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.show{opacity:1}
+
+  @media(max-width:760px){
+    .app-shell{grid-template-columns:1fr}
+    .rail{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px}
+    .rail .nav,.rail-foot{display:none}
+    .rec-new{flex:1}
+    .main{padding:20px 16px 100px}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>🎙 총회 기록기 <span class="pill">데모</span></h1>
-  <p class="sub">총회 녹음을 전사하고, 의사록 <b>초안</b>을 자동으로 만듭니다. 검토·확정은 사람이 합니다.</p>
 
-  <div id="app" hidden>
-    <div class="note">
-      <b>속기사 대체가 아닙니다.</b> 도정법 §125는 총회 기록으로 <b>속기록·녹음·영상 중 택일</b>을 인정합니다(속기사 자격 요구 조항 없음).
-      이 도구는 ① <b>법정 녹음 보관 의무 충족</b> + ② <b>의사록 초안 자동화</b> 두 가지를 돕습니다.
-      원본 녹음은 청산 시까지 보관하는 법정 증거자료이며, 아래 초안은 공식 의사록이 아니라 <b>사람 검토 전 초안</b>입니다.
+<div id="gate" class="gate" hidden>
+  <p style="color:var(--ink);font-weight:600;font-size:16px">🎙 총회 기록기 · 운영자 전용 데모</p>
+  <p class="hint">접근 키가 포함된 링크로 열어주세요.</p>
+</div>
+
+<div id="shell" class="app-shell" hidden>
+  <aside class="rail">
+    <div class="brand">🎙 총회 기록기 <span class="tag">데모</span></div>
+    <button class="rec-new" id="recNew"><span class="dot"></span> 새 녹음</button>
+    <nav class="nav">
+      <a class="nav-item active">제38차 정기총회</a>
+      <a class="nav-item" style="opacity:.5">지난 총회 <span>—</span></a>
+    </nav>
+    <div class="rail-foot">
+      운영자 전용 · noindex<br>
+      Whisper 오프라인 전사 → 렛서 LLM 의사록 초안<br>
+      <span style="color:var(--faint)">데모용 합성 음성 · 실제 녹음 아님</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="head">
+      <h1 id="mtgTitle">제38차 정기총회</h1>
+      <span class="status">● 전사 완료</span>
     </div>
 
-    <h2>1. 전사 타임라인</h2>
-    <p class="meta" id="asrMeta"></p>
-    <div id="timeline" class="card">불러오는 중…</div>
+    <p class="lead">총회 녹음을 전사하고, 의사록 <b>초안</b>을 자동으로 만듭니다. 검토·확정은 사람이 합니다.</p>
 
-    <h2>2. 의사록 초안</h2>
-    <p class="meta">전사문을 안건·발언요지·의결로 구조화한 초안입니다. 표를 직접 수정한 뒤 <code>의사록 텍스트 복사</code>로 가져가세요.</p>
-    <div class="row-actions">
-      <button id="regen" class="btn btn-sec">의사록 초안 재생성 (라이브)</button>
-      <span id="msg" class="msg"></span>
+    <!-- 개요 -->
+    <section class="card ov">
+      <div><div class="k">유형</div><div class="v"><span class="badge type">정기총회</span></div></div>
+      <div><div class="k">상태</div><div class="v" style="color:var(--ok)">● 전사 완료</div></div>
+      <div><div class="k">녹음 길이</div><div class="v" id="ovLen">—</div></div>
+      <div><div class="k">언어</div><div class="v">한국어 <span class="badge">자동 감지</span></div></div>
+      <div><div class="k">안건</div><div class="v" id="ovAgenda">—</div></div>
+      <div><div class="k">전사 모델</div><div class="v" id="ovModel">—</div></div>
+      <div class="ov-note" id="ovNote"></div>
+    </section>
+
+    <!-- 법적 배너 -->
+    <section class="card legal">
+      <b>속기사 대체가 아닙니다.</b> 도정법 §125는 총회 기록으로 <b>속기록·녹음·영상 중 택일</b>을 인정합니다(속기사 자격 요구 조항 없음).
+      이 도구는 ① <b>법정 녹음 보관 의무 충족</b> + ② <b>의사록 초안 자동화</b>를 돕고, 원본 녹음은 청산 시까지 보관하는 법정 증거자료입니다. 아래 초안은 공식 의사록이 아니라 <b>사람 검토 전 초안</b>입니다.
+    </section>
+
+    <!-- 전사 -->
+    <h2>전사 <span class="pill asr">Whisper</span></h2>
+    <div class="player">
+      <button class="pbtn" id="playBtn" title="재생">▶</button>
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <div class="ptime" id="ptime">0:00 / 0:00</div>
+    </div>
+    <div class="tl" id="timeline">불러오는 중…</div>
+
+    <!-- 의사록 초안 -->
+    <h2>의사록 초안 <span class="pill ai">AI</span></h2>
+    <p class="lead">전사문을 안건·발언요지·의결로 구조화한 초안입니다. 카드를 직접 수정한 뒤 복사하세요. <b style="color:var(--ink)">공식 의사록 아님(사람 검토 전제).</b></p>
+    <div class="mtoolbar">
+      <button class="btn sec" id="regen">의사록 초안 재생성 (라이브)</button>
+      <span class="msg" id="msg"></span>
     </div>
     <div id="minutes"></div>
-  </div>
-
-  <div id="gate" class="gate" hidden>
-    <p>이 페이지는 운영자 전용 데모입니다.</p>
-    <p class="hint">접근 키가 포함된 링크로 열어주세요.</p>
-  </div>
+  </main>
 </div>
+
+<div class="recw" id="recW" hidden>
+  <div class="rt"><span class="rd"></span> 녹음 중 <span style="margin-left:auto;font-size:11px;color:var(--sub)">데모</span></div>
+  <div class="rtime" id="recTime">00:00</div>
+  <div class="rbtns"><button id="recPause">일시정지</button><button id="recStop">정지</button></div>
+  <div style="font-size:11px;color:var(--faint);margin-top:9px">시뮬레이션 · 실제 오디오 저장 안 함</div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 (function(){
   var GATE_KEY = 'cb-owen-2026';
   var q = new URLSearchParams(location.search);
   if (q.get('key') !== GATE_KEY) { document.getElementById('gate').hidden = false; return; }
-  document.getElementById('app').hidden = false;
+  document.getElementById('shell').hidden = false;
 
-  var timelineEl = document.getElementById('timeline');
-  var asrMetaEl = document.getElementById('asrMeta');
-  var minutesEl = document.getElementById('minutes');
-  var regenBtn = document.getElementById('regen');
-  var regenLabel = regenBtn.textContent;
-  var msg = document.getElementById('msg');
-  var fullText = '';   // 전사 전체(재생성 입력)
-  var complexName = '느티마을 3단지 (데모)';
+  var $ = function(id){ return document.getElementById(id); };
+  var timelineEl = $('timeline'), minutesEl = $('minutes'), msg = $('msg');
+  var regenBtn = $('regen'), regenLabel = regenBtn.textContent;
+  var fullText = '', complexName = '느티마을 3단지 (데모)';
 
   function setMsg(t, cls){ msg.textContent = t || ''; msg.className = 'msg' + (cls ? ' ' + cls : ''); }
   function mmss(s){ s = Math.max(0, Math.round(Number(s) || 0)); var m = Math.floor(s/60), r = s%60; return m + ':' + (r<10?'0':'') + r; }
+  function clock(s){ var m = Math.floor(s/60), r = s%60; return (m<10?'0':'')+m + ':' + (r<10?'0':'')+r; }
+  function resClass(v){ v = String(v||''); if(/가결|승인|채택|의결로/.test(v)) return 'res-pass'; if(/부결|반려|거부/.test(v)) return 'res-fail'; if(/연기|보류|이관|넘기|다음/.test(v)) return 'res-hold'; return 'res-etc'; }
+
+  var toastT = null;
+  function toast(t){ var el = $('toast'); el.textContent = t; el.classList.add('show'); if(toastT) clearTimeout(toastT); toastT = setTimeout(function(){ el.classList.remove('show'); }, 2600); }
 
   // env 없이도 보이는 예시 초안(샘플 전사 기반 · 전사 오류 보정본)
   var EXAMPLE_MINUTES = {
@@ -102,91 +236,139 @@
     note: '본 초안은 음성 전사 기반 자동 생성물이며 공식 의사록이 아님(사람 검토·확정 전제). 원본 녹음이 법정 증거자료(도정법 §125).'
   };
 
-  // 전사 타임라인 로드 — data/minutes_demo.json만 읽음(정적 락)
+  /* ── 전사 데이터 로드 (data/minutes_demo.json만 읽음 · 정적 락) ── */
   (function loadTimeline(){
     var ctrl = new AbortController();
     var to = setTimeout(function(){ ctrl.abort(); }, 4000);
     fetch('data/minutes_demo.json', { signal: ctrl.signal }).then(function(r){ return r.json(); }).then(function(d){
       clearTimeout(to);
-      var m = (d && d.meta) || {};
-      asrMetaEl.textContent = (m.model || '') + (m.source ? ' · ' + m.source : '');
+      var m = (d && d.meta) || {}, segs = (d && d.segments) || [];
       fullText = (d && d.full_text) ? String(d.full_text) : '';
-      renderTimeline((d && d.segments) || []);
+      renderTimeline(segs);
+      dur = segs.reduce(function(mx,s){ return Math.max(mx, Number(s.end)||0); }, 0);
+      $('ovLen').textContent = mmss(dur);
+      $('ovAgenda').textContent = EXAMPLE_MINUTES.agenda.length + '건';
+      $('ovModel').textContent = (m.model || '—').split(' ')[0];
+      $('ovNote').textContent = m.source || '';
+      updPlayer();
     }).catch(function(){
       clearTimeout(to);
       timelineEl.textContent = '전사 데이터를 불러오지 못했어요. 새로고침 후 다시 시도해 주세요.';
     });
   })();
 
+  /* ── 전사 타임라인 (클릭 = 그 지점으로 이동) ── */
+  var segEls = [];
   function renderTimeline(segs){
-    timelineEl.innerHTML = '';
+    timelineEl.innerHTML = ''; segEls = [];
     if (!segs.length) { timelineEl.textContent = '전사 세그먼트가 없어요.'; return; }
     segs.forEach(function(s){
       var row = document.createElement('div'); row.className = 'seg';
       var t = document.createElement('div'); t.className = 't'; t.textContent = mmss(s.start);   // textContent = XSS 안전
       var x = document.createElement('div'); x.className = 'x'; x.textContent = (s.text || '').trim();
       row.appendChild(t); row.appendChild(x); timelineEl.appendChild(row);
+      var o = { el: row, start: Number(s.start)||0, end: Number(s.end)||0 }; segEls.push(o);
+      row.addEventListener('click', function(){ playT = o.start; updPlayer(); });
     });
   }
 
-  // 의사록 초안 렌더(편집 가능 · 모두 .value/.textContent = innerHTML 미사용 = XSS 안전)
+  /* ── 재생 플레이헤드 (오디오 없음 → 전사 하이라이트 따라가기) ── */
+  var dur = 0, playT = 0, playTimer = null;
+  var playBtn = $('playBtn'), fillEl = $('fill'), ptimeEl = $('ptime');
+  function updPlayer(){
+    fillEl.style.width = (dur ? Math.min(100, playT/dur*100) : 0) + '%';
+    ptimeEl.textContent = mmss(playT) + ' / ' + mmss(dur);
+    segEls.forEach(function(o){ o.el.classList.toggle('active', playT >= o.start && playT < o.end); });
+  }
+  function stopPlay(){ if (playTimer){ clearInterval(playTimer); playTimer = null; } playBtn.textContent = '▶'; }
+  playBtn.addEventListener('click', function(){
+    if (playTimer){ stopPlay(); return; }
+    if (playT >= dur) playT = 0;
+    playBtn.textContent = '⏸';
+    playTimer = setInterval(function(){
+      playT += 0.1;
+      if (playT >= dur){ playT = dur; updPlayer(); stopPlay(); return; }
+      updPlayer();
+    }, 100);
+  });
+
+  /* ── 녹음 위젯 (CLOVA식 · 시뮬레이션 → 전사 결과로 안내) ── */
+  var recW = $('recW'), recNew = $('recNew'), recTimeEl = $('recTime');
+  var recSec = 0, recTimer = null, recPaused = false;
+  recNew.addEventListener('click', function(){
+    recW.hidden = false; recSec = 0; recPaused = false; recNew.disabled = true;
+    recTimeEl.textContent = '00:00'; $('recPause').textContent = '일시정지';
+    recTimer = setInterval(function(){ if (recPaused) return; recSec++; recTimeEl.textContent = clock(recSec); }, 1000);
+  });
+  $('recPause').addEventListener('click', function(){ recPaused = !recPaused; this.textContent = recPaused ? '재개' : '일시정지'; });
+  $('recStop').addEventListener('click', function(){
+    if (recTimer){ clearInterval(recTimer); recTimer = null; }
+    recW.hidden = true; recNew.disabled = false;
+    toast('데모 전사 완료 — 아래 결과를 확인하세요');
+    var h = document.querySelector('h2'); if (h) h.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+
+  /* ── 의사록 초안 (편집 가능 · 모두 .value/.textContent = XSS 안전) ── */
+  function mkLabel(t){ var l = document.createElement('label'); l.textContent = t; return l; }
+  function mkInput(v){ var i = document.createElement('input'); i.type = 'text'; i.value = (v==null?'':String(v)); return i; }
+
+  function mkAgenda(a, i){
+    var card = document.createElement('div'); card.className = 'ag';
+    card.dataset.no = (a.no != null ? a.no : (i+1));
+    var head = document.createElement('div'); head.className = 'ag-head';
+    var no = document.createElement('span'); no.className = 'ag-no'; no.textContent = card.dataset.no;
+    var topic = document.createElement('input'); topic.type = 'text'; topic.className = 'topic'; topic.value = a.topic || '';
+    var pill = document.createElement('span'); pill.className = 'res-pill';
+    head.appendChild(no); head.appendChild(topic); head.appendChild(pill); card.appendChild(head);
+
+    card.appendChild(mkLabel('발언 요지'));
+    var disc = document.createElement('textarea'); disc.className = 'f discussion'; disc.value = a.discussion || ''; card.appendChild(disc);
+    card.appendChild(mkLabel('의결'));
+    var res = document.createElement('input'); res.type = 'text'; res.className = 'f resolution'; res.value = a.resolution || ''; card.appendChild(res);
+
+    function upd(){ pill.className = 'res-pill ' + resClass(res.value); pill.textContent = res.value.trim() || '—'; }
+    res.addEventListener('input', upd); upd();
+    return card;
+  }
+
   function renderMinutes(mn, sourceLabel){
-    minutesEl.innerHTML = '';
-    mn = mn || {};
+    minutesEl.innerHTML = ''; mn = mn || {};
     var agenda = Array.isArray(mn.agenda) ? mn.agenda : [];
+    var doc = document.createElement('div'); doc.className = 'doc';
 
-    var src = document.createElement('p'); src.className = 'meta';
+    var src = document.createElement('div'); src.style.cssText = 'font-size:11px;color:var(--faint);margin-bottom:2px';
     src.textContent = '출처: ' + (sourceLabel || '예시') + (mn.model ? ' · 모델 ' + mn.model : '');
-    minutesEl.appendChild(src);
+    doc.appendChild(src);
 
-    var lt = document.createElement('label'); lt.textContent = '제목'; minutesEl.appendChild(lt);
-    var title = document.createElement('input'); title.type='text'; title.id='mn-title'; title.value = mn.title || ''; minutesEl.appendChild(title);
+    doc.appendChild(mkLabel('제목'));
+    var title = mkInput(mn.title || ''); title.id = 'mn-title'; doc.appendChild(title);
+    doc.appendChild(mkLabel('일자'));
+    var date = mkInput(mn.date || ''); date.id = 'mn-date'; date.placeholder = '(불명확 시 비움)'; doc.appendChild(date);
 
-    var ld = document.createElement('label'); ld.textContent = '일자'; minutesEl.appendChild(ld);
-    var date = document.createElement('input'); date.type='text'; date.id='mn-date'; date.placeholder='(불명확 시 비움)'; date.value = mn.date || ''; minutesEl.appendChild(date);
+    var agWrap = document.createElement('div');
+    agenda.forEach(function(a, i){ agWrap.appendChild(mkAgenda(a, i)); });
+    doc.appendChild(agWrap);
 
-    var table = document.createElement('table');
-    var thead = document.createElement('thead');
-    thead.innerHTML = '<tr><th>#</th><th>안건</th><th>발언 요지</th><th>의결</th></tr>';
-    table.appendChild(thead);
-    var tbody = document.createElement('tbody');
-    agenda.forEach(function(a, i){
-      var tr = document.createElement('tr');
-      var tdNo = document.createElement('td'); var no = document.createElement('input'); no.type='text'; no.className='f no'; no.value = (a.no != null ? a.no : (i+1)); tdNo.appendChild(no); tr.appendChild(tdNo);
-      tr.appendChild(cellArea('topic', a.topic));
-      tr.appendChild(cellArea('discussion', a.discussion));
-      tr.appendChild(cellArea('resolution', a.resolution));
-      tbody.appendChild(tr);
-    });
-    table.appendChild(tbody); minutesEl.appendChild(table);
+    doc.appendChild(mkLabel('특이사항'));
+    var note = document.createElement('textarea'); note.id = 'mn-note'; note.value = mn.note || ''; doc.appendChild(note);
+    minutesEl.appendChild(doc);
 
-    var ln = document.createElement('label'); ln.textContent = '특이사항'; minutesEl.appendChild(ln);
-    var note = document.createElement('textarea'); note.id='mn-note'; note.value = mn.note || ''; minutesEl.appendChild(note);
-
-    var actions = document.createElement('div'); actions.className='row-actions';
-    var copyBtn = document.createElement('button'); copyBtn.className='btn'; copyBtn.textContent='의사록 텍스트 복사';
-    var copyMsg = document.createElement('span'); copyMsg.className='msg';
-    actions.appendChild(copyBtn); actions.appendChild(copyMsg); minutesEl.appendChild(actions);
-
-    copyBtn.addEventListener('click', function(){
-      var out = assembleText(title.value, date.value, tbody, note.value);
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(out).then(function(){ copyMsg.textContent='복사됨 ✅'; copyMsg.className='msg ok'; }, function(){ fallbackCopy(out, copyMsg); });
-      } else { fallbackCopy(out, copyMsg); }
-    });
+    var bar = document.createElement('div'); bar.className = 'mtoolbar';
+    var copyBtn = document.createElement('button'); copyBtn.className = 'btn'; copyBtn.textContent = '의사록 텍스트 복사';
+    var copyMsg = document.createElement('span'); copyMsg.className = 'msg';
+    bar.appendChild(copyBtn); bar.appendChild(copyMsg); minutesEl.appendChild(bar);
+    copyBtn.addEventListener('click', function(){ doCopy(assembleText(title.value, date.value, agWrap, note.value), copyMsg); });
   }
 
-  function cellArea(cls, val){ var td=document.createElement('td'); var ta=document.createElement('textarea'); ta.className='f '+cls; ta.value=(val==null?'':String(val)); td.appendChild(ta); return td; }
-  function getf(tr, cls){ var el = tr.querySelector('.'+cls); return el ? el.value.trim() : ''; }
-
-  function assembleText(title, date, tbody, note){
+  function val(root, sel){ var el = root.querySelector(sel); return el ? el.value.trim() : ''; }
+  function assembleText(title, date, agWrap, note){
     var L = [];
     if (title.trim()) L.push(title.trim());
     if (date.trim()) L.push('일자: ' + date.trim());
     L.push('');
-    tbody.querySelectorAll('tr').forEach(function(tr){
-      var no = getf(tr,'no'), topic = getf(tr,'topic'), disc = getf(tr,'discussion'), res = getf(tr,'resolution');
-      L.push('안건 ' + (no||'') + '. ' + topic);
+    agWrap.querySelectorAll('.ag').forEach(function(card){
+      L.push('안건 ' + (card.dataset.no || '') + '. ' + val(card, '.topic'));
+      var disc = val(card, '.discussion'), res = val(card, '.resolution');
       if (disc) L.push('  - 발언 요지: ' + disc);
       if (res) L.push('  - 의결: ' + res);
       L.push('');
@@ -195,18 +377,23 @@
     return L.join('\n');
   }
 
+  function doCopy(text, el){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ el.textContent = '복사됨 ✅'; el.className = 'msg ok'; }, function(){ fallbackCopy(text, el); });
+    } else { fallbackCopy(text, el); }
+  }
   function fallbackCopy(text, el){
-    var ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
     document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); el.textContent='복사됨 ✅'; el.className='msg ok'; }
-    catch(e){ el.textContent='복사 실패 — 표에서 직접 선택해 복사해 주세요.'; el.className='msg err'; }
+    try { document.execCommand('copy'); el.textContent = '복사됨 ✅'; el.className = 'msg ok'; }
+    catch(e){ el.textContent = '복사 실패 — 표에서 직접 선택해 복사해 주세요.'; el.className = 'msg err'; }
     document.body.removeChild(ta);
   }
 
   // 기본 = 예시 초안(env 없이 보임)
   renderMinutes(EXAMPLE_MINUTES, '예시');
 
-  // 재생성 = 라이브 렛서(Vercel env 켜져야 작동) — 실패해도 예시 초안 유지
+  /* ── 재생성 = 라이브 렛서 (Vercel env 켜져야 작동) · 실패해도 예시 유지 ── */
   regenBtn.addEventListener('click', function(){
     if (regenBtn.disabled) return;
     if (!fullText || fullText.trim().length < 10) { setMsg('전사문이 아직 로드되지 않았어요.', 'err'); return; }
