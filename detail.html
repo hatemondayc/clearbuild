@@ -203,9 +203,11 @@
     if(!z){ document.getElementById('app').innerHTML='<div class="notfound">단지를 찾지 못했습니다.<br><br><a href="/danji.html">← 커버리지 지도로 돌아가기</a></div>'; return; }
     fetch('/data/prices.json').then(function(r){return r.json();}).then(function(pj){
       var _prices=(pj&&pj.prices)||{}, _pmeta=(pj&&pj.meta)||{};
-      fetch('/data/forecasts.json').then(function(r){return r.json();}).then(function(fj){
-        render(z, _prices, _pmeta, (fj&&fj.forecasts)||{}, (fj&&fj.meta)||{});
-      }).catch(function(){ render(z, _prices, _pmeta, {}, {}); });
+      var _ctl=('AbortController' in window)?new AbortController():null;
+      var _to=setTimeout(function(){ if(_ctl) _ctl.abort(); }, 4000);
+      fetch('/data/forecasts.json', _ctl?{signal:_ctl.signal}:undefined).then(function(r){return r.json();}).then(function(fj){
+        clearTimeout(_to); render(z, _prices, _pmeta, (fj&&fj.forecasts)||{}, (fj&&fj.meta)||{});
+      }).catch(function(){ clearTimeout(_to); render(z, _prices, _pmeta, {}, {}); });
     }).catch(function(){ render(z, {}, {}, {}, {}); });
   }).catch(function(){ document.getElementById('app').innerHTML='<div class="notfound">데이터를 불러오지 못했습니다.<br><br><a href="/danji.html">← 돌아가기</a></div>'; });
 
@@ -319,7 +321,7 @@
         +'<circle cx="'+X(bi).toFixed(1)+'" cy="'+Y(hh[bi].median).toFixed(1)+'" r="4" fill="var(--cb-navy-700)"/>'
         +'<circle cx="'+X(tot-1).toFixed(1)+'" cy="'+Y(last.p50).toFixed(1)+'" r="4" fill="var(--cb-accent)"/>'
         +'</svg>';
-      var lY='position:absolute;left:0;font-size:11px;line-height:1;color:var(--cb-ink-400,#8b939f);background:#fff;padding-right:4px;transform:translateY(-50%);';
+      var lY='position:absolute;left:0;font-size:11px;line-height:1;color:var(--cb-ink-400,#8b939f);background:var(--cb-surface,#fff);padding-right:4px;transform:translateY(-50%);';
       var lX='position:absolute;top:100%;font-size:11px;line-height:1;color:var(--cb-ink-400,#8b939f);white-space:nowrap;padding-top:6px;';
       var svgHtml='<div style="position:relative;width:100%;margin:8px 0 24px;">'
         +svg
@@ -338,12 +340,12 @@
       forecastCard='<div class="card"><h2>시세 예측공시 <span style="font-size:12px;font-weight:600;color:var(--cb-accent);">참고</span></h2>'
         +'<div class="csub">국토부 실거래 median 기반 · 비확정 추정'+(fmeta.model?' · '+esc(fmeta.model):'')+'</div>'
         +svgHtml
-        +'<div class="mdeal" style="margin-top:8px;">약 '+esc(m)+'개월 뒤 추정 <b class="cb-num" style="font-size:18px;color:var(--cb-navy-700);">'+esc(fmtEok(last.p50))+'</b> <span style="color:var(--cb-sub,#5d6b80);">(범위 '+esc(fmtEok(last.p10))+' ~ '+esc(fmtEok(last.p90))+')</span></div>'
+        +'<div class="mdeal" style="margin-top:8px;">약 '+esc(m)+'개월 뒤 추정 <b class="cb-num" style="font-size:18px;color:var(--cb-navy-700);">'+esc(fmtEok(last.p50))+'</b> <span style="color:var(--cb-ink-500,#5d6b80);">(범위 '+esc(fmtEok(last.p10))+' ~ '+esc(fmtEok(last.p90))+')</span></div>'
         +errLine
         +'<div class="src-note">가격을 <b>단정하지 않습니다</b> — 추정을 박제해 두고 총회·실거래 확정과 대조합니다(예측공시). 출처·범위만 제공.</div>'
         +'</div>';
     } else if(fc && fc.show===false){
-      forecastCard='<div class="card"><h2>시세 예측공시 <span style="font-size:12px;font-weight:600;color:var(--cb-sub,#5d6b80);">참고</span></h2>'
+      forecastCard='<div class="card"><h2>시세 예측공시 <span style="font-size:12px;font-weight:600;color:var(--cb-ink-500,#5d6b80);">참고</span></h2>'
         +'<div class="src-note">표본이 부족해 예측을 보류합니다. 실거래가 더 쌓이면 추정 범위를 제공할 예정입니다.</div></div>';
     }
 

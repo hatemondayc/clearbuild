@@ -37,9 +37,21 @@ def forecast_series(pipe, values, h, qs):
     q, _ = pipe.predict_quantiles(inputs=ctx, prediction_length=h, quantile_levels=qs)
     return q[0].numpy()   # shape (h, len(qs))
 
+def pick_device():
+    if torch.backends.mps.is_available(): return "mps"
+    if torch.cuda.is_available(): return "cuda"
+    return "cpu"
+
 def main():
-    d = json.load(open(SRC, encoding="utf-8"))
-    pipe = BaseChronosPipeline.from_pretrained(MODEL, device_map="mps", torch_dtype=torch.float32)
+    torch.manual_seed(0)   # 재현성 — Bolt는 결정적이나 명시 고정
+    with open(SRC, encoding="utf-8") as f:
+        d = json.load(f)
+    device = pick_device()
+    print("device:", device)
+    try:
+        pipe = BaseChronosPipeline.from_pretrained(MODEL, device_map=device, torch_dtype=torch.float32)
+    except Exception as e:
+        raise SystemExit(f"모델 로드 실패({MODEL} · {device}): {e}")
     out = {
         "meta": {
             "model": MODEL,
@@ -100,7 +112,8 @@ def main():
         print(f"[{name}] {len(vals)}개월 · band_ratio {band_ratio:.2f} · {tag}"
               + (f" · backtest MAPE {bt['mape']}% (baseline {bt['baseline_mape']}%)" if bt else ""))
 
-    json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    with open(OUT, "w", encoding="utf-8") as f:
+        json.dump(out, f, ensure_ascii=False, indent=2)
     print("→ 저장:", os.path.relpath(OUT, HERE))
 
 if __name__ == "__main__":
