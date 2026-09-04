@@ -21,8 +21,8 @@
 <style>
   :root{
     --bg:#F5F8FC; --surface:#FFFFFF; --surface-2:#EDF2F9;
-    --ink:#0F2130; --soft:#334255; --muted:#5A6B80; --faint:#8792A3;
-    --teal:#1766B5; --teal-deep:#0E4C86; --teal-soft:#E4F1FB;
+    --ink:#0F2130; --soft:#334255; --muted:#5A6B80; --faint:#66738A;
+    --accent:#1766B5; --accent-deep:#0E4C86; --accent-soft:#E4F1FB;
     --line:rgba(15,33,48,.09); --line2:rgba(15,33,48,.15);
     --shadow:0 1px 2px rgba(15,33,48,.04);
     --r-lg:12px; --r-xl:14px; --r-panel:16px;
@@ -30,12 +30,12 @@
   }
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --bg:#0C121A; --surface:#141C26; --surface-2:#1C2634; --ink:#EAF0F7; --soft:#C0CAD6; --muted:#8B98A8; --faint:#5D6A7A;
-    --teal:#25B4F0; --teal-deep:#6FBEF2; --teal-soft:rgba(37,180,240,.13); --line:rgba(234,240,247,.08); --line2:rgba(234,240,247,.15);
+    --accent:#25B4F0; --accent-deep:#6FBEF2; --accent-soft:rgba(37,180,240,.13); --line:rgba(234,240,247,.08); --line2:rgba(234,240,247,.15);
     --shadow:0 1px 2px rgba(0,0,0,.4);
   }}
   :root[data-theme="dark"]{
     --bg:#0C121A; --surface:#141C26; --surface-2:#1C2634; --ink:#EAF0F7; --soft:#C0CAD6; --muted:#8B98A8; --faint:#5D6A7A;
-    --teal:#25B4F0; --teal-deep:#6FBEF2; --teal-soft:rgba(37,180,240,.13); --line:rgba(234,240,247,.08); --line2:rgba(234,240,247,.15);
+    --accent:#25B4F0; --accent-deep:#6FBEF2; --accent-soft:rgba(37,180,240,.13); --line:rgba(234,240,247,.08); --line2:rgba(234,240,247,.15);
     --shadow:0 1px 2px rgba(0,0,0,.4);
   }
   *{box-sizing:border-box}
@@ -45,33 +45,33 @@
   .mono{font-family:'IBM Plex Mono',ui-monospace,monospace; letter-spacing:0}
   .wrap{max-width:1000px; margin:0 auto; padding:0 24px}
   a{color:inherit; text-decoration:none}
-  :focus-visible{outline:2px solid var(--teal); outline-offset:3px}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px}
 
   nav{border-bottom:1px solid var(--line)}
   .nav-in{display:flex; align-items:center; gap:20px; height:64px}
-  .logo{font-weight:800; font-size:20px; letter-spacing:-.03em} .logo b{color:var(--teal)}
+  .logo{font-weight:800; font-size:20px; letter-spacing:-.03em} .logo b{color:var(--accent)}
   .nav-in .sp{margin-left:auto; display:flex; align-items:center; gap:18px}
   .nav-in .bk{font-size:14px; font-weight:500; color:var(--muted)} .nav-in .bk:hover{color:var(--ink)}
-  .btn{font-size:14px; font-weight:700; border-radius:10px; padding:10px 16px; background:var(--teal); color:#fff; transition:.16s}
+  .btn{font-size:14px; font-weight:700; border-radius:10px; padding:10px 16px; background:var(--accent); color:#fff; transition:.16s}
   :root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#0B2138}
-  .btn:hover{background:var(--teal-deep); transform:translateY(-1px)}
+  .btn:hover{background:var(--accent-deep); transform:translateY(-1px)}
 
   header{padding:80px 0 44px; text-align:center}
-  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-deep); font-weight:500}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-deep); font-weight:500}
   h1{font-size:clamp(28px,4vw,42px); font-weight:800; letter-spacing:-.025em; line-height:1.22; margin:16px 0 0; text-wrap:balance; max-width:20em; margin-left:auto; margin-right:auto}
   .lead{color:var(--muted); font-size:17px; line-height:1.6; margin:18px auto 0; max-width:36em}
 
   .members{display:grid; grid-template-columns:1fr 1fr; gap:22px; padding-bottom:24px}
   .mcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-xl); padding:32px; box-shadow:var(--shadow)}
   .mtop{display:flex; align-items:center; gap:16px}
-  .ava{width:60px; height:60px; border-radius:50%; background:var(--teal-soft); color:var(--teal-deep); display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; flex:none}
+  .ava{width:60px; height:60px; border-radius:50%; background:var(--accent-soft); color:var(--accent-deep); display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; flex:none}
   .mname{font-size:22px; font-weight:800; letter-spacing:-.02em}
-  .mrole{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--teal-deep); font-weight:500; margin-top:3px}
+  .mrole{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent-deep); font-weight:500; margin-top:3px}
   .mfocus{margin-top:18px; font-size:14px; font-weight:700; color:var(--soft)}
   .mbio{margin-top:10px; font-size:15px; line-height:1.65; color:var(--muted)}
   .mbio b{color:var(--ink); font-weight:700}
-  .mtag{margin-top:18px; padding-top:16px; border-top:1px solid var(--line); display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--teal-deep)}
-  .mtag::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--teal)}
+  .mtag{margin-top:18px; padding-top:16px; border-top:1px solid var(--line); display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--accent-deep)}
+  .mtag::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent)}
 
   .stance{margin-top:24px; background:linear-gradient(160deg, var(--d-a), var(--d-b));
     border-radius:var(--r-panel); padding:44px 48px; color:#fff; box-shadow:var(--shadow)}
@@ -83,9 +83,9 @@
   .cta{padding:72px 0 40px; text-align:center}
   .cta h2{font-size:clamp(24px,3vw,32px); font-weight:800; letter-spacing:-.02em; margin:0}
   .cta p{color:var(--muted); font-size:15.5px; margin:14px auto 26px; max-width:30em}
-  .cta .big{display:inline-block; font-size:16px; font-weight:700; color:#fff; background:var(--teal); border-radius:12px; padding:15px 28px; box-shadow:0 16px 34px -14px rgba(23,102,181,.6); transition:.16s}
+  .cta .big{display:inline-block; font-size:16px; font-weight:700; color:#fff; background:var(--accent); border-radius:12px; padding:15px 28px; box-shadow:0 16px 34px -14px rgba(23,102,181,.6); transition:.16s}
   :root[data-theme="dark"] .cta .big,:root:not([data-theme="light"]) .cta .big{color:#0B2138}
-  .cta .big:hover{background:var(--teal-deep); transform:translateY(-1px)}
+  .cta .big:hover{background:var(--accent-deep); transform:translateY(-1px)}
 
   footer{border-top:1px solid var(--line); padding:30px 0}
   .foot-in{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px}
@@ -97,11 +97,11 @@
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important; transition-duration:.001ms!important} html{scroll-behavior:auto}}
   .mbio-list{margin:10px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px}
   .mbio-list li{position:relative; padding-left:15px; font-size:14.5px; line-height:1.55; color:var(--muted)}
-  .mbio-list li::before{content:""; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--teal)}
+  .mbio-list li::before{content:""; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--accent)}
   .mbio-list li b{color:var(--ink); font-weight:700}
-  .mlink{display:flex; width:fit-content; align-items:center; gap:7px; margin-top:14px; font-size:13px; font-weight:600; color:var(--teal-deep); transition:color .14s}
+  .mlink{display:flex; width:fit-content; align-items:center; gap:7px; margin-top:14px; font-size:13px; font-weight:600; color:var(--accent-deep); transition:color .14s}
   .mlink svg{flex:none}
-  .mlink:hover{color:var(--teal)}
+  .mlink:hover{color:var(--accent)}
   .logo,.brand{display:inline-flex; align-items:center; gap:9px}
   .lm{flex:none; width:1.4em; height:1.4em}
   .lm-bg{fill:#122E4C}
