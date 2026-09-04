@@ -14,6 +14,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <meta name="description" content="정비사업을 안에서 겪은 당사자 2인이 만드는 CLEARBUILD 팀 — 오원기(대표)·정휘준(CTO).">
 <link rel="canonical" href="https://clearbuild-site-theta.vercel.app/team.html">
+<meta property="og:image" content="https://clearbuild-site-theta.vercel.app/assets/og-image.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="CLEARBUILD 팀"><meta property="og:description" content="정비사업을 안에서 겪은 당사자 2인이 만듭니다."><meta property="og:type" content="website"><meta property="og:url" content="https://clearbuild-site-theta.vercel.app/team.html">
 <style>
   :root{
     --bg:#F7F8F8; --surface:#FFFFFF; --surface-2:#EFF2F2;
@@ -91,6 +95,13 @@
   @media(max-width:760px){ .members{grid-template-columns:1fr} .stance{padding:34px 26px} header{padding:56px 0 36px} }
   @media(max-width:480px){.nav-in .bk{display:none}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important; transition-duration:.001ms!important} html{scroll-behavior:auto}}
+  .mbio-list{margin:10px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px}
+  .mbio-list li{position:relative; padding-left:15px; font-size:14.5px; line-height:1.55; color:var(--muted)}
+  .mbio-list li::before{content:""; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--teal)}
+  .mbio-list li b{color:var(--ink); font-weight:700}
+  .mlink{display:flex; width:fit-content; align-items:center; gap:7px; margin-top:14px; font-size:13px; font-weight:600; color:var(--teal-deep); transition:color .14s}
+  .mlink svg{flex:none}
+  .mlink:hover{color:var(--teal)}
 </style>
 </head>
 <body>
@@ -126,8 +137,16 @@
           </div>
         </div>
         <div class="mfocus">사업 · 도메인 · GTM · 조합 영업</div>
-        <p class="mbio"><b>가족 재개발 구역 소유주</b>로 조합장 교체·분담금·총회를 조합 안에서 직접 겪었습니다. 펀블(PO)에서 부동산 STO 공모 <b>93.3억 원 완판</b>. 벤처투자분석사 · 부동산학 복수학위.</p>
+        <ul class="mbio-list">
+          <li><b>가족 재개발 구역 소유주</b> — 조합장 교체·분담금·총회를 조합 안에서 직접 경험</li>
+          <li>펀블(PO) 부동산 STO 공모 <b>93.3억 원 완판</b></li>
+          <li>벤처투자분석사 · 부동산학 복수학위</li>
+        </ul>
         <div class="mtag">정비사업 당사자 · 자금·투자 실무</div>
+        <a class="mlink" href="https://www.linkedin.com/in/hatemondayowen/" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.74v20.51C0 23.2.8 24 1.77 24h20.45c.98 0 1.78-.8 1.78-1.75V1.74C24 .78 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
       </div>
       <div class="mcard">
         <div class="mtop">
@@ -138,7 +157,11 @@
           </div>
         </div>
         <div class="mfocus">문서 온톨로지 · 두 서피스 · 인프라</div>
-        <p class="mbio">42dot(100만 동시접속) · 카카오페이(신용·정산) · Flex(HR SaaS) · DEVUS(RAG·LLM)를 거쳐 파이프라인을 직접 구현·배포. <b>1기신도시 정비사업 조합원</b> — 첫 레퍼런스 당사자입니다.</p>
+        <ul class="mbio-list">
+          <li>42dot(100만 동시접속) · 카카오페이(신용·정산) · Flex(HR SaaS) · DEVUS(RAG·LLM)</li>
+          <li>파이프라인 직접 구현·배포</li>
+          <li><b>1기신도시 정비사업 조합원</b> — 첫 레퍼런스 당사자</li>
+        </ul>
         <div class="mtag">정비사업 조합원 · RAG·인프라 실무</div>
       </div>
     </div>
