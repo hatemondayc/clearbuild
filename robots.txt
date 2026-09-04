@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://clearbuild-site-theta.vercel.app/sitemap.xml
+Sitemap: https://clearbuild-ai.vercel.app/sitemap.xml
