@@ -113,6 +113,10 @@
   fieldset.field legend{padding:0; margin:0 0 9px; font-size:14px; font-weight:600; color:var(--soft)}
   .home-link{display:inline-block; margin-top:22px; font-size:14px; font-weight:600; color:var(--teal-deep)}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important; transition-duration:.001ms!important} html{scroll-behavior:auto}}
+  .logo,.brand{display:inline-flex; align-items:center; gap:9px}
+  .lm{flex:none; width:1.15em; height:1.15em}
+  .lm-bg{fill:#0E4644}
+  .pnav .lm-bg,.brand .lm-bg{fill:rgba(255,255,255,.14)}
 </style>
 </head>
 <body>
@@ -121,7 +125,7 @@
 <div class="card">
   <!-- left -->
   <aside class="aside">
-    <a class="brand" href="/">CLEAR<b>BUILD</b></a>
+    <a class="brand" href="/"><svg class="lm" viewBox="0 0 100 100" aria-hidden="true"><rect class="lm-bg" width="100" height="100" rx="26"/><text x="50" y="53" fill="#fff" font-family="Georgia,serif" font-size="66" font-weight="700" text-anchor="middle" dominant-baseline="central">§</text></svg><span class="wm">CLEAR<b>BUILD</b></span></a>
     <h1>우리 조합 문서로<br>먼저 확인해보세요</h1>
     <p class="sub">신청하시면 담당이 직접 연락드려, 조합 문서 일부로 시범 운영을 함께 준비합니다.</p>
     <ul class="relist">

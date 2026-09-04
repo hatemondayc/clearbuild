@@ -102,6 +102,10 @@
   .mlink{display:flex; width:fit-content; align-items:center; gap:7px; margin-top:14px; font-size:13px; font-weight:600; color:var(--teal-deep); transition:color .14s}
   .mlink svg{flex:none}
   .mlink:hover{color:var(--teal)}
+  .logo,.brand{display:inline-flex; align-items:center; gap:9px}
+  .lm{flex:none; width:1.15em; height:1.15em}
+  .lm-bg{fill:#0E4644}
+  .pnav .lm-bg,.brand .lm-bg{fill:rgba(255,255,255,.14)}
 </style>
 </head>
 <body>
@@ -109,7 +113,7 @@
 
 <nav>
   <div class="wrap nav-in">
-    <a class="logo" href="/">CLEAR<b>BUILD</b></a>
+    <a class="logo" href="/"><svg class="lm" viewBox="0 0 100 100" aria-hidden="true"><rect class="lm-bg" width="100" height="100" rx="26"/><text x="50" y="53" fill="#fff" font-family="Georgia,serif" font-size="66" font-weight="700" text-anchor="middle" dominant-baseline="central">§</text></svg><span class="wm">CLEAR<b>BUILD</b></span></a>
     <span class="sp">
       <a class="bk" href="/">← 홈으로</a>
       <a class="btn" href="/apply.html">무료 시범 운영 신청</a>
@@ -184,7 +188,7 @@
 
 <footer>
   <div class="wrap foot-in">
-    <span class="logo">CLEAR<b>BUILD</b></span>
+    <span class="logo"><svg class="lm" viewBox="0 0 100 100" aria-hidden="true"><rect class="lm-bg" width="100" height="100" rx="26"/><text x="50" y="53" fill="#fff" font-family="Georgia,serif" font-size="66" font-weight="700" text-anchor="middle" dominant-baseline="central">§</text></svg><span class="wm">CLEAR<b>BUILD</b></span></span>
     <span class="foot-note">당사자성 + 이미 작동하는 제품</span>
   </div>
 </footer>

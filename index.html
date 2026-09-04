@@ -414,6 +414,10 @@
   @keyframes blink{50%{opacity:0}}
   @keyframes fadein{from{opacity:0}to{opacity:1}}
   @keyframes popPeek{0%{opacity:0; visibility:hidden; transform:translateY(4px)}14%,55%{opacity:1; visibility:visible; transform:none}72%,100%{opacity:0; visibility:hidden; transform:translateY(4px)}}
+  .logo,.brand{display:inline-flex; align-items:center; gap:9px}
+  .lm{flex:none; width:1.15em; height:1.15em}
+  .lm-bg{fill:#0E4644}
+  .pnav .lm-bg,.brand .lm-bg{fill:rgba(255,255,255,.14)}
 </style>
 </head>
 <body>
@@ -421,7 +425,7 @@
 
 <nav>
   <div class="wrap nav-in">
-    <span class="logo">CLEAR<b>BUILD</b></span>
+    <span class="logo"><svg class="lm" viewBox="0 0 100 100" aria-hidden="true"><rect class="lm-bg" width="100" height="100" rx="26"/><text x="50" y="53" fill="#fff" font-family="Georgia,serif" font-size="66" font-weight="700" text-anchor="middle" dominant-baseline="central">§</text></svg><span class="wm">CLEAR<b>BUILD</b></span></span>
     <span class="nav-links">
       <a href="#solution">솔루션</a><a href="#how">작동 방식</a><a href="#trust">신뢰·보안</a><a href="#faq">FAQ</a>
     </span>
@@ -437,7 +441,7 @@
   <div class="wrap">
     <div class="panel reveal">
       <div class="pnav">
-        <span class="logo">CLEAR<b>BUILD</b></span>
+        <span class="logo"><svg class="lm" viewBox="0 0 100 100" aria-hidden="true"><rect class="lm-bg" width="100" height="100" rx="26"/><text x="50" y="53" fill="#fff" font-family="Georgia,serif" font-size="66" font-weight="700" text-anchor="middle" dominant-baseline="central">§</text></svg><span class="wm">CLEAR<b>BUILD</b></span></span>
         <span class="lk"><a href="#solution">솔루션</a><a href="#how">작동 방식</a><a href="#trust">신뢰·보안</a><a href="#faq">FAQ</a></span>
         <span class="r"><a class="btn-sm btn-ghost-d" href="#cta">무료 시범 운영 신청</a></span>
       </div>
@@ -806,7 +810,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <span class="logo">CLEAR<b>BUILD</b></span>
+        <span class="logo"><svg class="lm" viewBox="0 0 100 100" aria-hidden="true"><rect class="lm-bg" width="100" height="100" rx="26"/><text x="50" y="53" fill="#fff" font-family="Georgia,serif" font-size="66" font-weight="700" text-anchor="middle" dominant-baseline="central">§</text></svg><span class="wm">CLEAR<b>BUILD</b></span></span>
         <p class="foot-tag">흩어진 조합 문서를 모아 근거로 답하고, 그 응대를 기록으로 남기는 조합 AI입니다.</p>
         <p class="foot-team">정비사업 현장에서 총회·인가 실무를 겪은 팀이 만듭니다.</p>
         <div class="foot-social">
