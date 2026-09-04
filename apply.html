@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="1747d3d8-aa53-4000-bdfb-79c51fb639f9"></script>
 <title>CLEARBUILD 시범 운영 신청</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,6 +106,10 @@
     body{padding:16px}
   }
   .form-err{color:var(--err); font-size:13.5px; font-weight:600; margin:12px 0 0; text-align:center}
+  fieldset.field{border:0; padding:0; margin:0; min-width:0}
+  fieldset.field legend{padding:0; margin:0 0 9px; font-size:14px; font-weight:600; color:var(--soft)}
+  .home-link{display:inline-block; margin-top:22px; font-size:14px; font-weight:600; color:var(--teal-deep)}
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important; transition-duration:.001ms!important} html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -110,7 +118,7 @@
 <div class="card">
   <!-- left -->
   <aside class="aside">
-    <span class="brand">CLEAR<b>BUILD</b></span>
+    <a class="brand" href="/">CLEAR<b>BUILD</b></a>
     <h1>우리 조합 문서로<br>먼저 확인해보세요</h1>
     <p class="sub">신청하시면 담당이 직접 연락드려, 조합 문서 일부로 시범 운영을 함께 준비합니다.</p>
     <ul class="relist">
@@ -127,12 +135,12 @@
     <div class="ftitle">1분이면 됩니다</div>
     <form id="signup" novalidate>
       <div class="field" data-req>
-        <label>조합 · 신탁사 이름<span class="req">*</span></label>
-        <input name="org" type="text" placeholder="예: 새봄마을 리모델링주택조합" autocomplete="organization">
-        <span class="err-msg">조합 또는 신탁사 이름을 입력해 주세요.</span>
+        <label for="f-org">조합 · 신탁사 이름<span class="req" aria-hidden="true">*</span></label>
+        <input id="f-org" name="org" type="text" maxlength="120" required aria-describedby="e-org" placeholder="예: 새봄마을 리모델링주택조합" autocomplete="organization">
+        <span class="err-msg" id="e-org">조합 또는 신탁사 이름을 입력해 주세요.</span>
       </div>
-      <div class="field">
-        <label>정비사업 유형</label>
+      <fieldset class="field">
+        <legend>정비사업 유형</legend>
         <div class="chips">
           <label class="chip"><input type="radio" name="type" value="재개발"><span>재개발</span></label>
           <label class="chip"><input type="radio" name="type" value="재건축"><span>재건축</span></label>
@@ -140,34 +148,34 @@
           <label class="chip"><input type="radio" name="type" value="신탁방식"><span>신탁 방식</span></label>
           <label class="chip"><input type="radio" name="type" value="기타"><span>기타 · 준비 중</span></label>
         </div>
+      </fieldset>
+      <div class="field" data-req>
+        <label for="f-contact">담당자 성함 · 직함<span class="req" aria-hidden="true">*</span></label>
+        <input id="f-contact" name="contact" type="text" maxlength="80" required aria-describedby="e-contact" placeholder="예: 홍길동 사무국장" autocomplete="name">
+        <span class="err-msg" id="e-contact">담당자 성함을 입력해 주세요.</span>
       </div>
       <div class="field" data-req>
-        <label>담당자 성함 · 직함<span class="req">*</span></label>
-        <input name="contact" type="text" placeholder="예: 홍길동 사무국장" autocomplete="name">
-        <span class="err-msg">담당자 성함을 입력해 주세요.</span>
-      </div>
-      <div class="field" data-req>
-        <label>연락처<span class="req">*</span></label>
-        <input name="phone" type="tel" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel">
-        <span class="err-msg">연락 가능한 번호를 입력해 주세요.</span>
+        <label for="f-phone">연락처<span class="req" aria-hidden="true">*</span></label>
+        <input id="f-phone" name="phone" type="tel" maxlength="30" required aria-describedby="e-phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel">
+        <span class="err-msg" id="e-phone">연락 가능한 번호를 입력해 주세요.</span>
       </div>
       <div class="field">
-        <label>이메일<span class="opt">선택</span></label>
-        <input name="email" type="email" placeholder="name@example.com" autocomplete="email">
-        <span class="err-msg">이메일 형식을 확인해 주세요.</span>
+        <label for="f-email">이메일<span class="opt">선택</span></label>
+        <input id="f-email" name="email" type="email" maxlength="120" aria-describedby="e-email" placeholder="name@example.com" autocomplete="email">
+        <span class="err-msg" id="e-email">이메일 형식을 확인해 주세요.</span>
       </div>
       <div class="field">
-        <label>현재 상황 · 문의<span class="opt">선택</span></label>
-        <textarea name="note" placeholder="사업 단계, 문서 보관 현황, 궁금한 점 등 자유롭게 적어 주세요."></textarea>
+        <label for="f-note">현재 상황 · 문의<span class="opt">선택</span></label>
+        <textarea id="f-note" name="note" maxlength="2000" placeholder="사업 단계, 문서 보관 현황, 궁금한 점 등 자유롭게 적어 주세요."></textarea>
       </div>
       <button class="submit" type="submit">무료 시범 운영 신청하기</button>
       <p class="form-err" id="form-err" role="alert" hidden></p>
-      <p class="privacy">제출하신 정보는 시범 운영 안내 목적으로만 사용되며, 안내 후 요청 시 파기됩니다.</p>
+      <p class="privacy">제출하신 정보는 시범 운영 안내 목적으로만 사용되며, 안내 후 요청 시 파기됩니다. 자세한 내용은 <a href="/privacy.html">개인정보 처리방침</a>을 확인해 주세요.</p>
     </form>
   </div>
 
   <!-- success -->
-  <div class="success" id="success">
+  <div class="success" id="success" role="status" aria-live="polite">
     <div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14807F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
     <h2>신청이 접수됐습니다</h2>
     <p>영업일 기준 <b>1~2일 내</b>에 담당이 남겨주신 연락처로 연락드립니다.</p>
@@ -177,10 +185,11 @@
       ② 조합 문서 일부를 받아 저희가 올려드립니다.<br>
       ③ 사무국이 직접 물어보며 판단하십니다.
     </div>
+    <a class="home-link" href="/">← CLEARBUILD 홈으로</a>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.114.0"></script>
 <script>
 (function(){
   var SUPABASE_URL='https://lynmnuftfybbegdxjfbz.supabase.co';
@@ -193,22 +202,27 @@
   function showErr(m){ if(errEl){ errEl.textContent=m; errEl.hidden=false; } }
   var reGeneric = /\S/;
   var reEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var rePhone = /^\+?[\d\-\s().]{9,20}$/;
   function fieldOf(el){ return el.closest('.field'); }
+  function markInvalid(el){ var f=fieldOf(el); if(f) f.classList.add('invalid'); el.setAttribute('aria-invalid','true'); }
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var ok = true;
     form.querySelectorAll('.field').forEach(function(f){ f.classList.remove('invalid'); });
-    ['org','contact','phone'].forEach(function(n){
+    form.querySelectorAll('[aria-invalid="true"]').forEach(function(el){ el.setAttribute('aria-invalid','false'); });
+    ['org','contact'].forEach(function(n){
       var el = form.elements[n];
-      if(!reGeneric.test(el.value.trim())){ fieldOf(el).classList.add('invalid'); ok = false; }
+      if(!reGeneric.test(el.value.trim())){ markInvalid(el); ok = false; }
     });
+    var ph = form.elements['phone']; var pv = ph.value.trim();
+    if(!rePhone.test(pv) || pv.replace(/\D/g,'').length < 9){ markInvalid(ph); ok = false; }
     var em = form.elements['email'];
-    if(em.value.trim() && !reEmail.test(em.value.trim())){ fieldOf(em).classList.add('invalid'); ok = false; }
+    if(em.value.trim() && !reEmail.test(em.value.trim())){ markInvalid(em); ok = false; }
     if(!ok){ var first = form.querySelector('.field.invalid input'); if(first) first.focus(); return; }
     if(errEl) errEl.hidden=true;
     if(!sb){ showErr('연결 준비가 안 됐어요. 새로고침 후 다시 시도해 주세요.'); return; }
     var typeEl=form.querySelector('input[name="type"]:checked');
-    var payload={ org:form.elements['org'].value.trim(), redev_type:typeEl?typeEl.value:null, contact:form.elements['contact'].value.trim(), phone:form.elements['phone'].value.trim(), email:form.elements['email'].value.trim()||null, note:form.elements['note'].value.trim()||null, ref:(new URLSearchParams(location.search).get('ref')||'apply') };
+    var payload={ org:form.elements['org'].value.trim(), redev_type:typeEl?typeEl.value:null, contact:form.elements['contact'].value.trim(), phone:form.elements['phone'].value.trim(), email:form.elements['email'].value.trim()||null, note:form.elements['note'].value.trim()||null, ref:((new URLSearchParams(location.search).get('ref')||'apply')).slice(0,64) };
     if(btn){ btn.disabled=true; btn.textContent='접수 중…'; }
     var settled=false;
     function restore(){ if(btn){ btn.disabled=false; btn.textContent=btnLabel; } }
@@ -221,7 +235,7 @@
       s.scrollIntoView({behavior:'smooth', block:'center'});
     }).catch(function(err){
       if(settled) return; settled=true; restore();
-      showErr(err && err.message==='timeout' ? '네트워크가 불안정해요. 연결을 확인한 뒤 다시 시도해 주세요.' : '접수에 실패했어요. 잠시 후 다시 시도해 주세요.');
+      showErr(err && err.message==='timeout' ? '응답이 늦어요. 이미 접수됐을 수 있으니, 1~2일 내 연락이 없으면 다시 신청해 주세요.' : '접수에 실패했어요. 잠시 후 다시 시도해 주세요.');
     });
   });
 })();

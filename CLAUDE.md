@@ -3,6 +3,8 @@
 CLEARBUILD = 정비사업(재개발·재건축·리모델링·가로주택) **매수 대기자**를 위한 판단·데이터 인프라.
 이 repo는 그 **무료 정보 진입점(단지 페이지)** 웹사이트다. AI가 이 파일을 먼저 읽고 아래 규칙대로 작업한다.
 
+> **⚠️ 2026-09 방향 전환 (먼저 읽을 것).** 홈(`index.html`)은 이제 **정비사업 조합·신탁사 대상 B2B 랜딩**(문서 온톨로지·인용강제 RAG). 구 B2C "매수 대기자 단지 페이지"(danji/detail/lp 및 아래 문서 상당부)는 **폐기·noindex**, 파일만 보존(`legacy-home.html`=구 홈). 신규 표면 = `index.html`(랜딩)·`apply.html`(시범운영 신청폼→Supabase `pilot_signups`)·`team.html`. B2C 계산엔진(danji)·데이터 규칙은 참고용으로만.
+
 ## 스택 (중요: 프레임워크 없음)
 - **정적 HTML/CSS/JS** 멀티페이지. 빌드 스텝 없음, 번들러 없음. `<script>` 인라인 + CDN.
 - **Supabase**(supabase-js CDN, anon 키 하드코딩=RLS로 안전), **Vercel**(git push → 자동 배포), **Umami**(계측), **NAVER 지도**(Client ID `a4kxw68xe0`).
@@ -11,7 +13,10 @@ CLEARBUILD = 정비사업(재개발·재건축·리모델링·가로주택) **�
 ## 파일 지도
 | 파일 | 역할 |
 |---|---|
-| `index.html` | 홈 진입점 — 사전신청·ABOUT·FAQ·SEO + "시뮬레이션 경험하기" → danji · 검색·정비구역 통합 지도 |
+| `index.html` | ★홈 = **정비사업 조합 B2B 랜딩**(온톨로지·인용강제 데모·신뢰/보안·FAQ·CTA→apply) · A안 쿨뉴트럴 팔레트·Pretendard |
+| `apply.html` | 무료 시범 운영 신청 폼 → Supabase `pilot_signups`(anon INSERT·8초 타임아웃·접근성 label/aria) |
+| `team.html` | 팀 소개(오원기 대표·정휘준 CTO) |
+| `legacy-home.html` | 구 B2C 홈 보존본(noindex·미링크) |
 | `danji.html` | ★느티마을3 완성형 데모 — 계산엔진·시점별 필요현금 타임라인·예측공시 박제·자금조달/알림 CTA·판정보드·커버리지 지도 |
 | `detail.html` | 단지별 정보판(`?complex=`) — 실거래·월별 거래량·미니맵·알림폼 |
 | `admin.html` | 관리 화면(`?key=cb-owen-2026` = 가림막, 서버 인증 아님) |
@@ -23,7 +28,7 @@ CLEARBUILD = 정비사업(재개발·재건축·리모델링·가로주택) **�
 **서버리스 예외**: `api/extract.js`가 repo 유일 Vercel Node 서버리스 함수(CommonJS·`fetch` 내장·**의존성 0**·package.json 없음 유지). 렛서 게이트웨이(Anthropic 호환) `/v1/messages` 호출. 키는 **Vercel 환경변수에서만**: `ANTHROPIC_BASE_URL=https://gw.letsur.ai` · `ANTHROPIC_AUTH_TOKEN=sk-…`(클라 노출 금지). Supabase 테이블 `disclosure_facts`(anon INSERT RLS, ?key 게이트가 유일 가림막). **`mode` 분기**: default(무지정)=확정값 추출(`facts`, agent.html), `mode:'minutes'`=의사록 초안(`minutes`, recorder.html). 확정값 경로는 **무회귀 락**(수정 시 default 동작 회귀 검증).
 
 ## 데이터·배관 (검증된 패턴 — 복사해서 재사용)
-- Supabase project ref `lynmnuftfybbegdxjfbz`. 테이블: `reservations`·`orders`·`report_requests`.
+- Supabase project ref `lynmnuftfybbegdxjfbz`. 테이블: `reservations`·`orders`·`report_requests`·**`pilot_signups`(2026-09 조합 시범운영 신청·anon INSERT·CHECK 길이상한)**.
 - **RLS = 익명(anon)에게 INSERT만.** 원장 anon SELECT/UPDATE/DELETE 차단.
 - **읽기는 PII 뺀 public 뷰로만**: `reservations_public`·`orders_public`(연락처·이메일·주소 제외, 이름 마스킹). ⚠️ **원장에 anon SELECT 절대 열지 말 것**(Day14 PII 유출 사고 이력).
 - supabase-js `.insert()`는 **minimal 경로 사용**. `.select()`(=`return=representation`)는 INSERT 후 RETURNING → SELECT 정책 검사에 걸림(Day17 401 원인). 되읽기 필요 없으면 붙이지 말 것.
