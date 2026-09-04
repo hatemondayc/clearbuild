@@ -34,7 +34,7 @@
     --shadow:0 1px 2px rgba(0,0,0,.4);
   }}
   :root[data-theme="dark"]{
-    --bg:#0C121A; --surface:#141C26; --surface-2:#1C2634; --ink:#EAF0F7; --soft:#C0CAD6; --muted:#8792A3; --faint:#5E6B65;
+    --bg:#0C121A; --surface:#141C26; --surface-2:#1C2634; --ink:#EAF0F7; --soft:#C0CAD6; --muted:#8792A3; --faint:#5D6A7A;
     --teal:#25B4F0; --teal-deep:#6FBEF2; --teal-soft:rgba(37,180,240,.13); --line:rgba(234,240,247,.12); --line2:rgba(234,240,247,.2); --err:#E0865A;
     --shadow:0 2px 4px rgba(0,0,0,.3), 0 30px 60px -34px rgba(0,0,0,.72);
   }
@@ -50,9 +50,9 @@
 
   /* left reassurance panel (deep teal) */
   .aside{position:relative; overflow:hidden; padding:40px 36px; color:var(--d-ink);
-    background:radial-gradient(120% 130% at 80% -10%, #15706D 0%, var(--d-a) 46%, var(--d-b) 100%)}
+    background:radial-gradient(120% 130% at 80% -10%, #13314F 0%, var(--d-a) 46%, var(--d-b) 100%)}
   .aside::before{content:""; position:absolute; top:-120px; right:-100px; width:420px; height:420px; border-radius:50%;
-    background:radial-gradient(circle, rgba(63,211,207,.14), transparent 62%)}
+    background:radial-gradient(circle, rgba(51,192,245,.14), transparent 62%)}
   .brand{position:relative; font-weight:800; font-size:20px; letter-spacing:-.03em; color:#fff}
   .brand b{color:var(--d-accent)}
   .aside h1{position:relative; font-size:26px; font-weight:800; letter-spacing:-.03em; line-height:1.28; margin:26px 0 0; color:#fff; text-wrap:balance}
@@ -88,8 +88,8 @@
   .field.invalid input{border-color:var(--err)}
   .field.invalid .err-msg{display:block}
   .submit{margin-top:6px; font-family:inherit; font-size:16px; font-weight:700; color:#fff; background:var(--teal); border:none; border-radius:var(--r);
-    padding:15px; cursor:pointer; transition:.16s; box-shadow:0 14px 30px -14px rgba(20,128,127,.6)}
-  :root[data-theme="dark"] .submit,:root:not([data-theme="light"]) .submit{color:#062522}
+    padding:15px; cursor:pointer; transition:.16s; box-shadow:0 14px 30px -14px rgba(23,102,181,.6)}
+  :root[data-theme="dark"] .submit,:root:not([data-theme="light"]) .submit{color:#0B2138}
   .submit:hover{background:var(--teal-deep); transform:translateY(-1px)}
   .privacy{font-size:12px; color:var(--muted); line-height:1.5; margin:2px 0 0}
 
@@ -114,8 +114,10 @@
   .home-link{display:inline-block; margin-top:22px; font-size:14px; font-weight:600; color:var(--teal-deep)}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important; transition-duration:.001ms!important} html{scroll-behavior:auto}}
   .logo,.brand{display:inline-flex; align-items:center; gap:9px}
-  .lm{flex:none; width:1.15em; height:1.15em}
+  .lm{flex:none; width:1.4em; height:1.4em}
   .lm-bg{fill:#122E4C}
+  .pnav .lm-bg,.brand .lm-bg{fill:rgba(255,255,255,.15)}
+  :root[data-theme="dark"] .lm-bg,:root:not([data-theme="light"]) .lm-bg{fill:#1B3E63}
 </style>
 </head>
 <body>
