@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLEARBUILD 시범 운영 신청</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<meta name="description" content="정비사업 조합·신탁사를 위한 무료 시범 운영 신청. 조합 문서 일부로 시작, 담당이 직접 안내합니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://clearbuild-site-theta.vercel.app/apply.html">
+<meta property="og:title" content="CLEARBUILD 무료 시범 운영 신청"><meta property="og:description" content="조합 문서 일부로 비용 없이 시범 운영. 담당이 직접 안내."><meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#F7F8F8; --surface:#FFFFFF; --surface-2:#EFF2F2;
+    --ink:#121A19; --soft:#35413E; --muted:#5B6663; --faint:#86908D;
+    --teal:#14807F; --teal-deep:#0C4B49; --teal-soft:#E4F0EF;
+    --line:rgba(18,26,25,.09); --line2:rgba(18,26,25,.15); --err:#B4472A;
+    --d-a:#0E4644; --d-b:#0A3230; --d-ink:#F3F7F5; --d-mut:rgba(243,247,245,.74); --d-line:rgba(255,255,255,.14); --d-accent:#3FD3CF;
+    --r:12px; --shadow:0 1px 2px rgba(18,26,25,.04);
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#0F1315; --surface:#161B1E; --surface-2:#1E2529; --ink:#ECF1EF; --soft:#C3CCC8; --muted:#8F9B97; --faint:#5F6B67;
+    --teal:#2EC4C6; --teal-deep:#5FD8D4; --teal-soft:rgba(46,196,198,.13); --line:rgba(236,241,239,.08); --line2:rgba(236,241,239,.15); --err:#E0865A;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#111518; --surface:#191F23; --surface-2:#212A2E; --ink:#E9EFEC; --soft:#C6D0CB; --muted:#93A099; --faint:#5E6B65;
+    --teal:#2EC4C6; --teal-deep:#5FD8D4; --teal-soft:rgba(46,196,198,.13); --line:rgba(233,239,236,.12); --line2:rgba(233,239,236,.2); --err:#E0865A;
+    --shadow:0 2px 4px rgba(0,0,0,.3), 0 30px 60px -34px rgba(0,0,0,.72);
+  }
+  *{box-sizing:border-box}
+  body{margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+    font-family:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Noto Sans KR',sans-serif; line-height:1.6; letter-spacing:-.01em; -webkit-font-smoothing:antialiased; word-break:keep-all;
+    display:flex; align-items:center; justify-content:center; padding:32px 20px}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace; letter-spacing:0}
+  a{color:var(--teal-deep)}
+
+  .card{width:100%; max-width:960px; background:var(--surface); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow);
+    display:grid; grid-template-columns:.82fr 1fr; overflow:hidden}
+
+  /* left reassurance panel (deep teal) */
+  .aside{position:relative; overflow:hidden; padding:40px 36px; color:var(--d-ink);
+    background:radial-gradient(120% 130% at 80% -10%, #15706D 0%, var(--d-a) 46%, var(--d-b) 100%)}
+  .aside::before{content:""; position:absolute; top:-120px; right:-100px; width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(63,211,207,.14), transparent 62%)}
+  .brand{position:relative; font-weight:800; font-size:20px; letter-spacing:-.03em; color:#fff}
+  .brand b{color:var(--d-accent)}
+  .aside h1{position:relative; font-size:26px; font-weight:800; letter-spacing:-.03em; line-height:1.28; margin:26px 0 0; color:#fff; text-wrap:balance}
+  .aside .sub{position:relative; color:var(--d-mut); font-size:14.5px; margin:14px 0 26px; line-height:1.6}
+  .relist{position:relative; list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:14px}
+  .relist li{display:flex; gap:11px; align-items:flex-start; font-size:14px; color:#fff; line-height:1.45}
+  .relist svg{flex:none; margin-top:2px}
+  .relist span{color:var(--d-mut)}
+  .aside .foot{position:relative; margin-top:32px; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--d-mut)}
+
+  /* right form */
+  .formwrap{padding:40px 40px 36px}
+  .fhead{font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal-deep); display:flex; align-items:center; gap:9px}
+  .fhead::before{content:""; width:20px; height:1px; background:var(--teal)}
+  .ftitle{font-size:21px; font-weight:800; letter-spacing:-.02em; margin:12px 0 26px}
+  form{display:flex; flex-direction:column; gap:18px}
+  .field{display:flex; flex-direction:column; gap:8px}
+  label{font-size:13.5px; font-weight:600; color:var(--soft)}
+  label .req{color:var(--teal); margin-left:3px}
+  label .opt{color:var(--faint); font-weight:500; font-size:12px; margin-left:5px}
+  input, textarea{font-family:inherit; font-size:15px; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-radius:var(--r);
+    padding:13px 15px; transition:.14s; width:100%}
+  input::placeholder, textarea::placeholder{color:var(--faint)}
+  input:focus, textarea:focus{outline:none; border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-soft)}
+  textarea{resize:vertical; min-height:84px; line-height:1.55}
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{position:relative}
+  .chip input{position:absolute; opacity:0; inset:0; cursor:pointer}
+  .chip span{display:inline-block; font-size:14px; color:var(--soft); background:var(--bg); border:1px solid var(--line2); border-radius:999px; padding:9px 15px; transition:.14s; cursor:pointer}
+  .chip input:checked + span{background:var(--teal-soft); border-color:var(--teal); color:var(--teal-deep); font-weight:600}
+  .chip input:focus-visible + span{outline:2px solid var(--teal); outline-offset:2px}
+  .err-msg{display:none; font-size:12.5px; color:var(--err); margin-top:2px}
+  .field.invalid input{border-color:var(--err)}
+  .field.invalid .err-msg{display:block}
+  .submit{margin-top:6px; font-family:inherit; font-size:16px; font-weight:700; color:#fff; background:var(--teal); border:none; border-radius:var(--r);
+    padding:15px; cursor:pointer; transition:.16s; box-shadow:0 14px 30px -14px rgba(20,128,127,.6)}
+  :root[data-theme="dark"] .submit,:root:not([data-theme="light"]) .submit{color:#062522}
+  .submit:hover{background:var(--teal-deep); transform:translateY(-1px)}
+  .privacy{font-size:12px; color:var(--muted); line-height:1.5; margin:2px 0 0}
+
+  /* success */
+  .success{display:none; padding:56px 40px; text-align:center; flex-direction:column; align-items:center}
+  .success.on{display:flex}
+  .success .ic{width:60px; height:60px; border-radius:50%; background:var(--teal-soft); display:flex; align-items:center; justify-content:center; margin-bottom:22px}
+  .success h2{font-size:23px; font-weight:800; letter-spacing:-.02em; margin:0 0 10px}
+  .success p{color:var(--muted); font-size:15px; line-height:1.65; margin:0 0 6px; max-width:38em}
+  .success .next{margin-top:24px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r); padding:16px 20px; text-align:left; font-size:13.5px; color:var(--soft); line-height:1.6; max-width:34em}
+  .success .next b{color:var(--ink)}
+
+  @media (max-width:760px){
+    .card{grid-template-columns:1fr; max-width:520px}
+    .aside{padding:34px 28px}
+    .formwrap{padding:32px 26px}
+    body{padding:16px}
+  }
+  .form-err{color:var(--err); font-size:13.5px; font-weight:600; margin:12px 0 0; text-align:center}
+</style>
+</head>
+<body>
+
+
+<div class="card">
+  <!-- left -->
+  <aside class="aside">
+    <span class="brand">CLEAR<b>BUILD</b></span>
+    <h1>우리 조합 문서로<br>먼저 확인해보세요</h1>
+    <p class="sub">신청하시면 담당이 직접 연락드려, 조합 문서 일부로 시범 운영을 함께 준비합니다.</p>
+    <ul class="relist">
+      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3FD3CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> <div>비용 없이 시작<br><span>도입 여부는 직접 써보신 뒤 결정</span></div></li>
+      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3FD3CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> <div>문서 일부만으로 준비<br><span>설치할 것 없음 · 서면 절차 최소화</span></div></li>
+      <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3FD3CF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> <div>담당이 직접 안내<br><span>영업일 1~2일 내 연락</span></div></li>
+    </ul>
+    <div class="foot">조합·신탁사 대상 · 조합이 올린 문서 위에서만 작동</div>
+  </aside>
+
+  <!-- right form -->
+  <div class="formwrap" id="formwrap">
+    <span class="fhead">무료 시범 운영 신청</span>
+    <div class="ftitle">1분이면 됩니다</div>
+    <form id="signup" novalidate>
+      <div class="field" data-req>
+        <label>조합 · 신탁사 이름<span class="req">*</span></label>
+        <input name="org" type="text" placeholder="예: 새봄마을 리모델링주택조합" autocomplete="organization">
+        <span class="err-msg">조합 또는 신탁사 이름을 입력해 주세요.</span>
+      </div>
+      <div class="field">
+        <label>정비사업 유형</label>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="type" value="재개발"><span>재개발</span></label>
+          <label class="chip"><input type="radio" name="type" value="재건축"><span>재건축</span></label>
+          <label class="chip"><input type="radio" name="type" value="리모델링"><span>리모델링</span></label>
+          <label class="chip"><input type="radio" name="type" value="신탁방식"><span>신탁 방식</span></label>
+          <label class="chip"><input type="radio" name="type" value="기타"><span>기타 · 준비 중</span></label>
+        </div>
+      </div>
+      <div class="field" data-req>
+        <label>담당자 성함 · 직함<span class="req">*</span></label>
+        <input name="contact" type="text" placeholder="예: 홍길동 사무국장" autocomplete="name">
+        <span class="err-msg">담당자 성함을 입력해 주세요.</span>
+      </div>
+      <div class="field" data-req>
+        <label>연락처<span class="req">*</span></label>
+        <input name="phone" type="tel" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel">
+        <span class="err-msg">연락 가능한 번호를 입력해 주세요.</span>
+      </div>
+      <div class="field">
+        <label>이메일<span class="opt">선택</span></label>
+        <input name="email" type="email" placeholder="name@example.com" autocomplete="email">
+        <span class="err-msg">이메일 형식을 확인해 주세요.</span>
+      </div>
+      <div class="field">
+        <label>현재 상황 · 문의<span class="opt">선택</span></label>
+        <textarea name="note" placeholder="사업 단계, 문서 보관 현황, 궁금한 점 등 자유롭게 적어 주세요."></textarea>
+      </div>
+      <button class="submit" type="submit">무료 시범 운영 신청하기</button>
+      <p class="form-err" id="form-err" role="alert" hidden></p>
+      <p class="privacy">제출하신 정보는 시범 운영 안내 목적으로만 사용되며, 안내 후 요청 시 파기됩니다.</p>
+    </form>
+  </div>
+
+  <!-- success -->
+  <div class="success" id="success">
+    <div class="ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#14807F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+    <h2>신청이 접수됐습니다</h2>
+    <p>영업일 기준 <b>1~2일 내</b>에 담당이 남겨주신 연락처로 연락드립니다.</p>
+    <div class="next">
+      <b>다음 순서</b><br>
+      ① 담당이 연락드려 시범 운영 범위를 함께 정합니다.<br>
+      ② 조합 문서 일부를 받아 저희가 올려드립니다.<br>
+      ③ 사무국이 직접 물어보며 판단하십니다.
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var SUPABASE_URL='https://lynmnuftfybbegdxjfbz.supabase.co';
+  var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5bm1udWZ0ZnliYmVnZHhqZmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0Njk3OTUsImV4cCI6MjA5OTA0NTc5NX0.66hZ9W29yoscoC8ibbUeHQluG8ecEo-nI5a8F19beGE';
+  var sb=(window.supabase&&window.supabase.createClient)?window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY):null;
+  var form = document.getElementById('signup');
+  if(!form) return;
+  var btn=form.querySelector('.submit'); var btnLabel=btn?btn.textContent:'';
+  var errEl=document.getElementById('form-err');
+  function showErr(m){ if(errEl){ errEl.textContent=m; errEl.hidden=false; } }
+  var reGeneric = /\S/;
+  var reEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function fieldOf(el){ return el.closest('.field'); }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = true;
+    form.querySelectorAll('.field').forEach(function(f){ f.classList.remove('invalid'); });
+    ['org','contact','phone'].forEach(function(n){
+      var el = form.elements[n];
+      if(!reGeneric.test(el.value.trim())){ fieldOf(el).classList.add('invalid'); ok = false; }
+    });
+    var em = form.elements['email'];
+    if(em.value.trim() && !reEmail.test(em.value.trim())){ fieldOf(em).classList.add('invalid'); ok = false; }
+    if(!ok){ var first = form.querySelector('.field.invalid input'); if(first) first.focus(); return; }
+    if(errEl) errEl.hidden=true;
+    if(!sb){ showErr('연결 준비가 안 됐어요. 새로고침 후 다시 시도해 주세요.'); return; }
+    var typeEl=form.querySelector('input[name="type"]:checked');
+    var payload={ org:form.elements['org'].value.trim(), redev_type:typeEl?typeEl.value:null, contact:form.elements['contact'].value.trim(), phone:form.elements['phone'].value.trim(), email:form.elements['email'].value.trim()||null, note:form.elements['note'].value.trim()||null, ref:(new URLSearchParams(location.search).get('ref')||'apply') };
+    if(btn){ btn.disabled=true; btn.textContent='접수 중…'; }
+    var settled=false;
+    function restore(){ if(btn){ btn.disabled=false; btn.textContent=btnLabel; } }
+    var to=new Promise(function(_,rej){ setTimeout(function(){ rej(new Error('timeout')); },8000); });
+    Promise.race([ sb.from('pilot_signups').insert(payload), to ]).then(function(res){
+      if(settled) return; settled=true; restore();
+      if(res && res.error){ showErr('접수에 실패했어요. 잠시 후 다시 시도해 주세요.'); return; }
+      document.getElementById('formwrap').style.display = 'none';
+      var s = document.getElementById('success'); s.classList.add('on');
+      s.scrollIntoView({behavior:'smooth', block:'center'});
+    }).catch(function(err){
+      if(settled) return; settled=true; restore();
+      showErr(err && err.message==='timeout' ? '네트워크가 불안정해요. 연결을 확인한 뒤 다시 시도해 주세요.' : '접수에 실패했어요. 잠시 후 다시 시도해 주세요.');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

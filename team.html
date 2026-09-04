@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLEARBUILD 팀</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<meta name="description" content="정비사업을 안에서 겪은 당사자 2인이 만드는 CLEARBUILD 팀 — 오원기(대표)·정휘준(CTO).">
+<link rel="canonical" href="https://clearbuild-site-theta.vercel.app/team.html">
+<style>
+  :root{
+    --bg:#F7F8F8; --surface:#FFFFFF; --surface-2:#EFF2F2;
+    --ink:#121A19; --soft:#35413E; --muted:#5B6663; --faint:#86908D;
+    --teal:#14807F; --teal-deep:#0C4B49; --teal-soft:#E4F0EF;
+    --line:rgba(18,26,25,.09); --line2:rgba(18,26,25,.15);
+    --shadow:0 1px 2px rgba(18,26,25,.04);
+    --r-lg:12px; --r-xl:14px; --r-panel:16px;
+    --d-a:#0E4644; --d-b:#0A3230; --d-mut:rgba(243,247,245,.74); --d-accent:#3FD3CF;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#0F1315; --surface:#161B1E; --surface-2:#1E2529; --ink:#ECF1EF; --soft:#C3CCC8; --muted:#8F9B97; --faint:#5F6B67;
+    --teal:#2EC4C6; --teal-deep:#5FD8D4; --teal-soft:rgba(46,196,198,.13); --line:rgba(236,241,239,.08); --line2:rgba(236,241,239,.15);
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0F1315; --surface:#161B1E; --surface-2:#1E2529; --ink:#ECF1EF; --soft:#C3CCC8; --muted:#8F9B97; --faint:#5F6B67;
+    --teal:#2EC4C6; --teal-deep:#5FD8D4; --teal-soft:rgba(46,196,198,.13); --line:rgba(236,241,239,.08); --line2:rgba(236,241,239,.15);
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    line-height:1.62; letter-spacing:-.01em; -webkit-font-smoothing:antialiased; word-break:keep-all}
+  .mono{font-family:'IBM Plex Mono',ui-monospace,monospace; letter-spacing:0}
+  .wrap{max-width:1000px; margin:0 auto; padding:0 24px}
+  a{color:inherit; text-decoration:none}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px}
+
+  nav{border-bottom:1px solid var(--line)}
+  .nav-in{display:flex; align-items:center; gap:20px; height:64px}
+  .logo{font-weight:800; font-size:20px; letter-spacing:-.03em} .logo b{color:var(--teal)}
+  .nav-in .sp{margin-left:auto; display:flex; align-items:center; gap:18px}
+  .nav-in .bk{font-size:14px; font-weight:500; color:var(--muted)} .nav-in .bk:hover{color:var(--ink)}
+  .btn{font-size:14px; font-weight:700; border-radius:10px; padding:10px 16px; background:var(--teal); color:#fff; transition:.16s}
+  :root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#062522}
+  .btn:hover{background:var(--teal-deep); transform:translateY(-1px)}
+
+  header{padding:80px 0 44px; text-align:center}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-deep); font-weight:500}
+  h1{font-size:clamp(28px,4vw,42px); font-weight:800; letter-spacing:-.025em; line-height:1.22; margin:16px 0 0; text-wrap:balance; max-width:20em; margin-left:auto; margin-right:auto}
+  .lead{color:var(--muted); font-size:17px; line-height:1.6; margin:18px auto 0; max-width:36em}
+
+  .members{display:grid; grid-template-columns:1fr 1fr; gap:22px; padding-bottom:24px}
+  .mcard{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-xl); padding:32px; box-shadow:var(--shadow)}
+  .mtop{display:flex; align-items:center; gap:16px}
+  .ava{width:60px; height:60px; border-radius:50%; background:var(--teal-soft); color:var(--teal-deep); display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; flex:none}
+  .mname{font-size:22px; font-weight:800; letter-spacing:-.02em}
+  .mrole{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--teal-deep); font-weight:500; margin-top:3px}
+  .mfocus{margin-top:18px; font-size:14px; font-weight:700; color:var(--soft)}
+  .mbio{margin-top:10px; font-size:15px; line-height:1.65; color:var(--muted)}
+  .mbio b{color:var(--ink); font-weight:700}
+  .mtag{margin-top:18px; padding-top:16px; border-top:1px solid var(--line); display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--teal-deep)}
+  .mtag::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--teal)}
+
+  .stance{margin-top:24px; background:linear-gradient(160deg, var(--d-a), var(--d-b));
+    border-radius:var(--r-panel); padding:44px 48px; color:#fff; box-shadow:var(--shadow)}
+  .stance .k{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--d-accent)}
+  .stance p{font-size:clamp(19px,2.4vw,24px); font-weight:700; letter-spacing:-.02em; line-height:1.45; margin:14px 0 0; max-width:26em}
+  .stance p b{color:var(--d-accent)}
+  .stance .sub{font-size:14.5px; font-weight:400; color:var(--d-mut); line-height:1.6; margin-top:16px; max-width:40em}
+
+  .cta{padding:72px 0 40px; text-align:center}
+  .cta h2{font-size:clamp(24px,3vw,32px); font-weight:800; letter-spacing:-.02em; margin:0}
+  .cta p{color:var(--muted); font-size:15.5px; margin:14px auto 26px; max-width:30em}
+  .cta .big{display:inline-block; font-size:16px; font-weight:700; color:#fff; background:var(--teal); border-radius:12px; padding:15px 28px; box-shadow:0 16px 34px -14px rgba(20,128,127,.6); transition:.16s}
+  :root[data-theme="dark"] .cta .big,:root:not([data-theme="light"]) .cta .big{color:#062522}
+  .cta .big:hover{background:var(--teal-deep); transform:translateY(-1px)}
+
+  footer{border-top:1px solid var(--line); padding:30px 0}
+  .foot-in{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px}
+  .foot-in .logo{font-size:16px}
+  .foot-note{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted)}
+
+  @media(max-width:760px){ .members{grid-template-columns:1fr} .stance{padding:34px 26px} header{padding:56px 0 36px} }
+</style>
+</head>
+<body>
+
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="/">CLEAR<b>BUILD</b></a>
+    <span class="sp">
+      <a class="bk" href="/">← 홈으로</a>
+      <a class="btn" href="/apply.html">무료 시범 운영 신청</a>
+    </span>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow">팀</span>
+    <h1>정비사업을 안에서 겪은 사람들이 만듭니다</h1>
+    <p class="lead">책상 위 이론이 아니라, 조합장 교체·분담금·총회를 직접 겪은 당사자 2인이 만듭니다. 두 서피스는 이미 작동합니다.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="members">
+      <div class="mcard">
+        <div class="mtop">
+          <div class="ava">오</div>
+          <div>
+            <div class="mname">오원기 · 대표</div>
+            <div class="mrole">CEO</div>
+          </div>
+        </div>
+        <div class="mfocus">사업 · 도메인 · GTM · 조합 영업</div>
+        <p class="mbio"><b>가족 재개발 구역 소유주</b>로 조합장 교체·분담금·총회를 조합 안에서 직접 겪었습니다. 펀블(PO)에서 부동산 STO 공모 <b>93.3억 원 완판</b>. 벤처투자분석사 · 부동산학 복수학위.</p>
+        <div class="mtag">정비사업 당사자 · 자금·투자 실무</div>
+      </div>
+      <div class="mcard">
+        <div class="mtop">
+          <div class="ava">정</div>
+          <div>
+            <div class="mname">정휘준 · CTO</div>
+            <div class="mrole">CTO</div>
+          </div>
+        </div>
+        <div class="mfocus">문서 온톨로지 · 두 서피스 · 인프라</div>
+        <p class="mbio">42dot(100만 동시접속) · 카카오페이(신용·정산) · Flex(HR SaaS) · DEVUS(RAG·LLM)를 거쳐 파이프라인을 직접 구현·배포. <b>1기신도시 정비사업 조합원</b> — 첫 레퍼런스 당사자입니다.</p>
+        <div class="mtag">정비사업 조합원 · RAG·인프라 실무</div>
+      </div>
+    </div>
+
+    <div class="stance">
+      <span class="k">왜 우리가</span>
+      <p>정비사업의 고통을 <b>겪어 본 사람</b>이, 그 문제를 푸는 제품을 <b>이미 작동하게</b> 만들고 있습니다.</p>
+      <p class="sub">우리는 조합 문서를 온톨로지로 묶고 인용을 강제해 "판정하지 않는다"를 아키텍처로 지킵니다. 조합 대시보드와 조합원 챗봇, 두 서피스는 지금 라이브로 돌아갑니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>같은 문제를 겪고 계신다면</h2>
+    <p>조합 문서 일부로 비용 없이 시범 운영해 보세요. 담당이 직접 안내합니다.</p>
+    <a class="big" href="/apply.html">무료 시범 운영 신청 →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span class="logo">CLEAR<b>BUILD</b></span>
+    <span class="foot-note">당사자성 + 이미 작동하는 제품</span>
+  </div>
+</footer>
+
+</body>
+</html>
