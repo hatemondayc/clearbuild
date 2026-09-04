@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="1747d3d8-aa53-4000-bdfb-79c51fb639f9"></script>
 <title>CLEARBUILD · 정비사업 조합을 위한 AI</title>
-<meta name="description" content="정비사업 조합의 문서를 온톨로지로 묶고 인용을 강제해, 조합원 문의에 근거로 답하고 기록을 자동으로 남깁니다. 판정하지 않는 조합 AI.">
+<meta name="description" content="정비사업 조합의 총회록·이사회록·공문을 한곳에 묶고, 원문을 인용해, 조합원 문의에 근거로 답하고 기록을 자동으로 남깁니다. 판정하지 않는 조합 AI.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://clearbuild-site-theta.vercel.app/">
 <meta property="og:image" content="https://clearbuild-site-theta.vercel.app/assets/og-image.png">
@@ -260,9 +260,12 @@
   .cta-row .sec:hover{color:#fff}
   .cta-note{margin-top:20px; font-size:12.5px; color:var(--d-mut)}
 
-  /* footer — 3 col */
+  /* footer — 4 col */
   footer{border-top:1px solid var(--line); padding:64px 0 32px; background:var(--surface)}
-  .foot-top{display:grid; grid-template-columns:1.6fr 1fr 1.2fr; gap:40px; padding-bottom:36px; border-bottom:1px solid var(--line)}
+  .foot-top{display:grid; grid-template-columns:1.7fr .9fr 1fr 1.1fr; gap:40px; padding-bottom:36px; border-bottom:1px solid var(--line)}
+  .foot-social{display:flex; gap:12px; margin-top:18px}
+  .foot-social a{color:var(--faint); display:inline-flex; transition:color .14s}
+  .foot-social a:hover{color:var(--teal-deep)}
   .foot-brand .logo{font-size:20px; letter-spacing:-.03em}
   .foot-tag{margin:16px 0 8px; font-size:14px; color:var(--muted); line-height:1.6; max-width:30em}
   .foot-team{margin:0; font-size:12.5px; color:var(--muted); line-height:1.5}
@@ -275,10 +278,12 @@
   .foot-trust li::before{content:"—"; color:var(--teal-deep)}
   .foot-mail{margin-top:16px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--teal-deep)}
   .foot-bottom{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding-top:22px; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--muted)}
+  .foot-bottom a{color:var(--muted); transition:color .14s} .foot-bottom a:hover{color:var(--teal-deep)}
 
   @media (max-width:880px){
     section{padding:64px 0} #problem{padding-top:72px} #faq{padding:56px 0} .cta{padding:56px 0}
     .grid3,.steps,.stage,.moat{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr 1fr; gap:28px} .foot-brand{grid-column:1/-1}
     .nav-links{display:none} .pnav .lk{display:none}
     .panel{padding:30px 24px 112px; border-radius:22px}
     .demo-card{margin-top:-56px; padding:20px 18px; border-radius:var(--r-lg)}
@@ -440,7 +445,7 @@
       <div class="hcopy">
         <span class="hbadge">정비사업 조합을 위한 AI</span>
         <h1>조합 관리, 뒤지지 말고<br><span>물어보세요</span></h1>
-        <p class="hsub">정비사업은 10년을 넘게 갑니다. 그동안 임원은 바뀌고 총회록·이사회록·공문은 흩어집니다. 조합이 쌓아 온 그 문서를 기억해, 사무국 질문에도 조합원 문의에도 근거로 답하고 기록은 자동으로 남깁니다.</p>
+        <p class="hsub">CLEARBUILD는 조합이 쌓아 온 문서를 통째로 읽어 두고, 사무국과 조합원의 질문에 그 문서를 인용해 답합니다. 응대 기록은 자동으로 남습니다.</p>
         <div class="chips">
           <a class="chip" href="#demo"><span class="qm">Q</span> 지난 이사회 공사비 의결 금액은? <span class="who">사무국</span></a>
           <a class="chip" href="#demo"><span class="qm">Q</span> 변경인가 경과는? <span class="who">사무국</span></a>
@@ -489,7 +494,7 @@
   <div class="wrap">
     <span class="eyebrow sec-hd"><span class="n mono">§ 01</span> 정비사업이라는 구조</span>
     <h2>10년 넘게 가는 사업을, 상근 몇 사람이 감당합니다</h2>
-    <p class="lead">구역 지정부터 입주까지 평균 14년. 조합 한 곳이 다루는 사업비는 수천억. 그것을 챙기는 상근 인력은 두세 명입니다. 게을러서가 아니라, 구조가 그렇습니다.</p>
+    <p class="lead">구역 지정부터 입주까지 평균 14년. 조합 한 곳이 다루는 사업비는 수천억. 그것을 챙기는 상근 인력은 두세 명입니다. 어느 조합이나 사정은 비슷합니다.</p>
 
     <div class="stat-tiles">
       <div class="stat-tile"><div class="sv">14년 2개월</div><div class="sk">구역 지정 → 입주 평균</div><div class="ss mono">서울 재건축 · 보도 기준</div></div>
@@ -551,14 +556,14 @@
     <span class="eyebrow sec-hd"><span class="n mono">§ 02</span> 그래서 조합 안에서는</span>
     <h2>같은 일이 반복됩니다</h2>
     <div class="grid3">
-      <div class="pcard"><span class="pn">01</span><h3>지식이 증발한다</h3><p>임원·사무국이 교체되면 지난 결정의 맥락이 함께 나갑니다. "그때 왜 그렇게 정했더라"에 답할 사람이 남지 않습니다.</p><div class="tag">14년 사업 · 임원 임기 3년</div></div>
-      <div class="pcard"><span class="pn">02</span><h3>문의가 폭주한다</h3><p>같은 질문이 전화·카페·단톡으로 끝없이 반복됩니다. 상근 인력의 하루가 응대에만 녹습니다.</p><div class="tag">커뮤니티 질문 중 사업단계·일정 29.4%</div></div>
-      <div class="pcard"><span class="pn">03</span><h3>요청이 오면 또 뒤진다</h3><p>자료 공개와 회의록 보관은 집행부의 의무입니다. 지금은 요청이 올 때마다 사람이 문서를 처음부터 다시 찾습니다.</p><div class="tag">자료 공개 · 회의록 보관 의무</div></div>
+      <div class="pcard"><span class="pn">01</span><h3>결정 경위가 사라진다</h3><p>임원과 사무국이 바뀌면 지난 결정의 경위도 함께 나갑니다. "그때 왜 그렇게 정했더라"에 답할 사람이 남지 않습니다.</p><div class="tag">14년 사업 · 임원 임기 3년</div></div>
+      <div class="pcard"><span class="pn">02</span><h3>문의가 폭주한다</h3><p>같은 질문이 전화·카페·단톡으로 끝없이 반복됩니다. 상근 직원의 하루가 전화 응대로 다 갑니다.</p><div class="tag">커뮤니티 질문 중 사업단계·일정 29.4%</div></div>
+      <div class="pcard"><span class="pn">03</span><h3>요청이 오면 또 뒤진다</h3><p>자료 공개와 회의록 보관은 법이 정한 의무라 미룰 수 없습니다. 그런데 요청이 올 때마다 사람이 문서를 처음부터 다시 찾습니다.</p><div class="tag">자료 공개 · 회의록 보관 의무</div></div>
     </div>
 
     <div class="voc">
       <p class="voc-h">정비사업 커뮤니티 질문 154,558건을 수집해 69,985건을 분류했습니다</p>
-      <p class="voc-sub">절반 가까이가 조합 문서로 답할 수 있는 질문입니다. 판정이 필요한 질문에는 답하지 않습니다.</p>
+      <p class="voc-sub">10건 중 4건은 조합 문서로 답할 수 있는 질문입니다. 판정이 필요한 질문에는 답하지 않습니다.</p>
       <div class="voc-row"><span class="vl">사업 단계·일정</span><div class="voc-track"><div class="voc-fill ans" style="width:100%"></div></div><span class="voc-pct">29.4%</span></div>
       <div class="voc-row"><span class="vl">매수·매도 타이밍</span><div class="voc-track"><div class="voc-fill no" style="width:65%"></div></div><span class="voc-pct">19.1%</span></div>
       <div class="voc-row"><span class="vl">상품성·설계</span><div class="voc-track"><div class="voc-fill oth" style="width:49%"></div></div><span class="voc-pct">14.5%</span></div>
@@ -567,7 +572,7 @@
       <div class="voc-leg"><span><i class="ans"></i> 조합 문서로 답할 수 있는 질문</span><span><i class="no"></i> 판정이 필요해 답하지 않는 질문</span></div>
     </div>
 
-    <p class="bridge">찾는 시간을 묻는 시간으로 바꾸면, <b>세 가지가 한 번에</b> 풀립니다.</p>
+    <p class="bridge">문서를 찾는 대신 물어볼 수 있으면, <b>위의 세 가지 일이 함께</b> 줄어듭니다.</p>
   </div>
 </section>
 
@@ -575,7 +580,7 @@
 <section id="solution">
   <div class="wrap">
     <span class="eyebrow">솔루션</span>
-    <h2>두 개의 화면, 하나의 지식 레이어</h2>
+    <h2>화면은 두 개, 바탕이 되는 문서는 하나</h2>
     <p class="lead">집행부는 관리하고, 조합원은 물어봅니다. 둘 다 같은 문서를 근거로 삼습니다.</p>
     <div class="grid3">
       <div class="solcard">
@@ -595,7 +600,7 @@
         <h3>조합 대시보드</h3>
         <div class="sol-role">집행부용</div>
         <p>문서를 올리고, 묻고, 동향·일정·증적을 한자리에서 관리합니다.</p>
-        <div class="sol-vs">종이 박스 · 엑셀 · 단톡을 대신합니다</div>
+        <div class="sol-vs">서류함 · 엑셀 · 단톡에 흩어진 것을 한곳에 모읍니다</div>
       </div>
       <div class="solcard">
         <div class="sol-crop">
@@ -620,8 +625,8 @@
           </div>
         </div>
         <h3>기록·증적</h3>
-        <div class="sol-role">컴플라이언스</div>
-        <p>열람·응대·회의록이 자동으로 아카이브되어 증적으로 남습니다.</p>
+        <div class="sol-role">법정 의무 대응</div>
+        <p>열람·응대·회의록이 자동으로 보관되어 증적으로 남습니다.</p>
         <div class="sol-vs">§124·125 의무 이행 지원 (판정·자문 아님)</div>
       </div>
     </div>
@@ -633,11 +638,11 @@
   <div class="wrap">
     <span class="eyebrow">작동 방식</span>
     <h2>흩어진 문서를 한곳에서 물어볼 수 있게</h2>
-    <p class="lead">조합이 올린 문서를 안건·금액·일정끼리 연결해 두고, 답은 반드시 그 문서를 인용하게 만듭니다. "판정하지 않는다"를 말이 아니라 구조로 지킵니다.</p>
+    <p class="lead">조합이 올린 문서를 안건·금액·일정끼리 연결해 두고, 답에는 반드시 그 문서의 원문을 붙입니다. 원문이 없으면 답이 나가지 않도록 만들어 두었습니다.</p>
     <div class="steps">
-      <div class="step"><span class="sn">01</span><h3>문서를 올립니다</h3><p>총회록·이사회록·공문·고시공고를 그대로. 스캔·이미지도 읽습니다(OCR).</p><div class="mini"><span class="tagchip">총회 회의록</span><span class="tagchip">이사회 의결</span><span class="tagchip">공문·공고</span></div></div>
-      <div class="step"><span class="sn">02</span><h3>문서끼리 연결합니다</h3><p>안건·금액·일정·인가 단계를 문서끼리 연결해 하나의 지식 레이어로 둡니다.</p><div class="mini"><span class="tagchip">문서 간 연결</span><span class="tagchip">일정·기한</span><span class="tagchip">단계 추적</span></div></div>
-      <div class="step"><span class="sn">03</span><h3>근거로 답합니다</h3><p>질문에 원문 인용을 붙여 답합니다. 인용이 없으면 답하지 않습니다. 답한 내용과 인용은 그대로 기록으로 남습니다.</p><div class="mini"><span class="tagchip">인용강제 RAG</span><span class="tagchip">판정 금지</span><span class="tagchip">응대 기록</span></div></div>
+      <div class="step"><span class="sn">01</span><h3>문서를 올립니다</h3><p>총회록·이사회록·공문·고시공고를 있는 그대로 올립니다. 스캔본·사진도 읽습니다.</p><div class="mini"><span class="tagchip">총회 회의록</span><span class="tagchip">이사회 의결</span><span class="tagchip">공문·공고</span></div></div>
+      <div class="step"><span class="sn">02</span><h3>문서끼리 연결합니다</h3><p>안건·금액·일정·인가 단계를 문서끼리 연결해 한 묶음으로 엮어 둡니다.</p><div class="mini"><span class="tagchip">문서 간 연결</span><span class="tagchip">일정·기한</span><span class="tagchip">단계 추적</span></div></div>
+      <div class="step"><span class="sn">03</span><h3>근거로 답합니다</h3><p>질문에 원문 인용을 붙여 답하고, 답과 인용은 그대로 기록으로 남습니다.</p><div class="mini"><span class="tagchip">원문 인용 필수</span><span class="tagchip">판정 금지</span><span class="tagchip">응대 기록</span></div></div>
     </div>
   </div>
 </section>
@@ -647,8 +652,8 @@
   <div class="wrap">
     <div class="ipanel">
       <span class="eyebrow">화면 그대로</span>
-      <h2>물으면 답이, 집행부에는 기록이 남습니다</h2>
-      <p class="lead">조합원은 근거 붙은 답을 받고, 집행부는 "무엇이 처리됐는지"를 받습니다. 같은 대화 하나가 응대이자 증적이 됩니다.</p>
+      <h2>조합원에게는 답이, 집행부에는 기록이 남습니다</h2>
+      <p class="lead">조합원은 근거가 붙은 답을 받고, 집행부는 무엇이 어떻게 처리됐는지 기록으로 받습니다. 대화 한 건이 응대이면서 증적입니다.</p>
       <div class="stage2">
         <div class="tabrail" role="tablist" aria-label="실물 시연">
           <button class="tab active" data-t="0" role="tab" aria-selected="true"><span class="tn mono">01</span><span class="tt"><span class="th">조합원이 묻는다</span><span class="tx">공개된 문서에서 근거로 답합니다</span></span></button>
@@ -685,19 +690,19 @@
     <p class="lead">찾고 정리하고 답하는 반복은 AI가, 정하는 일은 집행부가 합니다.</p>
     <div class="grid3">
       <div class="divcard">
-        <span class="us mono">■ 우리가 하는 것</span>
+        <span class="us mono">■ AI가 하는 것</span>
         <h3>동향 체크</h3>
         <p>구청 고시·공고와 인근 단지 진행 상황을 모아 정리해 드립니다.</p>
-        <div class="exec-line"><b>집행부가 하시는 것:</b> 대응 여부만 정하십니다.</div>
+        <div class="exec-line"><b>집행부가 하시는 것:</b> 대응 여부를 정하십니다.</div>
       </div>
       <div class="divcard">
-        <span class="us mono">■ 우리가 하는 것</span>
+        <span class="us mono">■ AI가 하는 것</span>
         <h3>조합원 응대</h3>
         <p>반복 문의에 원문을 찾아 근거로 답합니다.</p>
-        <div class="exec-line"><b>집행부가 하시는 것:</b> 예외 건만 보십니다.</div>
+        <div class="exec-line"><b>집행부가 하시는 것:</b> 예외 건을 보십니다.</div>
       </div>
       <div class="divcard">
-        <span class="us mono">■ 우리가 하는 것</span>
+        <span class="us mono">■ AI가 하는 것</span>
         <h3>기록·의사록</h3>
         <p>응대와 회의 내용을 초안으로 정리해 남깁니다.</p>
         <div class="exec-line"><b>집행부가 하시는 것:</b> 의결·확정.</div>
@@ -711,16 +716,16 @@
   <div class="wrap">
     <span class="eyebrow">신뢰 설계</span>
     <h2>"AI를 어떻게 믿습니까"에 대한 세 가지 답</h2>
-    <p class="lead">믿어달라고 말하는 대신, 답이 나가는 조건을 구조로 정했습니다.</p>
+    <p class="lead">답이 나가는 조건을 세 가지로 정해 두었습니다.</p>
     <div class="principles">
-      <div class="pr"><span class="pn">01</span><div><h3>답변에는 원문 인용이 반드시 붙습니다</h3><p>회의록 몇 회차, 몇 페이지인지 함께 나옵니다. <b>인용을 찾지 못하면 답하지 않습니다.</b> 인용 없는 문장은 나가지 않습니다.</p></div></div>
+      <div class="pr"><span class="pn">01</span><div><h3>답변에는 원문 인용이 반드시 붙습니다</h3><p>회의록 몇 회차, 몇 페이지인지 함께 나옵니다. <b>인용을 찾지 못하면 답하지 않습니다.</b></p></div></div>
       <div class="pr"><span class="pn">02</span><div><h3>판단하지 않습니다</h3><p>"해도 되나요"에 답하지 않고, 관련 규정과 이전 결정의 원문을 보여드립니다. <b>법적 판단이 필요한 건은 변호사 연결로 넘깁니다.</b></p></div></div>
-      <div class="pr"><span class="pn">03</span><div><h3>응대 기록이 그대로 증적이 됩니다</h3><p>무엇을 언제 물었고 어떤 문서로 답했는지 자동으로 기록됩니다. <b>공개·보관 의무에 그대로 쓸 수 있는 기록입니다</b> — 판정이나 자문이 아닙니다.</p></div></div>
+      <div class="pr"><span class="pn">03</span><div><h3>응대 기록이 그대로 증적이 됩니다</h3><p>무엇을 언제 물었고 어떤 문서로 답했는지 자동으로 기록됩니다. <b>공개·보관 의무 이행에 쓸 수 있는 기록입니다.</b> 판정이나 자문은 아닙니다.</p></div></div>
     </div>
     <p class="footnote">도정법 §124(자료 공개·열람) · §125(회의록·녹음 보관)가 정한 집행부의 의무 이행을 자동화하고 증적으로 남기는 데까지가 이 제품의 역할입니다. 정비사업 유형에 따라 적용 법령은 다를 수 있으며, 법적 해석·판단은 제공하지 않습니다.</p>
     <div class="sec-strip">
-      <div class="ss-item"><b>국내 리전 저장</b><span>조합별 데이터 격리</span></div>
-      <div class="ss-item"><b>계약 범위 내 사용</b><span>정식 활용은 NDA 이후</span></div>
+      <div class="ss-item"><b>국내 서버 저장</b><span>조합별 데이터 격리</span></div>
+      <div class="ss-item"><b>계약 범위 내 사용</b><span>정식 활용은 비밀유지계약 이후</span></div>
       <div class="ss-item"><b>요청 시 파기</b><span>보관·삭제 정책 명시</span></div>
       <div class="ss-item"><b>로컬 장비 옵션</b><span>조합 PC 내 운영 · 준비 중</span></div>
     </div>
@@ -730,13 +735,13 @@
 <!-- ===== 해자 ===== -->
 <section>
   <div class="wrap">
-    <span class="eyebrow">왜 복제가 어려운가</span>
-    <h2>법이 만들게 하는 문서, 연결해 둔 곳은 아직 없습니다</h2>
+    <span class="eyebrow">왜 지금까지 없었나</span>
+    <h2>법이 남기라고 정한 문서, 서로 이어 둔 곳은 아직 없습니다</h2>
     <div class="moat">
       <div>
         <p>총회록·이사회록·공문은 조합이 <b>법에 따라 반드시 남기는</b> 문서입니다. 흩어져 있을 뿐, 사라지지 않습니다.</p>
-        <p style="margin-top:16px">CLEARBUILD는 그 문서를 <b>안건·의결 금액·인가 단계로 연결</b>해, 한 질문이 여러 문서를 가로지르게 만듭니다. "변경인가 경과는?" 한 번에 접수증·보완요청·심의 일정이 근거로 딸려 나오는 이유입니다.</p>
-        <p style="margin-top:16px">규제가 강제한 이 데이터가 조합마다 쌓일수록, <b>뒤늦게 따라오기 어려워집니다.</b></p>
+        <p style="margin-top:16px">CLEARBUILD는 그 문서를 <b>안건·의결 금액·인가 단계로 연결</b>해 둡니다. 그래서 "변경인가 경과는?" 하고 물으면 접수증·보완 요청·심의 일정이 한 번에 근거로 붙어 나옵니다.</p>
+        <p style="margin-top:16px">이렇게 이어 둔 문서는 조합이 쓰는 동안 계속 쌓입니다. <b>오래 쓴 조합일수록 답이 정확해지고,</b> 그 축적은 뒤늦게 따라 만들기 어렵습니다.</p>
       </div>
       <div class="moat-fig">
         <svg viewBox="0 0 400 300" role="img" aria-label="흩어진 조합 문서를 하나의 지식 레이어로 연결한 온톨로지" font-family="'Pretendard', -apple-system, system-ui, sans-serif">
@@ -770,7 +775,7 @@
     <h2>집행부가 실제로 걱정하시는 것들</h2>
     <div class="faq">
       <details><summary>AI가 틀린 답을 하면 누가 책임지나요?<span class="mk">+</span></summary><p>AI는 조합 문서 원문을 인용해서만 답하고, 근거가 없으면 답하지 않습니다. 판단이 걸리는 질문은 답하지 않고 사무국으로 넘깁니다. <b>조합 명의로 나가는 공식 입장은 지금처럼 집행부가 정하십니다.</b> AI는 그 앞의 "찾아서 보여주는" 일까지만 합니다.</p></details>
-      <details><summary>조합 문서를 꼭 외부 서버에 올려야 하나요?<span class="mk">+</span></summary><p>국내 리전에 저장하고 조합 간 데이터를 격리합니다. 민감 데이터를 외부에 두기 어려운 조합을 위해 <b>조합 PC 안에서 운영하는 로컬 장비 옵션</b>도 준비하고 있습니다. 정식 활용은 계약·NDA 이후 업로드로 진행합니다.</p></details>
+      <details><summary>조합 문서를 꼭 외부 서버에 올려야 하나요?<span class="mk">+</span></summary><p>국내 서버에 저장하고 조합 간 데이터를 격리합니다. 민감 데이터를 외부에 두기 어려운 조합을 위해 <b>조합 PC 안에서 운영하는 로컬 장비 옵션</b>도 준비하고 있습니다. 정식 활용은 비밀유지계약 체결 이후 업로드로 진행합니다.</p></details>
       <details><summary>사무장 자리를 없애자는 건가요?<span class="mk">+</span></summary><p><b>아니요. 업무 자동화 지원입니다.</b> 반복 응대와 문서 정리를 덜어드리는 것이지, 판단과 의결은 집행부가 그대로 하십니다. 사람이 하던 일 중 "찾고 정리하는" 시간만 걷어냅니다.</p></details>
       <details><summary>조합원이 곤란한 것까지 물어보면 그대로 답하나요?<span class="mk">+</span></summary><p>조합이 공개를 승인한 문서 범위 안에서만 답합니다. 그 밖의 질문에는 <b>"공개된 자료가 없습니다"</b>라고 답합니다. 무엇을 공개할지는 집행부가 정합니다.</p></details>
       <details><summary>도입하려면 무엇이 필요한가요?<span class="mk">+</span></summary><p>설치할 것은 없습니다. 시범 운영은 조합 문서 일부만으로 시작하고, 사무국이 직접 물어보며 판단하실 수 있습니다. 서면 절차도 최소화되어 있습니다.</p></details>
@@ -787,7 +792,7 @@
     <div class="cta-panel">
       <span class="eyebrow">도입</span>
       <h2>우리 조합 문서에 먼저 물어보세요</h2>
-      <p class="lead">비용 없이 조합 문서 일부로 시범 운영해 보고, 사무국이 직접 물어보며 판단하세요. 시범 운영 문서는 저희가 받아 올려드립니다.</p>
+      <p class="lead">비용 없이 조합 문서 일부로 시범 운영해 보고, 사무국이 직접 물어보며 판단하시면 됩니다. 시범 운영 문서는 저희가 받아 올려드립니다.</p>
       <div class="cta-row">
         <a class="btn-lg btn-white" href="/apply.html">무료 시범 운영 신청</a>
         <a class="sec" href="#demo">가상 조합으로 둘러보기 (2분) →</a>
@@ -802,30 +807,39 @@
     <div class="foot-top">
       <div class="foot-brand">
         <span class="logo">CLEAR<b>BUILD</b></span>
-        <p class="foot-tag">조합의 기억을 기록으로. 흩어진 문서에 근거로 답하는 조합 AI.</p>
+        <p class="foot-tag">흩어진 조합 문서를 모아 근거로 답하고, 그 응대를 기록으로 남기는 조합 AI입니다.</p>
         <p class="foot-team">정비사업 현장에서 총회·인가 실무를 겪은 팀이 만듭니다.</p>
+        <div class="foot-social">
+          <a href="https://www.linkedin.com/in/hatemondayowen/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.74v20.51C0 23.2.8 24 1.77 24h20.45c.98 0 1.78-.8 1.78-1.75V1.74C24 .78 23.2 0 22.22 0z"/></svg>
+          </a>
+        </div>
       </div>
       <div class="foot-col">
-        <div class="foot-h">바로가기</div>
-        <a href="#problem">문제</a>
-        <a href="#solution">솔루션</a><a href="#how">작동 방식</a>
-        <a href="#trust">신뢰</a>
+        <div class="foot-h">제품</div>
+        <a href="#solution">솔루션</a>
+        <a href="#how">작동 방식</a>
+        <a href="#demo">실물 시연</a>
         <a href="#faq">FAQ</a>
-        <a href="#cta">무료 시범 운영 신청</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-h">회사</div>
+        <a href="/team.html">팀 소개</a>
+        <a href="/apply.html">무료 시범 운영 신청</a>
+        <a href="/privacy.html">개인정보 처리방침</a>
       </div>
       <div>
-        <div class="foot-h">신뢰</div>
+        <div class="foot-h">신뢰 · 보안</div>
         <ul class="foot-trust" style="margin:0; padding:0">
-          <li>국내 리전에 저장 · 조합 간 데이터 격리</li>
+          <li>국내 서버 저장 · 조합 간 데이터 격리</li>
           <li>답변은 원문 인용, 판정·자문 없음</li>
           <li>도정법 §124 · §125 의무 이행 지원</li>
         </ul>
-        <div class="foot-mail"><a href="/apply.html" style="color:var(--teal-deep)">문의: 시범 운영 신청</a></div>
       </div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 CLEARBUILD</span>
-      <span>조합 대상 · 조합이 올린 문서 위에서만 작동</span>
+      <a href="/privacy.html">개인정보 처리방침</a>
     </div>
   </div>
 </footer>
