@@ -89,7 +89,8 @@
   .field.invalid .err-msg{display:block}
   .submit{margin-top:6px; font-family:inherit; font-size:16px; font-weight:700; color:#fff; background:var(--accent); border:none; border-radius:var(--r);
     padding:15px; cursor:pointer; transition:.16s; box-shadow:0 14px 30px -14px rgba(23,102,181,.6)}
-  :root[data-theme="dark"] .submit,:root:not([data-theme="light"]) .submit{color:#0B2138}
+  :root[data-theme="dark"] .submit{color:#0B2138}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .submit{color:#0B2138}}
   .submit:hover{background:var(--accent-deep); transform:translateY(-1px)}
   .privacy{font-size:12px; color:var(--muted); line-height:1.5; margin:2px 0 0}
 
@@ -117,7 +118,8 @@
   .lm{flex:none; width:1.4em; height:1.4em}
   .lm-bg{fill:#122E4C}
   .pnav .lm-bg,.brand .lm-bg{fill:rgba(255,255,255,.15)}
-  :root[data-theme="dark"] .lm-bg,:root:not([data-theme="light"]) .lm-bg{fill:#1B3E63}
+  :root[data-theme="dark"] .lm-bg{fill:#1B3E63}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lm-bg{fill:#1B3E63}}
 </style>
 </head>
 <body>

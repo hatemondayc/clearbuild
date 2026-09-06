@@ -72,7 +72,8 @@
   .btn-lg{font-family:inherit; font-size:16px; font-weight:700; border-radius:var(--r-md); padding:15px 28px; white-space:nowrap; transition:.16s ease; cursor:pointer; border:1px solid transparent}
   .btn-solid{background:var(--accent); color:#fff}
   .btn-solid:hover{background:var(--accent-deep); transform:translateY(-1px)}
-  :root[data-theme="dark"] .btn-solid,:root:not([data-theme="light"]) .btn-solid{color:#0B2138}
+  :root[data-theme="dark"] .btn-solid{color:#0B2138}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-solid{color:#0B2138}}
   .btn-white{background:#fff; color:var(--d-b)}
   .btn-white:hover{transform:translateY(-1px)}
   .btn-ghost-d{color:#fff; border:1px solid var(--d-line)}
@@ -129,7 +130,8 @@
   .thread{display:flex; flex-direction:column; gap:14px}
   .msg{max-width:86%; font-size:15px; line-height:1.55; padding:12px 16px; border-radius:var(--r-md)}
   .msg.q{align-self:flex-end; background:var(--accent); color:#fff; font-weight:500; border-bottom-right-radius:4px}
-  :root[data-theme="dark"] .msg.q,:root:not([data-theme="light"]) .msg.q{color:#0B2138}
+  :root[data-theme="dark"] .msg.q{color:#0B2138}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .msg.q{color:#0B2138}}
   .msg.a{align-self:flex-start; background:var(--surface-2); border:1px solid var(--line); border-bottom-left-radius:4px}
   .msg.a .who{display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent-deep); margin-bottom:6px; letter-spacing:.04em}
   .cites{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; padding-top:12px; border-top:1px dashed var(--line2)}
@@ -353,7 +355,8 @@
   /* 솔루션 크롭 UI — 실제 화면을 축소한 미니 프리뷰 */
   .sol-crop{height:138px; border-radius:12px; overflow:hidden; margin-bottom:18px; padding:11px 12px;
     background:linear-gradient(158deg,var(--surface-2) 0%,var(--surface) 88%); border:1px solid var(--line2); box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
-  :root[data-theme="dark"] .sol-crop,:root:not([data-theme="light"]) .sol-crop{box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+  :root[data-theme="dark"] .sol-crop{box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sol-crop{box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}}
   .sol-crop .cbar{display:flex; align-items:center; gap:5px; margin-bottom:10px}
   .sol-crop .cbar i{width:6.5px; height:6.5px; border-radius:50%; background:var(--line2)}
   .sol-crop .cbar b{margin-left:5px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--faint); font-weight:500; letter-spacing:.02em}
@@ -373,7 +376,8 @@
   .cr-chat{display:flex; flex-direction:column; gap:6px; height:86px; justify-content:center}
   .cr-chat .bub{max-width:80%; font-size:11px; line-height:1.4; padding:6px 9px; border-radius:11px; font-weight:500}
   .cr-chat .me{align-self:flex-end; background:var(--accent); color:#fff; border-bottom-right-radius:3px}
-  :root[data-theme="dark"] .cr-chat .me,:root:not([data-theme="light"]) .cr-chat .me{color:#0B2138}
+  :root[data-theme="dark"] .cr-chat .me{color:#0B2138}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cr-chat .me{color:#0B2138}}
   .cr-chat .ai{align-self:flex-start; background:var(--surface); border:1px solid var(--line); color:var(--soft); border-bottom-left-radius:3px}
   .cr-chat .cchip{display:inline-flex; align-items:center; gap:3px; margin-top:5px; font-family:'IBM Plex Mono',monospace; font-size:8.5px; color:var(--accent-deep); background:var(--accent-soft); border-radius:5px; padding:2px 5px; font-weight:600}
   /* 3. 기록·증적 */
@@ -420,7 +424,8 @@
   .lm{flex:none; width:1.4em; height:1.4em}
   .lm-bg{fill:#122E4C}
   .pnav .lm-bg,.brand .lm-bg{fill:rgba(255,255,255,.15)}
-  :root[data-theme="dark"] .lm-bg,:root:not([data-theme="light"]) .lm-bg{fill:#1B3E63}
+  :root[data-theme="dark"] .lm-bg{fill:#1B3E63}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lm-bg{fill:#1B3E63}}
   .demo-card{box-shadow:0 22px 50px -26px rgba(11,33,56,.42)}
 </style>
 </head>
@@ -452,7 +457,7 @@
 
       <div class="hcopy">
         <span class="hbadge">정비사업 조합을 위한 AI</span>
-        <h1>조합 관리, 뒤지지 말고<br><span>물어보세요</span></h1>
+        <h1>조합 관리, 뒤지지 말고 <br><span>물어보세요</span></h1>
         <p class="hsub">CLEARBUILD는 조합이 쌓아 온 문서를 통째로 읽어 두고, 사무국과 조합원의 질문에 그 문서를 인용해 답합니다. 응대 기록은 자동으로 남습니다.</p>
         <div class="chips">
           <a class="chip" href="#demo"><span class="qm">Q</span> 지난 이사회 공사비 의결 금액은? <span class="who">사무국</span></a>
@@ -870,7 +875,7 @@
       var i=0;
       (function tick(){
         if(i<=full.length){ target.textContent=full.slice(0,i); i++; setTimeout(tick, 30); }
-        else { target.classList.remove('typing'); card.classList.add('done'); }
+        else { target.classList.remove('typing'); card.classList.remove('anim'); card.classList.add('done'); }
       })();
     }, 750);
   }, {threshold:.35}).observe(card);
