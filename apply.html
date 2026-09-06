@@ -29,12 +29,12 @@
     --r:12px; --shadow:0 1px 2px rgba(15,33,48,.04);
   }
   @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-    --bg:#0C121A; --surface:#141C26; --surface-2:#1C2634; --ink:#EAF0F7; --soft:#C0CAD6; --muted:#8B98A8; --faint:#5D6A7A;
+    --bg:#0C121A; --surface:#141C26; --surface-2:#1C2634; --ink:#EAF0F7; --soft:#C0CAD6; --muted:#8B98A8; --faint:#7C8A9C;
     --accent:#25B4F0; --accent-deep:#6FBEF2; --accent-soft:rgba(37,180,240,.13); --line:rgba(234,240,247,.08); --line2:rgba(234,240,247,.15); --err:#E0865A;
     --shadow:0 1px 2px rgba(0,0,0,.4);
   }}
   :root[data-theme="dark"]{
-    --bg:#0C121A; --surface:#141C26; --surface-2:#1C2634; --ink:#EAF0F7; --soft:#C0CAD6; --muted:#8792A3; --faint:#5D6A7A;
+    --bg:#0C121A; --surface:#141C26; --surface-2:#1C2634; --ink:#EAF0F7; --soft:#C0CAD6; --muted:#8792A3; --faint:#7C8A9C;
     --accent:#25B4F0; --accent-deep:#6FBEF2; --accent-soft:rgba(37,180,240,.13); --line:rgba(234,240,247,.12); --line2:rgba(234,240,247,.2); --err:#E0865A;
     --shadow:0 2px 4px rgba(0,0,0,.3), 0 30px 60px -34px rgba(0,0,0,.72);
   }
@@ -43,7 +43,7 @@
     font-family:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo','Noto Sans KR',sans-serif; line-height:1.6; letter-spacing:-.01em; -webkit-font-smoothing:antialiased; word-break:keep-all;
     display:flex; align-items:center; justify-content:center; padding:32px 20px}
   .mono{font-family:'IBM Plex Mono',ui-monospace,monospace; letter-spacing:0}
-  a{color:var(--accent-deep)}
+  a{color:var(--accent-deep); text-decoration:none}
 
   .card{width:100%; max-width:960px; background:var(--surface); border:1px solid var(--line); border-radius:24px; box-shadow:var(--shadow);
     display:grid; grid-template-columns:.82fr 1fr; overflow:hidden}
@@ -178,7 +178,7 @@
         <label for="f-note">현재 상황 · 문의<span class="opt">선택</span></label>
         <textarea id="f-note" name="note" maxlength="2000" placeholder="사업 단계, 문서 보관 현황, 궁금한 점 등 자유롭게 적어 주세요."></textarea>
       </div>
-      <button class="submit" type="submit">무료 시범 운영 신청하기</button>
+      <button class="submit" type="submit" data-umami-event="apply-submit-click">무료 시범 운영 신청하기</button>
       <p class="form-err" id="form-err" role="alert" hidden></p>
       <p class="privacy">제출하신 정보는 시범 운영 안내 목적으로만 사용되며, 안내 후 요청 시 파기됩니다. 자세한 내용은 <a href="/privacy.html">개인정보 처리방침</a>을 확인해 주세요.</p>
     </form>
@@ -240,6 +240,7 @@
     Promise.race([ sb.from('pilot_signups').insert(payload), to ]).then(function(res){
       if(settled) return; settled=true; restore();
       if(res && res.error){ showErr('접수에 실패했어요. 잠시 후 다시 시도해 주세요.'); return; }
+      if(window.umami) umami.track('apply-submit-success');
       document.getElementById('formwrap').style.display = 'none';
       var s = document.getElementById('success'); s.classList.add('on');
       s.scrollIntoView({behavior:'smooth', block:'center'});
